@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4AEB96C8274C28DF001F7611 /* Maine_Edna_Freezer_MappingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB96C7274C28DF001F7611 /* Maine_Edna_Freezer_MappingApp.swift */; };
+		4AEB96CA274C28DF001F7611 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB96C9274C28DF001F7611 /* ContentView.swift */; };
+		4AEB96CC274C28E1001F7611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB96CB274C28E1001F7611 /* Assets.xcassets */; };
+		4AEB96CF274C28E1001F7611 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB96CE274C28E1001F7611 /* Preview Assets.xcassets */; };
+		4AEB96D9274C28E2001F7611 /* Maine_Edna_Freezer_MappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB96D8274C28E2001F7611 /* Maine_Edna_Freezer_MappingTests.swift */; };
+		4AEB96E3274C28E2001F7611 /* Maine_Edna_Freezer_MappingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB96E2274C28E2001F7611 /* Maine_Edna_Freezer_MappingUITests.swift */; };
+		4AEB96E5274C28E2001F7611 /* Maine_Edna_Freezer_MappingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB96E4274C28E2001F7611 /* Maine_Edna_Freezer_MappingUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4AEB96D5274C28E2001F7611 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4AEB96BC274C28DF001F7611 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AEB96C3274C28DF001F7611;
+			remoteInfo = "Maine-Edna-Freezer-Mapping";
+		};
+		4AEB96DF274C28E2001F7611 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4AEB96BC274C28DF001F7611 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AEB96C3274C28DF001F7611;
+			remoteInfo = "Maine-Edna-Freezer-Mapping";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4AEB96C4274C28DF001F7611 /* Maine-Edna-Freezer-Mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Maine-Edna-Freezer-Mapping.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AEB96C7274C28DF001F7611 /* Maine_Edna_Freezer_MappingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maine_Edna_Freezer_MappingApp.swift; sourceTree = "<group>"; };
+		4AEB96C9274C28DF001F7611 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4AEB96CB274C28E1001F7611 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4AEB96CE274C28E1001F7611 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4AEB96D4274C28E2001F7611 /* Maine-Edna-Freezer-MappingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Maine-Edna-Freezer-MappingTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AEB96D8274C28E2001F7611 /* Maine_Edna_Freezer_MappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maine_Edna_Freezer_MappingTests.swift; sourceTree = "<group>"; };
+		4AEB96DE274C28E2001F7611 /* Maine-Edna-Freezer-MappingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Maine-Edna-Freezer-MappingUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AEB96E2274C28E2001F7611 /* Maine_Edna_Freezer_MappingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maine_Edna_Freezer_MappingUITests.swift; sourceTree = "<group>"; };
+		4AEB96E4274C28E2001F7611 /* Maine_Edna_Freezer_MappingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maine_Edna_Freezer_MappingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4AEB96C1274C28DF001F7611 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AEB96D1274C28E2001F7611 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AEB96DB274C28E2001F7611 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4AEB96BB274C28DF001F7611 = {
+			isa = PBXGroup;
+			children = (
+				4AEB96C6274C28DF001F7611 /* Maine-Edna-Freezer-Mapping */,
+				4AEB96D7274C28E2001F7611 /* Maine-Edna-Freezer-MappingTests */,
+				4AEB96E1274C28E2001F7611 /* Maine-Edna-Freezer-MappingUITests */,
+				4AEB96C5274C28DF001F7611 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4AEB96C5274C28DF001F7611 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4AEB96C4274C28DF001F7611 /* Maine-Edna-Freezer-Mapping.app */,
+				4AEB96D4274C28E2001F7611 /* Maine-Edna-Freezer-MappingTests.xctest */,
+				4AEB96DE274C28E2001F7611 /* Maine-Edna-Freezer-MappingUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4AEB96C6274C28DF001F7611 /* Maine-Edna-Freezer-Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				4AEB96C7274C28DF001F7611 /* Maine_Edna_Freezer_MappingApp.swift */,
+				4AEB96C9274C28DF001F7611 /* ContentView.swift */,
+				4AEB96CB274C28E1001F7611 /* Assets.xcassets */,
+				4AEB96CD274C28E1001F7611 /* Preview Content */,
+			);
+			path = "Maine-Edna-Freezer-Mapping";
+			sourceTree = "<group>";
+		};
+		4AEB96CD274C28E1001F7611 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4AEB96CE274C28E1001F7611 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4AEB96D7274C28E2001F7611 /* Maine-Edna-Freezer-MappingTests */ = {
+			isa = PBXGroup;
+			children = (
+				4AEB96D8274C28E2001F7611 /* Maine_Edna_Freezer_MappingTests.swift */,
+			);
+			path = "Maine-Edna-Freezer-MappingTests";
+			sourceTree = "<group>";
+		};
+		4AEB96E1274C28E2001F7611 /* Maine-Edna-Freezer-MappingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4AEB96E2274C28E2001F7611 /* Maine_Edna_Freezer_MappingUITests.swift */,
+				4AEB96E4274C28E2001F7611 /* Maine_Edna_Freezer_MappingUITestsLaunchTests.swift */,
+			);
+			path = "Maine-Edna-Freezer-MappingUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4AEB96C3274C28DF001F7611 /* Maine-Edna-Freezer-Mapping */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AEB96E8274C28E2001F7611 /* Build configuration list for PBXNativeTarget "Maine-Edna-Freezer-Mapping" */;
+			buildPhases = (
+				4AEB96C0274C28DF001F7611 /* Sources */,
+				4AEB96C1274C28DF001F7611 /* Frameworks */,
+				4AEB96C2274C28DF001F7611 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Maine-Edna-Freezer-Mapping";
+			productName = "Maine-Edna-Freezer-Mapping";
+			productReference = 4AEB96C4274C28DF001F7611 /* Maine-Edna-Freezer-Mapping.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4AEB96D3274C28E2001F7611 /* Maine-Edna-Freezer-MappingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AEB96EB274C28E2001F7611 /* Build configuration list for PBXNativeTarget "Maine-Edna-Freezer-MappingTests" */;
+			buildPhases = (
+				4AEB96D0274C28E2001F7611 /* Sources */,
+				4AEB96D1274C28E2001F7611 /* Frameworks */,
+				4AEB96D2274C28E2001F7611 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4AEB96D6274C28E2001F7611 /* PBXTargetDependency */,
+			);
+			name = "Maine-Edna-Freezer-MappingTests";
+			productName = "Maine-Edna-Freezer-MappingTests";
+			productReference = 4AEB96D4274C28E2001F7611 /* Maine-Edna-Freezer-MappingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4AEB96DD274C28E2001F7611 /* Maine-Edna-Freezer-MappingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AEB96EE274C28E2001F7611 /* Build configuration list for PBXNativeTarget "Maine-Edna-Freezer-MappingUITests" */;
+			buildPhases = (
+				4AEB96DA274C28E2001F7611 /* Sources */,
+				4AEB96DB274C28E2001F7611 /* Frameworks */,
+				4AEB96DC274C28E2001F7611 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4AEB96E0274C28E2001F7611 /* PBXTargetDependency */,
+			);
+			name = "Maine-Edna-Freezer-MappingUITests";
+			productName = "Maine-Edna-Freezer-MappingUITests";
+			productReference = 4AEB96DE274C28E2001F7611 /* Maine-Edna-Freezer-MappingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4AEB96BC274C28DF001F7611 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					4AEB96C3274C28DF001F7611 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					4AEB96D3274C28E2001F7611 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 4AEB96C3274C28DF001F7611;
+					};
+					4AEB96DD274C28E2001F7611 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 4AEB96C3274C28DF001F7611;
+					};
+				};
+			};
+			buildConfigurationList = 4AEB96BF274C28DF001F7611 /* Build configuration list for PBXProject "Maine-Edna-Freezer-Mapping" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4AEB96BB274C28DF001F7611;
+			productRefGroup = 4AEB96C5274C28DF001F7611 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4AEB96C3274C28DF001F7611 /* Maine-Edna-Freezer-Mapping */,
+				4AEB96D3274C28E2001F7611 /* Maine-Edna-Freezer-MappingTests */,
+				4AEB96DD274C28E2001F7611 /* Maine-Edna-Freezer-MappingUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4AEB96C2274C28DF001F7611 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AEB96CF274C28E1001F7611 /* Preview Assets.xcassets in Resources */,
+				4AEB96CC274C28E1001F7611 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AEB96D2274C28E2001F7611 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AEB96DC274C28E2001F7611 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4AEB96C0274C28DF001F7611 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AEB96CA274C28DF001F7611 /* ContentView.swift in Sources */,
+				4AEB96C8274C28DF001F7611 /* Maine_Edna_Freezer_MappingApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AEB96D0274C28E2001F7611 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AEB96D9274C28E2001F7611 /* Maine_Edna_Freezer_MappingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AEB96DA274C28E2001F7611 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AEB96E5274C28E2001F7611 /* Maine_Edna_Freezer_MappingUITestsLaunchTests.swift in Sources */,
+				4AEB96E3274C28E2001F7611 /* Maine_Edna_Freezer_MappingUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4AEB96D6274C28E2001F7611 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4AEB96C3274C28DF001F7611 /* Maine-Edna-Freezer-Mapping */;
+			targetProxy = 4AEB96D5274C28E2001F7611 /* PBXContainerItemProxy */;
+		};
+		4AEB96E0274C28E2001F7611 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4AEB96C3274C28DF001F7611 /* Maine-Edna-Freezer-Mapping */;
+			targetProxy = 4AEB96DF274C28E2001F7611 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4AEB96E6274C28E2001F7611 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4AEB96E7274C28E2001F7611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4AEB96E9274C28E2001F7611 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Maine-Edna-Freezer-Mapping/Preview Content\"";
+				DEVELOPMENT_TEAM = KCSE39EC45;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vengarre.Maine-Edna-Freezer-Mapping";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4AEB96EA274C28E2001F7611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Maine-Edna-Freezer-Mapping/Preview Content\"";
+				DEVELOPMENT_TEAM = KCSE39EC45;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vengarre.Maine-Edna-Freezer-Mapping";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4AEB96EC274C28E2001F7611 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KCSE39EC45;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vengarre.Maine-Edna-Freezer-MappingTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Maine-Edna-Freezer-Mapping.app/Maine-Edna-Freezer-Mapping";
+			};
+			name = Debug;
+		};
+		4AEB96ED274C28E2001F7611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KCSE39EC45;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vengarre.Maine-Edna-Freezer-MappingTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Maine-Edna-Freezer-Mapping.app/Maine-Edna-Freezer-Mapping";
+			};
+			name = Release;
+		};
+		4AEB96EF274C28E2001F7611 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KCSE39EC45;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vengarre.Maine-Edna-Freezer-MappingUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Maine-Edna-Freezer-Mapping";
+			};
+			name = Debug;
+		};
+		4AEB96F0274C28E2001F7611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KCSE39EC45;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vengarre.Maine-Edna-Freezer-MappingUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Maine-Edna-Freezer-Mapping";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4AEB96BF274C28DF001F7611 /* Build configuration list for PBXProject "Maine-Edna-Freezer-Mapping" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AEB96E6274C28E2001F7611 /* Debug */,
+				4AEB96E7274C28E2001F7611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AEB96E8274C28E2001F7611 /* Build configuration list for PBXNativeTarget "Maine-Edna-Freezer-Mapping" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AEB96E9274C28E2001F7611 /* Debug */,
+				4AEB96EA274C28E2001F7611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AEB96EB274C28E2001F7611 /* Build configuration list for PBXNativeTarget "Maine-Edna-Freezer-MappingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AEB96EC274C28E2001F7611 /* Debug */,
+				4AEB96ED274C28E2001F7611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AEB96EE274C28E2001F7611 /* Build configuration list for PBXNativeTarget "Maine-Edna-Freezer-MappingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AEB96EF274C28E2001F7611 /* Debug */,
+				4AEB96F0274C28E2001F7611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4AEB96BC274C28DF001F7611 /* Project object */;
+}
