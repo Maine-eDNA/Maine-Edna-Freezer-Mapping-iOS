@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FreezerEntity" representedClassName="FreezerEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="createdBy" optional="YES" attributeType="String"/>
+        <attribute name="createdDatetime" optional="YES" attributeType="String"/>
+        <attribute name="freezerCapacityColumns" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="freezerCapacityDepth" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="freezerCapacityRows" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="freezerDepth" optional="YES" attributeType="String"/>
+        <attribute name="freezerDimensionUnits" optional="YES" attributeType="String"/>
+        <attribute name="freezerLabel" optional="YES" attributeType="String"/>
+        <attribute name="freezerLabelSlug" optional="YES" attributeType="String"/>
+        <attribute name="freezerLength" optional="YES" attributeType="String"/>
+        <attribute name="freezerRatedTemp" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="freezerRatedTempUnits" optional="YES" attributeType="String"/>
+        <attribute name="freezerRoomName" optional="YES" attributeType="String"/>
+        <attribute name="freezerWidth" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="modifiedDatetime" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="UserCssThemeEntity" representedClassName="UserCssThemeEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="created_by" optional="YES" attributeType="String"/>
+        <attribute name="created_datetime" optional="YES" attributeType="String"/>
+        <attribute name="css_selected_background_color" optional="YES" attributeType="String"/>
+        <attribute name="css_selected_text_color" optional="YES" attributeType="String"/>
+        <attribute name="custom_css_label" optional="YES" attributeType="String"/>
+        <attribute name="default_css_label" optional="YES" attributeType="String"/>
+        <attribute name="freezer_empty_box_css_background_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_empty_box_css_text_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_empty_css_background_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_empty_css_text_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_empty_inventory_css_background_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_empty_inventory_css_text_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_empty_rack_css_background_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_empty_rack_css_text_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_inuse_box_css_background_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_inuse_box_css_text_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_inuse_css_background_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_inuse_css_text_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_inuse_inventory_css_background_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_inuse_inventory_css_text_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_inuse_rack_css_background_color" optional="YES" attributeType="String"/>
+        <attribute name="freezer_inuse_rack_css_text_color" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="modified_datetime" optional="YES" attributeType="String"/>
+        <attribute name="user" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="FreezerEntity" positionX="-63" positionY="-18" width="128" height="269"/>
+        <element name="UserCssThemeEntity" positionX="-54" positionY="108" width="128" height="404"/>
+    </elements>
+</model>

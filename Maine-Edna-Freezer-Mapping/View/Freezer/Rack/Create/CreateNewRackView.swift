@@ -29,11 +29,11 @@ struct CreateNewRackView: View {
    
         ScrollView(showsIndicators: false){
             VStack(alignment: .leading){
-                Text("\(freezer_detail.freezer_label)").font(.title3).bold()
+                Text("\(freezer_detail.freezerLabel ?? "")").font(.title3).bold()
                 TextFieldLabelCombo(textValue: self.$rack_label, label: "Rack Label", placeHolder: "Enter a Rack Label", iconValue: "pencil")
                 HStack{
                     Text("Preview")
-                    Text("\(freezer_detail.freezer_label)_\(self.rack_label)")
+                    Text("\(freezer_detail.freezerLabel ?? "")_\(self.rack_label)")
                 }
                 
                 //Dynamic grid based start
@@ -84,7 +84,7 @@ struct CreateNewRackView: View {
                 Toggle("Show Map",isOn: $show_freezer_grid_layout.animation(.spring()))
                 if show_freezer_grid_layout{
                 Text("Select Rack Position").font(.caption)
-                    FreezerLayoutPreview(freezer_max_rows: $freezer_detail.freezer_max_rows, freezer_max_columns: $freezer_detail.freezer_max_rows,selected_row: self.$selected_row,selected_column: self.$selected_col,show_freezer_grid_layout: $show_freezer_grid_layout).frame(width: nil)
+                    FreezerLayoutPreview(freezer_max_rows: .constant($freezer_detail.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_detail.freezerCapacityColumns.wrappedValue ?? 0),selected_row: self.$selected_row,selected_column: self.$selected_col,show_freezer_grid_layout: $show_freezer_grid_layout).frame(width: nil)
                 }
                 //MARK: - Rack Position Map - end
                 
@@ -95,20 +95,22 @@ struct CreateNewRackView: View {
                     Spacer()
                     Button(action: {
                         //send the freezer to the server
-                        let rack_profile = RackItemModel()
+                        var rack_profile = RackItemModel()
                       ///Added +1 because array starts at 1
                         rack_profile.freezer_rack_row_start = self.selected_row + 1
                         rack_profile.freezer_rack_row_end = self.selected_row + 1
-                        rack_profile.freezer_rack_label = freezer_detail.freezer_label + "" + self.rack_label
-                        rack_profile.freezer = self.freezer_detail.freezer_label
+                        rack_profile.freezer_rack_label = freezer_detail.freezerLabel ?? "" + "" + self.rack_label
+                        rack_profile.freezer = self.freezer_detail.freezerLabel ?? ""
                         rack_profile.freezer_rack_column_start = self.selected_col
                         rack_profile.freezer_rack_column_end = self.selected_col
                         rack_profile.freezer_rack_depth_start = self.rack_depth_start
                         rack_profile.freezer_rack_depth_end = self.rack_depth_end
                         
+                        
+                        let request_data : RackItemModel = rack_profile
                         Task{
                             do{
-                                let response =  try await    self.rack_profile_service.CreateNewRack(_rackDetail: rack_profile){
+                                let response =  try await    self.rack_profile_service.CreateNewRack(_rackDetail: request_data){
                                     response in
                                     print("Response is: \(response.serverMessage)")
                                     //self.showResponseMsg = response.serverMessage

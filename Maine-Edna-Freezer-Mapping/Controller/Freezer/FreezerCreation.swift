@@ -13,7 +13,7 @@ import Alamofire
 class FreezerCreation: ObservableObject {
     @AppStorage(AppStorageNames.edna_freezer_token.rawValue) var edna_freezer_token = ""//set this when I create an account and login, which i need to do next
     
-    @AppStorage(AppStorageNames.stored_freezers.rawValue) var stored_freezers : [FreezerProfileModel] = [FreezerProfileModel]()
+   // @AppStorage(AppStorageNames.stored_freezers.rawValue) var stored_freezers : [FreezerProfileModel] = [FreezerProfileModel]()
   
     // Loading Screen...
     @Published var isLoading = false
@@ -56,13 +56,13 @@ class FreezerCreation: ObservableObject {
                 }
                 
             }
-            else if response.response?.statusCode == 200{
+            else if response.response?.statusCode == 200 || response.response?.statusCode == 201{
                 //completion("Record Successfully Saved")
                 
                 if let errorMsg = response.data{
                     let jsonMsg = String(data: errorMsg,encoding: String.Encoding.utf8)
                     let errorDetail = ServerMessageModel()
-                    errorDetail.serverMessage = String(describing: jsonMsg!)
+                    errorDetail.serverMessage = "Freezer Successfully Saved"//String(describing: jsonMsg!)
                     errorDetail.isError = false
                     
                     completion(errorDetail)

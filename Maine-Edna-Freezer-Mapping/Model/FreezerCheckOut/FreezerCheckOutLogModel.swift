@@ -22,6 +22,7 @@ class FreezerCheckOutLogModel: Encodable,Decodable, Identifiable {
     
     var freezer_return_vol_units : String = ""
     var freezer_log_notes : String = ""
+    #warning("Use Codeable")
     var freezer_log_slug : String = ""
     var created_by : String = ""
     var created_datetime : String = ""

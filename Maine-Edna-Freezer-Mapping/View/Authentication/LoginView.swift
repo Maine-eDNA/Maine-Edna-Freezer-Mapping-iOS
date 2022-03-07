@@ -17,6 +17,8 @@ struct LoginView: View {
     @AppStorage(AppStorageNames.store_email_address.rawValue) var store_email_address = ""
     @AppStorage(AppStorageNames.stored_password.rawValue) var stored_password = ""
     
+    @AppStorage(AppStorageNames.stored_user_id.rawValue)  var stored_user_id : Int = 0
+    
     @AppStorage(AppStorageNames.login_status.rawValue) var logged = false
 
     
@@ -57,10 +59,10 @@ struct LoginView: View {
                 Spacer().frame(height: 60)
             
                 
-                Image("full-logo")
+                Image("logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 170, height: 170)
+                    .frame(width: 250, height: 250)
                 //.clipShape(Circle())
                 //.overlay(Circle().stroke(Color.white, lineWidth: 1))
                     .shadow(radius: 10)
@@ -147,7 +149,7 @@ struct LoginView: View {
                             self.showForgotPassword.toggle()
                             
                         }, label: {
-                            Text("Forget password?")
+                            Text("Forgot password?")
                                 .foregroundColor(.green)
                         })
                             .padding(.top,8)

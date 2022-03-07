@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct InteractFreezerLayoutPreview: View {
+    #warning("TODO TO MAKE THE COLOR DYNAMIC")
     //need to show the empty spots by pre-populating it and with the positions
     let columns = [
         GridItem(.adaptive(minimum: 100))
@@ -22,20 +23,104 @@ struct InteractFreezerLayoutPreview: View {
     @State var show_create_new_rack : Bool = false
     //TODO: - need to get the system colors
     
+    @State var max_capacity : Int = 0
+    //TODO: - SHow when takes more than one row and col
+    
+    //Theme information
+    //TODO: make it a environment object
+   // @ObservedObject var user_css_core_data_service = UserCssThemeCoreDataManagement()
+    
+    @AppStorage(AppStorageNames.stored_user_id.rawValue)  var stored_user_id : Int = 0
+    //TODO: updated model (may need to make this into a map settings model
+    #warning("updated model (may need to make this into a map settings model")
+    @State var inner_rack_rect_color : String = "gray"
+    @State var suggested_outline_slot_color : String = "yellow"
+    
+    @Binding var show_guided_rack_view : Bool
+ 
+    @Binding var show_guided_map_view : Bool
+    
     var body: some View {
-        
-        ScrollView{
+        //TODO outline the map with the row labels and column outline
+        ScrollView([.horizontal, .vertical],showsIndicators: false){
+            //Experiment
+            //MARK: Show map only if them can be found
+           // if let user_css = user_css_core_data_service.user_css_entity{
             InteractiveGridStack(rows: freezer_max_rows, columns: freezer_max_columns,racks: self.stored_freezer_rack_layout) { row, col,content  in
                 NavigationLink(destination: RackProfileView(rack_profile: content,freezer_profile: self.freezer_profile)){
-                    HStack{
-                        
-                        Text("\(row) \(col) \(content.freezer_rack_label)").foregroundColor(Color.white)
-                        
-                    }.padding().background(Color.orange)
+                    
+                    if content.freezer_rack_row_start == row && content.freezer_rack_column_start == col{
+                        //this is the target position where something exist
+                        //  MultiRackSlotItemView(top_half_color: .constant("green"), bottom_half_color: .constant("gray"))
+                        ///Check if it is a single or multi-rack level rack
+                        if content.is_suggested_rack_position{
+                            SuggestedRackGridItemView(inner_rack_rect_color: self.$inner_rack_rect_color, outline_color: self.$suggested_outline_slot_color, rack_label: .constant(content.freezer_rack_label))
+                                .onTapGesture {
+                                    //allow users to clip it to be able to see the suggest rack layout
+                                    self.show_guided_map_view = false
+                                    self.show_guided_rack_view.toggle()
+                                }
+                        }
+                        else if (content.freezer_rack_depth_end - content.freezer_rack_depth_start) > 0{
+                            //MARK: - multi-level rack level section
+                            MultiRackSlotItemView(top_half_color: .constant(/*user_css.freezer_inuse_rack_css_text_color ??*/ "green"), bottom_half_color: .constant(/*user_css.freezer_empty_rack_css_text_color ?? */"gray"),width: 50,height: 50)
+                            
+                            
+                        }
+                        else if (content.freezer_rack_depth_end - content.freezer_rack_depth_start) < 1{
+                            //MARK: - single rack level section
+                            //single rack level color scheme
+                            //Text("\(content.freezer_rack_label) Depth End: \(content.freezer_rack_depth_end) Depth Start: \(content.freezer_rack_depth_start)")
+                            SingleLevelRaciSlotItemView(single_lvl_rack_color: .constant(/*user_css.freezer_inuse_rack_css_text_color ?? */"orange"))
+                            
+                        }
+                    }
+                    else{
+                        //MARK: - Empty Rack Section
+                        //empty rack color
+                        // Text("\(row) - \(col) =>  \(content.freezer_rack_row_start) - \(content.freezer_rack_column_start)")
+                       // if let empty_rack_css = user_css.freezer_empty_rack_css_text_color {
+                       // EmptyRackSlotView(empty_rack_color: .constant(empty_rack_css),width: 50,height: 50)
+                            
+                       // }
+                      //  else{
+                            EmptyRackSlotView(empty_rack_color: .constant("gray"),width: 50,height: 50)
+                        //SuggestedRackGridItemView(inner_rack_rect_color: self.$inner_rack_rect_color, outline_color: self.$suggested_outline_slot_color)
+                       // }
+                    }
                 }
+                }.buttonStyle(PlainButtonStyle())  /*Remove Navigation Link blue tint*/
                 
-            }
+        //    }
+          /*  else{
+                HStack{
+                    Text("No User Theme Found, Log Out and Log back in please, to reset the theme").font(.title2).bold().foregroundColor(.primary)
+                }
+            }*/
+            
+            
         }
+        
+        //}
+        /* ScrollView{
+         InteractiveGridStack(rows: freezer_max_rows, columns: freezer_max_columns,racks: self.stored_freezer_rack_layout) { row, col,content  in
+         NavigationLink(destination: RackProfileView(rack_profile: content,freezer_profile: self.freezer_profile)){
+         ///if when subtracted the result is greater than 0 it means the start and end are different there multi-level
+         if (content.freezer_rack_depth_end - content.freezer_rack_depth_start) > 0{
+         MultiRackSlotItemView(top_half_color: .constant("green"), bottom_half_color: .constant("gray"))
+         }
+         else if (content.freezer_rack_depth_end - content.freezer_rack_depth_start) < 1{
+         HStack{
+         
+         Text("\(row) \(col) \(content.freezer_rack_label)").foregroundColor(Color.white)
+         
+         }.padding().background(Color.orange)
+         
+         }
+         }
+         
+         }
+         }*/
         /*ForEach(self.stored_freezer_rack_layout, id: \.id) { item in
          
          InteractiveGridStack(rows: freezer_max_rows, columns: freezer_max_columns,label: item.freezer_rack_label) { row, col,content  in
@@ -107,12 +192,19 @@ struct InteractFreezerLayoutPreview: View {
          }
          
          }*/
+        
+        .onAppear{
+            //Get freezer layout
+            self.max_capacity = (freezer_profile.freezerCapacityRows ?? 0) * (freezer_profile.freezerCapacityColumns ?? 0)
+            #warning("Need to fix this")
+            //self.user_css_core_data_service.fetchTargetUserCssById(_userCssId: self.stored_user_id)
+        }
     }
 }
 
 struct InteractFreezerLayoutPreview_Previews: PreviewProvider {
     static var previews: some View {
-        InteractFreezerLayoutPreview(freezer_max_rows: .constant(0), freezer_max_columns: .constant(0), stored_freezer_rack_layout: [RackItemModel](), freezer_profile: FreezerProfileModel())
+        InteractFreezerLayoutPreview(freezer_max_rows: .constant(0), freezer_max_columns: .constant(0), stored_freezer_rack_layout: [RackItemModel](), freezer_profile: FreezerProfileModel(), show_guided_rack_view: .constant(false), show_guided_map_view: .constant(false))
         
     }
 }
@@ -127,13 +219,13 @@ struct InteractiveGridStack<Content: View>: View {
     var body: some View {
         VStack {
             // ForEach(racks, id: .\id){
-        
-                
-                ForEach(0 ..< rows, id: \.self) { row in
-                    HStack {
-                        ForEach(0 ..< columns, id: \.self) { column in
-                            ForEach(racks, id: \.freezer_rack_label) {
-                                rack in
+            
+            
+            ForEach(0 ..< rows, id: \.self) { row in
+                HStack {
+                    ForEach(0 ..< columns, id: \.self) { column in
+                        ForEach(racks, id: \.freezer_rack_label) {
+                            rack in
                             content(row, column,rack)
                         }
                     }

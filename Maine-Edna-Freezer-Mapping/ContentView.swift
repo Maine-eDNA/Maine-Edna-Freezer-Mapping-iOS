@@ -44,13 +44,13 @@ struct ContentView: View {
                     AllFreezersView()
                             .tabItem {
                                 VStack{
-                                    Image(systemName: "square")
+                                    Image(systemName: "note")
                                     Text("Freezer")
                                 }
                         }.tag(1)
                         .navigationViewStyle(StackNavigationViewStyle())
                     
-                    CartView()
+                    CartView(freezer_profile: FreezerProfileModel(), freezer_rack_layouts: RackItemVm())
                         .tabItem {
                             VStack{
                                 Image(systemName: "cart")

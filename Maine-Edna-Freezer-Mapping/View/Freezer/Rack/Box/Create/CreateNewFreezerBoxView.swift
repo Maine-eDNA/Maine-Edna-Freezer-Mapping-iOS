@@ -16,13 +16,22 @@ import SwiftUI
 
 
 struct CreateNewFreezerBoxView: View {
+    
+    @Binding var row : Int
+    @Binding var column : Int
+    @Binding var freezer_profile : FreezerProfileModel
+    @Binding var rack_profile : RackItemModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Text("Create New Box View Coming Soon")
+            Text("Will be in Freezer \($freezer_profile.freezerLabel.wrappedValue ?? "") Rack : \(rack_profile.freezer_rack_label) Row: \(row) Column: \(column)")
+        }
     }
 }
 
 struct CreateNewFreezerBoxView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateNewFreezerBoxView()
+        CreateNewFreezerBoxView(row: .constant(1), column: .constant(1), freezer_profile: .constant(FreezerProfileModel()), rack_profile: .constant(RackItemModel()))
     }
 }

@@ -14,6 +14,7 @@ class InventorySampleModel: Encodable,Decodable, Identifiable {
     var id : Int = 0
     var freezer_box : String = ""
     var sample_barcode : String = ""
+    #warning("Use Codeable")
     var freezer_inventory_slug : String = ""
     var freezer_inventory_type : String = ""
     var freezer_inventory_status : String = ""
@@ -24,6 +25,8 @@ class InventorySampleModel: Encodable,Decodable, Identifiable {
     var created_by : String = ""
     var created_datetime : String = ""
     var modified_datetime : String = ""
+    
+    var is_suggested_sample : Bool = false
 
 }
 

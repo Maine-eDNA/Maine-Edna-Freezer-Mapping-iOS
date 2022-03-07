@@ -15,12 +15,13 @@ struct RackProfileView: View {
     @ObservedObject var box_service = FreezerBoxRetrieval()
     
     var body: some View {
+        //TODO: - Show empty box spaces fo the available slots in the rack and show multi-level rack as well
       //  NavigationView{
             
             VStack(alignment: .leading){
                 HStack{
                     Text("Freezer").font(.title3).bold()
-                    Text("\(freezer_profile.freezer_label)").font(.subheadline)
+                    Text("\(freezer_profile.freezerLabel ?? "")").font(.subheadline)
                     
                 }
                 HStack{
@@ -52,14 +53,21 @@ struct RackProfileView: View {
                 }
                 Section{
                     Text("Boxes in Freezer").font(.title3).bold()//hightlighted
-                    RackCrossSectView(rack_profile: self.rack_profile, rack_boxes: self.$box_service.stored_rack_boxes, freezer_profile: .constant(self.freezer_profile))
+                    Label("Cross-Sectional View", systemImage: "eye").font(.caption)
                     
+                    ScrollView([.horizontal,.vertical],showsIndicators: false){
+                        RackCrossSectView(rack_profile: self.rack_profile, rack_boxes: self.$box_service.stored_rack_boxes, freezer_profile: .constant(self.freezer_profile),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false))
+                        
+                 
+                           // .frame(width: UIScreen.main.bounds.width)
+                    }//.frame(width: UIScreen.main.bounds.width)
                 }
                 
                 Spacer()
             }.padding()
             
                 .onAppear{
+                    //add loading animation here
                     self.box_service.FetchAllRackBoxesByRackId(_rack_id: String(self.rack_profile.id))
                 }
                 .navigationTitle("Rack Detail")
@@ -79,7 +87,7 @@ struct RackProfileView_Previews: PreviewProvider {
         rack_profile.created_by = "keijaoh.campbell@maine.edu"
         rack_profile.freezer = "Freezer_Test_1"
         rack_profile.freezer_rack_label = "Freezer_Test_1_Rack_1"
-        freezer_profile.freezer_label = "Test Freezer"
+        freezer_profile.freezerLabel = "Test Freezer"
         
         return Group {
             RackProfileView(rack_profile: rack_profile,freezer_profile: freezer_profile)

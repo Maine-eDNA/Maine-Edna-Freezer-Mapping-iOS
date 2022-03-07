@@ -23,12 +23,14 @@ struct MenuView: View {
 
     @AppStorage(AppStorageNames.stored_user_name.rawValue) var stored_user_name = ""
     @AppStorage(AppStorageNames.stored_user_profile_pic_url.rawValue) var stored_user_profile_pic_url = ""
+
+    @State var current_user : UserProfileModel = UserProfileModel()
     
     var body: some View {
-        VStack{
-            Spacer().frame(height: 20)
+        NavigationView{
+           // Spacer().frame(height: 20)
             VStack{
-                
+                VStack{
            
                 AsyncImage(url: URL(string: self.stored_user_profile_pic_url)) { image in
                     image
@@ -56,10 +58,29 @@ struct MenuView: View {
                 
                     
                 
-                Text("Hi \(self.stored_user_name) !").font(.title)
+                Text("Hi \(self.current_user.first_name) \(self.current_user.last_name) !").font(.title)
                 
             }
             List{
+                //UserThemeView
+                Section(header: Text("Settings")){
+                    
+                    NavigationLink(destination: UserProfileView(), label: {
+                        HStack{
+                            Image(systemName: "person")
+                            Text("Profile")
+                        }
+                    })
+                    
+                    NavigationLink(destination: UserThemeView(), label: {
+                        HStack{
+                            Image(systemName: "eyedropper.halffull")
+                            Text("Color Preference")
+                        }
+                    })
+                    
+                }
+                
                /*Section(header: Text("Rental")){
                     /* Button("Create New Store"){
                      //redirect to the new store view
@@ -174,8 +195,24 @@ struct MenuView: View {
                 }
                 
             }
+            
+            Spacer()
         }
+            .navigationTitle("Menu")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    
+        
+        .onAppear{
+            if self.store_logged_in_user_profile.count > 0{
+                self.current_user = self.store_logged_in_user_profile[0]
+            }
+        }
+        
     }
+    
+    
+        
 }
 
 struct MenuView_Previews: PreviewProvider {

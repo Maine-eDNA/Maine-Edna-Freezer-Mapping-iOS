@@ -32,11 +32,10 @@ struct FreezerLayoutPreview: View {
                 
                 self.show_freezer_grid_layout.toggle()
             }, label: {
-                HStack{
-                    //Text("A").foregroundColor(Color.white)
-                    Text("").foregroundColor(Color.white)
-                        
-                }.padding(10).background(Color.orange)//.frame(width: 80, height: 80)
+            
+                
+                
+                SingleLevelRaciSlotItemView(single_lvl_rack_color: .constant("orange"))
            
             })
          }

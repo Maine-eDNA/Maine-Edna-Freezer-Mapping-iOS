@@ -14,7 +14,7 @@ enum ServerConnectionUrls: String {
 }
 
 enum AppStorageNames : String{
-   // case temp_hard_coded_token = "d1b5013e3ec193491c7c507234a311af63f9ebfa"
+    case stored_user_id = "stored_user_id"
     case stored_password = "stored_password"
     case store_email_address = "store_email_address"
     case edna_freezer_token = "edna_freezer_token"
@@ -28,7 +28,10 @@ enum AppStorageNames : String{
     case stored_box_sample_logs = "stored_box_sample_logs"
     case stored_return_meta_data = "stored_return_meta_data"
     case store_logged_in_user_profile = "store_logged_in_user_profile"
+    case store_default_css = "store_default_css"
+    case all_unfiltered_stored_box_samples = "all_unfiltered_stored_box_samples"
+    case all_found_box_samples = "all_found_box_samples"
+    case stored_freezer_racks_in_system = "stored_freezer_racks_in_system"
+    case all_stored_rack_boxes_in_system = "all_stored_rack_boxes_in_system"
     
-    
-
 }

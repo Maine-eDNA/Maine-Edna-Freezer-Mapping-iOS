@@ -13,7 +13,7 @@ struct SampleCapsuleMapLegendView: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            Text("\(box_detail.freezer_box_label.uppercased()) Sample Capsule Map Legend").font(.title2).bold()
+            Text("\(box_detail.freezer_box_label?.uppercased() ?? "No Box Label") Sample Capsule Map Legend").font(.title2).bold()
             HStack{
                 Rectangle()
                     .fill(Color(wordName: "purple")!)

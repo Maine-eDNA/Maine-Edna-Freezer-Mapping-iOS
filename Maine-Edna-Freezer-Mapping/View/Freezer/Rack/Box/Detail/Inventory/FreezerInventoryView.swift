@@ -22,17 +22,20 @@ struct FreezerInventoryView: View {
                 HStack{
                     Text("Box Label").font(.title3).bold()
                     Spacer()
-                    Text("\(self.box_detail.freezer_box_label)").font(.body)
+                    Text("\(self.box_detail.freezer_box_label ?? "")").font(.body)
                 }
                 HStack{
                     Text("in Rack").font(.title3).bold()
                     Spacer()
-                    Text("\(self.box_detail.freezer_rack)").font(.body)
+                    Text("\(self.box_detail.freezer_rack ?? "")").font(.body)
                 }
                 HStack{
                     Text("Max Capacity").font(.title3).bold()
                     Spacer()
-                    Text("\((self.box_detail.freezer_box_max_row * self.box_detail.freezer_box_max_column))").font(.body)
+                    if let row = self.box_detail.freezer_box_capacity_row, let column = self.box_detail.freezer_box_capacity_column{
+                        Text("\((row * column))").font(.body)
+                        
+                    }
                 }
                 HStack{
                     Toggle("Nerd Stats", isOn: $showNerdRackStats)
@@ -46,47 +49,47 @@ struct FreezerInventoryView: View {
                             HStack{
                                 Text("Slug").font(.title3).bold()
                                 Spacer()
-                                Text("\(self.box_detail.freezer_box_label_slug)").font(.body)
+                                Text("\(self.box_detail.freezer_box_label_slug ?? "")").font(.body)
                             }
                             HStack{
                                 Text("Depth").font(.title3).bold()
                                 Spacer()
-                                Text("\(self.box_detail.freezer_box_depth)").font(.body)
+                                Text("\(self.box_detail.freezer_box_depth ?? 0)").font(.body)
                             }
                             HStack{
                                 Text("Box Row").font(.title3).bold()
                                 Spacer()
-                                Text("\(self.box_detail.freezer_box_row)").font(.body)
+                                Text("\(self.box_detail.freezer_box_row ?? 0)").font(.body)
                             }
                             HStack{
                                 Text("Max Box Row").font(.title3).bold()
                                 Spacer()
-                                Text("\(self.box_detail.freezer_box_max_row)").font(.body)
+                                Text("\(self.box_detail.freezer_box_capacity_row ?? 0)").font(.body)
                             }
                             HStack{
                                 Text("Box Column").font(.title3).bold()
                                 Spacer()
-                                Text("\(self.box_detail.freezer_box_column)").font(.body)
+                                Text("\(self.box_detail.freezer_box_column ?? 0)").font(.body)
                             }
                             HStack{
                                 Text("Max Box Column").font(.title3).bold()
                                 Spacer()
-                                Text("\(self.box_detail.freezer_box_max_column)").font(.body)
+                                Text("\(self.box_detail.freezer_box_capacity_column ?? 0)").font(.body)
                             }
                             HStack{
                                 Text("Created Date").font(.title3).bold()
                                 Spacer()
-                                Text("\(self.box_detail.created_datetime)").font(.body)
+                                Text("\(self.box_detail.created_datetime ?? "")").font(.body)
                             }
                             HStack{
                                 Text("Modified Date").font(.title3).bold()
                                 Spacer()
-                                Text("\(self.box_detail.modified_datetime)").font(.body)
+                                Text("\(self.box_detail.modified_datetime ?? "")").font(.body)
                             }
                             HStack{
                                 Text("Created By").font(.title3).bold()
                                 Spacer()
-                                Text("\(self.box_detail.created_by)").font(.body)
+                                Text("\(self.box_detail.created_by ?? "")").font(.body)
                             }
                         }
                     }
@@ -100,7 +103,7 @@ struct FreezerInventoryView: View {
                 }, label: {
                     HStack{
                        Image(systemName: "plus")
-                        Text("Sample").font(.title3)
+                        Text("Sample").font(.caption)
                     }  .padding()
                 }).foregroundColor(.white)
                     .background(Color.green)
@@ -112,7 +115,7 @@ struct FreezerInventoryView: View {
                     }, label: {
                         HStack{
                            Image(systemName: "plus")
-                            Text("Bulk Sample").font(.title3)
+                            Text("Bulk").font(.caption)
                         } .padding()
                     }).foregroundColor(.white)
                         .background(Color.blue)
@@ -123,7 +126,7 @@ struct FreezerInventoryView: View {
                     }, label: {
                         HStack{
                            Image(systemName: "plus")
-                            Text("CSV Import").font(.title3)
+                            Text("CSV").font(.caption)
                         }.padding()
                     }).foregroundColor(.white)
                         .background(Color.green)
@@ -132,7 +135,8 @@ struct FreezerInventoryView: View {
             }.padding()
             
             HStack{
-                Text("Samples in \(self.box_detail.freezer_box_label)").font(.title3).bold()
+                Text("Samples in \(self.box_detail.freezer_box_label ?? "")").font(.title3).bold()
+                Label("Top-Down View", systemImage: "eye").font(.caption)
                 Spacer()
                 Button(action: {
                     //show the key
@@ -161,7 +165,7 @@ struct FreezerInventoryView: View {
         }
         
         .onAppear{
-            self.box_sample_service.FetchAllSamplesInBox(_box_id: String(box_detail.id))
+            self.box_sample_service.FetchAllSamplesInBox(_box_id: String(box_detail.id ?? 0))
         }
     }
 }

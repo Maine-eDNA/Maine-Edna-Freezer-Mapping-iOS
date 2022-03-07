@@ -19,71 +19,20 @@ struct FreezerMapView: View {
     @State var showSampleDetail : Bool = false
     
     
-    @State var stored_freezer_rack_layout : [RackItemModel]
+    @Binding var stored_freezer_rack_layout : [RackItemModel]
     
     @State var freezer_profile : FreezerProfileModel
     
     //conditional renders
     @State var show_create_new_rack : Bool = false
-    
+    @State var show_guided_rack_view : Bool = false
     
     var body: some View {
         //ScrollView(showsIndicators: false) {
      
+      
             
-          /*  VStack {
-                
-                ForEach(self.stored_freezer_rack_layout, id: \.id) { item in
-                    //VStack{
-                        
-                        ForEach(0 ..< freezer_profile.freezer_max_rows, id: \.self) { row in
-                            //if is belongs to a particular row
-                            if row == item.freezer_rack_row_start
-                            {
-                                
-                                
-                                HStack {
-                                    ForEach(0 ..< freezer_profile.freezer_max_columns, id: \.self) { column in
-                                        
-                                        if column == item.freezer_rack_column_start{
-                                            NavigationLink(destination: RackProfileView(rack_profile: item,freezer_profile: self.freezer_profile)){
-                                                HStack{
-                                                    
-                                                    Text("\(row) \(column) \(item.freezer_rack_label)").foregroundColor(Color.white)
-                                                    
-                                                }.padding().background(Color.orange)
-                                            }
-                                  
-                                            
-                                            
-                                        }   else{
-                                            //Empty
-                                        
-                                            
-                                            NavigationLink(destination:  CreateNewRackView(freezer_detail: self.freezer_profile,show_create_new_rack: $show_create_new_rack,selected_row: row,selected_col: column)){
-                                                HStack{
-                                                    
-                                                    Text("\(row) \(column) Empty").foregroundColor(Color.white)
-                                                    
-                                                }.padding().background(Color.gray)
-                                            }
-                                            
-                                        }
-                                        
-                                    }
-                                }
-                            }
-                       
-                        }
-                        
-                   // }
-                }
-                
-                // }
-            }
-        */
-            
-        InteractFreezerLayoutPreview(freezer_max_rows: $freezer_profile.freezer_max_rows, freezer_max_columns: $freezer_profile.freezer_max_columns,stored_freezer_rack_layout : stored_freezer_rack_layout,freezer_profile: freezer_profile)
+        InteractFreezerLayoutPreview(freezer_max_rows: .constant($freezer_profile.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_profile.freezerCapacityColumns.wrappedValue ?? 0),stored_freezer_rack_layout : stored_freezer_rack_layout,freezer_profile: freezer_profile, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: .constant(false))
             
             
         //}
@@ -96,6 +45,6 @@ struct FreezerMapView: View {
 
 struct FreezerMapView_Previews: PreviewProvider {
     static var previews: some View {
-        FreezerMapView(stored_freezer_rack_layout: [RackItemModel](), freezer_profile: FreezerProfileModel())
+        FreezerMapView(stored_freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel())
     }
 }

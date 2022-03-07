@@ -28,6 +28,9 @@ class LoginAuthenService : ObservableObject {
 
     @AppStorage(AppStorageNames.store_email_address.rawValue)  var store_email_address = ""
     @AppStorage(AppStorageNames.stored_password.rawValue)  var stored_password = ""
+    
+    @AppStorage(AppStorageNames.stored_user_id.rawValue)  var stored_user_id : Int = 0
+    
     @AppStorage(AppStorageNames.login_status.rawValue) var logged = false
     @Published var store_Info = false
     
@@ -82,6 +85,8 @@ class LoginAuthenService : ObservableObject {
         let accountCredentials : UserProfileModel =  UserProfileModel()
         accountCredentials.email = email.lowercased()
         accountCredentials.password = password
+        
+        print("Email \(email.lowercased()) Code \(password)")
         //Login through Firebase
         let requestUrl : String = ServerConnectionUrls.productionUrl.rawValue + "rest-auth/login/"
         
@@ -120,8 +125,11 @@ class LoginAuthenService : ObservableObject {
                    
                     self.edna_freezer_token = jsonArray["key"].stringValue
                 }
-                
-                
+            
+                if jsonArray["id"].int != nil{
+                   
+                    self.stored_user_id = jsonArray["id"].intValue
+                }
                 
                 //withAnimation{self.logged = true}
                 if response.response?.statusCode == 400{

@@ -19,12 +19,8 @@ struct FreezerDepthPreview: View {
       var body: some View {
           
           GridStack(rows: freezer_max_rows, columns: 1) { row, col in
-          
-                  HStack{
-                      //Text("A").foregroundColor(Color.white)
-                      Text("").foregroundColor(Color.white)
-                          
-                  }.padding(10).background(Color.blue)//.frame(width: 80, height: 80)
+              
+              SingleLevelRaciSlotItemView(single_lvl_rack_color: .constant("blue"))
              
            }
        }

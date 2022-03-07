@@ -77,11 +77,11 @@ struct SampleInvenActivLogView: View {
                 }
                 VStack(alignment: .leading){
                     HStack{
-                        Text("\(self.sample_detail.sample_barcode.uppercased()) CheckOut Logs").font(.title3).bold()
+                        Text("\(self.sample_detail.sample_barcode.uppercased()) Inventory History").font(.title3).bold()
                     }
                     
                     //self.sample_check_out_log_service.stored_box_sample_logs
-                    ZStack{
+                    VStack{
                         
                         List{
                             // FreezerMapView().frame(width: nil, height: nil, alignment: .center)
@@ -137,10 +137,10 @@ struct SampleInvenActivLogView: View {
         
         .onAppear{
             print("First \(self.sample_detail.freezer_inventory_slug.isEmpty)")
-            if !self.need_target_sample{
+         if !self.need_target_sample{
                 self.sample_check_out_log_service.FetchAllSampleCheckOutLog(_inventory_id: String(self.sample_detail.id))
             }
-            else if self.need_target_sample{
+              else if self.need_target_sample{
                 //fetch the sample detail then get the logs
                 //1. fetch all logs from
             //https://metadata.spatialmsk.dev/api/freezer_inventory/log/
@@ -151,7 +151,7 @@ struct SampleInvenActivLogView: View {
                     
                     if !freezer_inventory.isEmpty{
                         //get the sample detail
-                        Get_Target_Sample(_freezer_inventory_slug: freezer_inventory)
+                      //  Get_Target_Sample(_freezer_inventory_slug: freezer_inventory)
                     }
                     
                 }
