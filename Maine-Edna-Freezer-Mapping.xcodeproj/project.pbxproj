@@ -38,6 +38,17 @@
 		4A29186727C7F7140066A645 /* FreezerEdnaContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A29186527C7F7140066A645 /* FreezerEdnaContainer.xcdatamodeld */; };
 		4A29186A27C7F87F0066A645 /* FreezerCoreDataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A29186927C7F87F0066A645 /* FreezerCoreDataManagement.swift */; };
 		4A29186C27C841AD0066A645 /* UserCssThemeCoreDataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A29186B27C841AD0066A645 /* UserCssThemeCoreDataManagement.swift */; };
+		4A2CE72E27E54C68000C0EFC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE72727E54C67000C0EFC /* UIApplication.swift */; };
+		4A2CE72F27E54C68000C0EFC /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE72827E54C67000C0EFC /* Double.swift */; };
+		4A2CE73027E54C68000C0EFC /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE72927E54C67000C0EFC /* Date.swift */; };
+		4A2CE73127E54C68000C0EFC /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE72A27E54C68000C0EFC /* PreviewProvider.swift */; };
+		4A2CE73227E54C68000C0EFC /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE72B27E54C68000C0EFC /* String.swift */; };
+		4A2CE73327E54C68000C0EFC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE72C27E54C68000C0EFC /* Color.swift */; };
+		4A2CE73427E54C68000C0EFC /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE72D27E54C68000C0EFC /* HapticManager.swift */; };
+		4A2CE73727E54D19000C0EFC /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE73627E54D19000C0EFC /* DashboardViewModel.swift */; };
+		4A2CE73927E67202000C0EFC /* FreezerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE73827E67202000C0EFC /* FreezerViewModel.swift */; };
+		4A2CE74627EA3829000C0EFC /* FreezerBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE74527EA3828000C0EFC /* FreezerBoxViewModel.swift */; };
+		4A2CE74827EA4C5A000C0EFC /* FreezerRackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE74727EA4C5A000C0EFC /* FreezerRackViewModel.swift */; };
 		4A34DF65279ECF9700CA9531 /* UserThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34DF64279ECF9700CA9531 /* UserThemeView.swift */; };
 		4A34DF68279EF67100CA9531 /* EditUserColorThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34DF67279EF67100CA9531 /* EditUserColorThemeView.swift */; };
 		4A34DF6C279F5C5600CA9531 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34DF6B279F5C5600CA9531 /* UserProfileView.swift */; };
@@ -147,6 +158,17 @@
 		4A29186627C7F7140066A645 /* FreezerEdnaContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FreezerEdnaContainer.xcdatamodel; sourceTree = "<group>"; };
 		4A29186927C7F87F0066A645 /* FreezerCoreDataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerCoreDataManagement.swift; sourceTree = "<group>"; };
 		4A29186B27C841AD0066A645 /* UserCssThemeCoreDataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCssThemeCoreDataManagement.swift; sourceTree = "<group>"; };
+		4A2CE72727E54C67000C0EFC /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		4A2CE72827E54C67000C0EFC /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		4A2CE72927E54C67000C0EFC /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		4A2CE72A27E54C68000C0EFC /* PreviewProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
+		4A2CE72B27E54C68000C0EFC /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		4A2CE72C27E54C68000C0EFC /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		4A2CE72D27E54C68000C0EFC /* HapticManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		4A2CE73627E54D19000C0EFC /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		4A2CE73827E67202000C0EFC /* FreezerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerViewModel.swift; sourceTree = "<group>"; };
+		4A2CE74527EA3828000C0EFC /* FreezerBoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerBoxViewModel.swift; sourceTree = "<group>"; };
+		4A2CE74727EA4C5A000C0EFC /* FreezerRackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerRackViewModel.swift; sourceTree = "<group>"; };
 		4A34DF64279ECF9700CA9531 /* UserThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserThemeView.swift; sourceTree = "<group>"; };
 		4A34DF67279EF67100CA9531 /* EditUserColorThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserColorThemeView.swift; sourceTree = "<group>"; };
 		4A34DF6B279F5C5600CA9531 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
@@ -572,6 +594,31 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		4A2CE72627E54BB2000C0EFC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4A2CE72C27E54C68000C0EFC /* Color.swift */,
+				4A2CE72927E54C67000C0EFC /* Date.swift */,
+				4A2CE72827E54C67000C0EFC /* Double.swift */,
+				4A2CE72D27E54C68000C0EFC /* HapticManager.swift */,
+				4A2CE72A27E54C68000C0EFC /* PreviewProvider.swift */,
+				4A2CE72B27E54C68000C0EFC /* String.swift */,
+				4A2CE72727E54C67000C0EFC /* UIApplication.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4A2CE73527E54C99000C0EFC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A2CE73627E54D19000C0EFC /* DashboardViewModel.swift */,
+				4A2CE73827E67202000C0EFC /* FreezerViewModel.swift */,
+				4A2CE74527EA3828000C0EFC /* FreezerBoxViewModel.swift */,
+				4A2CE74727EA4C5A000C0EFC /* FreezerRackViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		4A34DF61279ECF5600CA9531 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -913,10 +960,12 @@
 		4AEB96C6274C28DF001F7611 /* Maine-Edna-Freezer-Mapping */ = {
 			isa = PBXGroup;
 			children = (
+				4A2CE72627E54BB2000C0EFC /* Extensions */,
 				4A29186427C7F67C0066A645 /* CoreData */,
 				4A1B95592755638B00504AB7 /* Constants */,
 				4A1B954F2755590C00504AB7 /* Model */,
 				4A1B95512755591C00504AB7 /* Controller */,
+				4A2CE73527E54C99000C0EFC /* ViewModel */,
 				4A1B95502755591500504AB7 /* View */,
 				4AEB96C7274C28DF001F7611 /* Maine_Edna_Freezer_MappingApp.swift */,
 				4AEB96C9274C28DF001F7611 /* ContentView.swift */,
@@ -1143,11 +1192,15 @@
 				4AF48646277DDE6300C3E053 /* DefaultCssModel.swift in Sources */,
 				4A758509275C4381006124ED /* ExitButtonView.swift in Sources */,
 				4A758520275DA48E006124ED /* CreateNewRackView.swift in Sources */,
+				4A2CE73027E54C68000C0EFC /* Date.swift in Sources */,
 				4AF7D6B02770D01C00FABFA6 /* CartView.swift in Sources */,
 				4A1F0B3D27676699008FDDF1 /* SampleInvenActivLogView.swift in Sources */,
 				4A1F0AF7276266CB008FDDF1 /* UserProfileModel.swift in Sources */,
 				4A1B955B275563B700504AB7 /* ConstantValues.swift in Sources */,
+				4A2CE74627EA3829000C0EFC /* FreezerBoxViewModel.swift in Sources */,
+				4A2CE73227E54C68000C0EFC /* String.swift in Sources */,
 				4A1B95652755665B00504AB7 /* ModalCompatibility.swift in Sources */,
+				4A2CE73127E54C68000C0EFC /* PreviewProvider.swift in Sources */,
 				4A758507275C4381006124ED /* DropdownButton.swift in Sources */,
 				4A758529275DD7C0006124ED /* RackCreation.swift in Sources */,
 				4A1F0B222766A16C008FDDF1 /* RackCrossSectView.swift in Sources */,
@@ -1157,6 +1210,7 @@
 				4A1F0B302766E234008FDDF1 /* BoxSampleMapView.swift in Sources */,
 				4A1F0B4F2767C4EA008FDDF1 /* UserProfileManagment.swift in Sources */,
 				4A766F2C27D638E700049DBF /* InventoryLocationModel.swift in Sources */,
+				4A2CE73727E54D19000C0EFC /* DashboardViewModel.swift in Sources */,
 				4A758517275CEA1E006124ED /* DropdownPicker.swift in Sources */,
 				4A34DF6C279F5C5600CA9531 /* UserProfileView.swift in Sources */,
 				4A1B95542755595000504AB7 /* FreezerMapView.swift in Sources */,
@@ -1165,6 +1219,7 @@
 				4A04962227BAC51000BD483B /* GuidedSearchSampleView.swift in Sources */,
 				4A1F0B43276781C3008FDDF1 /* FreezerCheckOutLogModel.swift in Sources */,
 				4A1F0B332766E6B2008FDDF1 /* InventorySampleModel.swift in Sources */,
+				4A2CE73327E54C68000C0EFC /* Color.swift in Sources */,
 				4A29186727C7F7140066A645 /* FreezerEdnaContainer.xcdatamodeld in Sources */,
 				4A1F0B272766BA2A008FDDF1 /* ColorHelpers.swift in Sources */,
 				4A29186C27C841AD0066A645 /* UserCssThemeCoreDataManagement.swift in Sources */,
@@ -1172,12 +1227,14 @@
 				4A1F0AFA27626A0C008FDDF1 /* UserRoleGroupModel.swift in Sources */,
 				4A758527275DC4A4006124ED /* RackPreviewSummaryView.swift in Sources */,
 				4A1F0B4D2767955A008FDDF1 /* FreezerInventoryReturnMetaDataModel.swift in Sources */,
+				4A2CE73427E54C68000C0EFC /* HapticManager.swift in Sources */,
 				4A34DF65279ECF9700CA9531 /* UserThemeView.swift in Sources */,
 				4A1F0B462767828B008FDDF1 /* FreezerCheckOutLogRetrieval.swift in Sources */,
 				4A409787277D289100848560 /* MultiRackSlotItemView.swift in Sources */,
 				4A7584ED275AA20E006124ED /* FreezerProfileCardView.swift in Sources */,
 				4A758503275C4381006124ED /* TextFieldLabelNoAuto.swift in Sources */,
 				4A1F0B252766B3EC008FDDF1 /* BoxItemModel.swift in Sources */,
+				4A2CE72E27E54C68000C0EFC /* UIApplication.swift in Sources */,
 				4A758511275C7C4E006124ED /* FreezerCreation.swift in Sources */,
 				4AF48643277D48C600C3E053 /* BoxSampleCapsuleView.swift in Sources */,
 				4AF4864B277DF76800C3E053 /* ClassConverter.swift in Sources */,
@@ -1190,6 +1247,7 @@
 				4A58839E27B57B7F0020AB0B /* SuggestedRackGridItemView.swift in Sources */,
 				4A71276827591EA9000D13CA /* LoginView.swift in Sources */,
 				4AF4863E277D42A800C3E053 /* EmptyRackSlotView.swift in Sources */,
+				4A2CE72F27E54C68000C0EFC /* Double.swift in Sources */,
 				4A758505275C4381006124ED /* SecuredTextFieldLabelCombo.swift in Sources */,
 				4A7584E8275A98D3006124ED /* FreezerProfilesResultModel.swift in Sources */,
 				4A758502275C4381006124ED /* TextFieldLabelCombo.swift in Sources */,
@@ -1202,6 +1260,8 @@
 				4A1F0B482767902F008FDDF1 /* SampleCheckOutLogCard.swift in Sources */,
 				4A1B95582755602B00504AB7 /* RackItemModel.swift in Sources */,
 				4A8E739127A9B0C2006A3D0A /* CapsuleSuggestedPositionView.swift in Sources */,
+				4A2CE74827EA4C5A000C0EFC /* FreezerRackViewModel.swift in Sources */,
+				4A2CE73927E67202000C0EFC /* FreezerViewModel.swift in Sources */,
 				4A1F0B1F27669898008FDDF1 /* RackProfileView.swift in Sources */,
 				4A758514275C7DC7006124ED /* ServerMessageModel.swift in Sources */,
 				4AAFA6A5277BC2C1009F83B5 /* BarcodeScannerBtn.swift in Sources */,
@@ -1367,7 +1427,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1;
+				CURRENT_PROJECT_VERSION = 2.15;
 				DEVELOPMENT_ASSET_PATHS = "\"Maine-Edna-Freezer-Mapping/Preview Content\"";
 				DEVELOPMENT_TEAM = KCSE39EC45;
 				ENABLE_PREVIEWS = YES;
@@ -1398,7 +1458,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1;
+				CURRENT_PROJECT_VERSION = 2.15;
 				DEVELOPMENT_ASSET_PATHS = "\"Maine-Edna-Freezer-Mapping/Preview Content\"";
 				DEVELOPMENT_TEAM = KCSE39EC45;
 				ENABLE_PREVIEWS = YES;
