@@ -27,6 +27,17 @@ struct RackCrossSectView: View {
     @Binding var show_guided_box_view : Bool
     @Binding var show_guided_rack_view : Bool
     
+    @State private var showCreateFreezerBox : Bool = false
+    
+    @State private var targetRow : Int = 0
+    @State private var targetColumn : Int = 0
+    
+    @State var targetBox : BoxItemModel = BoxItemModel()
+    @State var showFreezerBoxDetail : Bool = false
+    
+    ///Used as a master list to show the records that need to be highlighted
+    @State var inventoryLocations : [InventoryLocationResult] = []
+    @State var isInSearchMode : Bool = false
     
     
     var body: some View {
@@ -40,67 +51,118 @@ struct RackCrossSectView: View {
          and a the rack has 5 Rows it means it can be in any of the rows
          so any of the row and column combination but must not fall outside of the range else show error
          */
-        VStack{
-            //Text("\(rack_profile.freezer_rack_row_start) \(rack_profile.freezer_rack_row_end)")
-            //Text("\(rack_profile.freezer_rack_column_start) \(rack_profile.freezer_rack_column_end)")
-            ForEach(rack_profile.freezer_rack_row_start ..< rack_profile.freezer_rack_row_end, id: \.self) { row in
-                HStack {
-                    ForEach(rack_profile.freezer_rack_column_start ..< rack_profile.freezer_rack_column_end, id: \.self) { column in
-                        ForEach($rack_boxes, id: \.freezer_box_label) {
-                            box in
-                            
-                            if box.is_suggested_box_position.wrappedValue{
-                                NavigationLink(destination: FreezerInventoryView(box_detail: box, freezer_profile: self.$freezer_profile)){
-                                    SuggestedBoxItemCard(box_color: "green", box_text_color: "white", freezer_box_row: row, freezer_box_column: column,freezer_rack: rack_profile.freezer_rack_label)
-                                        .onTapGesture {
+        ZStack{
+            VStack{
+                if self.rack_boxes.count > 0{
+                    withAnimation(.easeInOut(duration: 5)){
+                        ForEach(rack_profile.freezer_rack_row_start ..< rack_profile.freezer_rack_row_end, id: \.self) { row in
+                            HStack {
+                                ForEach(rack_profile.freezer_rack_column_start ..< rack_profile.freezer_rack_column_end, id: \.self) { column in
+                                    ForEach(self.rack_boxes, id: \.freezer_box_label) {
+                                        box in
+                                        
+                                        
+                                        if box.is_suggested_box_position && box.freezer_box_column == column && box.freezer_box_row == row{
                                             
-                                            self.show_guided_rack_view = false
-                                            self.show_guided_box_view.toggle()
+                                            SuggestedBoxItemCard(box_color: "green", box_text_color: "white", freezer_box_row: 0, freezer_box_column: 0,freezer_rack: rack_profile.freezer_rack_label)
+                                                .listRowBackground(Color.clear)
+                                                .onTapGesture {
+                                                    
+                                                    self.show_guided_rack_view = false
+                                                    self.show_guided_box_view.toggle()
+                                                    
+                                                    
+                                                    
+                                                    //set the current box
+                                                    self.targetBox = box
+                                                    self.showFreezerBoxDetail.toggle()
+                                                }
+                                            
                                         }
-                                }
-                            }
-                            else if box.freezer_box_column.wrappedValue == column && box.freezer_box_row.wrappedValue == row {
-                                NavigationLink(destination: FreezerInventoryView(box_detail: box, freezer_profile: self.$freezer_profile)){
-                                    BoxItemCard(rack_box: box)
+                                        else if box.freezer_box_column == column && box.freezer_box_row == row {
+                                            
+                                            BoxItemCard(rack_box: .constant(box))
+                                                .listRowBackground(Color.clear)
+                                                .onTapGesture {
+                                                    
+                                                    
+                                                    //set the current box
+                                                    self.targetBox = box
+                                                    self.showFreezerBoxDetail.toggle()
+                                                }
+                                            
+                                        }
+                                        else{
+                                            //Create new box: send the row and column the current box is in and the freezer info
+                                            
+                                            BoxEmptyItemCard(freezer_box_row: row , freezer_box_column: column,freezer_rack: rack_profile.freezer_rack_label)
+                                            // .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                                                .listRowBackground(Color.clear)
+                                                .onTapGesture {
+                                                    self.targetRow = row
+                                                    self.targetColumn = column
+                                                    
+                                                    //segue to the view
+                                                    self.showCreateFreezerBox.toggle()
+                                                }
+                                            
+                                            
+                                        }
+                                        
+                                        
+                                    }
                                     
                                 }
-                            }
-                            else{
-                                //Create new box: send the row and column the current box is in and the freezer info
-                                NavigationLink(destination: CreateNewFreezerBoxView(row: .constant(row), column: .constant(column), freezer_profile: self.$freezer_profile,rack_profile: .constant(self.rack_profile))){
-                                    BoxEmptyItemCard(freezer_box_row: row , freezer_box_column: column,freezer_rack: rack_profile.freezer_rack_label)
-                                    
-                                }
-                                
                             }
                         }
+                        
+                        
                         
                     }
                 }
             }
             
-            
-            
-            
-            
-        }
-        .onAppear{
-            //get user css profile
-            if self.store_user_default_css.count > 0{
-                user_css_settings = self.store_user_default_css.first!
-            }
-            else{
-                //use the default values
-                if self.store_default_css.count > 0{
-                    user_css_settings = self.convert_service.DefaultCssToUserCss(_user_email: self.store_email_address, _default_css: self.store_default_css.first!)
-                    print("User Settings from default Css Sample: \(user_css_settings.freezer_empty_box_css_background_color)")
+            .onAppear{
+                debugPrint(rack_profile)
+                print("Rack Name: \(self.rack_profile.freezer_rack_label_slug)")
+                print("Rack Name: \(self.rack_profile.freezer_rack_column_start)")
+                //freezer_rack_column_start
+                print("Amt of boxes : \(self.rack_boxes.count)")
+                //get user css profile
+                if self.store_user_default_css.count > 0{
+                    user_css_settings = self.store_user_default_css.first!
                 }
+                else{
+                    //use the default values
+                    if self.store_default_css.count > 0{
+                        user_css_settings = self.convert_service.DefaultCssToUserCss(_user_email: self.store_email_address, _default_css: self.store_default_css.first!)
+                        print("User Settings from default Css Sample: \(user_css_settings.freezer_empty_box_css_background_color)")
+                    }
+                    
+                }
+                
                 
             }
             
             
             
+        }  .background(){
+            NavigationLink(destination: CreateNewFreezerBoxView(row: self.$targetRow, column: self.$targetColumn, freezer_profile: self.$freezer_profile,rack_profile: .constant(self.rack_profile)),isActive: self.$showCreateFreezerBox,  label: {EmptyView()})
         }
+        .background(){
+            //MARK: Need to send isInSearchMode so that it highlights the samples
+            NavigationLink(destination: FreezerInventoryView(box_detail: self.$targetBox, freezer_profile: self.$freezer_profile,inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode)
+                           ,isActive: self.$showFreezerBoxDetail,  label: {EmptyView()})
+        }
+#warning("Fix these to pass parameters")
+        /*.background(
+         //  NavigationLink(destination: CreateNewFreezerBoxView(row: .constant(0), column: .constant(0), freezer_profile: self.$freezer_profile,rack_profile: .constant(self.rack_profile)))
+         )
+         .background(
+         //NavigationLink(destination: FreezerInventoryView(box_detail: BoxModel(), freezer_profile: self.$freezer_profile))
+         
+         )*/
+        
     }
 }
 
@@ -130,11 +192,11 @@ struct BoxItemCard : View{
                         HStack(alignment: .top){
                             
                             Spacer().frame(width: 140,height: 10)
-                            Text("\(rack_box.freezer_rack ?? "")").foregroundColor(Color(wordName: box_text_color)).font(.caption).bold()
+                            Text("\(rack_box.freezer_rack ?? "")").foregroundColor(Color(wordName: box_text_color)).font(.caption2).bold().minimumScaleFactor(0.01)
                             //
                         }
                         HStack{
-                            Text("\(rack_box.freezer_box_label ?? "")").foregroundColor(Color(wordName: box_text_color)).font(.title).bold()
+                            Text("\(rack_box.freezer_box_label ?? "")").foregroundColor(Color(wordName: box_text_color)).font(.subheadline).bold().minimumScaleFactor(0.01)
                             
                         }
                         HStack{
@@ -245,7 +307,7 @@ struct BoxEmptyItemCard : View
                             //
                         }
                         HStack{
-                            Text("Empty").foregroundColor(Color(wordName: box_text_color)).font(.title).bold()
+                            Text("Empty").foregroundColor(Color(wordName: box_text_color)).font(.title3).bold().minimumScaleFactor(0.01)
                             
                         }
                         HStack{
@@ -320,7 +382,7 @@ struct SuggestedBoxItemCard : View
                             //
                         }
                         HStack{
-                            Text("Empty").foregroundColor(Color(wordName: box_text_color)).font(.title).bold()
+                            Text("Empty").foregroundColor(Color(wordName: box_text_color)).font(.title3).bold().minimumScaleFactor(0.01)
                             
                         }
                         HStack{
@@ -342,8 +404,8 @@ struct SuggestedBoxItemCard : View
                             
                         }
                     }
-                  
-                  
+                    
+                    
                     
                     
                 }

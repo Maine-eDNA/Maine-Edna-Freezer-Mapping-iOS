@@ -25,7 +25,7 @@ struct InventoryLocationResult: Codable {
     var freezerInventoryColumn, freezerInventoryRow: Int?
     var freezerBox: BoxModel?
     var createdBy, createdDatetime, modifiedDatetime: String?
-
+    var isHighlighed : Bool = false
     enum CodingKeys: String, CodingKey {
             case id
             case sampleBarcode = "sample_barcode"
@@ -69,6 +69,25 @@ struct BoxModel: Codable {
 
 // MARK: - FreezerRack
 struct RackModel: Codable {
+    
+    init(freezer_rack_label : String){
+        self.id = 0
+        self.freezer_rack_label = freezer_rack_label
+        self.freezer_rack_label_slug = ""
+        self.freezer_rack_column_start = 0
+        self.freezer_rack_column_end = 0
+        self.freezer_rack_row_start = 0
+        self.freezer_rack_row_end = 0
+        self.freezer_rack_depth_start = 0
+        self.freezer_rack_depth_end = 0
+        self.freezer = FreezerProfileModel()
+        //freezer = ""
+        self.created_by = ""
+        self.created_datetime = ""
+        self.modified_datetime = ""
+        
+    }
+    
     init(){
         id = 0
         freezer_rack_label = ""

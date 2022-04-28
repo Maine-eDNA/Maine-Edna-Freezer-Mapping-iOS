@@ -35,6 +35,7 @@ struct BoxSampleMapView: View {
             InteractiveBoxGridStack(rows: $stored_rack_box_layout.freezer_box_capacity_row.wrappedValue ?? 0, columns: $stored_rack_box_layout.freezer_box_capacity_column.wrappedValue ?? 0,samples: self.stored_box_samples) { row, col,content  in
                 NavigationLink(destination: SampleInvenActivLogView(sample_detail: .constant(content))){
                    // BoxSampleCapsuleView(single_lvl_rack_color: .constant("blue"))
+                    #warning("Test this to see why it is not showing the highlighted samples")
                     if content.is_suggested_sample && content.freezer_inventory_row == row && content.freezer_inventory_column == col{
                         CapsuleSuggestedPositionView(single_lvl_rack_color: .constant("yellow"), sample_code:.constant(String(!content.sample_barcode.isEmpty ? content.sample_barcode.suffix(4) : "N/A")), sample_type_code: .constant(String(!content.freezer_inventory_type.isEmpty ? content.freezer_inventory_type.prefix(1) : "N/A")))
                             .onTapGesture {
@@ -59,75 +60,7 @@ struct BoxSampleMapView: View {
             
             
         }
-        
-       /* ScrollView(showsIndicators: false) {
-     
-            
-            VStack {
-                
-                ForEach(self.stored_box_samples, id: \.id) { item in
-                    //VStack{
-                        
-                        ForEach(0 ..< stored_rack_box_layout.freezer_box_max_row, id: \.self) { row in
-                            //if is belongs to a particular row
-                            if row == item.freezer_inventory_row
-                            {
-                                
-                                
-                                HStack {
-                                    ForEach(0 ..< stored_rack_box_layout.freezer_box_max_column, id: \.self) { column in
-                                        
-                                        if column == item.freezer_inventory_column{
-                               
-                                            
-                                            NavigationLink(destination: SampleInvenActivLogView(sample_detail: .constant(item))){
-                                               /* HStack{
-                                                    
-                                                    Text(" \(item.sample_barcode)").foregroundColor(Color.white).font(.caption)
-                                                    
-                                                }.padding().background(Color.orange)
-                                                    .clipShape(Circle())*/
-                                                BoxSampleCapsuleView(single_lvl_rack_color: .constant("blue"), width: 50, height: 50)
-                                            }
-                                            
-                                        }   else{
-                                            //Empty
-                                         
-                                            //MARK: - Open the create new sample view
-                                            NavigationLink(destination: EmptyView()){
-                                               /* HStack{
-                                                    //go to a screen to add a new sample at this location
-                                                    Text("Empty").foregroundColor(Color.white)
-                                                       
-                                                }.padding().background(Color.gray)
-                                                    .clipShape(Circle())*/
-                                                BoxSampleCapsuleView(single_lvl_rack_color: .constant("gray"), width: 50, height: 50)
-                                            }
-                                    
-                                            
-                                        }
-                                        
-                                    }
-                                }
-                            }
-                            else{
-                                //Empty
-                            
-                            }
-                        }
-                        
-                   // }
-                }
-                
-                // }
-            }
-            
-            /*InteractFreezerLayoutPreview(freezer_max_rows: $freezer_profile.freezer_max_rows, freezer_max_columns: $freezer_profile.freezer_max_columns,stored_freezer_rack_layout : stored_freezer_rack_layout)*/
-            
-            
-        }
-        .frame(minHeight: 300,maxHeight: 500)*/
-        
+ 
         
     }
 }
@@ -146,6 +79,10 @@ struct InteractiveBoxGridStack<Content: View>: View {
     let samples : [InventorySampleModel]
     let content: (Int, Int,InventorySampleModel) -> Content
     
+    //letters of the alphabet start
+    let alphabet : [String] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+    //letters of the alphabet end
+    
     var body: some View {
         VStack {
             // ForEach(racks, id: .\id){
@@ -154,10 +91,65 @@ struct InteractiveBoxGridStack<Content: View>: View {
             ForEach(0 ..< rows, id: \.self) { row in
                 HStack {
                     ForEach(0 ..< columns, id: \.self) { column in
-                        ForEach(samples, id: \.freezer_box) {
+                        HStack{
+                            
+                            Text("\(( column == 0 ? String(alphabet[row]).uppercased() : "") )")
+                                .font(.subheadline)
+                                .bold()
+                                .padding(.horizontal,column == 0 ? 10 : 0)
+                            
+                        }
+                        
+                        /*ForEach(samples, id: \.freezer_box) {
                             sample in
                             content(row, column,sample)
+                        }*/
+                        VStack(alignment: .leading){
+                            Section{
+                                if row == 0{
+                                    HStack{
+                                        Text("\(((column ) + 1) )")
+                                            .font(.subheadline)
+                                            .bold()
+                                            .padding(.horizontal,5)
+                                        
+                                    }
+                                }
+                            }
+                            Section{
+                            //must be unique
+                            if let sample = samples.first(where: {$0.freezer_inventory_column == column  && $0.freezer_inventory_row == row}){
+                                content(row, column,sample)
+                            }
+                            else{
+                                content(row, column,InventorySampleModel(id: 0,freezer_box: "",freezer_inventory_column: column, freezer_inventory_row: row, is_suggested_sample: false))//MARK: change this to be dynamic when it is suggested
+                            }
                         }
+                           //here
+                            Section{
+                                if row == (rows - 1){
+                                    HStack{
+                                        Text("\(((column ) + 1) )")
+                                            .font(.subheadline)
+                                            .bold()
+                                            .padding(.horizontal,5)
+                                        
+                                    }
+                                }
+                            }
+                            
+                        }
+                        HStack{
+                            
+                            Text("\(( column == (columns - 1) ? String(alphabet[row]).uppercased() : "") )")
+                                .font(.subheadline)
+                                .bold()
+                                .padding(.horizontal,column == 9 ? 8 : 0)
+                            
+                        }
+                        
+                        
+                        
                     }
                 }
             }

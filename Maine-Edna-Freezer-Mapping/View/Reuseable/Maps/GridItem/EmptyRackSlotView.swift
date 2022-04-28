@@ -24,6 +24,11 @@ struct EmptyRackSlotView: View {
                 .foregroundColor(Color(wordName: empty_rack_color))
                 .clipped()
         }.border(.secondary, width: 2)
+            .shadow(color: (Color(wordName: empty_rack_color) ?? Color.gray).opacity(0.50) , radius: 10, x: 10, y: 10)
+        
+        /*
+         .shadow(color: Color.theme.accent.opacity(0.25), radius: 10, x: 0, y: 0)
+         */
     }
 }
 

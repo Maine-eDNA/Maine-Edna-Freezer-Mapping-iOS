@@ -11,29 +11,13 @@ import SwiftUI
 
 //MARK: Model for fetching different from adding to the server
 
-/*
-
-class FreezerInventoryReturnMetaDataModel: Encodable,Decodable, Identifiable {
-    
-  
-    var freezer_log : String = ""
-    var freezer_return_notes : String = ""
-    var freezer_return_metadata_entered : String = ""
-    var return_actions : [String] = [String]()
-    var created_by : String = ""
-    var created_datetime : String = ""
-    var modified_datetime : String = ""
-    
-
-
-}*/
 
 
 // MARK: - FreezerInventoryReturnMetaDataModel
 struct FreezerInventoryReturnMetaDataModel: Codable {
     var links: Links?
     var count: Int?
-    var results: [Result]?
+    var results: [FreezerInventoryReturnMetaDataResults]?
 }
 
 
@@ -44,7 +28,7 @@ struct Links: Codable {
 
 
 // MARK: - Result
-struct Result: Identifiable, Codable {
+struct FreezerInventoryReturnMetaDataResults: Identifiable, Codable {
     var id = UUID()
     
     
@@ -55,7 +39,7 @@ struct Result: Identifiable, Codable {
     var freezerLog: String?//FreezerLog?
     var createdBy, createdDatetime, modifiedDatetime: String?
     
-    static func == (lhs: Result, rhs: Result) -> Bool {
+    static func == (lhs: FreezerInventoryReturnMetaDataResults, rhs: FreezerInventoryReturnMetaDataResults) -> Bool {
         lhs.id == rhs.id
     }
 

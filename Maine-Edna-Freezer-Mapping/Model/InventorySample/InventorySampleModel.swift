@@ -11,6 +11,18 @@ import SwiftUI
 
 class InventorySampleModel: Encodable,Decodable, Identifiable {
     
+    init(){
+        
+    }
+    
+    init(id : Int,freezer_box : String,freezer_inventory_column : Int,freezer_inventory_row : Int, is_suggested_sample : Bool  ){
+        self.id = 0
+        self.freezer_box = ""
+        self.freezer_inventory_column = 0
+        self.freezer_inventory_row = 0
+        self.is_suggested_sample = false
+    }
+    
     var id : Int = 0
     var freezer_box : String = ""
     var sample_barcode : String = ""

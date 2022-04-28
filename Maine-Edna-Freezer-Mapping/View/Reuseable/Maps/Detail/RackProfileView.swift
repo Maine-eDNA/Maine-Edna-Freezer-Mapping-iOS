@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct RackProfileView: View {
-    
-    var rack_profile : RackItemModel
+    ///RackProfile is needed o make the server call to generate the results
+   @Binding var rack_profile : RackItemModel
     var freezer_profile : FreezerProfileModel
     @State var showNerdRackStats : Bool = false
-    @ObservedObject var box_service = FreezerBoxRetrieval()
+    //@ObservedObject var box_service = FreezerBoxRetrieval()
+    @StateObject private var vm : FreezerBoxViewModel = FreezerBoxViewModel()
+    
+    ///Optional: only used when doing Cart View Querying to find the target boxes
+    @State var isInSearchMode : Bool = false
+    ///Used as a master list to show the records that need to be highlighted
+    @State var inventoryLocations : [InventoryLocationResult] = []
     
     var body: some View {
         //TODO: - Show empty box spaces fo the available slots in the rack and show multi-level rack as well
@@ -26,11 +32,11 @@ struct RackProfileView: View {
                 }
                 HStack{
                     Text("Rack").font(.title3).bold()
-                    Text("\(rack_profile.freezer_rack_label)").font(.subheadline)
+                    Text("\(rack_profile.freezer_rack_label) Slug \(rack_profile.freezer_rack_label_slug)").font(.subheadline)
                     
                 }
                 HStack{
-                    Toggle("Nerd Stats", isOn: $showNerdRackStats)
+                    Toggle("More Details", isOn: $showNerdRackStats)
                         .toggleStyle(SwitchToggleStyle(tint: .blue))
                 }
                 
@@ -51,24 +57,46 @@ struct RackProfileView: View {
                         }
                     }
                 }
-                Section{
-                    Text("Boxes in Freezer").font(.title3).bold()//hightlighted
-                    Label("Cross-Sectional View", systemImage: "eye").font(.caption)
-                    
-                    ScrollView([.horizontal,.vertical],showsIndicators: false){
-                        RackCrossSectView(rack_profile: self.rack_profile, rack_boxes: self.$box_service.stored_rack_boxes, freezer_profile: .constant(self.freezer_profile),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false))
-                        
-                 
-                           // .frame(width: UIScreen.main.bounds.width)
-                    }//.frame(width: UIScreen.main.bounds.width)
+                if self.vm.all_filter_rack_boxes.count > 0{
+                    withAnimation(.spring()){
+                        Section{
+                            Text("Boxes in Freezer").font(.title3).bold()//hightlighted
+                            Label("Cross-Sectional View", systemImage: "eye").font(.caption)
+                            
+                            ScrollView([.horizontal,.vertical],showsIndicators: false){
+                                RackCrossSectView(rack_profile: self.rack_profile, rack_boxes: self.$vm.all_filter_rack_boxes, freezer_profile: .constant(self.freezer_profile),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode)
+                                
+                         
+                                   // .frame(width: UIScreen.main.bounds.width)
+                            }//.frame(width: UIScreen.main.bounds.width)
+                        }
+                    }
                 }
-                
+                else{
+                    VStack{
+                        Text("No Boxes Found In this Rack").bold().font(.title3).foregroundColor(.primary)
+                        Image("not_found_06").resizable().frame(width: 400, height: 400, alignment: .center)
+                    }
+                }
                 Spacer()
             }.padding()
             
                 .onAppear{
-                    //add loading animation here
-                    self.box_service.FetchAllRackBoxesByRackId(_rack_id: String(self.rack_profile.id))
+                    print("Rack Label Slug: \(self.rack_profile.freezer_rack_label_slug)")
+                    if isInSearchMode{
+                       //need to add the icon to the boxes in search
+                        self.vm.isInSearchMode = true
+                        //target list
+                        
+                        self.vm.FilterFreezerBoxesSearchMode(_rack_id: String(self.rack_profile.freezer_rack_label_slug),inventoryLocations: self.inventoryLocations)
+                    }
+                    else{
+                        //add loading animation here
+                        print("Rack Slug \(self.rack_profile.freezer_rack_label_slug)")
+                        
+                        self.vm.FilterFreezerBoxes(_rack_id: String(self.rack_profile.freezer_rack_label_slug))
+                        
+                    }
                 }
                 .navigationTitle("Rack Detail")
                 .navigationBarTitleDisplayMode(.inline)
@@ -90,15 +118,15 @@ struct RackProfileView_Previews: PreviewProvider {
         freezer_profile.freezerLabel = "Test Freezer"
         
         return Group {
-            RackProfileView(rack_profile: rack_profile,freezer_profile: freezer_profile)
+            RackProfileView(rack_profile: .constant(rack_profile),freezer_profile: freezer_profile)
             // .preferredColorScheme(.dark)
                 .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
                 .previewDisplayName("iPad Air (4th generation)")
             //.environment(\.colorScheme, .dark)
-            RackProfileView(rack_profile: rack_profile,freezer_profile: freezer_profile)
+            RackProfileView(rack_profile: .constant(rack_profile),freezer_profile: freezer_profile)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
                 .previewDisplayName("iPhone 8")
-            RackProfileView(rack_profile: rack_profile,freezer_profile: freezer_profile)
+            RackProfileView(rack_profile: .constant(rack_profile),freezer_profile: freezer_profile)
                 .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
                 .previewDisplayName("iPhone XS Max")
         }

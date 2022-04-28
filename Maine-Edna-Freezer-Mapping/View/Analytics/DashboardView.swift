@@ -11,9 +11,9 @@ import AlertToast
 //half and half box when half full
 //bulk add using Barcode and CSV
 //Guided Tour
-
+#warning("Need to monitor the amount of queries hitting the server per second on the cart view and map views")
 struct DashboardView: View {
-    //need to fetch the system colors
+    //MARK: Clean up the screen
     
     @ObservedObject var todo_list_service : FreezerCheckOutLogRetrieval = FreezerCheckOutLogRetrieval()
     @AppStorage(AppStorageNames.store_logged_in_user_profile.rawValue)  var store_logged_in_user_profile : [UserProfileModel] = [UserProfileModel]()
@@ -32,100 +32,40 @@ struct DashboardView: View {
     @State var isErrorMsg : Bool = false
     @State var responseMsg : String = ""
     //loading spinner
-    @State var show_loading_spinner = false
+    //@State var show_loading_spinner = false
     
+    #warning("make it a environment object")
     //TODO: make it a environment object
     @ObservedObject var user_css_core_data_service = UserCssThemeCoreDataManagement()
     
+    @EnvironmentObject private var vm : DashboardViewModel
     
-    
+    #warning("Format the screen to be more resuable using extensions etc")
     
     var body: some View {
         NavigationView{
+            #warning("Add the detail view for this return meta data unique from SampleInvenActivLogView ")
+            ZStack{
             VStack(alignment: .leading){
-                if self.todo_list_service.stored_return_meta_data.count < 1{
+            /*
+             
+             SampleInvenActivLogView(sample_detail: .constant(InventorySampleModel()), need_target_sample: true,freezer_log_slug: meta.freezer_log))
+             if self.todo_list_service.freezer_return_metas != nil{
                     Image("not_found_06").resizable().frame(width: 400, height: 400, alignment: .center)
                 }
-                else{
+                else{*/
                     //to get it grouped i will have to have a header with the category and rows belonging to the category
                     List{
-                        if let todoes = self.todo_list_service.freezer_return_metas.results{
-                            ForEach(todoes, id: \.id){ meta in
-                      /*  ForEach(Array(self.todo_list_service.freezer_return_metas.results/*freezer_meta_grouped.keys*/), id: \.self){
-                            key in*/
-                            
-                                VStack(alignment: .leading){
-                                    //Text("\(meta.freezer_return_notes)").font(.title3)//.fontWeight(.medium)
-                                    HStack{
-                                        Text("Return").font(.title3).bold()
-                                        if let return_actions = meta.freezerReturnActions{
-                                        ForEach(return_actions, id: \.self){ action in
-                                            Text("\(action.uppercased())").padding(1)
-                                        }
-                                    }
-                                    }
-                                    /* HStack{
-                                     
-                                     Text("by").font(.caption)
-                                     Text("\(meta.created_by)").font(.body).bold()
-                                     Spacer()
-                                     }*/
-                                    if let created_date_time = meta.createdDatetime{
-                                    HStack{
-                                        
-                                        //String(convertDateFormat(inputDate: meta.created_datetime))
-                                        Text("date ").font(.caption)
-                                        Text("\(created_date_time.convertDateFormat(withFormat: created_date_time).formatted(.dateTime))").font(.body).bold()
-                                        Spacer()
-                                    }
-                                    
-                                }
-                                    /* HStack{
-                                     Text("metadata entered").font(.caption)
-                                     Text("\(meta.freezer_return_metadata_entered)").font(.body)
-                                     }*/
-                                }
-                          /*  Section(header: Text("metadata entered \(key)")){
-                                ForEach(self.todo_list_service.freezer_meta_grouped[key] ?? [], id: \.freezer_log){
-                                    meta in
-                                    NavigationLink(destination: SampleInvenActivLogView(sample_detail: .constant(InventorySampleModel()), need_target_sample: true,freezer_log_slug: meta.freezer_log)){
-                                        
-                                        VStack(alignment: .leading){
-                                            //Text("\(meta.freezer_return_notes)").font(.title3)//.fontWeight(.medium)
-                                            HStack{
-                                                Text("Return").font(.title3).bold()
-                                                ForEach(meta.return_actions, id: \.self){ action in
-                                                    Text("\(action)").padding(1)
-                                                }
-                                            }
-                                            
-                                            /* HStack{
-                                             
-                                             Text("by").font(.caption)
-                                             Text("\(meta.created_by)").font(.body).bold()
-                                             Spacer()
-                                             }*/
-                                            HStack{
-                                                
-                                                //String(convertDateFormat(inputDate: meta.created_datetime))
-                                                Text("date ").font(.caption)
-                                                Text("\(meta.created_datetime.convertDateFormat(withFormat: meta.created_datetime).formatted(.dateTime))").font(.body).bold()
-                                                Spacer()
-                                            }
-                                            /* HStack{
-                                             Text("metadata entered").font(.caption)
-                                             Text("\(meta.freezer_return_metadata_entered)").font(.body)
-                                             }*/
-                                        }
-                                    }
-                                }
-                            }*/
-                        }
+                  
+                        returnMetaDataList
                         
-                    }
+               
                     }.listStyle(PlainListStyle())
-                }
-            }.toast(isPresenting: $show_loading_spinner){
+                    .refreshable {
+                        self.vm.reloadData()
+                    }
+              //  }
+            }.toast(isPresenting: self.$vm.isLoading){
                 
                 AlertToast(type: .loading, title: "Response", subTitle: "Loading..")
                 
@@ -146,7 +86,7 @@ struct DashboardView: View {
                 
                 //Show Loading Animation
                 withAnimation(.spring()){
-                    self.show_loading_spinner = true
+                    self.vm.isLoading = true
                     
                 }
                 
@@ -159,25 +99,7 @@ struct DashboardView: View {
                 }
                 //fetch user profile
                 
-                self.todo_list_service.FetchInventoryReturnMetadata(_created_by: self.store_email_address){
-                    response in
-                    
-                    self.show_loading_spinner = false
-                    
-                    //give message after loading is finished
-                    
-                    print("Response is: \(response)")
-                    self.responseMsg = response.serverMessage
-                    self.showResponseMsg = true
-                    self.isErrorMsg = response.isError
-                    
-                    if(!self.isErrorMsg){
-                        //Do something if no error occurred
-                        
-                    }
-                    
-                }
-                
+               // self.todo_list_service.FetchInventoryReturnMetadata(_created_by: self.store_email_address)
                 /*
                  @AppStorage(AppStorageNames.store_default_css.rawValue)  var store_default_css : [DefaultCssModel] = [DefaultCssModel]()
                  @AppStorage(AppStorageNames.store_default_css.rawValue)  var store_user_default_css : [UserCssModel] = [UserCssModel]()
@@ -187,6 +109,7 @@ struct DashboardView: View {
                 self.LoadUserCss()
                 
             }
+        }
         }
     }
     
@@ -271,62 +194,52 @@ struct DashboardView: View {
 struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
         DashboardView()
+            .environmentObject(dev.dashboardVM)
+            .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
 
 
 
-//date extension
-
-extension String {
-
-    /*func toDate(withFormat format: String = "yyyy-MM-dd HH:mm:ss")-> Date?{
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(identifier: "Asia/Tehran")
-        dateFormatter.locale = Locale(identifier: "fa-IR")
-        dateFormatter.calendar = Calendar(identifier: .gregorian)
-        dateFormatter.dateFormat = format
-        let date = dateFormatter.date(from: self)
-
-        return date
-
-    }*/
+extension DashboardView{
     
-    
-    func convertDateFormat(withFormat inputDate: String) -> Date {
-
-        let isoDate = inputDate
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let date = dateFormatter.date(from: isoDate)
-       
-        if let target_date = date{
-            print("date: \(target_date)")
+    private var returnMetaDataList : some View{
+        Section{
+        ForEach(self.vm.metaDataResults){ meta in
+   
             
-            return target_date
-            
+                VStack(alignment: .leading){
+                    //Text("\(meta.freezer_return_notes)").font(.title3)//.fontWeight(.medium)
+                    HStack{
+                        Text("Return").font(.title3).bold()
+                        if let return_actions = meta.freezerReturnActions{
+                        ForEach(return_actions, id: \.self){ action in
+                            Text("\(action.uppercased())").padding(1)
+                        }
+                    }
+                    }
+           
+                    if let created_date_time = meta.createdDatetime{
+                    HStack{
+                        
+                        //String(convertDateFormat(inputDate: meta.created_datetime))
+                        Text("date ").font(.caption)
+                        Text("\(created_date_time/*.convertDateFormat(withFormat: created_date_time).formatted(.dateTime)*/)").font(.body).bold()
+                        Spacer()
+                    }
+                    
+                }
+                     HStack{
+                     Text("metadata entered").font(.caption)
+                         Text("\(meta.freezerReturnMetadataEntered ?? "")").font(.body)
+                     }
+
+//freezer_inventory_slug
+                }
+
         }
-        else{
-            return Date()
-        }
+    }
     }
 }
 
-extension Date {
-
-    func toString(withFormat format: String = "EEEE ، d MMMM yyyy") -> String {
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "fa-IR")
-        dateFormatter.timeZone = TimeZone(identifier: "Asia/Tehran")
-        dateFormatter.calendar = Calendar(identifier: .persian)
-        dateFormatter.dateFormat = format
-        let str = dateFormatter.string(from: self)
-
-        return str
-    }
-}

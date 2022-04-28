@@ -24,6 +24,7 @@ struct MultiRackSlotItemView: View {
                 .foregroundColor(Color(wordName: bottom_half_color))
                 .clipped()
         }.border(.secondary, width: 2)
+            .shadow(color: (Color(wordName: top_half_color) ?? Color.gray).opacity(0.25) , radius: 10, x: 10, y: 10)
     }
 }
 

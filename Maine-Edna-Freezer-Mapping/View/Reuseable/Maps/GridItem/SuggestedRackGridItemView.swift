@@ -37,6 +37,7 @@ struct SuggestedRackGridItemView: View {
                     .foregroundColor(Color(wordName: inner_rack_rect_color))
                     .clipped()
             }.border(.secondary, width: 2)
+                .shadow(color: (Color(wordName: outline_color) ?? Color.gray).opacity(0.25) , radius: 10, x: 10, y: 10)
             
             Text(!rack_label.isEmpty ? rack_label.suffix(4) : "N/A").font(.system(size: 9)).foregroundColor(.white).bold()
     }

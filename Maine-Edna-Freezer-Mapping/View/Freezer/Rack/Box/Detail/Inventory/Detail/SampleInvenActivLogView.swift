@@ -136,11 +136,12 @@ struct SampleInvenActivLogView: View {
          }*/
         
         .onAppear{
-            print("First \(self.sample_detail.freezer_inventory_slug.isEmpty)")
-         if !self.need_target_sample{
-                self.sample_check_out_log_service.FetchAllSampleCheckOutLog(_inventory_id: String(self.sample_detail.id))
-            }
-              else if self.need_target_sample{
+            //MARK: COpy this page for the dashboard view
+            print("First \(self.sample_detail.freezer_inventory_slug)")
+         //if !self.need_target_sample{
+                self.sample_check_out_log_service.FetchAllSampleCheckOutLog(_inventory_id: String(self.sample_detail.freezer_inventory_slug))
+           // }
+           /*   else if self.need_target_sample{
                 //fetch the sample detail then get the logs
                 //1. fetch all logs from
             //https://metadata.spatialmsk.dev/api/freezer_inventory/log/
@@ -155,7 +156,7 @@ struct SampleInvenActivLogView: View {
                     }
                     
                 }
-            }
+            }*/
         
         }
         

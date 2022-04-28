@@ -24,6 +24,7 @@ struct SingleLevelRaciSlotItemView: View {
                 .foregroundColor(Color(wordName: single_lvl_rack_color))
                 .clipped()
         }.border(.secondary, width: 2)
+            .shadow(color: (Color(wordName: single_lvl_rack_color) ?? Color.gray).opacity(0.25) , radius: 10, x: 10, y: 10)
     }
 }
 

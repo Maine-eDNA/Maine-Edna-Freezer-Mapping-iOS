@@ -11,9 +11,13 @@ struct FreezerInventoryView: View {
     
     @Binding var box_detail : BoxItemModel
     @Binding var freezer_profile : FreezerProfileModel
-    @ObservedObject var box_sample_service : BoxInventorySampleRetrieval = BoxInventorySampleRetrieval()
+    @StateObject var vm : FreezerInventoryViewModel = FreezerInventoryViewModel()
     @State var showNerdRackStats : Bool = false
     @State var show_map_key : Bool = false
+    
+    ///Used as a master list to show the records that need to be highlighted
+    @State var inventoryLocations : [InventoryLocationResult] = []
+    @State var isInSearchMode : Bool = false
     
     var body: some View {
         VStack(alignment: .leading){
@@ -154,8 +158,8 @@ struct FreezerInventoryView: View {
                     SampleCapsuleMapLegendView(box_detail: self.box_detail)
                 }
             }
-            
-            BoxSampleMapView(stored_rack_box_layout: self.box_detail, stored_box_samples: self.box_sample_service.stored_box_samples, freezer_profile: self.freezer_profile)
+            //MARK: Need to show the get the samples that are the targets and  and the other samples like with boxes
+            BoxSampleMapView(stored_rack_box_layout: self.box_detail, stored_box_samples: self.vm.all_box_samples, freezer_profile: self.freezer_profile)
                 
                 //Navigation Section
                 .navigationTitle("Box Profile Detail")
@@ -165,7 +169,15 @@ struct FreezerInventoryView: View {
         }
         
         .onAppear{
-            self.box_sample_service.FetchAllSamplesInBox(_box_id: String(box_detail.id ?? 0))
+            print("Target Box ID: \(box_detail.id)")
+            //MARK: need to send the inven_locations inventoryLocations
+            
+            if isInSearchMode{
+                self.vm.LoadFreezerInventoryData(box_detail: self.box_detail, inventoryLocations: self.inventoryLocations)
+            }
+            else{
+                self.vm.LoadFreezerInventoryData(box_detail: self.box_detail, inventoryLocations: self.inventoryLocations)
+            }
         }
     }
 }

@@ -15,11 +15,12 @@ struct FreezerProfileCardView: View {
             
         VStack(alignment: .leading){
             HStack{
-                Text("\(freezer_profile.freezerLabel ?? "")").font(.title2).bold()
+                Text("\(freezer_profile.freezerLabel ?? "")").font(.title3).bold()
             }
             HStack{
                 VStack(alignment: .leading)
                 {
+                    Text("\(freezer_profile.freezerRoomName ?? "")").font(.subheadline).foregroundColor(Color.theme.secondaryText).bold()
                     #warning("Fix this")
                     /*   Text("Max Capacity").font(.title3).bold()
                    Text("\(calc_max_capacity(max_row: freezer_profile.freezerCapacityRows ?? 0, max_col: freezer_profile.freezerCapacityColumns ?? 0))").font(.body)*/
@@ -27,8 +28,8 @@ struct FreezerProfileCardView: View {
                 Spacer().frame(width: 40)
                 VStack(alignment: .leading)
                 {
-                    Text("Max Depth").font(.title3).bold()
-                    Text("\(freezer_profile.freezerCapacityDepth ?? 0)").font(.title2)
+                    Text("Max Depth").font(.subheadline).foregroundColor(Color.theme.secondaryText).bold()
+                    Text("\(freezer_profile.freezerCapacityDepth ?? 0)").font(.title3).font(.subheadline).foregroundColor(Color.primary)
                 }
             }
         }

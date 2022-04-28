@@ -8,6 +8,19 @@
 import Foundation
 import SwiftUI
 
+struct BoxItemResultsModel: Codable {
+    var links: BoxItemLinks?
+    var count: Int?
+    var results: [BoxItemModel]?
+}
+
+
+// MARK: - Links
+struct BoxItemLinks: Codable {
+    var next, previous: JSONNull?
+}
+
+
 
 // MARK: - FreezerBox
 struct BoxItemModel: Codable {

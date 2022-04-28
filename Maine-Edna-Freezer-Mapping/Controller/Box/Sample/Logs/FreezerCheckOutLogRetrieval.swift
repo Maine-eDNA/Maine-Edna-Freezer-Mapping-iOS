@@ -15,6 +15,8 @@ class FreezerCheckOutLogRetrieval : ObservableObject {
     
     @AppStorage(AppStorageNames.edna_freezer_token.rawValue) var edna_freezer_token = ""//set this when I create an account and login, which i need to do next
     
+    @AppStorage(AppStorageNames.store_email_address.rawValue)  var store_email_address = ""
+    
     @AppStorage(AppStorageNames.stored_box_sample_logs.rawValue) var stored_box_sample_logs : [FreezerCheckOutLogModel] = [FreezerCheckOutLogModel]()
     
     @AppStorage(AppStorageNames.stored_return_meta_data.rawValue) var stored_return_meta_data : [FreezerInventoryReturnMetaDataModel] = [FreezerInventoryReturnMetaDataModel]()
@@ -29,8 +31,19 @@ class FreezerCheckOutLogRetrieval : ObservableObject {
     //https://metadata.spatialmsk.dev/api/freezer_inventory/freezer/"
     
     var cancellables = Set<AnyCancellable>()
-    @Published var freezer_return_metas = FreezerInventoryReturnMetaDataModel()
+    @Published var freezer_return_meta_data = FreezerInventoryReturnMetaDataModel()
     
+    
+    //new
+    @Published var freezer_return_metas : [FreezerInventoryReturnMetaDataResults] = []
+    
+    
+    init(){
+        
+        FetchInventoryReturnMetadata(_created_by: self.store_email_address )
+            
+       
+    }
     
     /*
      Right now you have one section, just have two sections in Dashboard
@@ -42,6 +55,52 @@ class FreezerCheckOutLogRetrieval : ObservableObject {
 
 
      */
+    
+    
+    
+    //Need to group them after
+    //meta  /api/freezer_inventory/return_metadata/
+    func FetchInventoryReturnMetadata(_created_by : String){
+       // var request = URLRequest(url: URL(string: "\(ServerConnectionUrls.productionUrl.rawValue)api/freezer_inventory/return_metadata/")!,timeoutInterval: Double.infinity)
+      //  guard let url = URL(string: "\(ServerConnectionUrls.productionUrl.rawValue)api/freezer_inventory/return_metadata/") else{ return }
+        //freezer_return_metas
+      
+        var request = URLRequest(url: URL(string: "\(ServerConnectionUrls.productionUrl.rawValue)api/freezer_inventory/return_metadata/?created_by=\(_created_by)")!,timeoutInterval: Double.infinity)
+        request.addValue("Token \(self.edna_freezer_token)", forHTTPHeaderField: "Authorization")
+
+        request.httpMethod = "GET"
+       
+        //request
+        URLSession.shared.dataTaskPublisher(for: request)//(for: url)
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: DispatchQueue.main)
+            .tryMap { (data, response) -> Data in
+                
+                
+                guard let response = response as? HTTPURLResponse,
+                      response.statusCode >= 200 && response.statusCode < 300 else{
+                          throw URLError(URLError.badServerResponse)
+                      }
+                return data
+            }
+            .decode(type: FreezerInventoryReturnMetaDataModel.self, decoder: JSONDecoder())
+            .sink { (completion) in
+                print("Completion: \(completion)")
+            } receiveValue: { [weak self] (returnedMetaData) in
+                //need to sort the data
+                if let results = returnedMetaData.results {
+                    self?.freezer_return_metas = results
+                }
+           
+            }
+            .store(in: &cancellables)
+        
+    }
+    
+    
+    
+    
+    
     func FetchAllSampleCheckOutLog(_inventory_id : String){
     
         
@@ -124,47 +183,7 @@ class FreezerCheckOutLogRetrieval : ObservableObject {
         
     }
     
-    //Need to group them after
-    //meta  /api/freezer_inventory/return_metadata/
-    func FetchInventoryReturnMetadata(_created_by : String,completion: @escaping (ServerMessageModel) -> Void){
-       // var request = URLRequest(url: URL(string: "\(ServerConnectionUrls.productionUrl.rawValue)api/freezer_inventory/return_metadata/")!,timeoutInterval: Double.infinity)
-      //  guard let url = URL(string: "\(ServerConnectionUrls.productionUrl.rawValue)api/freezer_inventory/return_metadata/") else{ return }
-        //freezer_return_metas
-      
-        var request = URLRequest(url: URL(string: "\(ServerConnectionUrls.productionUrl.rawValue)api/freezer_inventory/return_metadata/?created_by=\(_created_by)")!,timeoutInterval: Double.infinity)
-        request.addValue("Token \(self.edna_freezer_token)", forHTTPHeaderField: "Authorization")
 
-        request.httpMethod = "GET"
-       
-        //request
-        URLSession.shared.dataTaskPublisher(for: request)//(for: url)
-            .subscribe(on: DispatchQueue.global(qos: .background))
-            .receive(on: DispatchQueue.main)
-            .tryMap { (data, response) -> Data in
-                
-                
-                guard let response = response as? HTTPURLResponse,
-                      response.statusCode >= 200 && response.statusCode < 300 else{
-                          throw URLError(URLError.badServerResponse)
-                      }
-                return data
-            }
-            .decode(type: FreezerInventoryReturnMetaDataModel.self, decoder: JSONDecoder())
-            .sink { (completion) in
-                print("Completion: \(completion)")
-            } receiveValue: { [weak self] (returnedMetaData) in
-                self?.freezer_return_metas = returnedMetaData //group this
-                
-                let errorDetail = ServerMessageModel()
-                errorDetail.serverMessage = String(describing: "Todos Found")
-                errorDetail.isError = false
-                
-                completion(errorDetail)
-            }
-            .store(in: &cancellables)
-        
-    }
-    
     
     
     //1. fetch all logs from

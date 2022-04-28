@@ -12,9 +12,9 @@ struct FreezerDetailView: View {
     
     @State var show_freezer_detail : Bool = false
     @State var freezer_profile : FreezerProfileModel
-    @ObservedObject var rack_layout_service : FreezerRackLayoutService = FreezerRackLayoutService()
+  //  @ObservedObject var rack_layout_service : FreezerRackLayoutService = FreezerRackLayoutService()
    // @AppStorage(AppStorageNames.stored_freezer_rack_layout.rawValue) var stored_freezer_rack_layout : [RackItemModel] = [RackItemModel]()
-    @State var freezer_rack_layouts : RackItemVm //= [RactItemVm]()
+    //@State var vm : RackItemVm //= [RactItemVm]()
     
     //conditional renders
     @State var show_create_new_rack : Bool = false
@@ -28,10 +28,12 @@ struct FreezerDetailView: View {
     @State var isErrorMsg : Bool = false
     @State var responseMsg : String = ""
     
-    @State var show_loading_spinner = false
+
     
     //TODO: make it a environment object
     @ObservedObject var user_css_core_data_service = UserCssThemeCoreDataManagement()
+    
+    @StateObject private var vm : FreezerRackViewModel = FreezerRackViewModel()
     
     
     var body: some View {
@@ -40,11 +42,13 @@ struct FreezerDetailView: View {
             VStack(alignment: .leading){
                 //   if !show_create_new_rack{
                 //self.rack_layout_service.freezer_racks
-                if self.freezer_rack_layouts.rack_layout.count > 0{
+                if self.vm.freezer_racks.count > 0{
                     withAnimation(.spring()){
                         Section{
-                            Label("Top-Down View \(self.self.$freezer_rack_layouts.rack_layout.count)", systemImage: "eye").font(.caption)
-                            FreezerMapView(stored_freezer_rack_layout: self.$freezer_rack_layouts.rack_layout, freezer_profile: freezer_profile).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
+                            Label("Top-Down View", systemImage: "eye").font(.caption)
+                            FreezerMapView(freezer_rack_layout: self.$vm.freezer_racks, freezer_profile: freezer_profile).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
+                            
+                          
                         }
                     }
                 }
@@ -72,7 +76,7 @@ struct FreezerDetailView: View {
                     return AlertToast(type: .regular, title: "Response", subTitle: "\(self.responseMsg )")
                 }
             }
-            .toast(isPresenting: $show_loading_spinner){
+            .toast(isPresenting: $vm.isLoading){
                 
                 AlertToast(type: .loading, title: "Response", subTitle: "Loading..")
                 
@@ -141,13 +145,12 @@ struct FreezerDetailView: View {
             
             .onAppear{
                 //Show Loading Animation
-                withAnimation(.spring()){
-                    self.show_loading_spinner = true
-                    
-                }
+              
                 
                 //fetching the freezer by the freezer_id example 1
-                self.rack_layout_service.FetchLayoutForTargetFreezer(freezer_label: String(self.$freezer_profile.freezerLabel.wrappedValue ?? "")){
+                self.vm.FindRackLayoutByFreezerLabel(_freezer_label: String(self.$freezer_profile.freezerLabel.wrappedValue ?? ""))
+                //Convert to return error from the view model
+                /*{
                     response in
                     
                     self.show_loading_spinner = false
@@ -180,7 +183,7 @@ struct FreezerDetailView: View {
                         
                     }*/
                     
-                }
+                }*/
             }
             
         }
@@ -190,7 +193,7 @@ struct FreezerDetailView: View {
 struct FreezerDetailView_Previews: PreviewProvider {
     static var previews: some View {
         //dummy data
-        var freezer_rack_layouts : RackItemVm = RackItemVm()
+       /* var freezer_rack_layouts : RackItemVm = RackItemVm()
         
         var rack_1 = RackItemModel()
       //  rack_1.css_text_color = "white"
@@ -217,7 +220,7 @@ struct FreezerDetailView_Previews: PreviewProvider {
         rack_2.freezer_rack_column_end = 2
         
         freezer_rack_layouts.rack_layout.append(rack_2)
-        
+        */
         var freezer_profile = FreezerProfileModel()
         freezer_profile.freezerLabel = "Test Freezer 1"
         freezer_profile.freezerDepth = "10"
@@ -229,18 +232,18 @@ struct FreezerDetailView_Previews: PreviewProvider {
        // return FreezerDetailView(freezer_profile: freezer_profile, freezer_rack_layouts: .constant(freezer_rack_layouts))
         
         return Group{
-            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile, freezer_rack_layouts: freezer_rack_layouts)
+            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile)
                         .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
                         .previewDisplayName("iPhone 13").preferredColorScheme)
            
-            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile, freezer_rack_layouts: freezer_rack_layouts)
+            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile)
                         .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
                         .previewDisplayName("iPhone 13 Pro Max").preferredColorScheme)
-            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile, freezer_rack_layouts: freezer_rack_layouts)
+            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile)
                         .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
                         .previewDisplayName("iPad Air (4th generation)").preferredColorScheme)
             
-            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile, freezer_rack_layouts: freezer_rack_layouts)
+            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile)
                         .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
                         .previewDisplayName("iPad Air (4th generation)").preferredColorScheme)
                         .previewInterfaceOrientation(.landscapeLeft)

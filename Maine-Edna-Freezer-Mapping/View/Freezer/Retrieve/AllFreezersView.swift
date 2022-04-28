@@ -12,25 +12,25 @@ import AlertToast
 //MARK: Freezer List will come from Coredata, in the background it will check to see if a new freezer exist
 struct AllFreezersView: View {
     
-    @ObservedObject var freezer_profile_service : FreezerProfileRetrieval = FreezerProfileRetrieval()
+    @StateObject var vm : FreezerViewModel
     //fetch from local only sync the data from server
     @ObservedObject var freezer_profile_core_data = FreezerCoreDataManagement()
     
     
     //@AppStorage(AppStorageNames.stored_freezers.rawValue) var stored_freezers : [FreezerProfileModel] = [FreezerProfileModel]()
     @State private var searchText = ""
-    var searchResults: [FreezerEntity] {
-        if !self.freezer_profile_core_data.freezer_entities.isEmpty{
+    var searchResults: [FreezerProfileModel] {
+        if !self.vm.allFreezers.isEmpty{
             if searchText.isEmpty {
-                return self.freezer_profile_core_data.freezer_entities
+                return self.vm.allFreezers
             } else {
-                return self.freezer_profile_core_data.freezer_entities.filter { $0.freezerLabel!.contains(searchText) }
+                return self.vm.allFreezers.filter { $0.freezerLabel!.contains(searchText) }
             }
             
                 
             }
         else{
-            return [FreezerEntity]()
+            return [FreezerProfileModel]()
         }
     }
     
@@ -60,10 +60,10 @@ struct AllFreezersView: View {
                         
                         ForEach(self.searchResults, id: \.id) { freezer in
                             
-                            NavigationLink(destination: FreezerDetailView(freezer_profile: self.freezer_profile_core_data.translateFreezerEntityToModel(_freezerDetail: freezer), freezer_rack_layouts: RackItemVm())) {
+                            NavigationLink(destination: FreezerDetailView(freezer_profile: freezer)) {
                                 //Freezer cards
                                 
-                                FreezerProfileCardView(freezer_profile: self.freezer_profile_core_data.translateFreezerEntityToModel(_freezerDetail: freezer))
+                                FreezerProfileCardView(freezer_profile: freezer)
                                 
                             }
                         }
@@ -81,24 +81,9 @@ struct AllFreezersView: View {
                             self.show_loading_spinner = true
                             
                         }
+                        #warning("Need to handle this using the viewmodel and displaying errors as well")
                         //fetching the freezer by the freezer_id example 1
-                        self.freezer_profile_service.FetchAllAvailableFreezers(){
-                            response in
-                            
-                            self.show_loading_spinner = false
-                            
-                            //give message after loading is finished
-                            
-                            print("Response is: \(response)")
-                            self.responseMsg = response.serverMessage
-                            self.showResponseMsg = true
-                            self.isErrorMsg = response.isError
-                            
-                            if(!self.isErrorMsg){
-                                //Do something if no error occurred
-                                
-                            }
-                        }
+                        self.vm.reloadFreezerData()
                     }
                     Spacer()
                     
@@ -108,7 +93,7 @@ struct AllFreezersView: View {
                     
                     
                 }
-            }.toast(isPresenting: $show_loading_spinner){
+            }.toast(isPresenting: $vm.isLoading){
                 
                 AlertToast(type: .loading, title: "Response", subTitle: "Loading..")
                 
@@ -122,7 +107,7 @@ struct AllFreezersView: View {
                 }
             }
             
-            .navigationBarTitle(Text("Freezers (\(self.freezer_profile_core_data.freezer_entities.count)"))
+            .navigationBarTitle(Text("Freezers (\(self.vm.allFreezers.count))"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(
                 trailing:
@@ -149,30 +134,7 @@ struct AllFreezersView: View {
         }
         
         .onAppear{
-            //Show Loading Animation
-            withAnimation(.spring()){
-                self.show_loading_spinner = true
-                
-            }
-            
-            //fetching the freezer by the freezer_id example 1
-            self.freezer_profile_service.FetchAllAvailableFreezers(){
-                response in
-                
-                self.show_loading_spinner = false
-                
-                //give message after loading is finished
-                
-                print("Response is: \(response)")
-                self.responseMsg = response.serverMessage
-                self.showResponseMsg = true
-                self.isErrorMsg = response.isError
-                
-                if(!self.isErrorMsg){
-                    //Do something if no error occurred
-                    
-                }
-            }
+  
         }
     }
     
@@ -180,6 +142,6 @@ struct AllFreezersView: View {
 
 struct AllFreezersView_Previews: PreviewProvider {
     static var previews: some View {
-        AllFreezersView()
+        AllFreezersView(vm: FreezerViewModel())
     }
 }

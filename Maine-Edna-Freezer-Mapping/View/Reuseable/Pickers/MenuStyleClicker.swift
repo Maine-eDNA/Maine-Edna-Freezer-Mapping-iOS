@@ -11,11 +11,13 @@ struct MenuStyleClicker : View{
     @Binding var selection : String
     @Binding var actions : [String]
     @State var label : String = "Action"
-    
+    @Binding var label_action : String 
     var body : some View{
         VStack(alignment: .leading){
-            Text(label).font(.callout).foregroundColor(.secondary).bold()
-
+            HStack{
+                Text(label_action).font(.subheadline).foregroundColor(.primary).bold()
+                Text(label).font(.callout).foregroundColor(.secondary).bold()
+            }
             HStack{
                 Picker(selection: self.$selection, label:
                         HStack{

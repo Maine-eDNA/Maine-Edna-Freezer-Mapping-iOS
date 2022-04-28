@@ -19,7 +19,7 @@ struct FreezerMapView: View {
     @State var showSampleDetail : Bool = false
     
     
-    @Binding var stored_freezer_rack_layout : [RackItemModel]
+    @Binding var freezer_rack_layout : [RackItemModel]
     
     @State var freezer_profile : FreezerProfileModel
     
@@ -29,22 +29,22 @@ struct FreezerMapView: View {
     
     var body: some View {
         //ScrollView(showsIndicators: false) {
-     
+        Section{
       
             
-        InteractFreezerLayoutPreview(freezer_max_rows: .constant($freezer_profile.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_profile.freezerCapacityColumns.wrappedValue ?? 0),stored_freezer_rack_layout : stored_freezer_rack_layout,freezer_profile: freezer_profile, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: .constant(false))
+            InteractFreezerLayoutPreview(freezer_max_rows: .constant($freezer_profile.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_profile.freezerCapacityColumns.wrappedValue ?? 0),freezer_rack_layout : $freezer_rack_layout,freezer_profile: freezer_profile, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: .constant(false))
             
             
         //}
         .frame(minHeight: 300,maxHeight: 500)
-        
-        
+          
+    }
     }
 }
 
 
 struct FreezerMapView_Previews: PreviewProvider {
     static var previews: some View {
-        FreezerMapView(stored_freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel())
+        FreezerMapView(freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel())
     }
 }

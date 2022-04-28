@@ -14,7 +14,8 @@ class BoxInventorySampleRetrieval : ObservableObject {
     
     @AppStorage(AppStorageNames.edna_freezer_token.rawValue) var edna_freezer_token = ""//set this when I create an account and login, which i need to do next
     
-    @AppStorage(AppStorageNames.stored_box_samples.rawValue) var stored_box_samples : [InventorySampleModel] = [InventorySampleModel]()
+    @Published var all_box_samples : [InventorySampleModel] = []
+    //@AppStorage(AppStorageNames.stored_box_samples.rawValue) var stored_box_samples : [InventorySampleModel] = [InventorySampleModel]()
     @AppStorage(AppStorageNames.all_unfiltered_stored_box_samples.rawValue) var all_unfiltered_stored_box_samples : [InventorySampleModel] = [InventorySampleModel]()
   
     // Loading Screen...
@@ -125,7 +126,8 @@ class BoxInventorySampleRetrieval : ObservableObject {
         
     }
     
-    
+    //TODO: convert to combine
+    ///will use combine and wont wait on the results, it will use publishers and subscribers to update the UI
     func FetchAllSamplesInBox(_box_id : String){
     
         
@@ -210,11 +212,108 @@ class BoxInventorySampleRetrieval : ObservableObject {
                 //put the update to the properties on the main thread because that where it lives
                 //MARK: Add count
               
-                self.stored_box_samples = freezer_box_sample_locals //results from the db
+                self.all_box_samples = freezer_box_sample_locals //results from the db
                 //finished loading data so the observabke object can be updated to hide the spinner
                 // self.quotes = quoteLocals
                 //MARK: store the appstoreage data
                 //self.Stored_Rental_Contracts = rentalContractLocals
+                
+                self.isLoading = false
+                
+            }
+        }
+        
+        
+    }
+    ///has a completion handler so that the UI waits on the results
+    func FetchAllSamplesInBox(_box_id : String,completion: @escaping ([InventorySampleModel] ) -> Void){
+    
+        
+        var request = URLRequest(url: URL(string: "\(ServerConnectionUrls.productionUrl.rawValue)api/freezer_inventory/inventory/?box=\(_box_id)&freezer_inventory_status=in")!,timeoutInterval: Double.infinity)
+        request.addValue("Token \(self.edna_freezer_token)", forHTTPHeaderField: "Authorization")
+
+        request.httpMethod = "GET"
+        print("Token : \(self.edna_freezer_token)")
+    
+        
+        AF.request(request) .responseString { response in
+           // print("Response String: \(response.value)")
+        }
+        .responseJSON { response in
+           // print("Response JSON: \(response.value)")
+            //converting the results to Json Array format with SwiftyJSON
+            let jsonArray = JSON(response.value as Any??)
+            
+            print(jsonArray["results"])
+            //get the values out of the dictionary (array retrieved)
+            var freezer_box_sample_locals = [InventorySampleModel]()
+            
+            
+            
+            for (_, sample) in jsonArray["results"] {
+                
+                let freezer_box_sample_local = InventorySampleModel()
+                
+                if (sample["id"].int != nil){
+                    freezer_box_sample_local.id =  sample["id"].intValue
+                }
+                
+                if (sample["freezer_box"].string != nil){
+                    freezer_box_sample_local.freezer_box =  sample["freezer_box"].stringValue
+                }
+                
+                if (sample["sample_barcode"].string != nil){
+                    freezer_box_sample_local.sample_barcode =  sample["sample_barcode"].stringValue
+                }
+                
+                if (sample["freezer_inventory_slug"].string != nil){
+                    freezer_box_sample_local.freezer_inventory_slug =  sample["freezer_inventory_slug"].stringValue
+                }
+                
+                if (sample["freezer_inventory_type"].string != nil){
+                    freezer_box_sample_local.freezer_inventory_type =  sample["freezer_inventory_type"].stringValue
+                }
+                
+                if (sample["freezer_inventory_status"].string != nil){
+                    freezer_box_sample_local.freezer_inventory_status =  sample["freezer_inventory_status"].stringValue
+                }
+                
+                if (sample["freezer_inventory_column"].int != nil){
+                    freezer_box_sample_local.freezer_inventory_column =  sample["freezer_inventory_column"].intValue
+                }
+                if (sample["freezer_inventory_row"].int != nil){
+                    freezer_box_sample_local.freezer_inventory_row =  sample["freezer_inventory_row"].intValue
+                }
+                
+                
+                if (sample["created_by"].string != nil){
+                    freezer_box_sample_local.created_by =  sample["created_by"].stringValue
+                }
+                
+                if (sample["created_datetime"].string != nil){
+                    freezer_box_sample_local.created_datetime =  sample["created_datetime"].stringValue
+                }
+                
+                if (sample["modified_datetime"].string != nil){
+                    freezer_box_sample_local.modified_datetime =  sample["modified_datetime"].stringValue
+                }
+                
+                freezer_box_sample_locals.append(freezer_box_sample_local)
+            }
+            
+            
+            
+            
+            
+            
+            DispatchQueue.main.async {
+                //put the update to the properties on the main thread because that where it lives
+                //MARK: Add count
+              
+                self.all_box_samples = freezer_box_sample_locals //results from the db
+                
+                completion(freezer_box_sample_locals)
+                
                 
                 self.isLoading = false
                 
