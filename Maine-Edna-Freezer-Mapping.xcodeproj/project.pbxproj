@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A04962227BAC51000BD483B /* GuidedSearchSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04962127BAC50F00BD483B /* GuidedSearchSampleView.swift */; };
+		4A0941B9283BF54F0011485D /* FreezerBoxDepthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0941B8283BF54F0011485D /* FreezerBoxDepthView.swift */; };
 		4A1B95542755595000504AB7 /* FreezerMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1B95532755595000504AB7 /* FreezerMapView.swift */; };
 		4A1B95582755602B00504AB7 /* RackItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1B95572755602B00504AB7 /* RackItemModel.swift */; };
 		4A1B955B275563B700504AB7 /* ConstantValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1B955A275563B700504AB7 /* ConstantValues.swift */; };
@@ -35,6 +36,7 @@
 		4A1F0B4B276790E3008FDDF1 /* CheckOutLogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F0B4A276790E3008FDDF1 /* CheckOutLogDetailView.swift */; };
 		4A1F0B4D2767955A008FDDF1 /* FreezerInventoryReturnMetaDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F0B4C2767955A008FDDF1 /* FreezerInventoryReturnMetaDataModel.swift */; };
 		4A1F0B4F2767C4EA008FDDF1 /* UserProfileManagment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F0B4E2767C4E9008FDDF1 /* UserProfileManagment.swift */; };
+		4A234D68283FCEEA0078CB48 /* FreezerVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A234D67283FCEEA0078CB48 /* FreezerVisualView.swift */; };
 		4A29186727C7F7140066A645 /* FreezerEdnaContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A29186527C7F7140066A645 /* FreezerEdnaContainer.xcdatamodeld */; };
 		4A29186A27C7F87F0066A645 /* FreezerCoreDataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A29186927C7F87F0066A645 /* FreezerCoreDataManagement.swift */; };
 		4A29186C27C841AD0066A645 /* UserCssThemeCoreDataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A29186B27C841AD0066A645 /* UserCssThemeCoreDataManagement.swift */; };
@@ -49,6 +51,9 @@
 		4A2CE73927E67202000C0EFC /* FreezerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE73827E67202000C0EFC /* FreezerViewModel.swift */; };
 		4A2CE74627EA3829000C0EFC /* FreezerBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE74527EA3828000C0EFC /* FreezerBoxViewModel.swift */; };
 		4A2CE74827EA4C5A000C0EFC /* FreezerRackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2CE74727EA4C5A000C0EFC /* FreezerRackViewModel.swift */; };
+		4A2F5A13283D523C00214622 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2F5A12283D523C00214622 /* ButtonStyles.swift */; };
+		4A2F5A15283D536C00214622 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2F5A14283D536C00214622 /* LabelStyles.swift */; };
+		4A2F5A17283D580900214622 /* CustomLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2F5A16283D580900214622 /* CustomLabels.swift */; };
 		4A34DF65279ECF9700CA9531 /* UserThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34DF64279ECF9700CA9531 /* UserThemeView.swift */; };
 		4A34DF68279EF67100CA9531 /* EditUserColorThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34DF67279EF67100CA9531 /* EditUserColorThemeView.swift */; };
 		4A34DF6C279F5C5600CA9531 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34DF6B279F5C5600CA9531 /* UserProfileView.swift */; };
@@ -91,9 +96,12 @@
 		4A766F2C27D638E700049DBF /* InventoryLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A766F2B27D638E700049DBF /* InventoryLocationModel.swift */; };
 		4A84A4CC278760000059191C /* ExtensionClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A84A4CB278760000059191C /* ExtensionClasses.swift */; };
 		4A8E739127A9B0C2006A3D0A /* CapsuleSuggestedPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E739027A9B0C2006A3D0A /* CapsuleSuggestedPositionView.swift */; };
+		4A955BBB2854072000A3832B /* GuidedCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A955BBA2854072000A3832B /* GuidedCartView.swift */; };
+		4A955BBE2854091B00A3832B /* StepperView in Frameworks */ = {isa = PBXBuildFile; productRef = 4A955BBD2854091B00A3832B /* StepperView */; };
 		4AAFA6A5277BC2C1009F83B5 /* BarcodeScannerBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFA6A4277BC2C1009F83B5 /* BarcodeScannerBtn.swift */; };
 		4AAFA6A7277BD0A2009F83B5 /* MenuStyleClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFA6A6277BD0A2009F83B5 /* MenuStyleClicker.swift */; };
 		4AC28B8628087EFB00B7695A /* ResultsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC28B8528087EFB00B7695A /* ResultsPreviewView.swift */; };
+		4AC97EE72829894D00F3B42B /* BoxDepthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC97EE62829894D00F3B42B /* BoxDepthView.swift */; };
 		4AEB96C8274C28DF001F7611 /* Maine_Edna_Freezer_MappingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB96C7274C28DF001F7611 /* Maine_Edna_Freezer_MappingApp.swift */; };
 		4AEB96CA274C28DF001F7611 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB96C9274C28DF001F7611 /* ContentView.swift */; };
 		4AEB96CC274C28E1001F7611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB96CB274C28E1001F7611 /* Assets.xcassets */; };
@@ -133,6 +141,7 @@
 
 /* Begin PBXFileReference section */
 		4A04962127BAC50F00BD483B /* GuidedSearchSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedSearchSampleView.swift; sourceTree = "<group>"; };
+		4A0941B8283BF54F0011485D /* FreezerBoxDepthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerBoxDepthView.swift; sourceTree = "<group>"; };
 		4A1B95532755595000504AB7 /* FreezerMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerMapView.swift; sourceTree = "<group>"; };
 		4A1B95572755602B00504AB7 /* RackItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RackItemModel.swift; sourceTree = "<group>"; };
 		4A1B955A275563B700504AB7 /* ConstantValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantValues.swift; sourceTree = "<group>"; };
@@ -160,6 +169,7 @@
 		4A1F0B4A276790E3008FDDF1 /* CheckOutLogDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutLogDetailView.swift; sourceTree = "<group>"; };
 		4A1F0B4C2767955A008FDDF1 /* FreezerInventoryReturnMetaDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerInventoryReturnMetaDataModel.swift; sourceTree = "<group>"; };
 		4A1F0B4E2767C4E9008FDDF1 /* UserProfileManagment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManagment.swift; sourceTree = "<group>"; };
+		4A234D67283FCEEA0078CB48 /* FreezerVisualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerVisualView.swift; sourceTree = "<group>"; };
 		4A29186627C7F7140066A645 /* FreezerEdnaContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FreezerEdnaContainer.xcdatamodel; sourceTree = "<group>"; };
 		4A29186927C7F87F0066A645 /* FreezerCoreDataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerCoreDataManagement.swift; sourceTree = "<group>"; };
 		4A29186B27C841AD0066A645 /* UserCssThemeCoreDataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCssThemeCoreDataManagement.swift; sourceTree = "<group>"; };
@@ -174,6 +184,9 @@
 		4A2CE73827E67202000C0EFC /* FreezerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerViewModel.swift; sourceTree = "<group>"; };
 		4A2CE74527EA3828000C0EFC /* FreezerBoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerBoxViewModel.swift; sourceTree = "<group>"; };
 		4A2CE74727EA4C5A000C0EFC /* FreezerRackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerRackViewModel.swift; sourceTree = "<group>"; };
+		4A2F5A12283D523C00214622 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		4A2F5A14283D536C00214622 /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
+		4A2F5A16283D580900214622 /* CustomLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabels.swift; sourceTree = "<group>"; };
 		4A34DF64279ECF9700CA9531 /* UserThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserThemeView.swift; sourceTree = "<group>"; };
 		4A34DF67279EF67100CA9531 /* EditUserColorThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserColorThemeView.swift; sourceTree = "<group>"; };
 		4A34DF6B279F5C5600CA9531 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
@@ -216,9 +229,11 @@
 		4A766F2B27D638E700049DBF /* InventoryLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryLocationModel.swift; sourceTree = "<group>"; };
 		4A84A4CB278760000059191C /* ExtensionClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionClasses.swift; sourceTree = "<group>"; };
 		4A8E739027A9B0C2006A3D0A /* CapsuleSuggestedPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSuggestedPositionView.swift; sourceTree = "<group>"; };
+		4A955BBA2854072000A3832B /* GuidedCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedCartView.swift; sourceTree = "<group>"; };
 		4AAFA6A4277BC2C1009F83B5 /* BarcodeScannerBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerBtn.swift; sourceTree = "<group>"; };
 		4AAFA6A6277BD0A2009F83B5 /* MenuStyleClicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuStyleClicker.swift; sourceTree = "<group>"; };
 		4AC28B8528087EFB00B7695A /* ResultsPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsPreviewView.swift; sourceTree = "<group>"; };
+		4AC97EE62829894D00F3B42B /* BoxDepthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDepthView.swift; sourceTree = "<group>"; };
 		4AEB96C4274C28DF001F7611 /* eDna-Freezer-Mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eDna-Freezer-Mapping.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AEB96C7274C28DF001F7611 /* Maine_Edna_Freezer_MappingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maine_Edna_Freezer_MappingApp.swift; sourceTree = "<group>"; };
 		4AEB96C9274C28DF001F7611 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -246,6 +261,7 @@
 				4AEB96F9274C2958001F7611 /* AlertToast in Frameworks */,
 				4AEB96F3274C2928001F7611 /* Alamofire in Frameworks */,
 				4AEB96FC274C2975001F7611 /* SwiftyJSON in Frameworks */,
+				4A955BBE2854091B00A3832B /* StepperView in Frameworks */,
 				4AEB96F6274C2944001F7611 /* CarBode in Frameworks */,
 				4A34DF6F279F5D3C00CA9531 /* Kingfisher in Frameworks */,
 			);
@@ -274,6 +290,14 @@
 				4A04962127BAC50F00BD483B /* GuidedSearchSampleView.swift */,
 			);
 			path = Results;
+			sourceTree = "<group>";
+		};
+		4A0941B7283BF5230011485D /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				4A0941B8283BF54F0011485D /* FreezerBoxDepthView.swift */,
+			);
+			path = Item;
 			sourceTree = "<group>";
 		};
 		4A1B954F2755590C00504AB7 /* Model */ = {
@@ -321,6 +345,7 @@
 		4A1B95522755592500504AB7 /* Reuseable */ = {
 			isa = PBXGroup;
 			children = (
+				4A234D66283FCEBF0078CB48 /* Icons */,
 				4AC28B8328087EE200B7695A /* Cart */,
 				4A758525275DC481006124ED /* Preview */,
 				4A758515275CE9F5006124ED /* Pickers */,
@@ -490,6 +515,7 @@
 		4A1F0B2E2766E211008FDDF1 /* Box */ = {
 			isa = PBXGroup;
 			children = (
+				4A0941B7283BF5230011485D /* Item */,
 				4AF48641277D48AA00C3E053 /* Grid */,
 				4A1F0B2F2766E234008FDDF1 /* BoxSampleMapView.swift */,
 			);
@@ -587,6 +613,14 @@
 			path = LogDetail;
 			sourceTree = "<group>";
 		};
+		4A234D66283FCEBF0078CB48 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				4A234D67283FCEEA0078CB48 /* FreezerVisualView.swift */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
 		4A29186427C7F67C0066A645 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,6 +649,8 @@
 				4A2CE72A27E54C68000C0EFC /* PreviewProvider.swift */,
 				4A2CE72B27E54C68000C0EFC /* String.swift */,
 				4A2CE72727E54C67000C0EFC /* UIApplication.swift */,
+				4A2F5A12283D523C00214622 /* ButtonStyles.swift */,
+				4A2F5A14283D536C00214622 /* LabelStyles.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -822,6 +858,7 @@
 			isa = PBXGroup;
 			children = (
 				4A7584F9275C4381006124ED /* AttributedStringStyle.swift */,
+				4A2F5A16283D580900214622 /* CustomLabels.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -856,6 +893,7 @@
 			isa = PBXGroup;
 			children = (
 				4A75850E275C738A006124ED /* FreezerDepthPreview.swift */,
+				4AC97EE62829894D00F3B42B /* BoxDepthView.swift */,
 			);
 			path = Depth;
 			sourceTree = "<group>";
@@ -957,6 +995,14 @@
 				4A766F2B27D638E700049DBF /* InventoryLocationModel.swift */,
 			);
 			path = Cart;
+			sourceTree = "<group>";
+		};
+		4A955BB9285406E600A3832B /* Guided */ = {
+			isa = PBXGroup;
+			children = (
+				4A955BBA2854072000A3832B /* GuidedCartView.swift */,
+			);
+			path = Guided;
 			sourceTree = "<group>";
 		};
 		4AC28B8328087EE200B7695A /* Cart */ = {
@@ -1067,6 +1113,7 @@
 		4AF7D6AE2770D00200FABFA6 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				4A955BB9285406E600A3832B /* Guided */,
 				4A5E62982805D59700F9325B /* MovingBoxes */,
 				4A04962027BAC50200BD483B /* Results */,
 				4AF7D6AF2770D01C00FABFA6 /* CartView.swift */,
@@ -1096,6 +1143,7 @@
 				4AEB96F8274C2958001F7611 /* AlertToast */,
 				4AEB96FB274C2974001F7611 /* SwiftyJSON */,
 				4A34DF6E279F5D3C00CA9531 /* Kingfisher */,
+				4A955BBD2854091B00A3832B /* StepperView */,
 			);
 			productName = "Maine-Edna-Freezer-Mapping";
 			productReference = 4AEB96C4274C28DF001F7611 /* eDna-Freezer-Mapping.app */;
@@ -1175,6 +1223,7 @@
 				4AEB96F7274C2958001F7611 /* XCRemoteSwiftPackageReference "AlertToast" */,
 				4AEB96FA274C2974001F7611 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				4A34DF6D279F5D3B00CA9531 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				4A955BBC2854091B00A3832B /* XCRemoteSwiftPackageReference "StepperView" */,
 			);
 			productRefGroup = 4AEB96C5274C28DF001F7611 /* Products */;
 			projectDirPath = "";
@@ -1225,6 +1274,8 @@
 				4AEB96CA274C28DF001F7611 /* ContentView.swift in Sources */,
 				4A34DF68279EF67100CA9531 /* EditUserColorThemeView.swift in Sources */,
 				4A758504275C4381006124ED /* MultiLineTextFieldLabelCombo.swift in Sources */,
+				4A2F5A17283D580900214622 /* CustomLabels.swift in Sources */,
+				4A955BBB2854072000A3832B /* GuidedCartView.swift in Sources */,
 				4A758501275C4381006124ED /* NumericTextfieldView.swift in Sources */,
 				4A766F2927D637BC00049DBF /* CartQueryDataService.swift in Sources */,
 				4A1F0B4B276790E3008FDDF1 /* CheckOutLogDetailView.swift in Sources */,
@@ -1241,6 +1292,7 @@
 				4A2CE73227E54C68000C0EFC /* String.swift in Sources */,
 				4A1B95652755665B00504AB7 /* ModalCompatibility.swift in Sources */,
 				4A2CE73127E54C68000C0EFC /* PreviewProvider.swift in Sources */,
+				4A0941B9283BF54F0011485D /* FreezerBoxDepthView.swift in Sources */,
 				4A758507275C4381006124ED /* DropdownButton.swift in Sources */,
 				4A758529275DD7C0006124ED /* RackCreation.swift in Sources */,
 				4A5E629C2805D60B00F9325B /* DestinationFreezerView.swift in Sources */,
@@ -1288,6 +1340,7 @@
 				4A7584EA275A9A55006124ED /* FreezerProfileRetrieval.swift in Sources */,
 				4AAFA6A7277BD0A2009F83B5 /* MenuStyleClicker.swift in Sources */,
 				4A58839E27B57B7F0020AB0B /* SuggestedRackGridItemView.swift in Sources */,
+				4AC97EE72829894D00F3B42B /* BoxDepthView.swift in Sources */,
 				4A71276827591EA9000D13CA /* LoginView.swift in Sources */,
 				4AF4863E277D42A800C3E053 /* EmptyRackSlotView.swift in Sources */,
 				4A2CE72F27E54C68000C0EFC /* Double.swift in Sources */,
@@ -1297,6 +1350,8 @@
 				4AF48640277D439700C3E053 /* SingleLevelRaciSlotItemView.swift in Sources */,
 				4AC28B8628087EFB00B7695A /* ResultsPreviewView.swift in Sources */,
 				4A71276327591E07000D13CA /* AllFreezersView.swift in Sources */,
+				4A2F5A13283D523C00214622 /* ButtonStyles.swift in Sources */,
+				4A2F5A15283D536C00214622 /* LabelStyles.swift in Sources */,
 				4A84A4CC278760000059191C /* ExtensionClasses.swift in Sources */,
 				4A1B9560275564C000504AB7 /* FreezerRackLayoutService.swift in Sources */,
 				4A7584F0275AAAC1006124ED /* CreateFreezerProfileView.swift in Sources */,
@@ -1306,6 +1361,7 @@
 				4A8E739127A9B0C2006A3D0A /* CapsuleSuggestedPositionView.swift in Sources */,
 				4A2CE74827EA4C5A000C0EFC /* FreezerRackViewModel.swift in Sources */,
 				4A2CE73927E67202000C0EFC /* FreezerViewModel.swift in Sources */,
+				4A234D68283FCEEA0078CB48 /* FreezerVisualView.swift in Sources */,
 				4A1F0B1F27669898008FDDF1 /* RackProfileView.swift in Sources */,
 				4A758514275C7DC7006124ED /* ServerMessageModel.swift in Sources */,
 				4AAFA6A5277BC2C1009F83B5 /* BarcodeScannerBtn.swift in Sources */,
@@ -1673,6 +1729,14 @@
 				kind = branch;
 			};
 		};
+		4A955BBC2854091B00A3832B /* XCRemoteSwiftPackageReference "StepperView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/badrinathvm/StepperView.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		4AEB96F1274C2928001F7611 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1712,6 +1776,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4A34DF6D279F5D3B00CA9531 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		4A955BBD2854091B00A3832B /* StepperView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A955BBC2854091B00A3832B /* XCRemoteSwiftPackageReference "StepperView" */;
+			productName = StepperView;
 		};
 		4AEB96F2274C2928001F7611 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
