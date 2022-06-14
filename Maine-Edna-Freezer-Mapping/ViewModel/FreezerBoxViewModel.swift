@@ -125,9 +125,9 @@ class FreezerBoxViewModel : ObservableObject{
         //end
     }
     
-    func FilterFreezerBoxes(_rack_id : String){
-        
-        freezerBoxDataService.FetchAllRackBoxesByRackId(_rack_id: _rack_id)
+    func FilterFreezerBoxes(_freezer_rack_label_slug : String){
+   
+        freezerBoxDataService.FetchAllRackBoxesByRackId(_rack_id: _freezer_rack_label_slug)
         
         //run the above but without the hightlight filtering
     }
@@ -150,6 +150,19 @@ class FreezerBoxViewModel : ObservableObject{
         }
      return rack_boxes_occupied
         
+        
+    }
+    
+    ///Used for converting models that are being used in search function
+    func convertBoxModelToBoxItemModel(boxes : [BoxModel]) -> [BoxItemModel]
+    {
+        var convertedModel : [BoxItemModel] = []
+        
+        for box in boxes{
+            convertedModel.append(BoxItemModel(id: box.id, freezer_box_label: box.freezer_box_label, freezer_box_label_slug: box.freezer_box_label_slug, freezer_box_column: box.freezer_box_column, freezer_box_row: box.freezer_box_row, freezer_box_depth: box.freezer_box_depth, freezer_box_capacity_column: box.freezer_box_capacity_column, freezer_box_capacity_row: box.freezer_box_capacity_row, freezer_rack: box.freezer_rack?.freezer_rack_label, created_by: box.created_by, created_datetime: box.created_datetime, modified_datetime: box.modified_datetime, is_suggested_box_position: true))
+            
+        }
+        return convertedModel
         
     }
     

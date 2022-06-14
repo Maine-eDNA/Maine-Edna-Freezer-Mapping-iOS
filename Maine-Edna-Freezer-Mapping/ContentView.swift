@@ -8,7 +8,7 @@
 import SwiftUI
 /*
  TODO this week
- 
+ Only auto suggest the name of Racks, and Boxes (Need to add the BarcodeScanner support)
  Change the mode options to ve "Adding", "Returning", "Moving" to "Add", "Remove", "Move"
  Melissa Kimble to Everyone (3:13 PM)
  Change "Moving" to "Transfer Box"
@@ -64,7 +64,7 @@ struct ContentView: View {
                      
                   
                     
-                    AllFreezersView(vm: FreezerViewModel())
+                    AllFreezersView(vm: FreezerViewModel(), target_freezer: FreezerProfileModel())
                             .tabItem {
                                 VStack{
                                     Image(systemName: "note")
@@ -74,6 +74,7 @@ struct ContentView: View {
                         .navigationViewStyle(StackNavigationViewStyle())
                     
                     CartView(freezer_profile: FreezerProfileModel(), target_freezer: FreezerProfileModel())
+                   // GuidedCartView()
                         .tabItem {
                             VStack{
                                 Image(systemName: "cart")
@@ -81,13 +82,22 @@ struct ContentView: View {
                             }
                     }.tag(2)
                         .navigationViewStyle(StackNavigationViewStyle())
+                    
+                    GuidedCartView()
+                         .tabItem {
+                             VStack{
+                                 Image(systemName: "gearshape.2.fill")
+                                 Text("Utility")
+                             }
+                     }.tag(3)
+                         .navigationViewStyle(StackNavigationViewStyle())
                     MenuView()
                         .tabItem {
                             VStack{
                                 Image(systemName: "gear")
                                 Text("Menu")
                             }
-                    }.tag(2)
+                    }.tag(4)
                         .navigationViewStyle(StackNavigationViewStyle())
                     
                 }//.phoneOnlyStackNavigationView()

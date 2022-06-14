@@ -11,11 +11,25 @@ import AlertToast
 //show it graphically as you click an additional box show an animation of the space that will be occupired
 struct CreateFreezerProfileView: View {
     
+    @State var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    
+    @State var phoneTwoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
+    
+    
+    
+    
+    @State var tabletTwoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
+    
+    @State var phoneOneColumnGrid = [GridItem(.flexible())]
+    
     @SwiftUI.Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     @Binding var show_new_screen : Bool
     
     //Form values
+    
     @State var freezer_label : String = ""
+    //MARK: Turn this into a dropdownlist
+    @State var freezer_room_name : String = ""
     @State var freezer_length : String = ""
     @State var freezer_width : String = ""
     @State var freezer_rated_temp : String = ""
@@ -44,217 +58,69 @@ struct CreateFreezerProfileView: View {
     @State var responseMsg : String = ""
     
     //measurement unit picker
-    var measure_units = ["feet", "inches"] //get this from the server
+    var measure_units = ["feet"] //get this from the server
     @State private var selected_unit_id : Int = 0
-    #warning("Need to fetch the following constants from the API")
+#warning("Need to fetch the following constants from the API")
     //Rated Freezer Temperature Units
     var stored_freezer_rated_temp_units = ["fahrenheit", "celsius", "kelvin"] //get this from the server
     @State private var selected_rated_temp_unit_id : Int = 0
     
-    #warning("Do the same preview thing for the Capsules when adding a new box and its dimensions")
+#warning("Add form validation to this form")
     var body: some View {
         //suggest Names (based on what is available or a particular convention)
-        NavigationView{
-            ScrollView(showsIndicators: false){
-                VStack(alignment: .leading){
-                    Group{
-                        TextFieldLabelCombo(textValue: self.$freezer_label, label: "Freezer Label", placeHolder: "Enter a Freezer Asset Name", iconValue: "pencil")
-                            .focused($isInputActive)
-                            .toolbar {
-                                ToolbarItemGroup(placement: .keyboard) {
-                                    Spacer()
-                                    
-                                    Button("Done") {
-                                        isInputActive = false
-                                    }
-                                }
-                            }
-                        
-                        TextFieldLabelCombo(textValue: self.$freezer_length, label: "Freezer Length", placeHolder: "Enter a Freezer Length", iconValue: "number",keyboardType: .decimalPad)
-                            .focused($isInputActive)
-                        
-                        TextFieldLabelCombo(textValue: self.$freezer_width, label: "Freezer Width", placeHolder: "Enter a Freezer Width", iconValue: "number",keyboardType: .decimalPad)
-                            .focused($isInputActive)
-                        
-                        TextFieldLabelCombo(textValue: self.$freezer_rated_temp, label: "Rated Freezer Temperature", placeHolder: "Enter the Rated Freezer Temperature", iconValue: "number",keyboardType: .decimalPad)
-                            .focused($isInputActive)
-                    }
-                    VStack{
-                        DropdownPicker(title: "Choose a Rated Freezer Temperature Unit:", placeholder: "Rated Freezer Temperature Units", selection: self.$selected_rated_temp_unit_id, options: self.stored_freezer_rated_temp_units)
-                        
-                        
-                    }
-                    //picker section start
-                    VStack{
-                        DropdownPicker(title: "Choose a unit", placeholder: "Freezer Measurement Unit", selection: self.$selected_unit_id, options: self.measure_units)
-                        
-                        
-                    }
+        
+        ScrollView(showsIndicators: false){
+            VStack(alignment: .leading){
+                Group{
+                    freezernameandroomsection
+                    //threeColumnGrid phoneTwoColumnGrid
+                    freezerdimensionsection
                     
+                    freezertemperatureratingsection
                     
-                    //picker section end
-                    
-                    
-                    //Dynamic grid based start
-                    VStack{
-                        Stepper("Max Freezer Rows (Boxes)", onIncrement: {
-                            freezer_max_rows += 1
-                            
-                            
-                            self.generate_grid_amt()
-                            
-                        }, onDecrement: {
-                            freezer_max_rows -= 1
-                            self.generate_grid_amt()
-                            
-                        })
+                }
+                
+                
+                
+                
+                freezercapacitysection
+                
+                Spacer()
+                
+            }
+        }.padding()
+            .navigationBarTitle(Text("Create New Freezer"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        createNewFreezerProfile()
                         
-                        Text("Freezer Rows \(freezer_max_rows)")
-                    }
-                    
-                    VStack{
-                        Stepper("Max Freezer Columns (Boxes)", onIncrement: {
-                            freezer_max_columns += 1
-                            self.generate_grid_amt()
-                            
-                        }, onDecrement: {
-                            freezer_max_columns -= 1
-                            
-                            self.generate_grid_amt()
-                        })
-                        
-                        Text("Freezer Columns \(freezer_max_columns)")
-                    }
-                    
-                    //Show the preview of how the freezer layout will look
-                    //
-                    VStack{
-                        Section{
-                            Toggle("Show Freezer Preview", isOn: $show_freezer_preview)
-                        }
-                        if self.show_freezer_preview{
-                            withAnimation(.spring()){
-                                FreezerLayoutPreview(freezer_max_rows: self.$freezer_max_rows, freezer_max_columns: self.$freezer_max_columns,selected_row: .constant(0), selected_column: .constant(0), show_freezer_grid_layout: .constant(false))
-                            }
-                            
-                        }
-                    }
-                    //Depth section -- show how it looks when you say depth of 2
-                    
-                    //Show the preview of how the freezer depth will look
-                    //
-                    VStack{
-                        Stepper("Max Freezer Depth (Boxes)", onIncrement: {
-                            freezer_depth += 1
-                            
-                            
-                        }, onDecrement: {
-                            freezer_depth -= 1
-                            
-                            
-                        })
-                        
-                        Text("Freezer Depth \(freezer_depth)")
-                        
-                        Section{
-                            Toggle("Show Freezer  Depth Preview", isOn: $show_freezer_depth_preview)
-                        }
-                        if self.show_freezer_depth_preview{
-                            withAnimation(.spring()){
-                                FreezerDepthPreview(freezer_max_rows: self.$freezer_depth)
-                            }
-                            
-                        }
-                    }
-                    //Depth section -- show how it looks when you say depth of 2
-                    
-                    Spacer()
-                    HStack{
-                        Spacer()
-                        Button(action: {
-                            Task{
-                                do{
-                            
-                            //send the freezer to the server
-                            var freezer_profile = FreezerProfileModel()
-                            
-                            freezer_profile.freezerRatedTemp = Int(self.freezer_rated_temp) ?? 0
-                            freezer_profile.freezerRatedTempUnits = self.stored_freezer_rated_temp_units[self.selected_rated_temp_unit_id]
-                            
-                            freezer_profile.freezerLabel = self.freezer_label
-                            freezer_profile.freezerDepth = String( self.freezer_depth)
-                            freezer_profile.freezerCapacityRows = self.freezer_max_rows
-                            freezer_profile.freezerCapacityColumns = self.freezer_max_columns
-                           // freezer_profile.freezerDepth = self.freezer_depth
-                            freezer_profile.freezerDimensionUnits = self.measure_units[selected_unit_id]//Need to
-                            if let width = Int(self.freezer_length),let freezer_deploy = Int(self.freezer_length)
-                            {
-                                freezer_profile.freezerWidth = String(width)
-                                freezer_profile.freezerLength = String(freezer_deploy)
+                    }) {
+                        HStack{
+                            Text("Save").font(.title3)
+                        }.font(.caption)
+                            .foregroundColor(Color.primary)
+                            .padding(.vertical,10)
+                            .padding(.horizontal,20)
+                            .background(
                                 
-                            }
-                            
-                         
-                                    let response =  try await    self.freezer_profile_service.CreateNewFreezer(_freezerDetail: freezer_profile){
-                                        response in
-                                        print("Response is: \(response.serverMessage)")
-                                        self.responseMsg = response.serverMessage
-                                        self.showResponseMsg = true
-                                        self.isErrorMsg = response.isError
-                                        //go back to the previous screen
-                                        if !self.isErrorMsg{
-                                          //  self.presentationMode.wrappedValue.dismiss()
-                                            
-                                            self.show_new_screen.toggle()
-                                        }
-                                    }
-                                    
-                                    
-                                }
-                                catch{
-                                    //  AlertToast(type: .error(Color.red), title: "Error: \(error.localizedDescription)")
-                                    print("Error: \(error.localizedDescription)")
-                                }
-                                
-                            }
-                            
-                        }) {
-                            HStack{
-                                Text("Add Freezer").font(.title2).bold()
-                            }.padding()
-                        }.tint(Color.green)
-                            .foregroundColor(.white)
-                            .buttonStyle(.borderedProminent)
-                            .controlSize(.regular)
-                        
-                        
-                        Spacer()
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.theme.accent,lineWidth: 1)
+                            )
                     }
+                    
                 }
             }
-            .navigationBarTitle(Text("All Available Freezers"))
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(
-                leading:
-                    
-                    Button {
-                        self.show_new_screen.toggle()
-                    } label: {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.secondary)
-                            .font(.title)
-                            .padding(10)
-                    }
-                
-            )
-        }.toast(isPresenting: $showResponseMsg){
-            if self.isErrorMsg{
-                return AlertToast(type: .error(.red), title: "Response", subTitle: "\(self.responseMsg )")
+        
+            .toast(isPresenting: $showResponseMsg){
+                if self.isErrorMsg{
+                    return AlertToast(type: .error(.red), title: "Response", subTitle: "\(self.responseMsg )")
+                }
+                else{
+                    return AlertToast(type: .regular, title: "Response", subTitle: "\(self.responseMsg )")
+                }
             }
-            else{
-                return AlertToast(type: .regular, title: "Response", subTitle: "\(self.responseMsg )")
-            }
-        }
     }
     
     func generate_grid_amt(){
@@ -271,8 +137,220 @@ struct CreateFreezerProfileView: View {
     
 }
 
+
+
+
+extension CreateFreezerProfileView{
+    //MARK: form sections
+    
+    private var freezernameandroomsection : some View{
+        Section{
+            TextFieldLabelCombo(textValue: self.$freezer_label, label: "Freezer Label", placeHolder: "Enter a Freezer Asset Name", iconValue: "pencil")
+                .focused($isInputActive)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        
+                        Button("Done") {
+                            isInputActive = false
+                        }
+                    }
+                }
+            //freezer_room_name
+            TextFieldLabelCombo(textValue: self.$freezer_room_name, label: "Freezer Room", placeHolder: "Enter a Freezer Room Name", iconValue: "pencil")
+                .focused($isInputActive)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        
+                        Button("Done") {
+                            isInputActive = false
+                        }
+                    }
+                }
+            
+        }
+    }
+    private var freezerdimensionsection : some View{
+        LazyVGrid(columns: UIDevice.current.userInterfaceIdiom == .pad ? threeColumnGrid : phoneTwoColumnGrid) {
+            TextFieldLabelCombo(textValue: self.$freezer_length, label: "Freezer Length", placeHolder: "Enter a Freezer Length", iconValue: "number",keyboardType: .decimalPad)
+                .focused($isInputActive)
+            
+            TextFieldLabelCombo(textValue: self.$freezer_width, label: "Freezer Width", placeHolder: "Enter a Freezer Width", iconValue: "number",keyboardType: .decimalPad)
+                .focused($isInputActive)
+            
+            //picker section start
+            VStack{
+                DropdownPicker(title: "Choose a unit", placeholder: "Freezer Measurement Unit", selection: self.$selected_unit_id, options: self.measure_units)
+                
+                
+            }
+            
+            
+            //picker section end
+            
+        }
+    }
+    
+    private var freezertemperatureratingsection : some View{
+        LazyVGrid(columns: UIDevice.current.userInterfaceIdiom == .pad ? threeColumnGrid : phoneTwoColumnGrid) {
+            TextFieldLabelCombo(textValue: self.$freezer_rated_temp, label: "Rated Freezer Temperature", placeHolder: "Enter the Rated Freezer Temperature", iconValue: "number",keyboardType: .decimalPad)
+                .focused($isInputActive)
+            
+            VStack{
+                DropdownPicker(title: "Choose a Rated Freezer Temperature Unit:", placeholder: "Rated Freezer Temperature Units", selection: self.$selected_rated_temp_unit_id, options: self.stored_freezer_rated_temp_units)
+                
+                
+            }
+        }
+    }
+    
+    private var freezercapacitysection : some View{
+        
+        Section{
+            Section(header: Text("Freezer Row Column Layout").bold().font(.title3).foregroundColor(Color.theme.secondaryText)){
+                //Dynamic grid based start
+                //two columns for tab and one column phone
+                LazyVGrid(columns: UIDevice.current.userInterfaceIdiom == .pad ? tabletTwoColumnGrid : phoneOneColumnGrid) {
+                    VStack(alignment: .leading){
+                        VStack{
+                            Stepper("Max Freezer Rows (Boxes)", onIncrement: {
+                                freezer_max_rows += 1
+                                
+                                
+                                self.generate_grid_amt()
+                                
+                            }, onDecrement: {
+                                freezer_max_rows -= 1
+                                self.generate_grid_amt()
+                                
+                            })
+                            
+                            Text("Freezer Rows \(freezer_max_rows)")
+                        }
+                        
+                        VStack{
+                            Stepper("Max Freezer Columns (Boxes)", onIncrement: {
+                                freezer_max_columns += 1
+                                self.generate_grid_amt()
+                                
+                            }, onDecrement: {
+                                freezer_max_columns -= 1
+                                
+                                self.generate_grid_amt()
+                            })
+                            
+                            Text("Freezer Columns \(freezer_max_columns)")
+                        }
+                        
+                    }
+                    withAnimation(.spring()){
+                        FreezerLayoutPreview(freezer_max_rows: self.$freezer_max_rows, freezer_max_columns: self.$freezer_max_columns,selected_row: .constant(0), selected_column: .constant(0), show_freezer_grid_layout: .constant(false))
+                    }
+                    
+                }
+            }
+            
+            //Show the preview of how the freezer layout will look
+            //
+            
+            //Depth section -- show how it looks when you say depth of 2
+            
+            //Show the preview of how the freezer depth will look
+            //
+            LazyVGrid(columns: UIDevice.current.userInterfaceIdiom == .pad ? tabletTwoColumnGrid : phoneOneColumnGrid) {
+                VStack(alignment: .leading){
+                    Stepper("Max Freezer Depth (Boxes)", onIncrement: {
+                        freezer_depth += 1
+                        
+                        
+                    }, onDecrement: {
+                        freezer_depth -= 1
+                        
+                        
+                    })
+                    
+                    Text("Freezer Depth \(freezer_depth)")
+                }
+                
+                
+                withAnimation(.spring()){
+                    FreezerDepthPreview(freezer_max_rows: self.$freezer_depth)
+                }
+                
+                
+                
+                
+            }
+            //Depth section -- show how it looks when you say depth of 2
+        }
+    }
+    
+    //MARK: functions section
+    //put this in a view model
+    func createNewFreezerProfile(){
+        Task{
+            do{
+                
+                //send the freezer to the server
+                var freezer_profile = FreezerProfileModel()
+                
+                freezer_profile.freezerRoomName = self.freezer_room_name
+                freezer_profile.freezerCapacityDepth = Int(self.freezer_depth)
+                
+                
+                freezer_profile.freezerRatedTemp = Int(self.freezer_rated_temp) ?? 0
+                freezer_profile.freezerRatedTempUnits = self.stored_freezer_rated_temp_units[self.selected_rated_temp_unit_id]
+                
+                freezer_profile.freezerLabel = self.freezer_label
+                freezer_profile.freezerDepth = String( self.freezer_depth)
+                freezer_profile.freezerCapacityRows = self.freezer_max_rows
+                freezer_profile.freezerCapacityColumns = self.freezer_max_columns
+                // freezer_profile.freezerDepth = self.freezer_depth
+                freezer_profile.freezerDimensionUnits = self.measure_units[selected_unit_id]//Need to
+                if let width = Int(self.freezer_length),let freezer_deploy = Int(self.freezer_length)
+                {
+                    freezer_profile.freezerWidth = String(width)
+                    freezer_profile.freezerLength = String(freezer_deploy)
+                    
+                }
+                //MARK: Need to update this to utilize the await more effectively
+                
+                let response =  try await self.freezer_profile_service.CreateNewFreezer(_freezerDetail: freezer_profile){
+                    response in
+                    print("Response is: \(response.serverMessage)")
+                    self.responseMsg = response.serverMessage
+                    self.showResponseMsg = true
+                    self.isErrorMsg = response.isError
+                    //go back to the previous screen
+                    if !self.isErrorMsg{
+                        //  self.presentationMode.wrappedValue.dismiss()
+                        
+                        self.show_new_screen.toggle()
+                    }
+                }
+                
+                
+            }
+            catch{
+                //  AlertToast(type: .error(Color.red), title: "Error: \(error.localizedDescription)")
+                print("Error: \(error.localizedDescription)")
+            }
+            
+        }
+    }
+    
+    //additional components and functions
+}
+
+
+
 struct CreateFreezerProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateFreezerProfileView(show_new_screen: .constant(false))
+        //  CreateFreezerProfileView(show_new_screen: .constant(false))
+        //   .previewInterfaceOrientation(.landscapeLeft)
+        
+        ScreenPreview(screen:  CreateFreezerProfileView(show_new_screen: .constant(false)))
     }
 }
+

@@ -85,6 +85,28 @@ struct RackItemModel: Codable {
         
     }
     
+    init(id : Int, freezer_rack_label : String,freezer_rack_label_slug : String, is_suggested_rack_position : Bool,number_of_boxes_in_use : Int, box_capacity_of_rack : Int, freezer_rack_column_start : Int,
+         freezer_rack_column_end : Int,freezer_rack_row_start : Int, freezer_rack_row_end : Int,freezer_rack_depth_start : Int,freezer_rack_depth_end : Int, freezer : String, created_by : String ){
+        self.id = 0
+        self.freezer_rack_label = freezer_rack_label
+        self.freezer_rack_label_slug = freezer_rack_label_slug
+        self.freezer_rack_column_start = freezer_rack_column_start
+        self.freezer_rack_column_end = freezer_rack_column_end
+        self.freezer_rack_row_start = freezer_rack_row_start
+        self.freezer_rack_row_end = freezer_rack_row_end
+        self.freezer_rack_depth_start = freezer_rack_depth_start
+        self.freezer_rack_depth_end = freezer_rack_depth_end
+        //freezer = FreezerProfileModel()
+        self.freezer = freezer
+        self.created_by = created_by
+        self.created_datetime = ""
+        self.modified_datetime = ""
+        self.is_suggested_rack_position = is_suggested_rack_position
+        self.number_of_boxes_in_use = number_of_boxes_in_use
+        self.box_capacity_of_rack = box_capacity_of_rack
+        
+    }
+    
     var id: Int
     
     var freezer_rack_label, freezer_rack_label_slug: String

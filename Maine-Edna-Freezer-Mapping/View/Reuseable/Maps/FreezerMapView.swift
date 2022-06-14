@@ -24,20 +24,22 @@ struct FreezerMapView: View {
     @State var freezer_profile : FreezerProfileModel
     
     //conditional renders
-    @State var show_create_new_rack : Bool = false
+    @Binding var show_create_new_rack : Bool
     @State var show_guided_rack_view : Bool = false
     
     var body: some View {
         //ScrollView(showsIndicators: false) {
         Section{
       
+            GeometryReader{reader in
             
-            InteractFreezerLayoutPreview(freezer_max_rows: .constant($freezer_profile.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_profile.freezerCapacityColumns.wrappedValue ?? 0),freezer_rack_layout : $freezer_rack_layout,freezer_profile: freezer_profile, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: .constant(false))
-            
+                InteractFreezerLayoutPreview(freezer_max_rows: .constant($freezer_profile.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_profile.freezerCapacityColumns.wrappedValue ?? 0),freezer_rack_layout : $freezer_rack_layout,freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: .constant(false),freezer_width: .constant(reader.size.width * 0.95),freezer_height: .constant( reader.size.height * 0.95))
+           
             
         //}
-        .frame(minHeight: 300,maxHeight: 500)
-          
+       // .frame(minHeight: 300,maxHeight: 500)
+                  
+            }
     }
     }
 }
@@ -45,6 +47,6 @@ struct FreezerMapView: View {
 
 struct FreezerMapView_Previews: PreviewProvider {
     static var previews: some View {
-        FreezerMapView(freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel())
+        FreezerMapView(freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel(), show_create_new_rack: .constant(false))
     }
 }

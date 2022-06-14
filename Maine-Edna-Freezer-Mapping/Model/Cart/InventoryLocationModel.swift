@@ -20,12 +20,70 @@ struct InventoryLocationLinks: Codable {
 
 // MARK: - Result
 struct InventoryLocationResult: Codable {
+    
+    init(){
+        
+        self.id = 0
+        self.freezerLabel = ""
+        self.freezerRoomName = ""
+        
+        self.sampleBarcode = ""
+        self.freezerInventorySlug = ""
+        self.freezerInventoryType = ""
+        self.freezerInventoryStatus = ""
+        self.freezerInventoryColumn = 0
+        self.freezerInventoryRow = 0
+        self.freezerBox = BoxModel()
+        self.createdBy = ""
+        self.createdDatetime = ""
+        self.modifiedDatetime = ""
+        
+        self.isHighlighed = false
+        
+        
+    }
+    
+    
+    init(id : Int,freezerLabel : String, freezerRoomName : String,sampleBarcode : String, freezerInventorySlug : String, freezerInventoryType : String, freezerInventoryStatus : String,
+         freezerInventoryColumn : Int, freezerInventoryRow : Int, freezerBox : BoxModel, createdBy : String, createdDatetime : String, modifiedDatetime : String, isHighlighed : Bool ){
+       
+        self.id = id
+        
+        self.freezerLabel = freezerLabel
+        self.freezerRoomName = freezerRoomName
+        self.freezerInventoryRow = freezerInventoryRow
+        self.freezerInventoryColumn = freezerInventoryColumn
+        
+        self.sampleBarcode = sampleBarcode
+        self.freezerInventorySlug = freezerInventorySlug
+        self.freezerInventoryType = freezerInventoryType
+        self.freezerInventoryStatus = freezerInventoryStatus
+        self.freezerInventoryColumn = freezerInventoryColumn
+        self.freezerInventoryRow = freezerInventoryRow
+        self.freezerBox = freezerBox
+        self.createdBy = createdBy
+        self.createdDatetime = createdDatetime
+        self.modifiedDatetime = modifiedDatetime
+        
+        self.isHighlighed = isHighlighed
+        
+        
+    }
+    
+    
     var id: Int?
     var sampleBarcode, freezerInventorySlug, freezerInventoryType, freezerInventoryStatus: String?
     var freezerInventoryColumn, freezerInventoryRow: Int?
     var freezerBox: BoxModel?
     var createdBy, createdDatetime, modifiedDatetime: String?
     var isHighlighed : Bool = false
+    
+    var freezerLabel : String = ""
+    var freezerRoomName : String = ""
+  
+    
+    
+    
     enum CodingKeys: String, CodingKey {
             case id
             case sampleBarcode = "sample_barcode"
@@ -38,6 +96,9 @@ struct InventoryLocationResult: Codable {
             case createdBy = "created_by"
             case createdDatetime = "created_datetime"
             case modifiedDatetime = "modified_datetime"
+            case freezerRoomName
+            case freezerLabel
+        
         }
 }
 

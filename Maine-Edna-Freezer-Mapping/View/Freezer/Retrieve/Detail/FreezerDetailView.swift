@@ -12,8 +12,8 @@ struct FreezerDetailView: View {
     
     @State var show_freezer_detail : Bool = false
     @State var freezer_profile : FreezerProfileModel
-  //  @ObservedObject var rack_layout_service : FreezerRackLayoutService = FreezerRackLayoutService()
-   // @AppStorage(AppStorageNames.stored_freezer_rack_layout.rawValue) var stored_freezer_rack_layout : [RackItemModel] = [RackItemModel]()
+    //  @ObservedObject var rack_layout_service : FreezerRackLayoutService = FreezerRackLayoutService()
+    // @AppStorage(AppStorageNames.stored_freezer_rack_layout.rawValue) var stored_freezer_rack_layout : [RackItemModel] = [RackItemModel]()
     //@State var vm : RackItemVm //= [RactItemVm]()
     
     //conditional renders
@@ -28,7 +28,7 @@ struct FreezerDetailView: View {
     @State var isErrorMsg : Bool = false
     @State var responseMsg : String = ""
     
-
+    
     
     //TODO: make it a environment object
     @ObservedObject var user_css_core_data_service = UserCssThemeCoreDataManagement()
@@ -46,9 +46,12 @@ struct FreezerDetailView: View {
                     withAnimation(.spring()){
                         Section{
                             Label("Top-Down View", systemImage: "eye").font(.caption)
-                            FreezerMapView(freezer_rack_layout: self.$vm.freezer_racks, freezer_profile: freezer_profile).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
                             
-                          
+                            GeometryReader{reader in
+                                FreezerMapView(freezer_rack_layout: self.$vm.freezer_racks, freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
+                                    .frame(width: reader.size.width * 0.95, height: reader.size.height * 0.95, alignment: .center)
+                            }
+                            
                         }
                     }
                 }
@@ -82,6 +85,9 @@ struct FreezerDetailView: View {
                 
             }
             
+            //show_create_new_rack
+            
+            
             
             
             
@@ -103,7 +109,15 @@ struct FreezerDetailView: View {
                 HStack{
                     Image(systemName: "plus")
                     Text("Rack").font(.caption)
-                }
+                } .font(.caption)
+                    .foregroundColor(Color.primary)
+                    .padding(.vertical,10)
+                    .padding(.horizontal,20)
+                    .background(
+                        
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.theme.accent,lineWidth: 1)
+                    )
             }).sheet(isPresented: self.$show_freezer_detail){
                 //Show the Create Freezer Form
                 //MARK: - Show all the Freezer Detail
@@ -123,7 +137,15 @@ struct FreezerDetailView: View {
                     HStack{
                         Image(systemName: "questionmark.circle")
                         Text("Freezer").font(.caption)
-                    }
+                    } .font(.caption)
+                        .foregroundColor(Color.primary)
+                        .padding(.vertical,10)
+                        .padding(.horizontal,20)
+                        .background(
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.theme.accent,lineWidth: 1)
+                        )
                 }).sheet(isPresented: self.$show_freezer_detail){
                     //Show the Create Freezer Form
                     //MARK: - Show all the Freezer Detail
@@ -145,82 +167,84 @@ struct FreezerDetailView: View {
             
             .onAppear{
                 //Show Loading Animation
-              
+                
                 
                 //fetching the freezer by the freezer_id example 1
                 self.vm.FindRackLayoutByFreezerLabel(_freezer_label: String(self.$freezer_profile.freezerLabel.wrappedValue ?? ""))
                 //Convert to return error from the view model
                 /*{
-                    response in
-                    
-                    self.show_loading_spinner = false
-                    
-                    //give message after loading is finished
-                    
-                   
-                   // self.isErrorMsg = response.isError
-                    
-                    
-                    if response.count == 0{
-                        self.responseMsg = "No Data have been found."
-                        self.showResponseMsg = true
-                    }
-                    else if response.count > 0{
-                        print("Response is: \(response)")
-                        self.responseMsg = "Rack Layout Loaded"
-                        self.showResponseMsg = true
-                        print(self.freezer_profile.freezerLabel ?? "")
-                        self.freezer_rack_layouts.rack_layout = response
-                        
-                        print("Rack Count: \(self.$freezer_rack_layouts.rack_layout.count)")
-                        
-                        //freezeer specs
-                        
-                        print("\(self.freezer_profile.freezerCapacityRows) \(self.freezer_profile.freezerCapacityColumns)")
-                    }
-                  /*  if(!self.isErrorMsg){
-                        //Do something if no error occurred
-                        
-                    }*/
-                    
-                }*/
+                 response in
+                 
+                 self.show_loading_spinner = false
+                 
+                 //give message after loading is finished
+                 
+                 
+                 // self.isErrorMsg = response.isError
+                 
+                 
+                 if response.count == 0{
+                 self.responseMsg = "No Data have been found."
+                 self.showResponseMsg = true
+                 }
+                 else if response.count > 0{
+                 print("Response is: \(response)")
+                 self.responseMsg = "Rack Layout Loaded"
+                 self.showResponseMsg = true
+                 print(self.freezer_profile.freezerLabel ?? "")
+                 self.freezer_rack_layouts.rack_layout = response
+                 
+                 print("Rack Count: \(self.$freezer_rack_layouts.rack_layout.count)")
+                 
+                 //freezeer specs
+                 
+                 print("\(self.freezer_profile.freezerCapacityRows) \(self.freezer_profile.freezerCapacityColumns)")
+                 }
+                 /*  if(!self.isErrorMsg){
+                  //Do something if no error occurred
+                  
+                  }*/
+                 
+                 }*/
             }
             
-        }
+        }     .background(
+            NavigationLink(destination:   CreateNewRackView(freezer_detail: freezer_profile, show_create_new_rack:  self.$show_create_new_rack), isActive: self.$show_create_new_rack,label: {EmptyView()})
+        )
     }
 }
 
 struct FreezerDetailView_Previews: PreviewProvider {
     static var previews: some View {
         //dummy data
-       /* var freezer_rack_layouts : RackItemVm = RackItemVm()
-        
-        var rack_1 = RackItemModel()
-      //  rack_1.css_text_color = "white"
-      //  rack_1.css_background_color = "orange"
-        rack_1.freezer_rack_label = "Rk_R1_C2"
-        rack_1.freezer_rack_row_start = 1
-        rack_1.freezer_rack_row_end = 1
-        rack_1.freezer_rack_depth_start = 1
-        rack_1.freezer_rack_depth_end = 10
-        rack_1.freezer_rack_column_start = 1
-        rack_1.freezer_rack_column_end = 1
-        
-        freezer_rack_layouts.rack_layout.append(rack_1)
-        
-        var rack_2 = RackItemModel()
-       // rack_2.css_text_color = "white"
-        //rack_2.css_background_color = "orange"
-        rack_2.freezer_rack_label = "Rk_R2_C2"
-        rack_2.freezer_rack_row_start = 2
-        rack_2.freezer_rack_row_end = 2
-        rack_2.freezer_rack_depth_start = 2
-        rack_2.freezer_rack_depth_end = 10
-        rack_2.freezer_rack_column_start = 2
-        rack_2.freezer_rack_column_end = 2
-        
-        freezer_rack_layouts.rack_layout.append(rack_2)
-        */
+        /* var freezer_rack_layouts : RackItemVm = RackItemVm()
+         
+         var rack_1 = RackItemModel()
+         //  rack_1.css_text_color = "white"
+         //  rack_1.css_background_color = "orange"
+         rack_1.freezer_rack_label = "Rk_R1_C2"
+         rack_1.freezer_rack_row_start = 1
+         rack_1.freezer_rack_row_end = 1
+         rack_1.freezer_rack_depth_start = 1
+         rack_1.freezer_rack_depth_end = 10
+         rack_1.freezer_rack_column_start = 1
+         rack_1.freezer_rack_column_end = 1
+         
+         freezer_rack_layouts.rack_layout.append(rack_1)
+         
+         var rack_2 = RackItemModel()
+         // rack_2.css_text_color = "white"
+         //rack_2.css_background_color = "orange"
+         rack_2.freezer_rack_label = "Rk_R2_C2"
+         rack_2.freezer_rack_row_start = 2
+         rack_2.freezer_rack_row_end = 2
+         rack_2.freezer_rack_depth_start = 2
+         rack_2.freezer_rack_depth_end = 10
+         rack_2.freezer_rack_column_start = 2
+         rack_2.freezer_rack_column_end = 2
+         
+         freezer_rack_layouts.rack_layout.append(rack_2)
+         */
         var freezer_profile = FreezerProfileModel()
         freezer_profile.freezerLabel = "Test Freezer 1"
         freezer_profile.freezerDepth = "10"
@@ -229,24 +253,24 @@ struct FreezerDetailView_Previews: PreviewProvider {
         freezer_profile.freezerCapacityRows = 10
         freezer_profile.freezerRoomName = "Murray 313"
         
-       // return FreezerDetailView(freezer_profile: freezer_profile, freezer_rack_layouts: .constant(freezer_rack_layouts))
+        // return FreezerDetailView(freezer_profile: freezer_profile, freezer_rack_layouts: .constant(freezer_rack_layouts))
         
         return Group{
             ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile)
-                        .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
-                        .previewDisplayName("iPhone 13").preferredColorScheme)
-           
-            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile)
-                        .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
-                        .previewDisplayName("iPhone 13 Pro Max").preferredColorScheme)
-            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile)
-                        .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
-                        .previewDisplayName("iPad Air (4th generation)").preferredColorScheme)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
+                .previewDisplayName("iPhone 13").preferredColorScheme)
             
             ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile)
-                        .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
-                        .previewDisplayName("iPad Air (4th generation)").preferredColorScheme)
-                        .previewInterfaceOrientation(.landscapeLeft)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
+                .previewDisplayName("iPhone 13 Pro Max").preferredColorScheme)
+            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile)
+                .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
+                .previewDisplayName("iPad Air (4th generation)").preferredColorScheme)
+            
+            ForEach(ColorScheme.allCases, id: \.self, content:  FreezerDetailView(freezer_profile: freezer_profile)
+                .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
+                .previewDisplayName("iPad Air (4th generation)").preferredColorScheme)
+            .previewInterfaceOrientation(.landscapeLeft)
         }
     }
 }

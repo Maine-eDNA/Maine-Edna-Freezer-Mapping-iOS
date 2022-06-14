@@ -34,7 +34,7 @@ struct FreezerProfileCardView: View {
             }
         }
             Spacer()
-        }.padding()
+        }.background(Color.theme.background.opacity(0.001)).padding()
     }
     
     //May need to add it to its own file

@@ -12,6 +12,7 @@ struct RackCrossSectView: View {
     var rack_profile : RackItemModel
     @Binding var rack_boxes : [BoxItemModel]
     @Binding var freezer_profile : FreezerProfileModel
+    @Binding var current_rack_row : Int 
     
     //Css section
     @AppStorage(AppStorageNames.store_default_css.rawValue)  var store_user_default_css : [UserCssModel] = [UserCssModel]()
@@ -39,12 +40,15 @@ struct RackCrossSectView: View {
     @State var inventoryLocations : [InventoryLocationResult] = []
     @State var isInSearchMode : Bool = false
     
+    #warning("Need to refractor the box view to change the row based on the row selected and leave the row and column as is")
     
     var body: some View {
 #warning("Required Validation when entering new box it must meet the validation rules below")
         //TODO: - Need to add validation to prevent user from adding a position outside of the scope of the box, rack or freezer ( min starting position max position the max or furthest space)
         
+        #warning("NEXT Calculate the number of samples each box can hold and how much space is still available")
         /*
+         
          Max Box Columns (Inventory) and Max Box Rows (Inventory) means the capacity of the Box 10 x 10 means 100 samples max
          
          So a Rack with 3 columns means a box can be in any of the 3 columns
@@ -53,16 +57,17 @@ struct RackCrossSectView: View {
          */
         ZStack{
             VStack{
+                Text("Current Rack Row # \(current_rack_row)")
                 if self.rack_boxes.count > 0{
                     withAnimation(.easeInOut(duration: 5)){
-                        ForEach(rack_profile.freezer_rack_row_start ..< rack_profile.freezer_rack_row_end, id: \.self) { row in
+                        ForEach(rack_profile.freezer_rack_depth_start ..< rack_profile.freezer_rack_depth_end, id: \.self) { depth in
                             HStack {
                                 ForEach(rack_profile.freezer_rack_column_start ..< rack_profile.freezer_rack_column_end, id: \.self) { column in
                                     ForEach(self.rack_boxes, id: \.freezer_box_label) {
                                         box in
                                         
                                         
-                                        if box.is_suggested_box_position && box.freezer_box_column == column && box.freezer_box_row == row{
+                                        if box.is_suggested_box_position && box.freezer_box_column == column && box.freezer_box_row == depth{
                                             
                                             SuggestedBoxItemCard(box_color: "green", box_text_color: "white", freezer_box_row: 0, freezer_box_column: 0,freezer_rack: rack_profile.freezer_rack_label)
                                                 .listRowBackground(Color.clear)
@@ -79,7 +84,7 @@ struct RackCrossSectView: View {
                                                 }
                                             
                                         }
-                                        else if box.freezer_box_column == column && box.freezer_box_row == row {
+                                        else if box.freezer_box_column == column && box.freezer_box_row == depth {
                                             
                                             BoxItemCard(rack_box: .constant(box))
                                                 .listRowBackground(Color.clear)
@@ -95,11 +100,11 @@ struct RackCrossSectView: View {
                                         else{
                                             //Create new box: send the row and column the current box is in and the freezer info
                                             
-                                            BoxEmptyItemCard(freezer_box_row: row , freezer_box_column: column,freezer_rack: rack_profile.freezer_rack_label)
+                                            BoxEmptyItemCard(freezer_box_row: depth , freezer_box_column: column,freezer_rack: rack_profile.freezer_rack_label)
                                             // .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                                                 .listRowBackground(Color.clear)
                                                 .onTapGesture {
-                                                    self.targetRow = row
+                                                    self.targetRow = depth //depth is what tells how far down a box is
                                                     self.targetColumn = column
                                                     
                                                     //segue to the view
@@ -206,6 +211,10 @@ struct BoxItemCard : View{
                                 HStack{
                                     Text("Row ").foregroundColor(Color(wordName: box_text_color)).font(.callout).bold()
                                     Text("\(rack_box.freezer_box_row ?? 0)").foregroundColor(Color(wordName: box_text_color)).font(.callout)
+                                    
+                                    Text("Depth ").foregroundColor(Color(wordName: box_text_color)).font(.callout).bold()
+                                    Text("\(rack_box.freezer_box_depth ?? 0)").foregroundColor(Color(wordName: box_text_color)).font(.callout)
+                                    
                                     Text("Column ").foregroundColor(Color(wordName: box_text_color)).font(.callout).bold()
                                     Text("\(rack_box.freezer_box_column ?? 0)").foregroundColor(Color(wordName: box_text_color)).font(.callout)
                                 }
@@ -282,6 +291,7 @@ struct BoxEmptyItemCard : View
     @State var width : CGFloat = 300
     @State var freezer_box_row : Int = 0
     @State var freezer_box_column : Int  = 0
+    @State var freezer_rack_depth : Int = 0
     @State var freezer_rack : String = "test"
     
     
@@ -317,6 +327,8 @@ struct BoxEmptyItemCard : View
                                 HStack{
                                     Text("Row ").foregroundColor(Color(wordName: box_text_color)).font(.callout).bold()
                                     Text("\(freezer_box_row)").foregroundColor(Color(wordName: box_text_color)).font(.callout)
+                                    Text("Depth ").foregroundColor(Color(wordName: box_text_color)).font(.callout).bold()
+                                    Text("\(freezer_rack_depth ?? 0)").foregroundColor(Color(wordName: box_text_color)).font(.callout)
                                     Text("Column ").foregroundColor(Color(wordName: box_text_color)).font(.callout).bold()
                                     Text("\(freezer_box_column)").foregroundColor(Color(wordName: box_text_color)).font(.callout)
                                 }
@@ -357,6 +369,7 @@ struct SuggestedBoxItemCard : View
     @State var width : CGFloat = 300
     @State var freezer_box_row : Int = 0
     @State var freezer_box_column : Int  = 0
+    @State var freezer_rack_depth : Int = 0
     @State var freezer_rack : String = "test"
     
     
@@ -392,6 +405,8 @@ struct SuggestedBoxItemCard : View
                                 HStack{
                                     Text("Row ").foregroundColor(Color(wordName: box_text_color)).font(.callout).bold()
                                     Text("\(freezer_box_row)").foregroundColor(Color(wordName: box_text_color)).font(.callout)
+                                    Text("Depth ").foregroundColor(Color(wordName: box_text_color)).font(.callout).bold()
+                                    Text("\(freezer_rack_depth ?? 0)").foregroundColor(Color(wordName: box_text_color)).font(.callout)
                                     Text("Column ").foregroundColor(Color(wordName: box_text_color)).font(.callout).bold()
                                     Text("\(freezer_box_column)").foregroundColor(Color(wordName: box_text_color)).font(.callout)
                                 }
@@ -403,7 +418,7 @@ struct SuggestedBoxItemCard : View
                             }
                             
                         }
-                    }
+                    }.padding(.horizontal,10)
                     
                     
                     
@@ -466,14 +481,14 @@ struct RackCrossSectView_Previews: PreviewProvider {
         
         return Group {
             
-            RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false))
+            RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false))
                 .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
                 .previewDisplayName("iPhone 8")
-            RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false))
+            RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false))
                 .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
                 .previewDisplayName("iPhone XS Max")
             
-            RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false))
+            RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false))
             // .preferredColorScheme(.dark)
                 .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
                 .previewDisplayName("iPad Air (4th generation)")
@@ -493,6 +508,7 @@ struct BoxEmptyItemColorSettingCard : View
     @State var width : CGFloat = 300
     @State var freezer_box_row : Int = 0
     @State var freezer_box_column : Int  = 0
+    @State var freezer_rack_depth : Int = 0
     @State var freezer_rack : String = "test"
     
     
@@ -528,6 +544,9 @@ struct BoxEmptyItemColorSettingCard : View
                                 HStack{
                                     Text("Row ").foregroundColor(box_text_color).font(.callout).bold()
                                     Text("\(freezer_box_row)").foregroundColor(box_text_color).font(.callout)
+                                    Text("Depth ").foregroundColor( box_text_color).font(.callout).bold()
+                                    Text("\(freezer_rack_depth ?? 0)").foregroundColor( box_text_color).font(.callout)
+                                   
                                     Text("Column ").foregroundColor( box_text_color).font(.callout).bold()
                                     Text("\(freezer_box_column)").foregroundColor( box_text_color).font(.callout)
                                 }

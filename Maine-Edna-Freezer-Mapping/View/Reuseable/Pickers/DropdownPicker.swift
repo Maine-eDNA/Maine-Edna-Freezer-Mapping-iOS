@@ -20,15 +20,18 @@ struct DropdownPicker: View {
     var body: some View {
         ZStack {
             // Static row which shows user's current selection
-            HStack {
+            VStack(alignment: .leading) {
                 Text(title).font(.callout).foregroundColor(.secondary).bold()
-                Spacer()
-                Text(options[selection]).foregroundColor(colorScheme == .dark ? Color.white : Color.black).font(.title2).bold()
-                    .foregroundColor(Color.black.opacity(0.6))
-                Image(systemName: "chevron.right")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 10, height: 10)
+        
+                HStack{
+                    Text(options[selection]).foregroundColor(colorScheme == .dark ? Color.white : Color.black).font(.title2).bold()
+                        .foregroundColor(Color.black.opacity(0.6))
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 10, height: 10)
+                }
             }
             .font(Font.custom("Avenir Next", size: 16).weight(.medium))
             .padding(.horizontal, 12)

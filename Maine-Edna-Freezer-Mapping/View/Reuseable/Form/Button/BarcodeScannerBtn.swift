@@ -26,17 +26,21 @@ struct BarcodeScannerBtn : View{
     //view models
     @StateObject var vm : CartViewModel = CartViewModel()
     
+    //Grid layout
+    @State var buttonGridLayout = [GridItem(.flexible()),GridItem(.flexible())]
+    
     var body : some View{
         
         Button(action: {
             self.show_barcode_scanner.toggle()
         }, label: {
             HStack{
-                Text("Scan").font(.callout)
                 Image(systemName: "barcode")
-            }
-            .padding()
-            .foregroundColor(Color.white)
+                Text("Start Scanner").font(.callout)
+                
+            }.roundButtonStyle()
+                .padding()
+            //.foregroundColor(Color.white)
         }).sheet(isPresented: self.$show_barcode_scanner)
         {
             //ZStack Start
@@ -89,65 +93,131 @@ struct BarcodeScannerBtn : View{
             }
             //ZStack End
             
-        }.background(Color.blue)
-            .cornerRadius(10)
+        }//.background(Color.blue)
+        // .cornerRadius(10)
         
     }
 }
 
 
 extension BarcodeScannerBtn{
+    //MARK: Done btn make up start
     
+    private var finish_barcode_scanning_btn_label_top : some View{
+        Section{
+            Button(action: {
+                //close the modal
+                self.show_barcode_scanner.toggle()
+                
+            }, label: {
+                HStack{
+                    Text("Done").foregroundColor(.white).bold().font(.title3).frame(width: 80,height: 40).background(.ultraThinMaterial)
+                        .cornerRadius(10)
+                }
+                
+                
+            })
+        }
+        
+    }
+    
+    
+    private var finish_barcode_scanning_btn : some View{
+        Section{
+            Button(action: {
+                //Capture Barcode
+                //close the modal
+                self.show_barcode_scanner.toggle()
+                
+            }, label: {
+                
+                
+                scannerbuttonlabel
+                
+            }).background(Color.white.opacity(0.75))
+                .clipShape(Circle())
+        }
+        
+    }
     
     //break this control up into pieces
     private var barcode_camera_preview_window : some View{
         //Text("TEST").font(.title).foregroundColor(.primary)
-        VStack(alignment: .center, spacing: 10){
-            Spacer().frame(height: 5)
-            HStack{
-                Button(action: {
-                    //close the modal
-                    self.show_barcode_scanner.toggle()
-                    
-                }, label: {HStack{
-                    Text("Done").foregroundColor(.white).bold().font(.title3).frame(width: 80,height: 40).background(.ultraThinMaterial)
-                        .cornerRadius(10)
-                }})//.background(.ultraThinMaterial)
-                
-                Spacer()
-            }.padding(.horizontal,5)
-            Spacer()
-            HStack{
-                Spacer()//.frame(width: 100)
-                HStack{
-                    
-                    Button(action: {
-                        //Capture Barcode
-                        //close the modal
-                        self.show_barcode_scanner.toggle()
-                        
-                    }, label: {
-                        
-                        
-                        scannerbuttonlabel
-
-                    }).background(Color.teal.opacity(0.75))
-                        .clipShape(Circle())
-                    Spacer().frame(width: 80)
-                }
-               
-                scancountpreviewbox
-                
-                
-            }.padding(.bottom,40)
-                .sheet(isPresented: self.$showBarCodeDetail) {
-                    VStack{
-                        Text("Target Barcode details")
-                        Text(vm.inventoryLocation.freezerBox?.freezer_box_label ?? "")
-                    }
-                }
+        /* VStack(alignment: .center, spacing: 10){
+         Spacer().frame(height: 5)
+         HStack{
+         finish_barcode_scanning_btn_label_top
+         //.background(.ultraThinMaterial)
+         
+         Spacer()
+         }.padding(.horizontal,5)
+         Spacer()
+         
+         //  Spacer()//.frame(width: 100)
+         //buttonGridLayout
+         LazyHGrid(rows: buttonGridLayout,alignment: .center,spacing: 10){
+         // HStack{
+         finish_barcode_scanning_btn
+         
+         //Spacer().frame(minWidth: 100)
+         scancountpreviewbox
+         // }
+         
+         
+         
+         
+         }
+         //.padding(.bottom,40)
+         .sheet(isPresented: self.$showBarCodeDetail) {
+         VStack{
+         Text("Target Barcode details")
+         Text(vm.inventoryLocation.freezerBox?.freezer_box_label ?? "")
+         }
+         }
+         
+         }*/
+        VStack{
             
-        }.ignoresSafeArea()
+            Section{
+                Spacer().frame(height: 5)
+                HStack{
+                    finish_barcode_scanning_btn_label_top
+                    //.background(.ultraThinMaterial)
+                    
+                    Spacer()
+                }.padding(.horizontal,5)
+                .padding([.top], 20)
+            }
+        Section {
+          // Spacer()
+            
+            
+            VStack{
+                Spacer()
+                Image(systemName:"viewfinder")
+                    .resizable()
+                    .aspectRatio(contentMode:.fit)
+                    .foregroundColor(Color.white)
+                    .frame(height:100)
+               // Spacer()
+            }
+            VStack {
+              
+                Spacer() // will spread content to top and bottom of VStack
+                HStack(spacing: 45){
+                    //could put another func here like flash light
+                    Spacer().frame(maxWidth: 100)
+                    finish_barcode_scanning_btn
+                    
+                    
+                    scancountpreviewbox
+                }
+                Spacer()
+                    .frame(height:50)  // limit spacer size by applying a frame
+            }
+        }
+    }
+        .ignoresSafeArea()
             .sheet(isPresented: self.$showBarCodePreview){
                 HStack{
                     preview_barcode_list
@@ -160,8 +230,8 @@ extension BarcodeScannerBtn{
             Text("Codes").bold().font(.subheadline).foregroundColor(.white).padding(.top,0)
             
             ZStack{
-                Circle().frame(width: 50, height: 50).foregroundColor(.teal)
-                Text("\(self.target_barcodes.count)").bold().font(.subheadline).foregroundColor(.white)
+                Circle().frame(width: 50, height: 50).foregroundColor(.white)
+                Text("\(self.target_barcodes.count)").bold().font(.subheadline).foregroundColor(.primary)
             }
             Spacer().frame(height: 3)
         }.frame(width: 80,height: 80).background(.ultraThinMaterial)
@@ -198,58 +268,58 @@ extension BarcodeScannerBtn{
     
     private var preview_barcode_list : some View{
         NavigationView{
-        VStack{
-            
-         
-            //Add swipe left to delete
-            //swipe right to get details about the target barcode (search the db to find data on it)
-            List{
-                ForEach( self.target_barcodes, id: \.self){barcode in
-                Text("\(barcode)")
-                    .swipeActions(edge: .leading){
-                        Button(action: {
-                      
-                            //get the details on the current barcode
-                            vm.FetchSingleInventoryLocation(_sample_barcode: barcode)
-                            
-                            self.showBarCodeDetail.toggle()
-                        }, label:{
-                            HStack{
-                                Image(systemName: "info.circle")
+            VStack{
+                
+                
+                //Add swipe left to delete
+                //swipe right to get details about the target barcode (search the db to find data on it)
+                List{
+                    ForEach( self.target_barcodes, id: \.self){barcode in
+                        Text("\(barcode)")
+                            .swipeActions(edge: .leading){
+                                Button(action: {
+                                    
+                                    //get the details on the current barcode
+                                    vm.FetchSingleInventoryLocation(_sample_barcode: barcode)
+                                    
+                                    self.showBarCodeDetail.toggle()
+                                }, label:{
+                                    HStack{
+                                        Image(systemName: "info.circle")
+                                        
+                                    }
+                                }).tint(.blue)
+                                
+                                
                                 
                             }
-                        }).tint(.blue)
-                        
-                        
-                        
-                    }
-                    .swipeActions(edge: .trailing) {
-                        Button(action: {
-                            //remove from list
-                            if let target_code = self.target_barcodes.firstIndex(of: barcode)
-                            {
-                                print("Index \(target_code)")
-                                self.target_barcodes.remove(at: target_code)
-                            }
-                            //    let box_sample : InventorySampleModel = freezer_box_sample_locals.filter{log in return log.freezer_inventory_slug == _freezer_inventory_slug}.first!//results from the db
-                        }, label:{
-                            HStack{
-                                Image(systemName: "trash")
+                            .swipeActions(edge: .trailing) {
+                                Button(action: {
+                                    //remove from list
+                                    if let target_code = self.target_barcodes.firstIndex(of: barcode)
+                                    {
+                                        print("Index \(target_code)")
+                                        self.target_barcodes.remove(at: target_code)
+                                    }
+                                    //    let box_sample : InventorySampleModel = freezer_box_sample_locals.filter{log in return log.freezer_inventory_slug == _freezer_inventory_slug}.first!//results from the db
+                                }, label:{
+                                    HStack{
+                                        Image(systemName: "trash")
+                                        
+                                    }
+                                }).tint(.red)
                                 
                             }
-                        }).tint(.red)
-                   
                     }
+                    
+                }.listStyle(.plain)
+                
+                    .navigationTitle("(\(self.target_barcodes.count)) Barcode\(self.target_barcodes.count > 1 ? "s" : "")")
+                    .navigationBarTitleDisplayMode(.inline)
             }
-            
-        }.listStyle(.plain)
-            
-                .navigationTitle("(\(self.target_barcodes.count)) Barcode\(self.target_barcodes.count > 1 ? "s" : "")")
-                .navigationBarTitleDisplayMode(.inline)
-        }
             .animation(.spring(), value: 2)
             .navigationViewStyle(StackNavigationViewStyle())
-    }
+        }
     }
     
 }

@@ -20,7 +20,7 @@ struct InteractFreezerLayoutPreview: View {
     @State var freezer_profile : FreezerProfileModel
     @State var current_label : String = ""
     //conditional renders
-    @State var show_create_new_rack : Bool = false
+    @Binding var show_create_new_rack : Bool
     //TODO: - need to get the system colors
     
     @State var max_capacity : Int = 0
@@ -45,6 +45,9 @@ struct InteractFreezerLayoutPreview: View {
     @State var inventoryLocations : [InventoryLocationResult] = []
     @State var isInSearchMode : Bool = false
     
+    @Binding var freezer_width : CGFloat
+    @Binding var freezer_height : CGFloat
+    
     var body: some View {
         //TODO outline the map with the row labels and column outline
         ScrollView([.horizontal, .vertical],showsIndicators: false){
@@ -54,7 +57,7 @@ struct InteractFreezerLayoutPreview: View {
             InteractiveGridStack(rows: freezer_max_rows, columns: freezer_max_columns,racks: self.freezer_rack_layout) { row, col,content  in
                 
                 #warning("NEED TO POPULATE THE RACK PROFILE NEXT TO SHOW DATA FROM THE LIST")
-                NavigationLink(destination: RackProfileView(rack_profile: .constant(content),freezer_profile: self.freezer_profile,isInSearchMode: self.isInSearchMode, inventoryLocations: self.inventoryLocations)){
+                NavigationLink(destination: RackProfileView(rack_profile: .constant(content),freezer_profile: self.freezer_profile,isInSearchMode: self.isInSearchMode, inventoryLocations: self.inventoryLocations, addToRackMode: .constant(false))){
                     
                     if content.freezer_rack_row_start == row && content.freezer_rack_column_start == col{
                         //this is the target position where something exist
@@ -117,6 +120,13 @@ struct InteractFreezerLayoutPreview: View {
                         // }
                         //  else{
                         EmptyRackSlotView(empty_rack_color: .constant("gray"),width: 50,height: 50)
+                            .onTapGesture {
+                                //show_create_new_rack
+                                //open the model
+                                withAnimation {
+                                    self.show_create_new_rack.toggle()
+                                }
+                            }
                         //SuggestedRackGridItemView(inner_rack_rect_color: self.$inner_rack_rect_color, outline_color: self.$suggested_outline_slot_color)
                         // }
                     }
@@ -127,7 +137,7 @@ struct InteractFreezerLayoutPreview: View {
                 
                 
             }.buttonStyle(PlainButtonStyle())  /*Remove Navigation Link blue tint*/
-            
+                .frame(width: freezer_width, height: freezer_height, alignment: .center)
             
             
             
@@ -149,7 +159,7 @@ struct InteractFreezerLayoutPreview: View {
 
 struct InteractFreezerLayoutPreview_Previews: PreviewProvider {
     static var previews: some View {
-        InteractFreezerLayoutPreview(freezer_max_rows: .constant(0), freezer_max_columns: .constant(0), freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel(), show_guided_rack_view: .constant(false), show_guided_map_view: .constant(false))
+        InteractFreezerLayoutPreview(freezer_max_rows: .constant(0), freezer_max_columns: .constant(0), freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel(), show_create_new_rack: .constant(false), show_guided_rack_view: .constant(false), show_guided_map_view: .constant(false),freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95))
         
     }
 }

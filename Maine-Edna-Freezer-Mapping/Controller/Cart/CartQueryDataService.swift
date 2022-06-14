@@ -124,7 +124,7 @@ class CartQueryDataService : ObservableObject {
                 if returnedResults.results != nil
                 {
                     if returnedResults.results.count < 1{
-                        self?.inventory_location_result = InventoryLocationResult(id: 0, sampleBarcode: "No Data Found", freezerInventorySlug: "No Data Found", freezerInventoryType: "No Data Found", freezerInventoryStatus: "No Data Found",freezerBox: BoxModel(id: 0, freezer_box_label: "No Data Found", freezer_box_label_slug: "No Data Found"), createdBy: "No Data Found", createdDatetime: "No Data Found", modifiedDatetime: "No Data Found", isHighlighed: false)
+                        self?.inventory_location_result = InventoryLocationResult(id: 0,freezerLabel: "No Freezer Label Found",freezerRoomName: "No Room Found", sampleBarcode: "No Data Found", freezerInventorySlug: "No Data Found", freezerInventoryType: "No Data Found", freezerInventoryStatus: "No Data Found",freezerInventoryColumn: 0, freezerInventoryRow: 0, freezerBox: BoxModel(id: 0, freezer_box_label: "No Data Found", freezer_box_label_slug: "No Data Found"), createdBy: "No Data Found", createdDatetime: "",modifiedDatetime: "", isHighlighed: false)
                     }
                     
                     var preProcessedResults = returnedResults.results

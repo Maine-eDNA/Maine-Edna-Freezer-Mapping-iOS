@@ -70,7 +70,7 @@ class FreezerRackViewModel : ObservableObject{
                     if box_in_use_count > 0{
                         
                         if let box_capacity = self?.numberOfBoxesInRack(rack: rack){
-                        self?.freezer_racks_with_stat.append(RackItemModel(id: rack.id, freezer_rack_label: rack.freezer_rack_label, freezer_rack_label_slug: rack.freezer_rack_label_slug, is_suggested_rack_position: true,number_of_boxes_in_use: box_in_use_count, box_capacity_of_rack: box_capacity))
+                            self?.freezer_racks_with_stat.append(RackItemModel(id: rack.id, freezer_rack_label: rack.freezer_rack_label, freezer_rack_label_slug: rack.freezer_rack_label_slug, is_suggested_rack_position: true,number_of_boxes_in_use: box_in_use_count, box_capacity_of_rack: box_capacity, freezer_rack_column_start : rack.freezer_rack_column_start,freezer_rack_column_end : rack.freezer_rack_column_end,freezer_rack_row_start : rack.freezer_rack_row_start, freezer_rack_row_end : rack.freezer_rack_row_end, freezer_rack_depth_start : rack.freezer_rack_depth_start,freezer_rack_depth_end : rack.freezer_rack_depth_end, freezer : rack.freezer ?? "", created_by : rack.created_by ?? ""))
                    
                         }
                     }
