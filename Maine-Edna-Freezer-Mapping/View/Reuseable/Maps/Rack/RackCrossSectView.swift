@@ -37,8 +37,10 @@ struct RackCrossSectView: View {
     @State var showFreezerBoxDetail : Bool = false
     
     ///Used as a master list to show the records that need to be highlighted
-    @State var inventoryLocations : [InventoryLocationResult] = []
+    @State var inventoryLocations : [InventorySampleModel] = []
     @State var isInSearchMode : Bool = false
+    
+    
     
     #warning("Need to refractor the box view to change the row based on the row selected and leave the row and column as is")
     
@@ -75,12 +77,10 @@ struct RackCrossSectView: View {
                                                     
                                                     self.show_guided_rack_view = false
                                                     self.show_guided_box_view.toggle()
-                                                    
-                                                    
-                                                    
                                                     //set the current box
                                                     self.targetBox = box
                                                     self.showFreezerBoxDetail.toggle()
+                                      
                                                 }
                                             
                                         }

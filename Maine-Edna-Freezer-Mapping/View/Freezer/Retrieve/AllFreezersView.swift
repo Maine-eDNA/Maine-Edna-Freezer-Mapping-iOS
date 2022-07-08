@@ -162,3 +162,6 @@ struct AllFreezersView_Previews: PreviewProvider {
         AllFreezersView(vm: FreezerViewModel(), target_freezer: FreezerProfileModel())
     }
 }
+
+
+//MARK: NEXT Refractor the freezer list so it can be called anywhere

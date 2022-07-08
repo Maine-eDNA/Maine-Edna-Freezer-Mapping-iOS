@@ -42,7 +42,7 @@ struct InteractFreezerLayoutPreview: View {
     
     @State var showingAlert : Bool = false
     @State var alertMsg : String = ""
-    @State var inventoryLocations : [InventoryLocationResult] = []
+    @State var inventoryLocations : [InventorySampleModel] = []
     @State var isInSearchMode : Bool = false
     
     @Binding var freezer_width : CGFloat
@@ -137,7 +137,7 @@ struct InteractFreezerLayoutPreview: View {
                 
                 
             }.buttonStyle(PlainButtonStyle())  /*Remove Navigation Link blue tint*/
-                .frame(width: freezer_width, height: freezer_height, alignment: .center)
+               // .frame(width: freezer_width, height: freezer_height, alignment: .center)
             
             
             

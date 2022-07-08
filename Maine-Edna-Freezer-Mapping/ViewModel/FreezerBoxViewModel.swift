@@ -25,7 +25,7 @@ class FreezerBoxViewModel : ObservableObject{
     
     private let freezerBoxDataService = FreezerBoxRetrieval()
     private var cancellables = Set<AnyCancellable>()
-    @State var inventoryLocations : [InventoryLocationResult] = []
+    @State var inventoryLocations : [InventorySampleModel] = []
     
     init(){
         addSubscribers()
@@ -53,10 +53,10 @@ class FreezerBoxViewModel : ObservableObject{
         
     }
     
-    
-    func FilterFreezerBoxesSearchMode(_rack_id : String, inventoryLocations :  [InventoryLocationResult]){
+    //MARK: Rework this logic
+    func FilterFreezerBoxesSearchMode(_rack_id : String, inventoryLocations :  [InventorySampleModel]){
         
-        let targetLocations = inventoryLocations.filter {$0.freezerBox?.freezer_rack?.freezer_rack_label_slug == _rack_id}
+       /* let targetLocations = inventoryLocations.filter {$0.freezerBox?.freezer_rack?.freezer_rack_label_slug == _rack_id}
         if targetLocations.count > 0{
             freezerBoxDataService.FetchAllRackBoxesByRackId(_rack_id: _rack_id){
                 rackBoxes in
@@ -123,6 +123,7 @@ class FreezerBoxViewModel : ObservableObject{
             
         }
         //end
+        */
     }
     
     func FilterFreezerBoxes(_freezer_rack_label_slug : String){

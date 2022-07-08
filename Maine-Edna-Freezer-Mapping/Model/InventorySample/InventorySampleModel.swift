@@ -9,6 +9,20 @@ import Foundation
 import SwiftUI
 
 
+struct InventorySampleModelHeader: Codable {
+    var links: Links?
+    var count: Int?
+    var results: [InventorySampleModel]?
+}
+
+
+// MARK: - Links
+struct InventorySampleModelLinks: Codable {
+    var next, previous: JSONNull?
+}
+
+
+
 class InventorySampleModel: Encodable,Decodable, Identifiable {
     
     init(){
@@ -23,10 +37,20 @@ class InventorySampleModel: Encodable,Decodable, Identifiable {
         self.is_suggested_sample = false
     }
     
+    init(freezer_box : String,freezer_inventory_column : Int,freezer_inventory_row : Int, freezer_inventory_type : String,freezer_inventory_status : String, sample_barcode : String  ){
+
+        self.freezer_box = freezer_box
+        self.freezer_inventory_column = freezer_inventory_column
+        self.freezer_inventory_row = freezer_inventory_row
+        self.freezer_inventory_type = freezer_inventory_type
+        self.freezer_inventory_status = freezer_inventory_status
+        self.sample_barcode = sample_barcode
+        
+    }
+    
     var id : Int = 0
     var freezer_box : String = ""
     var sample_barcode : String = ""
-    #warning("Use Codeable")
     var freezer_inventory_slug : String = ""
     var freezer_inventory_type : String = ""
     var freezer_inventory_status : String = ""
@@ -39,6 +63,26 @@ class InventorySampleModel: Encodable,Decodable, Identifiable {
     var modified_datetime : String = ""
     
     var is_suggested_sample : Bool = false
+    
+    
+    
+    
+    
+    enum CodingKeys: String, CodingKey {
+            case id
+            case freezer_box
+            case sample_barcode
+            case freezer_inventory_slug
+            case freezer_inventory_type
+            case freezer_inventory_status
+            case freezer_inventory_column
+            case freezer_inventory_row
+            case created_by
+            case created_datetime
+            case modified_datetime
+         
+        
+        }
 
 }
 

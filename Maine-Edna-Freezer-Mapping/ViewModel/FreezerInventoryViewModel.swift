@@ -17,9 +17,16 @@ class FreezerInventoryViewModel : ObservableObject{
     @Published var all_box_samples : [InventorySampleModel] = []
     @Published var isLoading : Bool = false
     
-    private let freezerInventoryDataService = BoxInventorySampleRetrieval()
+    private let freezerInventoryRetrievalDataService = BoxInventorySampleRetrieval()
     private var cancellables = Set<AnyCancellable>()
+    
+    private let freezerInventoryCreationDataService = BoxInventorySampleCreation()
    
+    //properties to update the UI
+    @Published var showResponseMsg : Bool = false
+    @Published var isErrorMsg : Bool = false
+    @Published var responseMsg : String = ""
+    
     
     init(){
         addSubscribers()
@@ -29,7 +36,7 @@ class FreezerInventoryViewModel : ObservableObject{
     func addSubscribers(){
         
         //the freezer section
-        freezerInventoryDataService.$all_box_samples
+        freezerInventoryRetrievalDataService.$all_box_samples
             .sink {[weak self] (returnedSamples) in
                 
                 if returnedSamples.count > 0{
@@ -45,13 +52,13 @@ class FreezerInventoryViewModel : ObservableObject{
     ///Used when finding all samples within a box without any filtering
     func LoadFreezerInventoryData(box_detail : BoxItemModel){
         //MARK: Version that doesnt use completion handler to return results
-        freezerInventoryDataService.FetchAllSamplesInBox(_box_id: String(box_detail.id ?? 0))
+        freezerInventoryRetrievalDataService.FetchAllSamplesInBox(_box_id: String(box_detail.id ?? 0))
     }
     
     ///Used when filtering to find a set of samples and would like to highlight them
-    func LoadFreezerInventoryData(box_detail : BoxItemModel, inventoryLocations : [InventoryLocationResult] ){
+    /*func LoadFreezerInventoryData(box_detail : BoxItemModel, inventoryLocations : [InventoryLocationModel] ){
         //MARK: Filter list by the locations data
-        freezerInventoryDataService.FetchAllSamplesInBox(_box_id: String(box_detail.id ?? 0)){
+        freezerInventoryRetrievalDataService.FetchAllSamplesInBox(_box_id: String(box_detail.id ?? 0)){
             samples in
             var filtered_box_samples : [InventorySampleModel] = []
             //will use inventoryLocations to highlight the targets and return the list to the UI
@@ -76,10 +83,32 @@ class FreezerInventoryViewModel : ObservableObject{
             
             
         }
-    }
+    }*/
     
     func ReloadFreezerInventoryData(box_detail : BoxItemModel){
-        freezerInventoryDataService.FetchAllSamplesInBox(_box_id: String(box_detail.id ?? 0))
+        freezerInventoryRetrievalDataService.FetchAllSamplesInBox(_box_id: String(box_detail.id ?? 0))
+    }
+    
+    
+    ///Create Inv Sample
+    func createNewInvSample(_sampleDetail : InventorySampleModel,completion: @escaping (ServerMessageModel) -> Void){
+        
+        freezerInventoryCreationDataService.CreateInventorySample(_sampleDetail: _sampleDetail) { response in
+            //Update the UI
+            //MARK: send the results to the UI
+            print("Response is: \(response)")
+            self.responseMsg = response.serverMessage
+            self.showResponseMsg = true
+            self.isErrorMsg = response.isError
+           
+            completion(response)
+        }
+        
+    }
+    
+    //FetchAllInventoryFromFreezerBox
+    func fetchInventoryByBoxSlug(freezer_box_slug : String) async{
+        await freezerInventoryRetrievalDataService.FetchAllInventoryFromFreezerBox(freezer_box_slug: freezer_box_slug)
     }
     
 }

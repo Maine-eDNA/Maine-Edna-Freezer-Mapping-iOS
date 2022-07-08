@@ -16,13 +16,14 @@ struct FreezerInventoryView: View {
     @State var show_map_key : Bool = false
     
     ///Used as a master list to show the records that need to be highlighted
-    @State var inventoryLocations : [InventoryLocationResult] = []
+    @State var inventoryLocations : [InventorySampleModel] = []
     @State var isInSearchMode : Bool = false
     
     var body: some View {
         VStack(alignment: .leading){
+            #warning("Re-add the top but make it more uniform and less in the way")
             //Show Box Detail at the top
-            VStack(alignment: .leading){
+            /*VStack(alignment: .leading){
                 HStack{
                     Text("Box Label").font(.title3).bold()
                     Spacer()
@@ -157,27 +158,28 @@ struct FreezerInventoryView: View {
                     //Sample Capsule Map Key
                     SampleCapsuleMapLegendView(box_detail: self.box_detail)
                 }
-            }
+            }*/
+            #warning("Make sure samples are being sent to the box")
             //MARK: Need to show the get the samples that are the targets and  and the other samples like with boxes
-            BoxSampleMapView(stored_rack_box_layout: self.box_detail, stored_box_samples: self.vm.all_box_samples, freezer_profile: self.freezer_profile)
-                
-                //Navigation Section
-                .navigationTitle("Box Profile Detail")
-                .navigationBarTitleDisplayMode(.inline)
+            BoxSampleMapView(box: self.$box_detail, freezer_profile: self.$freezer_profile)
+         
             
             Spacer()
         }
+        //Navigation Section
+        .navigationTitle("Box Profile Detail")
+        .navigationBarTitleDisplayMode(.inline)
         
         .onAppear{
             print("Target Box ID: \(box_detail.id)")
             //MARK: need to send the inven_locations inventoryLocations
-            
-            if isInSearchMode{
+            //MARK: load from the previous page
+           /* if isInSearchMode{
                 self.vm.LoadFreezerInventoryData(box_detail: self.box_detail, inventoryLocations: self.inventoryLocations)
             }
             else{
                 self.vm.LoadFreezerInventoryData(box_detail: self.box_detail, inventoryLocations: self.inventoryLocations)
-            }
+            }*/
         }
     }
 }

@@ -47,10 +47,10 @@ struct FreezerDetailView: View {
                         Section{
                             Label("Top-Down View", systemImage: "eye").font(.caption)
                             
-                            GeometryReader{reader in
+                          //  GeometryReader{reader in
                                 FreezerMapView(freezer_rack_layout: self.$vm.freezer_racks, freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
-                                    .frame(width: reader.size.width * 0.95, height: reader.size.height * 0.95, alignment: .center)
-                            }
+                                .frame(width: UIScreen.main.bounds.width * 0.95, height: UIScreen.main.bounds.height * 0.95, alignment: .center)
+                           // }
                             
                         }
                     }

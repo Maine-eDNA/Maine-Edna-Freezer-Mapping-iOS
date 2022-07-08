@@ -31,15 +31,15 @@ struct FreezerMapView: View {
         //ScrollView(showsIndicators: false) {
         Section{
       
-            GeometryReader{reader in
+            //GeometryReader{reader in
             
-                InteractFreezerLayoutPreview(freezer_max_rows: .constant($freezer_profile.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_profile.freezerCapacityColumns.wrappedValue ?? 0),freezer_rack_layout : $freezer_rack_layout,freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: .constant(false),freezer_width: .constant(reader.size.width * 0.95),freezer_height: .constant( reader.size.height * 0.95))
+            InteractFreezerLayoutPreview(freezer_max_rows: .constant($freezer_profile.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_profile.freezerCapacityColumns.wrappedValue ?? 0),freezer_rack_layout : $freezer_rack_layout,freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: .constant(false),freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant( UIScreen.main.bounds.height * 0.95))
            
             
         //}
        // .frame(minHeight: 300,maxHeight: 500)
                   
-            }
+           // }
     }
     }
 }

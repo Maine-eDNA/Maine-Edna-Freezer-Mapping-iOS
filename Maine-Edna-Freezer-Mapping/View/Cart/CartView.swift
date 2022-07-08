@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import Kingfisher
 import TabularData
-
+#warning("This view will be deleted soon")
 #warning("Update this view to look professional and workflow streamlined before continuing the logic and refractor the parts to make the code more readable")
 //import CSV as well
 /*
@@ -115,6 +115,8 @@ struct CartView: View {
     @State var showBulkAddToFreezerForm : Bool = false
     @State var targetAddToFreezerRack : RackItemModel = RackItemModel()
     @State var samplesToAddToBox : [InventoryLocationResult] = [InventoryLocationResult]()
+    
+    @State var boxSamples : [InventorySampleModel] = [InventorySampleModel]()
     @State var showTargetRackToAdd : Bool = false
     
     @StateObject var box_vm : FreezerBoxViewModel = FreezerBoxViewModel()
@@ -187,13 +189,13 @@ struct CartView: View {
             }.background(
                 
                 
-                NavigationLink(destination: InteractFreezerLayoutPreview(freezer_max_rows:   .constant(target_freezer.freezerCapacityRows ??  0), freezer_max_columns:   .constant(target_freezer.freezerCapacityColumns ?? 0), freezer_rack_layout: self.$vm.rack_layout, freezer_profile: target_freezer, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: self.$show_guided_map_view,inventoryLocations: self.vm.inventoryLocations,isInSearchMode: true,freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95)),isActive: self.$show_guided_map_view,  label: {EmptyView()})
+                NavigationLink(destination: InteractFreezerLayoutPreview(freezer_max_rows:   .constant(target_freezer.freezerCapacityRows ??  0), freezer_max_columns:   .constant(target_freezer.freezerCapacityColumns ?? 0), freezer_rack_layout: self.$vm.rack_layout, freezer_profile: target_freezer, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: self.$show_guided_map_view,inventoryLocations: [InventorySampleModel](),isInSearchMode: true,freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95)),isActive: self.$show_guided_map_view,  label: {EmptyView()})
             )
             
             .background(
                 
                 
-                NavigationLink(destination: RackProfileView(rack_profile: self.$targetAddToFreezerRack, freezer_profile: self.addDestinationFreezer, showNerdRackStats: false, isInSearchMode: true, inventoryLocations: self.samplesToAddToBox,addToRackMode: self.$showTargetRackToAdd),isActive: self.$showTargetRackToAdd,  label: {EmptyView()})
+                NavigationLink(destination: RackProfileView(rack_profile: self.$targetAddToFreezerRack, freezer_profile: self.addDestinationFreezer, showNerdRackStats: false, isInSearchMode: true, inventoryLocations: self.boxSamples,addToRackMode: self.$showTargetRackToAdd),isActive: self.$showTargetRackToAdd,  label: {EmptyView()})
             )
             
             /*

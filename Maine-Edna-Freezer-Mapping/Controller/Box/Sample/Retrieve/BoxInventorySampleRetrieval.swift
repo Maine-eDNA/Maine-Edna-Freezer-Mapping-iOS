@@ -8,18 +8,23 @@
 import SwiftUI
 import SwiftyJSON
 import Alamofire
-import Foundation
+import Combine
 
 class BoxInventorySampleRetrieval : ObservableObject {
     
     @AppStorage(AppStorageNames.edna_freezer_token.rawValue) var edna_freezer_token = ""//set this when I create an account and login, which i need to do next
     
     @Published var all_box_samples : [InventorySampleModel] = []
+    
+
     //@AppStorage(AppStorageNames.stored_box_samples.rawValue) var stored_box_samples : [InventorySampleModel] = [InventorySampleModel]()
     @AppStorage(AppStorageNames.all_unfiltered_stored_box_samples.rawValue) var all_unfiltered_stored_box_samples : [InventorySampleModel] = [InventorySampleModel]()
   
     // Loading Screen...
     @Published var isLoading = false
+    
+    var cancellables = Set<AnyCancellable>()
+    
     //
     //Need a func to fetch just the inbox out
     //Fetch all freezers
@@ -429,6 +434,53 @@ class BoxInventorySampleRetrieval : ObservableObject {
                 
             }
         }
+        
+        
+    }
+    
+    //https://metadata.spatialmsk.dev/api/freezer_inventory/inventory/?freezer_box=test_freezer_1_test_rack3_test_box3
+    
+    func FetchAllInventoryFromFreezerBox(freezer_box_slug : String) async{
+        
+        
+        
+        var request = URLRequest(url: URL(string: "\(ServerConnectionUrls.productionUrl.rawValue)api/freezer_inventory/inventory/?freezer_box=\(freezer_box_slug)")!,timeoutInterval: Double.infinity)
+        request.addValue("Token \(self.edna_freezer_token)", forHTTPHeaderField: "Authorization")
+        
+        request.httpMethod = "GET"
+        
+        //request
+        URLSession.shared.dataTaskPublisher(for: request)//(for: url)
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: DispatchQueue.main)
+            .tryMap { (data, response) -> Data in
+                
+                
+                guard let response = response as? HTTPURLResponse,
+                      response.statusCode >= 200 && response.statusCode < 300 else{
+                          throw URLError(URLError.badServerResponse)
+                      }
+                return data
+            }
+            .decode(type: InventorySampleModelHeader.self, decoder: JSONDecoder())
+            .sink { (completion) in
+                print("Completion: \(completion)")
+            } receiveValue: { [weak self] (returnedInventory) in
+                if let inventories = returnedInventory.results{
+                    
+                    //go back on the main thread
+                  /*  await MainActor.run(body:{
+                        self?.all_box_samples = inventories
+                    })
+*/
+                    
+                    
+                    self?.all_box_samples = inventories
+                    
+                }
+            }
+            .store(in: &cancellables)
+        
         
         
     }

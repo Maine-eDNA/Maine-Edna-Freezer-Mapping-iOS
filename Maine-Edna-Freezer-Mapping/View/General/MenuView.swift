@@ -168,6 +168,17 @@ struct MenuView: View {
                             Text("Change Password")
                         }
                     }
+                    
+                    Button(
+                        action:{
+                            print("Action Happens")
+                        }){
+                        HStack{
+                            Image(systemName: "person.fill.xmark")
+                            Text("Delete Account")
+                        }
+                    }
+                    
                     Button(action:{
                         self.edna_freezer_token = ""
                         self.stored_user_name = ""

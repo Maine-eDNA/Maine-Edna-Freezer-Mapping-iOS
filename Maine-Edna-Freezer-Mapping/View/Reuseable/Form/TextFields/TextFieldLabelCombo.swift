@@ -15,6 +15,8 @@ struct TextFieldLabelCombo: View {
     var keyboardType : UIKeyboardType = UIKeyboardType.default
     var autoCorrection : Bool = true
     @State var isDisabled : Bool = false
+    
+    @State var autoCapitalization : UITextAutocapitalizationType = .none
     var body: some View {
  
             VStack(alignment: .leading){
@@ -27,6 +29,7 @@ struct TextFieldLabelCombo: View {
                          .modifier(TextFieldClearButton(text: $textValue))
                          .keyboardType(keyboardType)
                          .disableAutocorrection(autoCorrection)
+                         .autocapitalization(autoCapitalization)
                     }
                     else{
                         TextField(placeHolder, text: $textValue)

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+#warning("Fix UI Problem on the Create New Rack View")
 struct CreateNewRackView: View {
     @State var freezer_label : String = ""
     @State var freezer_detail : FreezerProfileModel
@@ -94,8 +94,8 @@ struct CreateNewRackView: View {
                 
                 //button  rack_profile_service
                 
-                
-            }
+                Spacer()
+            }.padding()
             
             .navigationTitle("Create New Rack")
             .navigationBarTitleDisplayMode(.inline)
@@ -123,7 +123,7 @@ struct CreateNewRackView: View {
                     
                 }
             }
-        }.padding()
+        }
         
             .onAppear(){
                 self.freezer_label = freezer_detail.freezerLabel ?? ""

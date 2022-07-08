@@ -1,20 +1,17 @@
 //
-//  GuidedCartView.swift
+//  UtilitiesView.swift
 //  Maine-Edna-Freezer-Mapping
 //
-//  Created by Keijaoh Campbell on 6/10/22.
+//  Created by Keijaoh Campbell on 6/14/22.
 //
 
 import SwiftUI
 import StepperView
 import Kingfisher
 
+//MARK: Will do Add, Remove, Transfer Box on this screen
 
-//Test
-//MARK: Split the CartView into Cart View (Extraction Return and Return todo Next based on drawings) and Utilities
-//MARK: Make into documentation
-//MARK: only handles Search (to find and take from freezer) and Return to freezer
-struct GuidedCartView: View {
+struct UtilitiesView: View {
     //MARK: Put the form details in a view model to clean up the UI
     ///Step indicator start
     @State private var changePosition : Bool = true
@@ -50,15 +47,10 @@ struct GuidedCartView: View {
         GridItem(.adaptive(minimum: 300,maximum: 700))
         
     ]
-    ///Multiple batch returns logic
-    //MARK: be able to select a batch of samples to be that was taken from a freezer, and merge it with another set
-    //because some samples may not be returned at the same time since some will be in a temp freezer
-    //so give the option at the begining to select one or more batches, it then will merge all the samples into one big list
-    //grouping by freezer, rack and box, then present it to the user giving them the option to remove the ones that isnt being returned at this time and so it will remain in the batch once the process is done. So they can be returned in the future
     
     /// Mode selector properties start
-    @State private var selection : String = "Search"
-    @State var actions = ["Search","Return"]
+    @State private var selection : String = "Add"
+    @State var actions = ["Add", "Remove", "Transfer Box"]
     
     /// Mode selector properties end
    
@@ -123,7 +115,7 @@ struct GuidedCartView: View {
 
 
 
-extension GuidedCartView{
+extension UtilitiesView{
     
     
     
@@ -329,14 +321,8 @@ extension GuidedCartView{
     
 }
 
-struct GuidedCartView_Previews: PreviewProvider {
+struct UtilitiesView_Previews: PreviewProvider {
     static var previews: some View {
-        GuidedCartView()
+        UtilitiesView()
     }
 }
-
-
-
-
-
-

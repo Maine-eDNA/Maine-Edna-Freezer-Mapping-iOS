@@ -73,8 +73,8 @@ struct ContentView: View {
                         }.tag(1)
                         .navigationViewStyle(StackNavigationViewStyle())
                     
-                    CartView(freezer_profile: FreezerProfileModel(), target_freezer: FreezerProfileModel())
-                   // GuidedCartView()
+                   // CartView(freezer_profile: FreezerProfileModel(), target_freezer: FreezerProfileModel())
+                    GuidedCartView()
                         .tabItem {
                             VStack{
                                 Image(systemName: "cart")
@@ -83,7 +83,7 @@ struct ContentView: View {
                     }.tag(2)
                         .navigationViewStyle(StackNavigationViewStyle())
                     
-                    GuidedCartView()
+                    UtilitiesView()
                          .tabItem {
                              VStack{
                                  Image(systemName: "gearshape.2.fill")

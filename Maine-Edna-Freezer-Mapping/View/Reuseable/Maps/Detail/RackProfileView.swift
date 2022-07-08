@@ -18,7 +18,7 @@ struct RackProfileView: View {
     ///Optional: only used when doing Cart View Querying to find the target boxes
     @State var isInSearchMode : Bool = false
     ///Used as a master list to show the records that need to be highlighted
-    @State var inventoryLocations : [InventoryLocationResult] = []
+    @State var inventoryLocations : [InventorySampleModel] = []
     
     
     //TODO: Must click a rack, to get the full stats like how many spaces are left in each Box (example 55%)
