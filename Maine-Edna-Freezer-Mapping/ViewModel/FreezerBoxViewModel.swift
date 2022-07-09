@@ -23,9 +23,17 @@ class FreezerBoxViewModel : ObservableObject{
     
     @Published var isInSearchMode : Bool = false
     
-    private let freezerBoxDataService = FreezerBoxRetrieval()
+    private let freezerBoxDataRetrievalService = FreezerBoxRetrieval()
+    private let freezerBoxCreationService = FreezerBoxCreation()
+    
+    
     private var cancellables = Set<AnyCancellable>()
     @State var inventoryLocations : [InventorySampleModel] = []
+    
+    //properties to update the UI
+    @Published var showResponseMsg : Bool = false
+    @Published var isErrorMsg : Bool = false
+    @Published var responseMsg : String = ""
     
     init(){
         addSubscribers()
@@ -39,7 +47,7 @@ class FreezerBoxViewModel : ObservableObject{
         ///used to return results that doesnt need search mode or highlighting
         ///Run this only when i am not in search mode
         if (!self.isInSearchMode){
-            freezerBoxDataService.$all_filter_rack_boxes
+            freezerBoxDataRetrievalService.$all_filter_rack_boxes
                 .sink { [weak self] returnedRackBoxes in
                     
                     if returnedRackBoxes.count > 0{
@@ -58,7 +66,7 @@ class FreezerBoxViewModel : ObservableObject{
         
        /* let targetLocations = inventoryLocations.filter {$0.freezerBox?.freezer_rack?.freezer_rack_label_slug == _rack_id}
         if targetLocations.count > 0{
-            freezerBoxDataService.FetchAllRackBoxesByRackId(_rack_id: _rack_id){
+        freezerBoxDataRetrievalService.FetchAllRackBoxesByRackId(_rack_id: _rack_id){
                 rackBoxes in
                 
                 if (self.isInSearchMode){
@@ -128,7 +136,7 @@ class FreezerBoxViewModel : ObservableObject{
     
     func FilterFreezerBoxes(_freezer_rack_label_slug : String){
    
-        freezerBoxDataService.FetchAllRackBoxesByRackId(_rack_id: _freezer_rack_label_slug)
+        freezerBoxDataRetrievalService.FetchAllRackBoxesByRackId(_rack_id: _freezer_rack_label_slug)
         
         //run the above but without the hightlight filtering
     }
@@ -136,7 +144,7 @@ class FreezerBoxViewModel : ObservableObject{
     
     func findNumberOfBoxesInUse(rack: RackItemModel) -> Int{
         //find all the boxes in this rack, keep the data for other processing
-        freezerBoxDataService.FetchAllRackBoxesByRackId(_rack_id: rack.freezer_rack_label){
+        freezerBoxDataRetrievalService.FetchAllRackBoxesByRackId(_rack_id: rack.freezer_rack_label){
             [weak self] returnedBoxes in
             
             self?.rack_boxes_for_report = returnedBoxes
@@ -165,6 +173,20 @@ class FreezerBoxViewModel : ObservableObject{
         }
         return convertedModel
         
+    }
+    
+    
+    func createFreezerBoxCreation(_boxDetail: BoxItemModel,completion: @escaping (ServerMessageModel) -> Void) async{
+        
+        self.freezerBoxCreationService.CreateNewFreezerBox(_boxDetail: _boxDetail) { response in
+            //update the UI
+            self.responseMsg = response.serverMessage
+            self.showResponseMsg = true
+            self.isErrorMsg = response.isError
+            
+            completion(response)
+            
+        }
     }
     
 }

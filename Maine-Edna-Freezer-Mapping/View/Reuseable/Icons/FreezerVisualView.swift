@@ -10,8 +10,8 @@ import SwiftUI
 struct FreezerVisualView: View {
     
     @Binding var freezerProfile : FreezerProfileModel
-    @State var box_color : String = "gray"
-    @State var box_text_color : String = "white"
+    @State var box_color : String = "blue"
+    @State var box_text_color : String = "blue"
     @State var height : CGFloat = 150
     @State var width : CGFloat = 300
 
@@ -66,23 +66,23 @@ extension FreezerVisualView{
                         
                         Spacer().frame(width: 150,height: 10)
                         HStack{
-                            Text("\(freezerProfile.freezerRatedTemp ?? 0)").foregroundColor(Color.primary).font(.caption).bold()
-                            Text(freezerProfile.freezerRatedTempUnits ?? "No Unit").foregroundColor(Color.primary).font(.caption)
+                            Text("\(freezerProfile.freezerRatedTemp ?? 0)").foregroundColor(Color.black).font(.caption).bold()
+                            Text(freezerProfile.freezerRatedTempUnits ?? "No Unit").foregroundColor(Color.black).font(.caption)
                         }
                         //
                     }
                     
                     HStack{
-                        Text("\(freezerProfile.freezerLabel ?? "")").foregroundColor(Color.primary).font(.title3).bold().minimumScaleFactor(0.01)
+                        Text("\(freezerProfile.freezerLabel ?? "")").foregroundColor(Color.black).font(.title3).bold().minimumScaleFactor(0.01)
                         
                     }
                     HStack(spacing: 30){
                         VStack(alignment: .leading){
-                            Text("Room").foregroundColor(Color.primary).font(.callout)//.bold()
+                            Text("Room").foregroundColor(Color.black).font(.callout)//.bold()
                             
                             //MARK: need to show how much space is left in the future
                             HStack{
-                                Text("\(freezerProfile.freezerRoomName ?? "")").foregroundColor(Color.primary).font(.callout).bold()
+                                Text("\(freezerProfile.freezerRoomName ?? "")").foregroundColor(Color.black).font(.callout).bold()
                                 
                             }
                             
@@ -90,7 +90,7 @@ extension FreezerVisualView{
                         
                         VStack(alignment: .leading){
                             Text("Capacity").foregroundColor(Color.primary).font(.callout)
-                            Text("\(calculatingFreezerCapacity())").foregroundColor(Color.primary).font(.callout)
+                            Text("\(calculatingFreezerCapacity())").foregroundColor(Color.black).font(.callout)
                         }
                         
                     }

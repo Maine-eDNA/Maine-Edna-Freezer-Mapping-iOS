@@ -68,6 +68,7 @@
 		4A71275E27591DD7000D13CA /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A71275D27591DD7000D13CA /* DashboardView.swift */; };
 		4A71276327591E07000D13CA /* AllFreezersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A71276227591E07000D13CA /* AllFreezersView.swift */; };
 		4A71276827591EA9000D13CA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A71276727591EA9000D13CA /* LoginView.swift */; };
+		4A73A5362878E51900C94C25 /* FreezerBoxCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A73A5352878E51900C94C25 /* FreezerBoxCreation.swift */; };
 		4A7584E8275A98D3006124ED /* FreezerProfilesResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7584E7275A98D3006124ED /* FreezerProfilesResultModel.swift */; };
 		4A7584EA275A9A55006124ED /* FreezerProfileRetrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7584E9275A9A55006124ED /* FreezerProfileRetrieval.swift */; };
 		4A7584ED275AA20E006124ED /* FreezerProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7584EC275AA20E006124ED /* FreezerProfileCardView.swift */; };
@@ -221,6 +222,7 @@
 		4A71275D27591DD7000D13CA /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		4A71276227591E07000D13CA /* AllFreezersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFreezersView.swift; sourceTree = "<group>"; };
 		4A71276727591EA9000D13CA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4A73A5352878E51900C94C25 /* FreezerBoxCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerBoxCreation.swift; sourceTree = "<group>"; };
 		4A7584E7275A98D3006124ED /* FreezerProfilesResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerProfilesResultModel.swift; sourceTree = "<group>"; };
 		4A7584E9275A9A55006124ED /* FreezerProfileRetrieval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerProfileRetrieval.swift; sourceTree = "<group>"; };
 		4A7584EC275AA20E006124ED /* FreezerProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerProfileCardView.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 		4A1F0B182765E4A5008FDDF1 /* Create */ = {
 			isa = PBXGroup;
 			children = (
+				4A73A5352878E51900C94C25 /* FreezerBoxCreation.swift */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -1416,6 +1419,7 @@
 				4AEB96CA274C28DF001F7611 /* ContentView.swift in Sources */,
 				4A34DF68279EF67100CA9531 /* EditUserColorThemeView.swift in Sources */,
 				4A758504275C4381006124ED /* MultiLineTextFieldLabelCombo.swift in Sources */,
+				4A73A5362878E51900C94C25 /* FreezerBoxCreation.swift in Sources */,
 				4A2F5A17283D580900214622 /* CustomLabels.swift in Sources */,
 				4A955BBB2854072000A3832B /* GuidedCartView.swift in Sources */,
 				4A758501275C4381006124ED /* NumericTextfieldView.swift in Sources */,
@@ -1687,13 +1691,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.2;
+				CURRENT_PROJECT_VERSION = 2.35;
 				DEVELOPMENT_ASSET_PATHS = "\"Maine-Edna-Freezer-Mapping/Preview Content\"";
 				DEVELOPMENT_TEAM = KCSE39EC45;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Maine-Edna-Freezer-Mapping/Info.plist";
-				INFOPLIST_KEY_LSApplicationCategoryType = Research;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Required to scan barcodes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1703,7 +1707,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.35;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.keijaoh.Maine-Edna-Freezer-Mapping";
 				PRODUCT_NAME = "eDna-Freezer-Mapping";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1718,13 +1722,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.2;
+				CURRENT_PROJECT_VERSION = 2.35;
 				DEVELOPMENT_ASSET_PATHS = "\"Maine-Edna-Freezer-Mapping/Preview Content\"";
 				DEVELOPMENT_TEAM = KCSE39EC45;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Maine-Edna-Freezer-Mapping/Info.plist";
-				INFOPLIST_KEY_LSApplicationCategoryType = Research;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Required to scan barcodes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1734,7 +1738,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.35;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.keijaoh.Maine-Edna-Freezer-Mapping";
 				PRODUCT_NAME = "eDna-Freezer-Mapping";
 				SWIFT_EMIT_LOC_STRINGS = YES;

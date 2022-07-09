@@ -21,6 +21,7 @@ struct FreezerInventoryView: View {
     
     var body: some View {
         VStack(alignment: .leading){
+            //MARK: Need to re-enable the following and make it collapsable
             #warning("Re-add the top but make it more uniform and less in the way")
             //Show Box Detail at the top
             /*VStack(alignment: .leading){

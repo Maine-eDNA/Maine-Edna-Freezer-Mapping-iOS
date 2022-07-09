@@ -19,6 +19,8 @@ struct FreezerLayoutPreview: View {
     @Binding  var selected_row : Int
     @Binding  var selected_column: Int
     
+    @State var width : CGFloat = 50
+    
     @Binding var show_freezer_grid_layout : Bool
     var body: some View {
         
@@ -38,7 +40,7 @@ struct FreezerLayoutPreview: View {
                 SingleLevelRaciSlotItemView(single_lvl_rack_color: .constant("orange"))
            
             })
-         }
+         }.frame(width: width)
      }
       
     //}

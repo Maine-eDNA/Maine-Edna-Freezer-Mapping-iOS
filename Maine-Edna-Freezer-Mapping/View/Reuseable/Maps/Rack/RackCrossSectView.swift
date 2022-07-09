@@ -28,7 +28,7 @@ struct RackCrossSectView: View {
     @Binding var show_guided_box_view : Bool
     @Binding var show_guided_rack_view : Bool
     
-    @State private var showCreateFreezerBox : Bool = false
+    @State var showCreateFreezerBox : Bool = false
     
     @State private var targetRow : Int = 0
     @State private var targetColumn : Int = 0

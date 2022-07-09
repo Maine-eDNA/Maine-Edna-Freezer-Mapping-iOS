@@ -28,6 +28,9 @@ struct FreezerDetailView: View {
     @State var isErrorMsg : Bool = false
     @State var responseMsg : String = ""
     
+    //MARK: the empty rack location properties
+    @State var rack_position_row : Int = 0
+    @State var rack_position_column: Int = 0
     
     
     //TODO: make it a environment object
@@ -48,7 +51,7 @@ struct FreezerDetailView: View {
                             Label("Top-Down View", systemImage: "eye").font(.caption)
                             
                           //  GeometryReader{reader in
-                                FreezerMapView(freezer_rack_layout: self.$vm.freezer_racks, freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
+                            FreezerMapView(freezer_rack_layout: self.$vm.freezer_racks, freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack, rack_position_row: $rack_position_row,rack_position_column: $rack_position_column).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
                                 .frame(width: UIScreen.main.bounds.width * 0.95, height: UIScreen.main.bounds.height * 0.95, alignment: .center)
                            // }
                             
@@ -209,7 +212,8 @@ struct FreezerDetailView: View {
             }
             
         }     .background(
-            NavigationLink(destination:   CreateNewRackView(freezer_detail: freezer_profile, show_create_new_rack:  self.$show_create_new_rack), isActive: self.$show_create_new_rack,label: {EmptyView()})
+            //MARK: Need to send the Rack Location accross
+            NavigationLink(destination:   CreateNewRackView(freezer_detail: freezer_profile, show_create_new_rack:  self.$show_create_new_rack,rack_position_row: $rack_position_row,rack_position_column: $rack_position_column), isActive: self.$show_create_new_rack,label: {EmptyView()})
         )
     }
 }

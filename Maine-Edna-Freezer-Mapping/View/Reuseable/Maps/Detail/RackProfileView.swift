@@ -37,116 +37,125 @@ struct RackProfileView: View {
     
     @State var  numOfRackRows : Int = 0
     
+    @State var showCreateRackBox : Bool = false
+    
     var body: some View {
         //TODO: - Show empty box spaces fo the available slots in the rack and show multi-level rack as well
         //  NavigationView{
-        
-        VStack(alignment: .leading){
-            LazyVGrid(columns: UIDevice.current.userInterfaceIdiom == .pad ? phoneOneColumnGrid : phoneOneColumnGrid,alignment: .leading) {
-                HStack{
-                    Text("Freezer").font(.title3).bold()
-                    Text("\(freezer_profile.freezerLabel ?? "")").font(.subheadline)
-                    
-                }
-                HStack{
-                    Text("Rack").font(.title3).bold()
-                    Text("\(rack_profile.freezer_rack_label) Slug \(rack_profile.freezer_rack_label_slug)").font(.subheadline)
-                    
-                }
-                VStack(alignment: .leading){
+        ZStack{
+            VStack(alignment: .leading){
+                
+                LazyVGrid(columns: UIDevice.current.userInterfaceIdiom == .pad ? phoneOneColumnGrid : phoneOneColumnGrid,alignment: .leading) {
                     HStack{
-                        Toggle("More Details", isOn: $showNerdRackStats)
-                            .toggleStyle(SwitchToggleStyle(tint: .blue))
-                    }
-                    
-                    if showNerdRackStats{
+                        Text("Freezer").font(.title3).bold()
+                        Text("\(freezer_profile.freezerLabel ?? "")").font(.subheadline)
                         
-                        withAnimation(.spring()){
-                            //use columns
-                            LazyHGrid(rows: UIDevice.current.userInterfaceIdiom == .pad ? phoneOneColumnGrid : phoneOneColumnGrid,spacing: 20) {
+                    }
+                    HStack{
+                        Text("Rack").font(.title3).bold()
+                        Text("\(rack_profile.freezer_rack_label) Slug \(rack_profile.freezer_rack_label_slug)").font(.subheadline)
+                        
+                    }
+                    VStack(alignment: .leading){
+                        HStack{
+                            Toggle("More Details", isOn: $showNerdRackStats)
+                                .toggleStyle(SwitchToggleStyle(tint: .blue))
+                        }
+                        
+                        if showNerdRackStats{
+                            
+                            withAnimation(.spring()){
+                                //use columns
+                                LazyHGrid(rows: UIDevice.current.userInterfaceIdiom == .pad ? phoneOneColumnGrid : phoneOneColumnGrid,spacing: 20) {
+                                    
+                                    VStack(alignment: .trailing){
+                                        
+                                        LabelTextValueHStack(label: .constant("Row Start:"), textValue: .constant(String(rack_profile.freezer_rack_row_start)))
+                                        
+                                        LabelTextValueHStack(label: .constant("Row End:"), textValue: .constant(String(rack_profile.freezer_rack_row_end)))
+                                        
+                                        LabelTextValueHStack(label: .constant("# of Rack Rows:"), textValue: .constant(String(findNumOfRackRows(rack_profile: rack_profile))))
+                                        
+                                    }
+                                    VStack(alignment: .trailing){
+                                        
+                                        
+                                        LabelTextValueHStack(label: .constant("Column Start:"), textValue: .constant(String(rack_profile.freezer_rack_column_start)))
+                                        
+                                        LabelTextValueHStack(label: .constant("Column End:"), textValue: .constant(String(rack_profile.freezer_rack_column_end)))
+                                        
+                                        LabelTextValueHStack(label: .constant("# of Rack Columns:"), textValue: .constant(String(findNumOfRackColumns(rack_profile: rack_profile))))
+                                        
+                                        
+                                    }
+                                    
+                                    VStack(alignment: .trailing){
+                                        
+                                        LabelTextValueHStack(label: .constant("Depth Start:"), textValue: .constant(String(rack_profile.freezer_rack_depth_start)))
+                                        
+                                        LabelTextValueHStack(label: .constant("Depth End:"), textValue: .constant(String(rack_profile.freezer_rack_depth_end)))
+                                        
+                                        LabelTextValueHStack(label: .constant("Depth Of:"), textValue: .constant(String(findNumOfRackDepth(rack_profile: rack_profile))))
+                                        
+                                    }
+                                }
                                 
-                                VStack(alignment: .trailing){
-                                    
-                                    LabelTextValueHStack(label: .constant("Row Start:"), textValue: .constant(String(rack_profile.freezer_rack_row_start)))
-                                    
-                                    LabelTextValueHStack(label: .constant("Row End:"), textValue: .constant(String(rack_profile.freezer_rack_row_end)))
-                                    
-                                    LabelTextValueHStack(label: .constant("# of Rack Rows:"), textValue: .constant(String(findNumOfRackRows(rack_profile: rack_profile))))
-                                    
-                                }
-                                VStack(alignment: .trailing){
-                                    
-                                    
-                                    LabelTextValueHStack(label: .constant("Column Start:"), textValue: .constant(String(rack_profile.freezer_rack_column_start)))
-                                    
-                                    LabelTextValueHStack(label: .constant("Column End:"), textValue: .constant(String(rack_profile.freezer_rack_column_end)))
-                                    
-                                    LabelTextValueHStack(label: .constant("# of Rack Columns:"), textValue: .constant(String(findNumOfRackColumns(rack_profile: rack_profile))))
-                                    
-                                    
-                                }
                                 
-                                VStack(alignment: .trailing){
-                                    
-                                    LabelTextValueHStack(label: .constant("Depth Start:"), textValue: .constant(String(rack_profile.freezer_rack_depth_start)))
-                                    
-                                    LabelTextValueHStack(label: .constant("Depth End:"), textValue: .constant(String(rack_profile.freezer_rack_depth_end)))
-                                    
-                                    LabelTextValueHStack(label: .constant("Depth Of:"), textValue: .constant(String(findNumOfRackDepth(rack_profile: rack_profile))))
-                                    
-                                }
+                            }
+                        }
+                        
+                        VStack(alignment: .center){
+                            
+                            //MARK: Check if the rack has more than 1 row -> rackprofile row start - end greater than one which means it has multiple
+                            if findRackLength(rack_profile: rack_profile) > 1{
+                                //show the control to select a row
+                                //generate the selection based on the number of rows found
+                                MenuStyleClicker(selection: self.$viewModeSelection, actions: self.$viewModes, label: "View Modes",label_action: self.$viewModeSelection)//.frame(width: 100).padding()
+                                
                             }
                             
-                            
                         }
                     }
                     
-                    VStack(alignment: .center){
-                        
-                        //MARK: Check if the rack has more than 1 row -> rackprofile row start - end greater than one which means it has multiple
-                        if findRackLength(rack_profile: rack_profile) > 1{
-                            //show the control to select a row
-                            //generate the selection based on the number of rows found
-                            MenuStyleClicker(selection: self.$viewModeSelection, actions: self.$viewModes, label: "View Modes",label_action: self.$viewModeSelection)//.frame(width: 100).padding()
-                            
-                        }
-                        
-                    }
                 }
                 
-            }
-            
-            if self.vm.all_filter_rack_boxes.count > 0{
-                //MARK: Use the view section to show the rack items according to the view mode cross-section or top down
-                withAnimation(.spring()){
-                    Section{
-                        Text(" Boxes in Freezer").font(.title3).bold()//hightlighted
-                        Label("Cross-Sectional View", systemImage: "eye").font(.caption)
-                        
-                        VStack{
-                            if numOfRackRows > 1{
-                                Text("Show the control to select the row thats visible").bold()
+                if self.vm.all_filter_rack_boxes.count > 0{
+                    //MARK: Use the view section to show the rack items according to the view mode cross-section or top down
+                    withAnimation(.spring()){
+                        Section{
+                            Text(" Boxes in Freezer").font(.title3).bold()//hightlighted
+                            Label("Cross-Sectional View", systemImage: "eye").font(.caption)
+                            
+                            VStack{
+                                if numOfRackRows > 1{
+                                    Text("Show the control to select the row thats visible").bold()
+                                }
                             }
+                            
+                            //get the current rack row index and add 1 to it since index start at 0
+                            ScrollView([.horizontal,.vertical],showsIndicators: false){
+                                RackCrossSectView(rack_profile: self.rack_profile, rack_boxes: self.$vm.all_filter_rack_boxes, freezer_profile: .constant(self.freezer_profile), current_rack_row: .constant(currentRackRow()),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false), inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode)
+                                
+                                
+                                // .frame(width: UIScreen.main.bounds.width)
+                            }//.frame(width: UIScreen.main.bounds.width)
                         }
-                        
-                        //get the current rack row index and add 1 to it since index start at 0
-                        ScrollView([.horizontal,.vertical],showsIndicators: false){
-                            RackCrossSectView(rack_profile: self.rack_profile, rack_boxes: self.$vm.all_filter_rack_boxes, freezer_profile: .constant(self.freezer_profile), current_rack_row: .constant(currentRackRow()),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode)
-                            
-                            
-                            // .frame(width: UIScreen.main.bounds.width)
-                        }//.frame(width: UIScreen.main.bounds.width)
                     }
                 }
-            }
-            else{
-                VStack{
-                    Text("No Boxes Found In this Rack").bold().font(.title3).foregroundColor(.primary)
-                    Image("not_found_06").resizable().frame(width: 400, height: 400, alignment: .center)
+                else{
+                    VStack{
+                        Text("No Boxes Found In this Rack").bold().font(.title3).foregroundColor(.primary)
+                        Image("not_found_06").resizable().frame(width: 400, height: 400, alignment: .center)
+                    }
                 }
+                Spacer()
+                
+                
             }
-            Spacer()
         }.padding()
+            .background(){
+                NavigationLink(destination: CreateNewFreezerBoxView(row: .constant(0), column: .constant(0), freezer_profile: .constant(freezer_profile),rack_profile: .constant(self.rack_profile)),isActive: self.$showCreateRackBox,  label: {EmptyView()})
+            }
         
             .onAppear{
                 print("Rack Label Slug: \(self.rack_profile.freezer_rack_label_slug)")
@@ -178,6 +187,22 @@ struct RackProfileView: View {
             }
             .navigationTitle("Rack Detail")
             .navigationBarTitleDisplayMode(.inline)
+        
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        //showCreateBox
+                        withAnimation {
+                            self.showCreateRackBox.toggle()
+                        }
+                    }) {
+                        HStack{
+                            Image(systemName: "plus")
+                            Text("Box")
+                        }.roundButtonStyle()
+                    }
+                }
+            }
         //}
     }
 }

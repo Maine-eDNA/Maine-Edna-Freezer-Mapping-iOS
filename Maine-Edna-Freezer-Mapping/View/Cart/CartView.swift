@@ -130,6 +130,10 @@ struct CartView: View {
     
     @State private var csvUrl : String = ""
     
+    //MARK: the empty rack location properties
+    @State var rack_position_row : Int = 0
+    @State var rack_position_column: Int = 0
+    
     var body: some View {
         //make this into its own separate methos
         
@@ -187,9 +191,8 @@ struct CartView: View {
                     }
                 }
             }.background(
-                
-                
-                NavigationLink(destination: InteractFreezerLayoutPreview(freezer_max_rows:   .constant(target_freezer.freezerCapacityRows ??  0), freezer_max_columns:   .constant(target_freezer.freezerCapacityColumns ?? 0), freezer_rack_layout: self.$vm.rack_layout, freezer_profile: target_freezer, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: self.$show_guided_map_view,inventoryLocations: [InventorySampleModel](),isInSearchMode: true,freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95)),isActive: self.$show_guided_map_view,  label: {EmptyView()})
+       
+                NavigationLink(destination: InteractFreezerLayoutPreview(freezer_max_rows:   .constant(target_freezer.freezerCapacityRows ??  0), freezer_max_columns:   .constant(target_freezer.freezerCapacityColumns ?? 0), freezer_rack_layout: self.$vm.rack_layout, freezer_profile: target_freezer, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: self.$show_guided_map_view,inventoryLocations: [InventorySampleModel](),isInSearchMode: true,freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95),rack_position_row: $rack_position_row,rack_position_column: $rack_position_column),isActive: self.$show_guided_map_view,  label: {EmptyView()})
             )
             
             .background(

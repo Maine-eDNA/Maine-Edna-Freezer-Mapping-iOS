@@ -16,7 +16,7 @@ import SwiftUI
 
 //MARK: Make sure all forms work
 struct CreateNewFreezerBoxView: View {
-    
+    //Value from previous screen
     @Binding var row : Int
     @Binding var column : Int
     @Binding var freezer_profile : FreezerProfileModel
@@ -30,6 +30,17 @@ struct CreateNewFreezerBoxView: View {
     
     @State var freezer_box_depth : Int = 0
     
+    @State var freezer_box_row : Int = 0
+    
+    @State var freezer_box_column: Int = 0
+    
+    @State var freezer_box_capacity_row : Int = 0
+    @State var freezer_box_capacity_column : Int = 0
+    
+    
+    @StateObject var freezer_box_creation : FreezerBoxViewModel = FreezerBoxViewModel()
+    
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ScrollView(showsIndicators: false){
@@ -52,6 +63,61 @@ struct CreateNewFreezerBoxView: View {
                     
                     BoxDepthView(freezer_box_max_rows: self.$freezer_box_depth, background_color: .constant("blue"))
                 }.padding()
+                //row and column
+                
+                VStack(alignment: .leading){
+                    Stepper("Box Row: \(freezer_box_row)", onIncrement: {
+                        freezer_box_row += 1
+                        updatebox_label()
+                        
+                    }, onDecrement: {
+                        freezer_box_row -= 1
+                        updatebox_label()
+                        
+                    })
+                    
+            
+                }.padding()
+                
+                VStack(alignment: .leading){
+                    Stepper("Box Column: \(freezer_box_column)", onIncrement: {
+                        freezer_box_column += 1
+                        updatebox_label()
+                        
+                    }, onDecrement: {
+                        freezer_box_column -= 1
+                        updatebox_label()
+                    })
+                    
+            
+                }.padding()
+        
+                
+                VStack(alignment: .leading){
+                    Stepper("Capacity Row: \(freezer_box_capacity_row)", onIncrement: {
+                        freezer_box_capacity_row += 1
+               
+                        
+                    }, onDecrement: {
+                        freezer_box_capacity_row -= 1
+                       
+                    })
+                    
+            
+                }.padding()
+                
+                VStack(alignment: .leading){
+                    Stepper("Capacity Column: \(freezer_box_capacity_column)", onIncrement: {
+                        freezer_box_capacity_column += 1
+                       
+                        
+                    }, onDecrement: {
+                        freezer_box_capacity_column -= 1
+                      
+                    })
+                    
+            
+                }.padding()
                 
                 //Box Position Preview
                 VStack(alignment: .leading){
@@ -68,8 +134,12 @@ struct CreateNewFreezerBoxView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     //create new box by sending it to the api
-                    
-                    
+                    //MARK: test when no location inherited and no location inherited
+                    #warning("Need a method to store freezer box Next")
+                    Task{
+                        await createNewFreezerBox()
+                        
+                    }
                 }) {
                     HStack{
                         Text("Save").font(.caption)
@@ -98,7 +168,9 @@ struct CreateNewFreezerBoxView: View {
             }
             
             self.freezer_rack = rack_profile.freezer_rack_label.lowercased()
-            
+            //set the row and column inherited
+            self.freezer_box_row = freezer_box_row
+            self.freezer_box_column = freezer_box_column
             
         }
     }
@@ -113,11 +185,35 @@ struct CreateNewFreezerBoxView_Previews: PreviewProvider {
 
 extension CreateNewFreezerBoxView{
     
+    func updatebox_label(){
+        if let freezer_label = freezer_profile.freezerLabel{
+            self.freezer_box_label = "\(freezer_label.lowercased())_\(rack_profile.freezer_rack_label.lowercased())_box_\(freezer_box_row)_\(freezer_box_column)"
+            
+        }
+    }
     
+    func createNewFreezerBox() async{
+        var boxDetail : BoxItemModel = BoxItemModel()
+        
+        boxDetail.freezer_rack = rack_profile.freezer_rack_label_slug
+        boxDetail.freezer_box_label = self.freezer_box_label
+        boxDetail.freezer_box_row = freezer_box_row
+        boxDetail.freezer_box_column = freezer_box_column
+        boxDetail.freezer_box_depth = freezer_box_depth
+        boxDetail.freezer_box_capacity_row = freezer_box_capacity_row
+        boxDetail.freezer_box_capacity_column = freezer_box_capacity_column
+        
+        await freezer_box_creation.createFreezerBoxCreation(_boxDetail: boxDetail){ response in
+            if !response.isError{
+                //go back to previous screen
+                dismiss()
+            }
+        }
+    }
     
     
     private var boxpreviewsection : some View{
-        BoxPreviewPositionView(column: $column, row: $row, rack_profile: $rack_profile)
+        BoxPreviewPositionView(column: $freezer_box_column, row: $freezer_box_row, rack_profile: $rack_profile)
     }
     
     

@@ -21,8 +21,14 @@ class FreezerRackViewModel : ObservableObject{
     private let freezerRackDataService = FreezerRackLayoutService()
     private var cancellables = Set<AnyCancellable>()
     private let freezerBoxDataService = FreezerBoxRetrieval()
+    private let freezerRackCreationService = RackCreation()
     
     @Published var box_vm : FreezerBoxViewModel = FreezerBoxViewModel()
+    
+    //properties to update the UI
+    @Published var showResponseMsg : Bool = false
+    @Published var isErrorMsg : Bool = false
+    @Published var responseMsg : String = ""
     
     init(){
         addSubscribers()
@@ -97,6 +103,25 @@ class FreezerRackViewModel : ObservableObject{
         let numberOfColumns = rack.freezer_rack_column_end - rack.freezer_rack_column_start
         
         return (numberOfColumns * numberOfBoxInRow)
+    }
+    
+    
+    //MARK: CREATE NEW BOX FORM AND METHOD
+    
+    //Create New Freezer Rack
+    
+    
+    func createNewFreezerRackProfile(_rackDetail : RackItemModel,completion: @escaping (ServerMessageModel) -> Void) async{
+        
+        freezerRackCreationService.CreateNewRack(_rackDetail: _rackDetail) { response in
+            
+            
+            self.responseMsg = response.serverMessage
+            self.showResponseMsg = true
+            self.isErrorMsg = response.isError
+            
+            completion(response)
+        }
     }
     
 }
