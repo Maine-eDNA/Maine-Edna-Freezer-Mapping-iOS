@@ -9,19 +9,21 @@ import SwiftUI
 import StepperView
 import Kingfisher
 
-
+//MARK: Need to remove the extra freezer_label etc that i add to create the slug the API already does it
 //Test
 //MARK: Split the CartView into Cart View (Extraction Return and Return todo Next based on drawings) and Utilities
 //MARK: Make into documentation
 //MARK: only handles Search (to find and take from freezer) and Return to freezer
 struct GuidedCartView: View {
-    //MARK: Put the form details in a view model to clean up the UI
+    //MARK: Put the form details in a view model to clean up the UI start
     ///Step indicator start
     @State private var changePosition : Bool = true
     @State var current_position_in_form : String = ""
     @State var next_position_in_form : String = ""
     @State var current_form_index : Int = 0
     @State var next_form_index : Int = 1
+    
+    //have steps for return
     @State var general_steps = [ Text("Mode").font(.caption),
                                  Text("Entry").font(.caption),
                                  Text("Freezer").font(.caption),
@@ -29,6 +31,24 @@ struct GuidedCartView: View {
                                  Text("Box").font(.caption)
                                  
                                  
+    ]
+    //MARK: steps for return
+    @State var return_steps = [ Text("Mode").font(.caption),
+                                 Text("Batch").font(.caption),
+                                 Text("Confirm").font(.caption),
+                                 Text("Returns").font(.caption),
+                                 Text("Summary").font(.caption)
+                                 
+                                 
+    ]
+    
+    let return_indicationTypes = [
+        StepperIndicationType.custom(NumberedCircleView(text: "1",triggerAnimation: false)),
+        .custom(NumberedCircleView(text: "2")),
+        .custom(NumberedCircleView(text: "3")),
+        .custom(NumberedCircleView(text: "4",triggerAnimation: false)),
+        .custom(NumberedCircleView(text: "5"))
+        
     ]
     
     //special steps for Remove and Transfer steps
@@ -60,6 +80,10 @@ struct GuidedCartView: View {
     @State private var selection : String = "Search"
     @State var actions = ["Search","Return"]
     
+    @State var return_selection : String = "Return"
+    @State var return_actions = ["Return","Extraction Return"]
+    
+    
     /// Mode selector properties end
    
     
@@ -72,7 +96,28 @@ struct GuidedCartView: View {
     @State var showTutorials : Bool = false
     @State var tutorialImage : String = "https://wwwcdn.cincopa.com/blogres/wp-content/uploads/2019/02/video-tutorial-image.jpg"
     
+    ///properties shared within the sections of the form (steps)
+    //@State var target_freezer : FreezerProfileModel = FreezerProfileModel()
     
+    
+    
+    @StateObject var util_vm : UtilitiesCartFormViewModel = UtilitiesCartFormViewModel()
+    
+    @State var freezer_rack_label_slug : String = ""
+    //Send the data to and from Rack
+    @State var target_rack : RackItemModel = RackItemModel()
+    @State var freezer_profile : FreezerProfileModel = FreezerProfileModel()
+    
+    @State var inventoryLocations : [InventorySampleModel] = []
+    
+    //MARK: batch section
+    @State var showBatchDetailView : Bool = false
+    @State var targetBatches : Set<SampleBatchModel> = Set<SampleBatchModel>()
+    
+    //@State var allSamplesInBatches : [InventorySampleModel] = [InventorySampleModel]()
+    @State var targetSamplesToProcess : Set<InventorySampleModel> = Set<InventorySampleModel>()
+    
+    //MARK: Put the form details in a view model to clean up the UI end
     
     var body: some View {
         NavigationView{
@@ -108,7 +153,7 @@ struct GuidedCartView: View {
                     
                 }
             }
-        }
+        }.navigationViewStyle(.stack)
         .sheet(isPresented: $showTutorials, content: {
             cartviewtutorialsection
         })
@@ -201,7 +246,7 @@ extension GuidedCartView{
             Spacer()
             //need to indicate where you are in the list
             StepperView()
-                .addSteps(general_steps)
+                .addSteps(selection == "Search" ? general_steps : return_steps)
                 .indicators(self.indicationTypes)
                 .stepIndicatorMode(StepperMode.horizontal)
                 .stepLifeCycles([StepLifeCycle.pending, .completed, .completed, .completed,.pending])
@@ -226,17 +271,51 @@ extension GuidedCartView{
             #warning("NEXT: Continue here do the Search, then take samples from the freezer and add it to a batch, make the list accessible ")
             VStack {
                 TabView(selection: $currentIndex) {
-                    ModeSelectorFormView(selection: $selection, actions: $actions)
-                        .tag (0 )
-                    CartDataCaptureFormView()
-                        .tag(1)
-                    FreezerCartFormView()
-                        .tag (2)
                     
-                    RackCartFormView()
-                        .tag (3)
-                    BoxCartFormView()
-                        .tag(4)
+                    if selection == "Search"{
+                        Section{
+                            //MARK: will change this according to the mode
+                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions)
+                                .tag (0)
+                            CartDataCaptureFormView()
+                                .tag(1)
+                            FreezerCartFormView(target_freezer: $freezer_profile)
+                                .tag (2)
+                            
+                            // RackCartFormView(freezer_profile: $freezer_profile, freezer_rack_label_slug: $freezer_rack_label_slug,target_rack: $target_rack, inventoryLocations: $inventoryLocations )
+                            RackCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug, target_rack: $target_rack, freezer_profile: $freezer_profile, inventoryLocations: $inventoryLocations)
+                                .tag (3)
+                            //BoxCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug)
+                           
+                            //Clean this up to only show the samples
+                           // BoxCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug, target_rack: $target_rack, freezer_profile: $freezer_profile, inventoryLocations: $inventoryLocations)
+                             //MARK: make this into a summary page
+                                EmptyView()
+                                .tag(4)
+                        }
+                    }
+                    else if selection == "Return"{
+                        //MARK: if the extraction return has special pages compared to the regular return which doesnt change the barcode just return to the existing position
+                        Section{
+                      
+                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions)
+                                .tag (0)
+                            
+                            //select a batch from the list
+                            MultiBatchSampleListView(showBatchDetailView: $showBatchDetailView, selection: $targetBatches)
+                            //Add unique navi option
+                                .tag(1)
+                            ShowAllSamplesInBatchesView(targetBatches: $targetBatches, targetSamplesToProcess: $targetSamplesToProcess)
+                                .tag(2)
+                            
+                            ExtractionSampleReturnGuideView(targetSamplesToProcess: $targetSamplesToProcess)
+                                .tag(3)
+                        }
+                    }
+                    
+                    
+                    
+                
                     
                     
                 }.tabViewStyle(PageTabViewStyle())
@@ -272,9 +351,9 @@ extension GuidedCartView{
                     }) {
                         HStack(alignment: .center, spacing: 10) {
                             Image(systemName: "arrow.backward")
-                                .accentColor(.secondary)
+                                .accentColor(.white)
                             Text("Back")
-                                .foregroundColor(Color.secondary)
+                                .foregroundColor(Color.primary)
                             
                         }
                     }
@@ -283,7 +362,7 @@ extension GuidedCartView{
                         maxWidth: .infinity,
                         maxHeight: 44
                     )
-                    .background(Color.white)
+                    .background(Color.secondary)
                     .cornerRadius(4)
                     .padding(
                         [.leading, .trailing], 20
@@ -295,17 +374,41 @@ extension GuidedCartView{
                     
                     //(general_steps.count - 1) meants at the end of the steps
                     //- 1 because the steps start from 0 while the steps count start from 1
-                    if currentIndex != (general_steps.count - 1) {
-                        currentIndex += 1
+                    if selection == "Search"{
+                        if currentIndex != (general_steps.count - 1) {
+                            currentIndex += 1
+                        }
                     }
+                    else if selection == "Return"{
+                        if currentIndex != (return_steps.count - 1) {
+                            currentIndex += 1
+                        }
+                    }
+                    
+                
+                    
                 }) {
                     HStack(alignment: .center, spacing: 10) {
                         //if equal the last section
                         //MARK: change to be the number of count of steps to know when at the end
-                        Text(currentIndex == (general_steps.count - 1) ? "Done" : "Next")
-                            .foregroundColor(.white)
-                        Image(systemName: currentIndex == (general_steps.count - 1) ? "checkmark" : "arrow.right")
-                            .accentColor(.white)
+                     
+                        
+                        if selection == "Search"{
+                            Section{
+                                Text(currentIndex == (general_steps.count - 1) ? "Done" : "Next")
+                                    .foregroundColor(.white)
+                                Image(systemName: currentIndex == (general_steps.count - 1) ? "checkmark" : "arrow.right")
+                                    .accentColor(.white)
+                            }
+                        }
+                        else if selection == "Return"{
+                            Section{
+                                Text(currentIndex == (return_steps.count - 1) ? "Done" : "Next")
+                                    .foregroundColor(.white)
+                                Image(systemName: currentIndex == (return_steps.count - 1) ? "checkmark" : "arrow.right")
+                                    .accentColor(.white)
+                            }
+                        }
                     }
                 }
                 .frame(

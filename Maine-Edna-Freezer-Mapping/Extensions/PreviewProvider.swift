@@ -102,7 +102,7 @@ class DeveloperPreview {
     freezer_profile.freezerCapacityColumns = 10
     freezer_profile.freezerCapacityRows = 10
     freezer_profile.freezerRoomName = "Murray 313"*/
-    let freezerProfile = FreezerProfileModel(id: 1, freezerLength: "100", freezerWidth: "100", freezerLabel: "Test Freezer 1", freezerLabelSlug: "Test_Freezer_1", freezerRoomName: "213 Murray Hall", freezerDepth: "3", freezerDimensionUnits: "feet", freezerCapacityColumns: 10, freezerCapacityRows: 10, freezerCapacityDepth: 5, freezerRatedTemp: -20, freezerRatedTempUnits: "Farenheit", createdBy: "keijaoh.campbell@maine.edu", createdDatetime: "04/04/2022", modifiedDatetime: "04/04/2022")
+    let freezerProfile = FreezerProfileModel(id: 1, freezerLength: "100", freezerWidth: "100", freezerLabel: "Test Freezer 1", freezerLabelSlug: "Test_Freezer_1", freezerRoomName: "213 Murray Hall", freezerDepth: "3", freezerDimensionUnits: "feet", freezerRatedTempUnits: "Farenheit", createdBy: "keijaoh.campbell@maine.edu", createdDatetime: "04/04/2022", modifiedDatetime: "04/04/2022", freezerCapacityColumns: 10, freezerCapacityRows: 10, freezerCapacityDepth: 5, freezerRatedTemp: -20)
     
     /*
      var sample2 = InventorySampleModel()

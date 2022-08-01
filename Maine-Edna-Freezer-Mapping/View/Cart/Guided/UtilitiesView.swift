@@ -8,8 +8,46 @@
 import SwiftUI
 import StepperView
 import Kingfisher
-
+import Combine
 //MARK: Will do Add, Remove, Transfer Box on this screen
+
+///Used to share data between the Form Control on the Utilities and Cart View Page instead of sending additional parameters in between
+class UtilitiesCartFormViewModel : ObservableObject{
+    
+ 
+    @Published var isLoading : Bool = false
+    
+    //private let freezerCheckOutDataService = FreezerCheckOutLogRetrieval()
+    private var cancellables = Set<AnyCancellable>()
+    
+   // @AppStorage(AppStorageNames.store_email_address.rawValue)  var store_email_address = ""
+    
+    @Published var rack_profile : RackItemModel = RackItemModel()
+    @Published var addToRackMode : Bool = false
+    @Published var rack_position_row : Int = 0
+    @Published var rack_position_column: Int = 0
+    
+    @Published var target_rack : RackItemModel = RackItemModel()
+    @Published var showRackProfile : Bool = false
+    @Published var freezer_profile : FreezerProfileModel = FreezerProfileModel()
+    
+    
+    @Published var inventoryLocations : [InventorySampleModel] = [InventorySampleModel]()
+    @Published var isInSearchMode : Bool = false
+    
+    init(){
+        //addSubscribers()
+    }
+    
+ 
+    
+    func addSubscribers(){
+        
+   
+    }
+    
+    
+}
 
 struct UtilitiesView: View {
     //MARK: Put the form details in a view model to clean up the UI
@@ -52,6 +90,8 @@ struct UtilitiesView: View {
     @State private var selection : String = "Add"
     @State var actions = ["Add", "Remove", "Transfer Box"]
     
+    @State var return_selection : String = "Return"
+    @State var return_actions = ["Return","Extraction Return"]
     /// Mode selector properties end
    
     
@@ -64,7 +104,12 @@ struct UtilitiesView: View {
     @State var showTutorials : Bool = false
     @State var tutorialImage : String = "https://wwwcdn.cincopa.com/blogres/wp-content/uploads/2019/02/video-tutorial-image.jpg"
     
+    ///properties shared within the sections of the form (steps)
+    @State var target_freezer : FreezerProfileModel = FreezerProfileModel()
     
+    @StateObject var util_vm : UtilitiesCartFormViewModel = UtilitiesCartFormViewModel()
+    
+    @State var freezer_rack_label_slug : String = ""
     
     var body: some View {
         NavigationView{
@@ -218,17 +263,19 @@ extension UtilitiesView{
             
             VStack {
                 TabView(selection: $currentIndex) {
-                    ModeSelectorFormView(selection: $selection, actions: $actions)
+                    ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions)
                         .tag (0 )
                     CartDataCaptureFormView()
                         .tag(1)
-                    FreezerCartFormView()
+                    FreezerCartFormView(target_freezer: $target_freezer)
                         .tag (2)
-                    
-                    RackCartFormView()
+                    //MARK: Re-enable once the Guided Cart has been fixed
+                   /* RackCartFormView(target_freezer: $target_freezer, freezer_rack_label_slug: $freezer_rack_label_slug)
                         .tag (3)
-                    BoxCartFormView()
-                        .tag(4)
+                    //This will no longer need params since it uses the viewmodel
+                    //MARK: get this from the RackCartFormView  (maybe use a view model to share the data since so larget)
+                    BoxCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug)
+                        .tag(4)*/
                     
                     
                 }.tabViewStyle(PageTabViewStyle())

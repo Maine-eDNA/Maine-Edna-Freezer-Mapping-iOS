@@ -36,6 +36,9 @@ struct ContentView: View {
     @ObservedObject var todo_list_service : FreezerCheckOutLogRetrieval = FreezerCheckOutLogRetrieval()
        
     @StateObject private var vm =  DashboardViewModel()
+    
+    #warning("will replace this by storing in database")
+    @AppStorage(AppStorageNames.store_sample_batches.rawValue)  var store_sample_batches : [SampleBatchModel] = [SampleBatchModel]()
         
         var body: some View {
             
@@ -51,20 +54,21 @@ struct ContentView: View {
                         }.tag(0)*///should be in the properties management
                  //orientation.isPortrait && UIDevice.current.userInterfaceIdiom == .pad
                     //MyPropertiesView(searchText: "")
-                    DashboardView()
+                   // DashboardView()
+                    BatchSampleManagementView()
                         .navigationViewStyle(StackNavigationViewStyle())
                         .environmentObject(vm)
                             .tabItem {
                                 VStack{
                                     Image(systemName: "house")
-                                    Text("Dashboard")
+                                    Text("Batch")
                                 }
                         }.tag(0)
-                        .badge(self.todo_list_service.stored_return_meta_data.count)
+                        .badge(self.store_sample_batches.count)
                      
                   
                     
-                    AllFreezersView(vm: FreezerViewModel(), target_freezer: FreezerProfileModel())
+                    AllFreezersView(target_freezer: FreezerProfileModel())
                             .tabItem {
                                 VStack{
                                     Image(systemName: "note")

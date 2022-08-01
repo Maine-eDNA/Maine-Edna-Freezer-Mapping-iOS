@@ -34,6 +34,8 @@ enum AppStorageNames : String{
     case stored_freezer_racks_in_system = "stored_freezer_racks_in_system"
     case all_stored_rack_boxes_in_system = "all_stored_rack_boxes_in_system"
     
+    case store_sample_batches = "store_sample_batches"
+    
 }
 
 

@@ -44,9 +44,8 @@ struct TargetBoxToMoveView: View {
                 LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
                     
                     ForEach(self.searchResults, id: \.id) { box in
-                        
-                        BoxItemCard(rack_box: .constant(box))
-                           // .resizable()
+                     
+                        BoxItemCard(rack_box: .constant(box),rack_depth: .constant(0),rack_row: .constant(0))
                             .scaledToFill()
                             .frame(minWidth: 0, maxWidth: .infinity)
                             .frame(height: gridLayout.count == 1 ? 200 : 100)

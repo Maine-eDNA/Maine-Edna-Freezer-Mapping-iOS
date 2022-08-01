@@ -18,6 +18,8 @@ struct FreezerInventoryView: View {
     ///Used as a master list to show the records that need to be highlighted
     @State var inventoryLocations : [InventorySampleModel] = []
     @State var isInSearchMode : Bool = false
+    @Binding var is_in_select_mode : Bool
+    
     
     var body: some View {
         VStack(alignment: .leading){
@@ -162,7 +164,7 @@ struct FreezerInventoryView: View {
             }*/
             #warning("Make sure samples are being sent to the box")
             //MARK: Need to show the get the samples that are the targets and  and the other samples like with boxes
-            BoxSampleMapView(box: self.$box_detail, freezer_profile: self.$freezer_profile)
+            BoxSampleMapView(box: self.$box_detail, freezer_profile: self.$freezer_profile, is_in_select_mode: $is_in_select_mode)
          
             
             Spacer()
@@ -187,6 +189,6 @@ struct FreezerInventoryView: View {
 
 struct FreezerInventoryView_Previews: PreviewProvider {
     static var previews: some View {
-        FreezerInventoryView(box_detail: .constant(BoxItemModel()), freezer_profile: .constant(FreezerProfileModel()))
+        FreezerInventoryView(box_detail: .constant(BoxItemModel()), freezer_profile: .constant(FreezerProfileModel()), is_in_select_mode: .constant(false))
     }
 }

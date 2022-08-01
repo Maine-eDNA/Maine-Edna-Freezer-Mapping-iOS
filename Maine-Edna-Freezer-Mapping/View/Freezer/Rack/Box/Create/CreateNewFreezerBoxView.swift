@@ -162,10 +162,10 @@ struct CreateNewFreezerBoxView: View {
             //MARK: make into a func
             //generating the box label
             //freezerName_RackName_box_row_column
-            if let freezer_label = freezer_profile.freezerLabel{
-                self.freezer_box_label = "\(freezer_label.lowercased())_\(rack_profile.freezer_rack_label.lowercased())_box_\(row)_\(column)"
+           
+                self.freezer_box_label = "\(freezer_profile.freezerLabel.lowercased())_\(rack_profile.freezer_rack_label.lowercased())_box_\(row)_\(column)"
                 
-            }
+           
             
             self.freezer_rack = rack_profile.freezer_rack_label.lowercased()
             //set the row and column inherited
@@ -186,10 +186,10 @@ struct CreateNewFreezerBoxView_Previews: PreviewProvider {
 extension CreateNewFreezerBoxView{
     
     func updatebox_label(){
-        if let freezer_label = freezer_profile.freezerLabel{
-            self.freezer_box_label = "\(freezer_label.lowercased())_\(rack_profile.freezer_rack_label.lowercased())_box_\(freezer_box_row)_\(freezer_box_column)"
+  
+            self.freezer_box_label = "\(freezer_profile.freezerLabel.lowercased())_\(rack_profile.freezer_rack_label.lowercased())_box_\(freezer_box_row)_\(freezer_box_column)"
             
-        }
+        
     }
     
     func createNewFreezerBox() async{

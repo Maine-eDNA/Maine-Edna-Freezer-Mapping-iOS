@@ -39,6 +39,12 @@ struct RackProfileView: View {
     
     @State var showCreateRackBox : Bool = false
     
+    @StateObject var util_vm : UtilitiesCartFormViewModel = UtilitiesCartFormViewModel()
+    
+    @Binding var freezer_rack_label_slug : String  //option to set slug if others empty
+    
+    @Binding var is_in_select_mode : Bool
+    
     var body: some View {
         //TODO: - Show empty box spaces fo the available slots in the rack and show multi-level rack as well
         //  NavigationView{
@@ -116,7 +122,7 @@ struct RackProfileView: View {
                             
                         }
                     }
-                    
+                    Spacer()
                 }
                 
                 if self.vm.all_filter_rack_boxes.count > 0{
@@ -134,7 +140,8 @@ struct RackProfileView: View {
                             
                             //get the current rack row index and add 1 to it since index start at 0
                             ScrollView([.horizontal,.vertical],showsIndicators: false){
-                                RackCrossSectView(rack_profile: self.rack_profile, rack_boxes: self.$vm.all_filter_rack_boxes, freezer_profile: .constant(self.freezer_profile), current_rack_row: .constant(currentRackRow()),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false), inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode)
+                                RackCrossSectView(rack_profile: self.rack_profile, rack_boxes: self.$vm.all_filter_rack_boxes, freezer_profile: .constant(self.freezer_profile), current_rack_row: .constant(currentRackRow()),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false), in_guided_sample_mode: .constant(false), inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode,
+                                                  freezer_rack_label_slug: freezer_rack_label_slug, is_in_select_mode: $is_in_select_mode)
                                 
                                 
                                 // .frame(width: UIScreen.main.bounds.width)
@@ -159,6 +166,8 @@ struct RackProfileView: View {
         
             .onAppear{
                 print("Rack Label Slug: \(self.rack_profile.freezer_rack_label_slug)")
+                //freezer_rack_label_slug
+                print("Rack Label Slug Opt#1: \(self.freezer_rack_label_slug)")
                 if isInSearchMode && !addToRackMode{
                     //need to add the icon to the boxes in search
                     self.vm.isInSearchMode = true
@@ -175,14 +184,30 @@ struct RackProfileView: View {
                     
                     
                 }
+                else if !freezer_rack_label_slug.isEmpty{
+                    //need to set the target rack_profile
+                    
+                   print( rack_profile.freezer_rack_label)
+                    self.vm.FilterFreezerBoxes(_freezer_rack_label_slug: freezer_rack_label_slug)
+                }
                 else{
                     //add loading animation here
-                    print("Rack Slug \(self.rack_profile.freezer_rack_label_slug)")
+                
                     
-                    self.vm.FilterFreezerBoxes(_freezer_rack_label_slug: String(self.rack_profile.freezer_rack_label_slug))
+                    var rack_label_slug : String = ""
+                    if !self.rack_profile.freezer_rack_label_slug.isEmpty{
+                        rack_label_slug = self.rack_profile.freezer_rack_label_slug
+                    }
+                    else if self.rack_profile.freezer_rack_label_slug.isEmpty{
+                        //get the data from the vm
+                        rack_label_slug = util_vm.target_rack.freezer_rack_label_slug
+                    }
+                    
+                    print("Rack Slug \(rack_label_slug)")
+                    self.vm.FilterFreezerBoxes(_freezer_rack_label_slug: rack_label_slug)
                     
                 }
-                
+               
                 generateRowSelectionList(rack_profile: rack_profile)
             }
             .navigationTitle("Rack Detail")
@@ -296,7 +321,7 @@ struct RackProfileView_Previews: PreviewProvider {
              .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
              .previewDisplayName("iPhone XS Max")*/
             
-            ScreenPreview(screen:   RackProfileView(rack_profile: .constant(rack_profile),freezer_profile: freezer_profile, addToRackMode: .constant(false)))
+            ScreenPreview(screen:   RackProfileView(rack_profile: .constant(rack_profile),freezer_profile: freezer_profile, addToRackMode: .constant(false), freezer_rack_label_slug: .constant(""), is_in_select_mode: .constant(false)))
         }
     }
 }

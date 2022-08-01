@@ -26,6 +26,8 @@ struct MenuView: View {
 
     @State var current_user : UserProfileModel = UserProfileModel()
     
+    @ObservedObject var todo_list_service : FreezerCheckOutLogRetrieval = FreezerCheckOutLogRetrieval()
+    
     var body: some View {
         NavigationView{
            // Spacer().frame(height: 20)
@@ -62,6 +64,20 @@ struct MenuView: View {
                 
             }
             List{
+                
+                Section(header: Text("Other Functions")){
+                    
+                    NavigationLink(destination: DashboardView(), label: {
+                        HStack{
+                            Image(systemName: "house")
+                            Text("Dashboard")
+                        }  //.badge(self.todo_list_service.stored_return_meta_data.count)
+                    })
+                    
+                 
+                    
+                }
+                
                 //UserThemeView
                 Section(header: Text("Settings")){
                     

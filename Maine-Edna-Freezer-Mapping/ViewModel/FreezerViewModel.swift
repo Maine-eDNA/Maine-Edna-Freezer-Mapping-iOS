@@ -19,6 +19,16 @@ class FreezerViewModel : ObservableObject{
     private var cancellables = Set<AnyCancellable>()
     @Published public var allFreezers : [FreezerProfileModel] = []
     
+    //Response from Server message
+    @Published var showResponseMsg : Bool = false
+    @Published var isErrorMsg : Bool = false
+    @Published var responseMsg : String = ""
+    
+    //loading spinner
+    @Published var show_loading_spinner = false
+    
+    
+    
     init(){
         addSubscribers()
     }

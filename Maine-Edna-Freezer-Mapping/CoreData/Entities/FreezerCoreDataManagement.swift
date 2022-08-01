@@ -165,7 +165,7 @@ class FreezerCoreDataManagement : ObservableObject{
         
         newFreezer.freezerLength = _freezerDetail.freezerLength
         newFreezer.freezerWidth = _freezerDetail.freezerWidth
-        newFreezer.freezerLabel = _freezerDetail.freezerLabel
+        newFreezer.freezerLabel = _freezerDetail.freezerLabel ?? ""
         newFreezer.freezerLabelSlug = _freezerDetail.freezerLabelSlug
         newFreezer.freezerRoomName = _freezerDetail.freezerRoomName
         newFreezer.freezerDepth = _freezerDetail.freezerDepth

@@ -192,13 +192,13 @@ struct CartView: View {
                 }
             }.background(
        
-                NavigationLink(destination: InteractFreezerLayoutPreview(freezer_max_rows:   .constant(target_freezer.freezerCapacityRows ??  0), freezer_max_columns:   .constant(target_freezer.freezerCapacityColumns ?? 0), freezer_rack_layout: self.$vm.rack_layout, freezer_profile: target_freezer, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: self.$show_guided_map_view,inventoryLocations: [InventorySampleModel](),isInSearchMode: true,freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95),rack_position_row: $rack_position_row,rack_position_column: $rack_position_column),isActive: self.$show_guided_map_view,  label: {EmptyView()})
+                NavigationLink(destination: InteractFreezerLayoutPreview(freezer_max_rows:   .constant(target_freezer.freezerCapacityRows ??  0), freezer_max_columns:   .constant(target_freezer.freezerCapacityColumns ?? 0), freezer_rack_layout: self.$vm.rack_layout, freezer_profile: target_freezer, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: self.$show_guided_map_view,inventoryLocations: [InventorySampleModel](),isInSearchMode: true,freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95),rack_position_row: $rack_position_row,rack_position_column: $rack_position_column, target_rack: .constant(RackItemModel())),isActive: self.$show_guided_map_view,  label: {EmptyView()})
             )
             
             .background(
                 
                 
-                NavigationLink(destination: RackProfileView(rack_profile: self.$targetAddToFreezerRack, freezer_profile: self.addDestinationFreezer, showNerdRackStats: false, isInSearchMode: true, inventoryLocations: self.boxSamples,addToRackMode: self.$showTargetRackToAdd),isActive: self.$showTargetRackToAdd,  label: {EmptyView()})
+                NavigationLink(destination: RackProfileView(rack_profile: self.$targetAddToFreezerRack, freezer_profile: self.addDestinationFreezer, showNerdRackStats: false, isInSearchMode: true, inventoryLocations: self.boxSamples,addToRackMode: self.$showTargetRackToAdd, freezer_rack_label_slug: .constant(""), is_in_select_mode: .constant(false)),isActive: self.$showTargetRackToAdd,  label: {EmptyView()})
             )
             
             /*
@@ -977,12 +977,12 @@ extension CartView{
                                                     //set the current freezer profile
                                                     self.vm.currentFreezerProfile = freezer
                                                     
-                                                    if let freezerLabel = freezer.freezerLabel{
+                                                    
                                                         //set the current freezer label so that the related records can be found
                                                         
-                                                        self.vm.LoadFreezerRackLayout(freezerLabel: freezerLabel)
+                                                        self.vm.LoadFreezerRackLayout(freezerLabel: freezer.freezerLabel)
                                                         
-                                                    }
+                                                    
                                                     
                                                     self.target_freezer = freezer
                                                     

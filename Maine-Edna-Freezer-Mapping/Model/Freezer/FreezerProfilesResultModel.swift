@@ -22,9 +22,53 @@ struct FreezerProfilesResultModel: Codable {
 // MARK: - Result
 struct FreezerProfileModel: Identifiable, Codable {
     
+    init(){
+        self.id = 0
+        self.freezerLength = ""
+        self.freezerWidth = ""
+        self.freezerLabel = ""
+        self.freezerLabelSlug = ""
+        self.freezerRoomName = ""
+        self.freezerDepth = ""
+        self.freezerDimensionUnits = ""
+        
+        self.freezerCapacityColumns = 0
+        self.freezerCapacityRows = 0
+        self.freezerCapacityDepth = 0
+        self.freezerRatedTemp = 0
+        
+        self.freezerRatedTempUnits = ""
+        self.createdBy = ""
+        self.createdDatetime = ""
+        self.modifiedDatetime = ""
+    }
+    
+    init(id : Int,freezerLength : String?,freezerWidth : String?,freezerLabel : String,freezerLabelSlug : String?,freezerRoomName : String?,freezerDepth : String?,freezerDimensionUnits : String?,freezerRatedTempUnits : String?,createdBy : String?,createdDatetime : String?,modifiedDatetime : String?, freezerCapacityColumns : Int?,freezerCapacityRows : Int?,freezerCapacityDepth : Int?,freezerRatedTemp : Int?){
+        
+        self.id = 0
+        self.freezerLength = ""
+        self.freezerWidth = ""
+        self.freezerLabel = ""
+        self.freezerLabelSlug = ""
+        self.freezerRoomName = ""
+        self.freezerDepth = ""
+        self.freezerDimensionUnits = ""
+        
+        self.freezerCapacityColumns = 0
+        self.freezerCapacityRows = 0
+        self.freezerCapacityDepth = 0
+        self.freezerRatedTemp = 0
+        
+        self.freezerRatedTempUnits = ""
+        self.createdBy = ""
+        self.createdDatetime = ""
+        self.modifiedDatetime = ""
+    }
+    
     var id: Int?
     var freezerLength, freezerWidth : String?
-    var freezerLabel, freezerLabelSlug, freezerRoomName, freezerDepth: String?
+    var freezerLabel : String
+    var freezerLabelSlug, freezerRoomName, freezerDepth: String?
     var freezerDimensionUnits: String?
     var freezerCapacityColumns, freezerCapacityRows, freezerCapacityDepth, freezerRatedTemp: Int?
     var freezerRatedTempUnits, createdBy, createdDatetime, modifiedDatetime: String?

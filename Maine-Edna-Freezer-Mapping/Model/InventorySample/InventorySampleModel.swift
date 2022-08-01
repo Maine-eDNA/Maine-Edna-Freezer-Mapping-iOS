@@ -23,7 +23,7 @@ struct InventorySampleModelLinks: Codable {
 
 
 
-class InventorySampleModel: Encodable,Decodable, Identifiable {
+class InventorySampleModel: Encodable,Decodable, Identifiable, Hashable {
     
     init(){
         
@@ -83,6 +83,45 @@ class InventorySampleModel: Encodable,Decodable, Identifiable {
          
         
         }
+    
+    //conform to hashable
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: InventorySampleModel, rhs: InventorySampleModel) -> Bool {
+        lhs.id == rhs.id
+    }
 
+}
+
+
+
+///For Batch Samples
+///
+struct SampleBatchModel: Codable, Identifiable, Hashable {
+   
+    init(){
+        self.batchName = ""
+        self.samples = [InventorySampleModel]()
+    }
+    init(batchName : String, samples: [InventorySampleModel])
+    {
+        self.batchName = batchName
+        self.samples = samples
+    }
+    
+    var id = UUID()
+    var batchName : String = ""
+    var samples: [InventorySampleModel] = [InventorySampleModel]()
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: SampleBatchModel, rhs: SampleBatchModel) -> Bool {
+        lhs.id == rhs.id
+    }
+    
 }
 

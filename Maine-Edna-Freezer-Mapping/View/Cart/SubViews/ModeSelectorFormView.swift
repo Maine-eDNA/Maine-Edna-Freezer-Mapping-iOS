@@ -13,11 +13,24 @@ struct ModeSelectorFormView : View{
     @Binding var selection : String
     @Binding var actions : [String]
     
+    @Binding var return_selection : String
+    @Binding var return_actions : [String]
+    
     var body: some View{
-        VStack(alignment: .center,spacing: 5){
+        VStack(alignment: .center,spacing: 10){
             title_instruction_section
             
             MenuStyleClicker(selection: self.$selection, actions: self.$actions,label: "Mode",label_action: self.$selection).frame(width: 200)
+            
+            if selection == "Return"{
+                withAnimation {
+                    Section{
+
+                        //Show return options and change what screens show next in the process switch out the the tag(0) CartDataCaptureFormView to be Batch List to select the batch/batches to return
+                        MenuStyleClicker(selection: self.$return_selection, actions: self.$return_actions,label: "Mode",label_action: self.$selection).frame(width: 200)
+                    }
+                }
+            }
             
             Spacer()
         }

@@ -30,7 +30,8 @@ class BarcodeDataService: ObservableObject {
     
     
     
-    
+    //To return all barcodes that are presenlt in the freezer
+    //https://metadata.spatialmsk.dev/api/sample_label/sample_barcode/?in_freezer=yes
     
     func FetchAllBarcodesInSystem(){
         
