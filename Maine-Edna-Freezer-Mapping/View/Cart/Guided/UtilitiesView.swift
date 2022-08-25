@@ -10,7 +10,7 @@ import StepperView
 import Kingfisher
 import Combine
 //MARK: Will do Add, Remove, Transfer Box on this screen
-
+#warning("Need to add validation so that if form needs target barcodes then dont allow them to move further till they select atleast one sample")
 ///Used to share data between the Form Control on the Utilities and Cart View Page instead of sending additional parameters in between
 class UtilitiesCartFormViewModel : ObservableObject{
     
@@ -66,6 +66,14 @@ struct UtilitiesView: View {
                                  
     ]
     
+    @State var remove_steps = [ Text("Mode").font(.caption),
+                                 Text("Freezer").font(.caption),
+                                 Text("Rack").font(.caption),
+                                 Text("Samples").font(.caption)
+                                 
+                                 
+    ]
+    
     //special steps for Remove and Transfer steps
     
     
@@ -74,6 +82,7 @@ struct UtilitiesView: View {
     let indicationTypes = [
         StepperIndicationType.custom(NumberedCircleView(text: "1",triggerAnimation: false)),
         .custom(NumberedCircleView(text: "2")),
+       // .image(Image(systemName: "checkmark"), 10),
         .custom(NumberedCircleView(text: "3")),
         .custom(NumberedCircleView(text: "4",triggerAnimation: false)),
         .custom(NumberedCircleView(text: "5"))
@@ -102,14 +111,21 @@ struct UtilitiesView: View {
     
     //toolbar
     @State var showTutorials : Bool = false
-    @State var tutorialImage : String = "https://wwwcdn.cincopa.com/blogres/wp-content/uploads/2019/02/video-tutorial-image.jpg"
+
     
     ///properties shared within the sections of the form (steps)
-    @State var target_freezer : FreezerProfileModel = FreezerProfileModel()
+    /// //Send the data to and from Rack
+    @State var target_rack : RackItemModel = RackItemModel()
+    @State var freezer_profile : FreezerProfileModel = FreezerProfileModel()
+    @State var inventoryLocations : [InventorySampleModel] = []
     
     @StateObject var util_vm : UtilitiesCartFormViewModel = UtilitiesCartFormViewModel()
     
     @State var freezer_rack_label_slug : String = ""
+    
+    @State var figureToFindEnd : Int =  -2
+    
+   
     
     var body: some View {
         NavigationView{
@@ -124,7 +140,7 @@ struct UtilitiesView: View {
             }
             
             //TOOL BAR
-            .navigationBarTitle("Cart")
+            .navigationBarTitle("Utilities")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -165,69 +181,8 @@ extension UtilitiesView{
     
     
     private var cartviewtutorialsection : some View{
-        NavigationView{
-            VStack(alignment: .leading){
-                List{
-                    // Text("Show Tutorials here in this list when clicked will show view and text")
-                    
-                    HStack{
-                        
-                        KFImage(URL(string: tutorialImage))
-                            .onSuccess { r in
-                                // r: RetrieveImageResult
-                                print("success: \(r)")
-                            }
-                            .onFailure { e in
-                                // e: KingfisherError
-                                print("failure: \(e)")
-                            }
-                            .placeholder {
-                                // Placeholder while downloading.
-                                
-                                KFImage(URL(string: tutorialImage))
-                                    .resizable()
-                                    .clipped()
-                                    .cornerRadius(15)
-                                    .frame(width: 100, height: 100)
-                                    .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 1))
-                            }
-                        //make reusable view modifier
-                            .resizable()
-                            .clipped()
-                            .cornerRadius(15)
-                            .frame(width: 100, height: 100)
-                            .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 1))
-                        
-                        
-                        VStack(alignment: .leading, spacing: 2) {
-                            HStack{
-                                Text("camera scanner")
-                                    .bold()
-                                    .font(.caption)
-                                    .padding()
-                                    .textInputAutocapitalization(.words)
-                                    .foregroundColor(Color.white)
-                                    .background(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 1).background(Color.teal).cornerRadius(15).frame(maxHeight: 25) )
-                                
-                                
-                                
-                            }
-                            
-                            
-                            Text("Using the Built in Camera for Barcode Scanning")
-                                .foregroundColor(Color.primary)
-                                .bold()
-                                .font(.subheadline)
-                            
-                            
-                            Spacer()
-                        }
-                    }
-                    
-                }.listStyle(.plain)
-                    .navigationTitle("User Guides")
-                    .navigationBarTitleDisplayMode(.inline)
-            }
+        Section{
+            HowToTutorialsView()
         }
     }
     
@@ -238,7 +193,7 @@ extension UtilitiesView{
             Spacer()
             //need to indicate where you are in the list
             StepperView()
-                .addSteps(general_steps)
+                .addSteps(setStepsMode())
                 .indicators(self.indicationTypes)
                 .stepIndicatorMode(StepperMode.horizontal)
                 .stepLifeCycles([StepLifeCycle.pending, .completed, .completed, .completed,.pending])
@@ -263,19 +218,65 @@ extension UtilitiesView{
             
             VStack {
                 TabView(selection: $currentIndex) {
-                    ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions)
-                        .tag (0 )
-                    CartDataCaptureFormView()
-                        .tag(1)
-                    FreezerCartFormView(target_freezer: $target_freezer)
-                        .tag (2)
-                    //MARK: Re-enable once the Guided Cart has been fixed
-                   /* RackCartFormView(target_freezer: $target_freezer, freezer_rack_label_slug: $freezer_rack_label_slug)
-                        .tag (3)
-                    //This will no longer need params since it uses the viewmodel
-                    //MARK: get this from the RackCartFormView  (maybe use a view model to share the data since so larget)
-                    BoxCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug)
-                        .tag(4)*/
+                    
+                    //if selection == Remove then change to flow
+                    /*
+                      1. Selected Remove
+                      2. Freezer
+                     3. Box
+                     4. Select the samples to remove
+                     */
+                    if selection == "Remove"{
+                        Section{
+                            //1. Selected Remove
+                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Utilities")
+                                .tag (0 )
+                           
+                            //2. Select a Freezer (Show that the Freezer was selected and can press next)
+                            FreezerCartFormView(target_freezer: $freezer_profile, selectMode: $selection)
+                                .tag (1)
+                            
+                            //3. Select the rack
+                            RackCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug, target_rack: $target_rack, freezer_profile: $freezer_profile, inventoryLocations: $inventoryLocations,selectMode : $selection)
+                                .tag (2)
+                            
+                            // 4. Select Box
+                            #warning("May need to add another form that shows the summary of what will be removed")
+                        }
+                    }
+                    else if selection == "Add"{
+                        #warning("Working on Add and clashes now ")
+                        Section{
+                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Utilities")
+                                .tag (0 )
+                            
+                            FreezerCartFormView(target_freezer: $freezer_profile, selectMode: $selection)
+                                .tag (1)
+                            
+                            //MARK: will be in press only mode and in Add Mode
+                            RackCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug, target_rack: $target_rack, freezer_profile: $freezer_profile, inventoryLocations: $inventoryLocations,selectMode : $selection)
+                                .tag (2)
+                        }
+                    }
+                    
+                    else{
+                        Section{
+                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Utilities")
+                                .tag (0 )
+                            CartDataCaptureFormView()
+                                .tag(1)
+                            FreezerCartFormView(target_freezer: $freezer_profile, selectMode: $selection)
+                                .tag (2)
+                            //MARK: Re-enable once the Guided Cart has been fixed
+                           /* RackCartFormView(target_freezer: $target_freezer, freezer_rack_label_slug: $freezer_rack_label_slug)
+                                .tag (3)
+                            //This will no longer need params since it uses the viewmodel
+                            //MARK: get this from the RackCartFormView  (maybe use a view model to share the data since so larget)
+                            BoxCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug)
+                                .tag(4)*/
+                        }
+                    }
+               
                     
                     
                 }.tabViewStyle(PageTabViewStyle())
@@ -311,9 +312,9 @@ extension UtilitiesView{
                     }) {
                         HStack(alignment: .center, spacing: 10) {
                             Image(systemName: "arrow.backward")
-                                .accentColor(.secondary)
+                                .accentColor(Color(wordName: ColorSetter().setTextForegroundColor()))
                             Text("Back")
-                                .foregroundColor(Color.secondary)
+                                .foregroundColor(Color(wordName: ColorSetter().setTextForegroundColor()))
                             
                         }
                     }
@@ -322,41 +323,46 @@ extension UtilitiesView{
                         maxWidth: .infinity,
                         maxHeight: 44
                     )
-                    .background(Color.white)
+                    //.background(Color.white)
                     .cornerRadius(4)
                     .padding(
                         [.leading, .trailing], 20
                     )
                 }
-                Button(action: {
-                    //animate transition
-                    changePosition.toggle()
-                    
-                    //(general_steps.count - 1) meants at the end of the steps
-                    //- 1 because the steps start from 0 while the steps count start from 1
-                    if currentIndex != (general_steps.count - 1) {
-                        currentIndex += 1
+                #warning("Switch the steps being used based on the mode")
+              
+                
+                if currentIndex != (setStepsMode().count + figureToFindEnd){
+                    Button(action: {
+                        //animate transition
+                        changePosition.toggle()
+                        
+                        //(setStepsMode().count - 1) meants at the end of the steps
+                        //- 1 because the steps start from 0 while the steps count start from 1
+                        if currentIndex != (setStepsMode().count + figureToFindEnd) {
+                            currentIndex += 1
+                        }
+                    }) {
+                        HStack(alignment: .center, spacing: 10) {
+                            //if equal the last section
+                            //MARK: change to be the number of count of steps to know when at the end
+                            Text(currentIndex == (setStepsMode().count + figureToFindEnd) ? "Done" : "Next")
+                                .foregroundColor(.white)
+                            Image(systemName: currentIndex == (setStepsMode().count + figureToFindEnd) ? "checkmark" : "arrow.right")
+                                .accentColor(.white)
+                        }
                     }
-                }) {
-                    HStack(alignment: .center, spacing: 10) {
-                        //if equal the last section
-                        //MARK: change to be the number of count of steps to know when at the end
-                        Text(currentIndex == (general_steps.count - 1) ? "Done" : "Next")
-                            .foregroundColor(.white)
-                        Image(systemName: currentIndex == (general_steps.count - 1) ? "checkmark" : "arrow.right")
-                            .accentColor(.white)
-                    }
+                    .frame(
+                        minWidth: 0,
+                        maxWidth: .infinity,
+                        maxHeight: 44
+                    )
+                    .background(Color.secondary)
+                    .cornerRadius(4)
+                    .padding(
+                        [.leading, .trailing], 20
+                    )
                 }
-                .frame(
-                    minWidth: 0,
-                    maxWidth: .infinity,
-                    maxHeight: 44
-                )
-                .background(Color.secondary)
-                .cornerRadius(4)
-                .padding(
-                    [.leading, .trailing], 20
-                )
             }
             // Spacer()
         }
@@ -368,8 +374,19 @@ extension UtilitiesView{
     
 }
 
+extension UtilitiesView{
+    #warning("Will need to update this to use a case or similar to set step mode for multiple selection types")
+    ///sets the correct steps according to the mode to keep the form behavior consistent
+    func setStepsMode() -> [Text]{
+        return selection == "Remove" ? remove_steps : general_steps
+    }
+    
+
+}
+
 struct UtilitiesView_Previews: PreviewProvider {
     static var previews: some View {
         UtilitiesView()
+            .navigationViewStyle(.stack)
     }
 }

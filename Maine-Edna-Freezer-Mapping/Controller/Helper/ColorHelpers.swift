@@ -10,7 +10,7 @@ import SwiftUI
 
 
 extension Color {
-    
+    ///Allows words to be used to dynamically set colors from parameters instead of needing example Color.red
     init?(wordName: String) {
         switch wordName {
         case "clear":       self = .clear

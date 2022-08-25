@@ -45,6 +45,8 @@ struct RackProfileView: View {
     
     @Binding var is_in_select_mode : Bool
     
+    @Binding var selectMode : String
+    
     var body: some View {
         //TODO: - Show empty box spaces fo the available slots in the rack and show multi-level rack as well
         //  NavigationView{
@@ -116,7 +118,7 @@ struct RackProfileView: View {
                             if findRackLength(rack_profile: rack_profile) > 1{
                                 //show the control to select a row
                                 //generate the selection based on the number of rows found
-                                MenuStyleClicker(selection: self.$viewModeSelection, actions: self.$viewModes, label: "View Modes",label_action: self.$viewModeSelection)//.frame(width: 100).padding()
+                                MenuStyleClicker(selection: self.$viewModeSelection, actions: self.$viewModes, label: "View Modes",label_action: self.$viewModeSelection,width: .constant(UIScreen.main.bounds.width * 0.90))//.frame(width: 100).padding()
                                 
                             }
                             
@@ -141,7 +143,7 @@ struct RackProfileView: View {
                             //get the current rack row index and add 1 to it since index start at 0
                             ScrollView([.horizontal,.vertical],showsIndicators: false){
                                 RackCrossSectView(rack_profile: self.rack_profile, rack_boxes: self.$vm.all_filter_rack_boxes, freezer_profile: .constant(self.freezer_profile), current_rack_row: .constant(currentRackRow()),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false), in_guided_sample_mode: .constant(false), inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode,
-                                                  freezer_rack_label_slug: freezer_rack_label_slug, is_in_select_mode: $is_in_select_mode)
+                                                  freezer_rack_label_slug: freezer_rack_label_slug, selectMode: $selectMode, is_in_select_mode: $is_in_select_mode)
                                 
                                 
                                 // .frame(width: UIScreen.main.bounds.width)
@@ -321,7 +323,7 @@ struct RackProfileView_Previews: PreviewProvider {
              .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
              .previewDisplayName("iPhone XS Max")*/
             
-            ScreenPreview(screen:   RackProfileView(rack_profile: .constant(rack_profile),freezer_profile: freezer_profile, addToRackMode: .constant(false), freezer_rack_label_slug: .constant(""), is_in_select_mode: .constant(false)))
+            ScreenPreview(screen:   RackProfileView(rack_profile: .constant(rack_profile),freezer_profile: freezer_profile, addToRackMode: .constant(false), freezer_rack_label_slug: .constant(""), is_in_select_mode: .constant(false), selectMode: .constant("")))
         }
     }
 }

@@ -98,7 +98,7 @@ struct SampleInvenActivLogView: View {
                                     }
                                 }
                             
-                        }
+                        }.listStyle(.plain)
                         .searchable(text: $searchText){
                             ForEach(searchResults, id: \.id) { result in
                                 Text("Are you looking for logs by \(result.created_by) ?").searchCompletion(result.created_by)

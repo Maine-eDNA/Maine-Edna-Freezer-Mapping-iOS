@@ -111,13 +111,13 @@ extension CreateInventorySampleView{
     
     private var freezer_inv_type_section : some View{
         Section{
-            MenuStyleClicker(selection: self.$selected_inv_type, actions: self.$inv_types_vm.inventoryType.choices,label: "Freezer Inventory Type",label_action: self.$selected_inv_type,reverseTxtOrder: true)//.frame(width: 200)
+            MenuStyleClicker(selection: self.$selected_inv_type, actions: self.$inv_types_vm.inventoryType.choices,label: "Freezer Inventory Type",label_action: self.$selected_inv_type,reverseTxtOrder: true, width: .constant(UIScreen.main.bounds.width * 0.90))//.frame(width: 200)
         }
     }
     
     private var freezer_inv_status_section : some View{
         Section{
-            MenuStyleClicker(selection: self.$selected_inv_status, actions: self.$inv_types_vm.inventoryStatus.choices,label: "Freezer Inventory Status",label_action: self.$selected_inv_type,reverseTxtOrder: true)//.frame(width: 200)
+            MenuStyleClicker(selection: self.$selected_inv_status, actions: self.$inv_types_vm.inventoryStatus.choices,label: "Freezer Inventory Status",label_action: self.$selected_inv_type,reverseTxtOrder: true,width: .constant(UIScreen.main.bounds.width * 0.90))//.frame(width: 200)
         }
     }
     
@@ -139,7 +139,9 @@ extension CreateInventorySampleView{
     private var inventory_item_position_preview : some View{
         VStack{
             ///+1 for the column since arrays start at 0 and -1 (if greater than 0) from row since  it is converting from a number to an array letter that starts at 0
-            SamplePreviewPositionView(column: .constant(target_sample_spot_detail.freezer_inventory_column + 1), row:  .constant(convertFromNumberToAlphabet(digit: target_sample_spot_detail.freezer_inventory_row)), inven_type_abbrev: $selected_inv_type, barcode_last_three_digits: $sample_barcode)
+           // Text("Column \(target_sample_spot_detail.freezer_inventory_column)")
+            
+            SamplePreviewPositionView(column: $target_sample_spot_detail.freezer_inventory_column, row:  .constant(convertFromNumberToAlphabet(digit: target_sample_spot_detail.freezer_inventory_row)), inven_type_abbrev: $selected_inv_type, barcode_last_three_digits: $sample_barcode)
             
         }
     }
@@ -154,23 +156,20 @@ extension CreateInventorySampleView{
         print("Current Value: \(digit)")
         
         return alphabet[digit].capitalized //+ "= \(digit)"
-        /*if digit == 0{
-            return alphabet[digit].capitalized + "= \(digit)"
-        }
-        if digit == 1{
-            return alphabet[digit - 1].capitalized + "= \(digit)"
-        }
-        else{
-            
-            return alphabet[digit].capitalized + "= \(digit)"
-        }*/
+
     }
     
     func createNewInventorySample(){
         print("Box \(target_sample_spot_detail.freezer_box)")
         print("Row \(target_sample_spot_detail.freezer_inventory_row) Column \(target_sample_spot_detail.freezer_inventory_column)")
+        //Because the API prevents columns or rows that arent 1 or greater
+        ///Example  {"freezer_inventory_row":["Ensure this value is greater than or equal to 1."]}
+        
+        if target_sample_spot_detail.freezer_inventory_row == 0{
+            target_sample_spot_detail.freezer_inventory_row += 1
+        }
         ///Add 1 to row and column to adhere with the validation
-        inventory_sample_vm.createNewInvSample(_sampleDetail: InventorySampleModel(freezer_box: target_sample_spot_detail.freezer_box, freezer_inventory_column: target_sample_spot_detail.freezer_inventory_column , freezer_inventory_row: target_sample_spot_detail.freezer_inventory_row,freezer_inventory_type: self.selected_inv_type,freezer_inventory_status:  self.selected_inv_status,sample_barcode: sample_barcode)) { response in
+        inventory_sample_vm.createNewInvSample(_sampleDetail: InventorySampleModel(freezer_box: target_sample_spot_detail.freezer_box, freezer_inventory_column: target_sample_spot_detail.freezer_inventory_column , freezer_inventory_row: target_sample_spot_detail.freezer_inventory_row,freezer_inventory_type: self.selected_inv_type,freezer_inventory_status:  self.selected_inv_status,sample_barcode: sample_barcode,freezer_inventory_freeze_datetime: Date().ISO8601Format())) { response in
             
             if !response.isError{
                 //then go back to previous screen

@@ -57,6 +57,8 @@ struct InteractFreezerLayoutPreview: View {
     
     @State var freezer_rack_label_slug : String = ""
     
+    @Binding var selectMode : String
+    
     var body: some View {
         //TODO outline the map with the row labels and column outline
         
@@ -69,7 +71,7 @@ struct InteractFreezerLayoutPreview: View {
             
         }
         
-        }.background(  NavigationLink(destination: RackProfileView(rack_profile: $target_rack,freezer_profile: self.freezer_profile,isInSearchMode: self.isInSearchMode, inventoryLocations: self.inventoryLocations, addToRackMode: .constant(false), freezer_rack_label_slug: $freezer_rack_label_slug, is_in_select_mode: .constant(false)),isActive: $showRackProfile,label: {EmptyView()}))
+        }.background(  NavigationLink(destination: RackProfileView(rack_profile: $target_rack,freezer_profile: self.freezer_profile,isInSearchMode: self.isInSearchMode, inventoryLocations: self.inventoryLocations, addToRackMode: .constant(false), freezer_rack_label_slug: $freezer_rack_label_slug, is_in_select_mode: .constant(false), selectMode: $selectMode),isActive: $showRackProfile,label: {EmptyView()}))
         
         .onAppear{
             //Get freezer layout
@@ -88,12 +90,13 @@ struct InteractFreezerLayoutPreview: View {
 
 struct InteractFreezerLayoutPreview_Previews: PreviewProvider {
     static var previews: some View {
-        InteractFreezerLayoutPreview(freezer_max_rows: .constant(0), freezer_max_columns: .constant(0), freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel(), show_create_new_rack: .constant(false), show_guided_rack_view: .constant(false), show_guided_map_view: .constant(false),freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95), rack_position_row: .constant(0),rack_position_column: .constant(0), target_rack: .constant(RackItemModel()))
+        InteractFreezerLayoutPreview(freezer_max_rows: .constant(0), freezer_max_columns: .constant(0), freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel(), show_create_new_rack: .constant(false), show_guided_rack_view: .constant(false), show_guided_map_view: .constant(false),freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95), rack_position_row: .constant(0),rack_position_column: .constant(0), target_rack: .constant(RackItemModel()), selectMode: .constant(""))
         
     }
 }
 
 //Resuable
+//MARK: Place this in a separate file
 struct FreezerRackMap : View{
     
     @Binding var freezer_max_rows : Int

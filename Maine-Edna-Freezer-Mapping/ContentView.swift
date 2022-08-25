@@ -27,6 +27,8 @@ import SwiftUI
  
  when in add mode need to allow the user to scan example the 50 barcodes then ask the user what freezer they would like to add the samples to. It will automatically select a rack, box or boxes that can store these samples it will then highlight and suggest the boxes and spots to add each sample to (step by step mode or overview mode which shows all the positions in the map view)
  */
+#warning("Read Marlee notes to see what needs to be updated such as for remove just scan barcodes -> then remove (perm_removed) samples.")
+//MARK: import CSVs from local, Google Drive and from URL
 struct ContentView: View {
     @AppStorage(AppStorageNames.login_status.rawValue) var logged = false
     //Screenshot should be from the tablet view and should be 300 dpi resolution

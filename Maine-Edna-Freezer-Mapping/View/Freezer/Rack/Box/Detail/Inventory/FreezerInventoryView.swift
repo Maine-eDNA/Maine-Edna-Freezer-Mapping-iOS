@@ -19,14 +19,14 @@ struct FreezerInventoryView: View {
     @State var inventoryLocations : [InventorySampleModel] = []
     @State var isInSearchMode : Bool = false
     @Binding var is_in_select_mode : Bool
-    
+    @Binding var selectMode : String //if in remove mode then the samples should be highlighted
     
     var body: some View {
         VStack(alignment: .leading){
             //MARK: Need to re-enable the following and make it collapsable
             #warning("Re-add the top but make it more uniform and less in the way")
             //Show Box Detail at the top
-            /*VStack(alignment: .leading){
+            VStack(alignment: .leading){
                 HStack{
                     Text("Box Label").font(.title3).bold()
                     Spacer()
@@ -105,7 +105,7 @@ struct FreezerInventoryView: View {
                 
             }.padding()
             //Text("Show the capsules in the form of grids that look like a box (round capsules")
-            HStack{
+           /* HStack{
                 Button(action: {
                     
                 }, label: {
@@ -140,7 +140,7 @@ struct FreezerInventoryView: View {
                         .background(Color.green)
                         .cornerRadius(5)
                 
-            }.padding()
+            }.padding()*/
             
             HStack{
                 Text("Samples in \(self.box_detail.freezer_box_label ?? "")").font(.title3).bold()
@@ -161,10 +161,10 @@ struct FreezerInventoryView: View {
                     //Sample Capsule Map Key
                     SampleCapsuleMapLegendView(box_detail: self.box_detail)
                 }
-            }*/
+            }
             #warning("Make sure samples are being sent to the box")
             //MARK: Need to show the get the samples that are the targets and  and the other samples like with boxes
-            BoxSampleMapView(box: self.$box_detail, freezer_profile: self.$freezer_profile, is_in_select_mode: $is_in_select_mode)
+            BoxSampleMapView(box: self.$box_detail, freezer_profile: self.$freezer_profile, is_in_select_mode: $is_in_select_mode, selectMode: $selectMode)
          
             
             Spacer()
@@ -189,6 +189,6 @@ struct FreezerInventoryView: View {
 
 struct FreezerInventoryView_Previews: PreviewProvider {
     static var previews: some View {
-        FreezerInventoryView(box_detail: .constant(BoxItemModel()), freezer_profile: .constant(FreezerProfileModel()), is_in_select_mode: .constant(false))
+        FreezerInventoryView(box_detail: .constant(BoxItemModel()), freezer_profile: .constant(FreezerProfileModel()), is_in_select_mode: .constant(false), selectMode: .constant(""))
     }
 }

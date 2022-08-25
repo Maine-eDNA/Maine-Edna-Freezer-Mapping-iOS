@@ -50,7 +50,7 @@ struct AllFreezersView: View {
         NavigationView{
             
             
-            FreezerVisualList(searchText: $searchText, target_freezer: $target_freezer,show_freezer_detail: $show_freezer_detail, freezerList: $vm.allFreezers)
+            FreezerVisualList(searchText: $searchText, target_freezer: $target_freezer,show_freezer_detail: $show_freezer_detail, freezerList: $vm.allFreezers, selectMode: .constant("Search"))
                /* .refreshable {
                     
                     //Show Loading Animation

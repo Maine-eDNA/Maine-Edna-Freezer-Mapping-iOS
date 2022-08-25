@@ -74,3 +74,28 @@ extension View{
 }
 
 //Rounded Button End
+
+//Rounded Rectangle Button
+
+struct RoundedRectangleButton : ViewModifier{
+    
+    func body(content: Content) -> some View {
+        content
+            .font(.caption)
+            .foregroundColor(Color.primary)
+            .padding(.vertical,10)
+            .padding(.horizontal,20)
+            .background(
+                
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.theme.accent,lineWidth: 1)
+            )
+    }
+}
+
+extension View{
+    
+    func roundedRectangleButton() -> some View{
+        self.modifier(RoundedRectangleButton())
+    }
+}

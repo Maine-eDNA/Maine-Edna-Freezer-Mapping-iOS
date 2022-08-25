@@ -119,6 +119,8 @@ struct GuidedCartView: View {
     
     //MARK: Put the form details in a view model to clean up the UI end
     
+    @State var figureToFindEnd : Int =  -2
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -246,7 +248,7 @@ extension GuidedCartView{
             Spacer()
             //need to indicate where you are in the list
             StepperView()
-                .addSteps(selection == "Search" ? general_steps : return_steps)
+                .addSteps(setStepsMode())
                 .indicators(self.indicationTypes)
                 .stepIndicatorMode(StepperMode.horizontal)
                 .stepLifeCycles([StepLifeCycle.pending, .completed, .completed, .completed,.pending])
@@ -275,15 +277,15 @@ extension GuidedCartView{
                     if selection == "Search"{
                         Section{
                             //MARK: will change this according to the mode
-                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions)
+                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Utilities")
                                 .tag (0)
                             CartDataCaptureFormView()
                                 .tag(1)
-                            FreezerCartFormView(target_freezer: $freezer_profile)
+                            FreezerCartFormView(target_freezer: $freezer_profile, selectMode: $selection)
                                 .tag (2)
                             
                             // RackCartFormView(freezer_profile: $freezer_profile, freezer_rack_label_slug: $freezer_rack_label_slug,target_rack: $target_rack, inventoryLocations: $inventoryLocations )
-                            RackCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug, target_rack: $target_rack, freezer_profile: $freezer_profile, inventoryLocations: $inventoryLocations)
+                            RackCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug, target_rack: $target_rack, freezer_profile: $freezer_profile, inventoryLocations: $inventoryLocations, selectMode: $selection)
                                 .tag (3)
                             //BoxCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug)
                            
@@ -298,7 +300,7 @@ extension GuidedCartView{
                         //MARK: if the extraction return has special pages compared to the regular return which doesnt change the barcode just return to the existing position
                         Section{
                       
-                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions)
+                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Cart")
                                 .tag (0)
                             
                             //select a batch from the list
@@ -351,9 +353,9 @@ extension GuidedCartView{
                     }) {
                         HStack(alignment: .center, spacing: 10) {
                             Image(systemName: "arrow.backward")
-                                .accentColor(.white)
+                                .accentColor(Color(wordName: ColorSetter().setTextForegroundColor()))
                             Text("Back")
-                                .foregroundColor(Color.primary)
+                                .foregroundColor(Color(wordName: ColorSetter().setTextForegroundColor()))
                             
                         }
                     }
@@ -362,20 +364,21 @@ extension GuidedCartView{
                         maxWidth: .infinity,
                         maxHeight: 44
                     )
-                    .background(Color.secondary)
+                    //.background(Color.secondary)
                     .cornerRadius(4)
                     .padding(
                         [.leading, .trailing], 20
                     )
                 }
+                if currentIndex != (setStepsMode().count + figureToFindEnd){
                 Button(action: {
                     //animate transition
                     changePosition.toggle()
                     
-                    //(general_steps.count - 1) meants at the end of the steps
+                    //(setStepsMode().count + figureToFindEnd) meants at the end of the steps
                     //- 1 because the steps start from 0 while the steps count start from 1
                     if selection == "Search"{
-                        if currentIndex != (general_steps.count - 1) {
+                        if currentIndex != (setStepsMode().count + figureToFindEnd) {
                             currentIndex += 1
                         }
                     }
@@ -385,19 +388,19 @@ extension GuidedCartView{
                         }
                     }
                     
-                
+                    
                     
                 }) {
                     HStack(alignment: .center, spacing: 10) {
                         //if equal the last section
                         //MARK: change to be the number of count of steps to know when at the end
-                     
+                        
                         
                         if selection == "Search"{
                             Section{
-                                Text(currentIndex == (general_steps.count - 1) ? "Done" : "Next")
+                                Text(currentIndex == (setStepsMode().count + figureToFindEnd) ? "Done" : "Next")
                                     .foregroundColor(.white)
-                                Image(systemName: currentIndex == (general_steps.count - 1) ? "checkmark" : "arrow.right")
+                                Image(systemName: currentIndex == (setStepsMode().count + figureToFindEnd) ? "checkmark" : "arrow.right")
                                     .accentColor(.white)
                             }
                         }
@@ -422,6 +425,7 @@ extension GuidedCartView{
                     [.leading, .trailing], 20
                 )
             }
+            }
             // Spacer()
         }
     }
@@ -430,6 +434,13 @@ extension GuidedCartView{
     //MARK: form switcher section end
     
     
+}
+extension GuidedCartView{
+    #warning("Will need to update this to use a case or similar to set step mode for multiple selection types")
+    ///sets the correct steps according to the mode to keep the form behavior consistent
+    func setStepsMode() -> [Text]{
+        return selection == "Search" ? general_steps : return_steps
+    }
 }
 
 struct GuidedCartView_Previews: PreviewProvider {

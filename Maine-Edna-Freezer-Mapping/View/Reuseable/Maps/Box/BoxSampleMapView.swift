@@ -16,6 +16,11 @@ import AlertToast
 
 
 #warning("Show the batches whenopen the app, put the dashboard in Menu")
+
+#warning("In Add Mode, when press auto fill for the system to assign the barcodes to position or manuallypress the location and select the barode from the list of barcodes provided")
+#warning("Bug some samples arent showing up in the map although added to the db")
+
+#warning("Need to hide buttons when not in use at the top, especially when using mobile phone")
 struct BoxSampleMapView: View {
     
     let data = (1...100).map { "\($0)" }
@@ -33,7 +38,7 @@ struct BoxSampleMapView: View {
     
     @Binding var freezer_profile : FreezerProfileModel
     
-    @State var target_sample_detail : InventorySampleModel = InventorySampleModel()
+  
     
     
     //CapsuleSuggestedPositionView
@@ -44,7 +49,7 @@ struct BoxSampleMapView: View {
     
     @Binding var is_in_select_mode : Bool
     
-    //MARK: Need to make this accessible throughout the form
+    ///used to do multi-select for take from freezer and perm_remove
     @State var selected_samples_to_take : [InventorySampleModel] = []
     
     //Response from Server message
@@ -57,6 +62,13 @@ struct BoxSampleMapView: View {
     @AppStorage(AppStorageNames.store_sample_batches.rawValue)  var store_sample_batches : [SampleBatchModel] = [SampleBatchModel]()
     
     @State var reset_cart_form_control : Bool = false
+    
+    @Binding var selectMode : String
+    
+    @State var isSampleSelected : Bool = false
+    
+    @State var showResolutionPopUp : Bool = false
+    
     
     var body: some View {
         
@@ -81,27 +93,98 @@ struct BoxSampleMapView: View {
                                     
                                     
                                     
-                                    self.target_sample_detail = content
+                                    self.inventory_vm.target_sample_detail = content
                                     
-                                    //open the modal
-                                    print("Show Details Pressed")
-                                    //MARK: after this functionality is tested add it to other capsules
-                                    sampleSuggestedCapsuleFunctionality()
+                                    if selectMode == "Remove"{
+                                        if let targetIndexToRemove = isSampleInList(sample: content)
+                                        {
+                                            //already exist which means the user is unselecting the sample
+                                            if removeSampleFromTargetList(targetIndexToRemove: targetIndexToRemove){
+                                                //then unselect the target sample by removing from the list
+                                                displayMesssageToUser(_message: "\(content.sample_barcode) Unselected", _isError: false)
+                                            }
+                                        }
+                                     
+                                        else{
+                                            //doesnt already exist so add to list
+                                            #warning("TODO next to ensure the target sample color changes to be highlight and can be unselected if no longer on removal list or accidentlly selected, when removed should turn to gray")
+                                            //MARK: highlight the sample that was selected
+                                            displayMesssageToUser(_message: "Hightlight this Sample", _isError: false)
+                                                #warning("NEXT")
+                                            //set that the sample has been selected
+                                            //MARK: need to track the selected samples in a list
+                                            //if unselected (means its false) then remove from the list and
+                                            
+                                            //add to multi-select list
+                                            self.selected_samples_to_take.append(content)
+                                            
+                                            self.isSampleSelected.toggle()
+                                        }
+                                    }
+                                    else if selectMode == "Add"{
+                                        //MARK: Position already taken so show modal with resolution options
+                                        populateAndShowResolutionPopUp()
+                                    }
+                                    else{
+                                        //open the modal
+                                        print("Show Details Pressed")
+                                        //MARK: after this functionality is tested add it to other capsules
+                                        sampleSuggestedCapsuleFunctionality()
+                                        
+                                    }
                                 }
                         }
                     }
                     else if content.freezer_inventory_row == row && content.freezer_inventory_column == col{
                         
-                        BoxSampleCapsuleView(background_color: .constant(setColorBasedOnSampleType(freezer_inventory_type: content.freezer_inventory_type)),sample_code: .constant(String(!content.sample_barcode.isEmpty ? content.sample_barcode.suffix(4) : "N/A")),sample_type_code: .constant(String(!content.freezer_inventory_type.isEmpty ? content.freezer_inventory_type.prefix(1) : "N/A")), foreground_color: .constant("white"),width: 50,height: 50)
+                        BoxSampleCapsuleView(sampleDetail: .constant(content), targetSamples: $selected_samples_to_take, isSelected: $isSampleSelected)
                             .onTapGesture {
-                                self.target_sample_detail = content
+                                //MARK: add this to its own section
+                                self.inventory_vm.target_sample_detail = content
                                 
-                                //open the modal
-                                print("Show Details Pressed")
-                                sampleCapsuleFunctionality()
-                                /* withAnimation {
-                                 self.showSampleDetail.toggle()
-                                 }*/
+                                if selectMode == "Remove"{
+                                    //if the current sample being selected was already selected then unselect it and remove it from the list
+                                    //MARK: own func
+                                    if let targetIndexToRemove = isSampleInList(sample: content)
+                                    {
+                                        //already exist which means the user is unselecting the sample
+                                        if removeSampleFromTargetList(targetIndexToRemove: targetIndexToRemove)
+                                        {
+                                            //then unselect the target sample by removing from the list
+                                            displayMesssageToUser(_message: "\(content.sample_barcode) Unselected", _isError: false)
+                                        }
+                                    }
+                                  
+                                    else{
+                                        //doesnt already exist so add to list
+
+                                        //MARK: highlight the sample that was selected
+                                        displayMesssageToUser(_message: "Hightlight this Sample", _isError: false)
+
+                                        //set that the sample has been selected
+                                        //MARK: need to track the selected samples in a list
+                                        //if unselected (means its false) then remove from the list and
+                                        
+                                        //add to multi-select list
+                                        self.selected_samples_to_take.append(content)
+                                        
+                                        self.isSampleSelected.toggle()
+                                    }
+                                    
+                                }
+                                else if selectMode == "Add"{
+                                    //MARK: Position already taken so show modal with resolution options
+                                    populateAndShowResolutionPopUp()
+                                }
+                                else{
+                                    //open the modal
+                                    print("Show Details Pressed")
+                                    sampleCapsuleFunctionality()
+                                    /* withAnimation {
+                                     self.showSampleDetail.toggle()
+                                     }*/
+                                }
+                                
                             }
                         
                         
@@ -115,17 +198,42 @@ struct BoxSampleMapView: View {
                         //empty sample box sample color
                         
                         VStack {
-                            BoxSampleCapsuleView(background_color: .constant("gray"),sample_code: .constant(String(!content.sample_barcode.isEmpty ? content.sample_barcode.suffix(4) : "N/A")),sample_type_code: .constant(String(!content.freezer_inventory_type.isEmpty ? content.freezer_inventory_type.prefix(1) : "N/A")), foreground_color: .constant("white"),width: 50,height: 50)
+                            BoxSampleCapsuleView(sampleDetail: .constant(content), targetSamples: $selected_samples_to_take, isSelected: $isSampleSelected)
                                 .onTapGesture {
-                                    
-                                    //Set the row and column
-                                    content.freezer_inventory_row = row
-                                    content.freezer_inventory_column = col
-                                    content.freezer_box = box.freezer_box_label_slug ?? "" //The box slug
-                                    self.target_sample_detail = content
-                                    
-                                    withAnimation {
-                                        self.showCreateNewSample.toggle()
+                                    if selectMode == "Remove"{
+                                        //MARK: do nothing since you cant remove from an empty position
+                                        
+                                        displayMesssageToUser(_message: "Can't Remove Empty Sample", _isError: false)
+                                        
+                                        
+                                        
+                                    }
+                                    else{
+                                        //MARK: Need to debug to ensure the correct coordinates are sent to the form at all times
+                                        
+                                        let tempSampleDetail = InventorySampleModel()
+                                        //Set the row and column
+                                        if let box_row_cap = box.freezer_box_capacity_row{
+                                            if row == (box_row_cap - 1){
+                                                //add 1 to the row
+                                                //content.freezer_inventory_row = row //+ 1
+                                                tempSampleDetail.freezer_inventory_row = row
+                                            }
+                                            else{
+                                                tempSampleDetail.freezer_inventory_row = row > 0 ? row - 1 : row// + 1
+                                                
+                                            }
+                                        }
+                                     
+                                        tempSampleDetail.freezer_inventory_column = col + 1 //because it starts at 0
+                                        tempSampleDetail.freezer_box = box.freezer_box_label_slug ?? "" //The box slug
+                                        self.inventory_vm.target_sample_detail = tempSampleDetail
+                                        
+                                        withAnimation {
+                                            self.showCreateNewSample.toggle()
+                                            
+                                            //reset the content
+                                        }
                                     }
                                 }
                         }//.background(.red)
@@ -147,7 +255,7 @@ struct BoxSampleMapView: View {
             
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if is_in_select_mode{
+                    if is_in_select_mode && selectMode != "Remove"{
                         Button {
                             //show list of samples in the list
                             withAnimation {
@@ -164,48 +272,50 @@ struct BoxSampleMapView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        //add the selected_samples to store_sample_batches
-                        //MARK: make batch
-                        if selected_samples_to_take.count > 0{
-                            var new_sample_batch = SampleBatchModel()
-                            //made of UUID + Current date + number of samples
-                            new_sample_batch.batchName = "\(UUID().uuidString)_\(Date().asShortDateString())_\(selected_samples_to_take.count)"
-                            new_sample_batch.samples = selected_samples_to_take
-                            //add to the global or database list
-                            self.store_sample_batches.append(new_sample_batch)
-                            
-                            //clear from the local list
-                            withAnimation {
-                                self.selected_samples_to_take.removeAll()
-                                self.reset_cart_form_control.toggle()
+                    if is_in_select_mode && selectMode != "Remove"{
+                        Button {
+                            //add the selected_samples to store_sample_batches
+                            //MARK: make batch
+                            if selected_samples_to_take.count > 0{
+                                var new_sample_batch = SampleBatchModel()
+                                //made of UUID + Current date + number of samples
+                                new_sample_batch.batchName = "\(UUID().uuidString)_\(Date().asShortDateString())_\(selected_samples_to_take.count)"
+                                new_sample_batch.samples = selected_samples_to_take
+                                //add to the global or database list
+                                self.store_sample_batches.append(new_sample_batch)
+                                
+                                //clear from the local list
+                                withAnimation {
+                                    self.selected_samples_to_take.removeAll()
+                                    self.reset_cart_form_control.toggle()
+                                }
                             }
+                            else{
+                                self.responseMsg = "Must have 1 or more samples"
+                                self.showResponseMsg = true
+                                self.isErrorMsg = true
+                            }
+                            
+                        } label: {
+                            HStack{
+                                Image(systemName: "tray.and.arrow.up.fill")
+                                Text("Take Samples")
+                            }.roundButtonStyle()
                         }
-                        else{
-                            self.responseMsg = "Must have 1 or more samples"
-                            self.showResponseMsg = true
-                            self.isErrorMsg = true
-                        }
-                        
-                    } label: {
-                        HStack{
-                            Image(systemName: "tray.and.arrow.up.fill")
-                            Text("Take Samples")
-                        }.roundButtonStyle()
                     }
                 }
             }
             
         }.background(
             NavigationLink(isActive: $showSampleDetail, destination: {
-                SampleInvenActivLogView(sample_detail: $target_sample_detail)
+                SampleInvenActivLogView(sample_detail: $inventory_vm.target_sample_detail)
             }, label: {
                 EmptyView()
             })
         )
         .background(
             NavigationLink(isActive: $showCreateNewSample, destination: {
-                CreateInventorySampleView(target_sample_spot_detail: $target_sample_detail, freezer_box_label: .constant(box.freezer_box_label ?? "No Box Found"))
+                CreateInventorySampleView(target_sample_spot_detail: $inventory_vm.target_sample_detail, freezer_box_label: .constant(box.freezer_box_label ?? "No Box Found"))
             }, label: {
                 EmptyView()
             })
@@ -229,7 +339,14 @@ struct BoxSampleMapView: View {
                 return AlertToast(type: .regular, title: "Response", subTitle: "\(self.responseMsg )")
             }
         }
-        
+        .customHalfSheet(showHalfSheet: $showResolutionPopUp) {
+            //Make into Custom Body
+            //Text("Resolution Logic and interface will show up here")
+          
+            ResolutionModalView(inventorySample: self.$inventory_vm.target_sample_detail)
+                //.frame(width: 200)
+                .padding()
+        }
         
         
         
@@ -238,11 +355,44 @@ struct BoxSampleMapView: View {
 
 struct BoxSampleMapView_Previews: PreviewProvider {
     static var previews: some View {
-        BoxSampleMapView(box: .constant(BoxItemModel()), freezer_profile: .constant(FreezerProfileModel()), is_in_select_mode: .constant(false))
+        BoxSampleMapView(box: .constant(BoxItemModel()), freezer_profile: .constant(FreezerProfileModel()), is_in_select_mode: .constant(false), selectMode: .constant(""))
     }
 }
 
 extension BoxSampleMapView{
+    
+    func populateAndShowResolutionPopUp(){
+        //Trigger the modal
+        withAnimation {
+            self.showResolutionPopUp.toggle()
+        }
+        
+    }
+    
+    ///checks if the sample is in the multi-select list and returns an index if found
+    func isSampleInList(sample : InventorySampleModel) -> Int?{
+        return selected_samples_to_take.firstIndex(where: {$0.id == sample.id})
+    }
+    
+    ///removes the sample at the target index and confirms it is no longer in the list
+    func removeSampleFromTargetList(targetIndexToRemove : Int) -> Bool{
+         selected_samples_to_take.remove(at: targetIndexToRemove)
+        
+        if !selected_samples_to_take.indices.contains(targetIndexToRemove){
+            //means it no longer exist
+            return true
+        }
+        else{
+            return false
+        }
+        
+    }
+    
+    func displayMesssageToUser(_message : String, _isError : Bool){
+        self.responseMsg = _message
+        self.isErrorMsg = _isError
+        self.showResponseMsg = true
+    }
     
     func doesSampleAlreadyExistInTheList(target_sample : InventorySampleModel) -> Bool
     {
@@ -283,15 +433,15 @@ extension BoxSampleMapView{
             print("In Select mode so will now add this sample to the list")
             
             withAnimation {
-                if doesSampleAlreadyExistInTheList(target_sample: self.target_sample_detail){
+                if doesSampleAlreadyExistInTheList(target_sample: self.inventory_vm.target_sample_detail){
                     print("Sample Already Exist")
                     
-                    self.responseMsg = "\(self.target_sample_detail.sample_barcode) Already Exist in list"
+                    self.responseMsg = "\(self.inventory_vm.target_sample_detail.sample_barcode) Already Exist in list"
                     self.showResponseMsg = true
                     self.isErrorMsg = true
                 }
                 else{
-                    self.selected_samples_to_take.append( self.target_sample_detail)
+                    self.selected_samples_to_take.append( self.inventory_vm.target_sample_detail)
                 }
             }
         }
@@ -329,36 +479,7 @@ extension BoxSampleMapView{
         }
     }
     
-#warning("Also color the samples based on their type: filter = blue, extraction = purple, sub-core = orange, pooled_lib = brown ")
     
-    func setColorBasedOnSampleType(freezer_inventory_type : String) -> String
-    {
-        //green for target samples
-        /*
-         "choices": [
-         "filter",
-         "subcore",
-         "extraction",
-         "pooled_lib"
-         ]
-         */
-        if freezer_inventory_type == "filter"{
-            return "blue"
-        }
-        else if freezer_inventory_type == "subcore"{
-            return "orange"
-        }
-        else if freezer_inventory_type == "extraction"{
-            return "purple"
-        }
-        else if freezer_inventory_type == "pooled_lib"{
-            return "brown"
-        }
-        else{
-            return "mint"
-        }
-        
-    }
     
 }
 
@@ -411,7 +532,7 @@ struct InteractiveBoxGridStack<Content: View>: View {
                                     content(row, column,sample)
                                 }
                                 else{
-                                    content(row, column,InventorySampleModel(id: 0,freezer_box: "",freezer_inventory_column: column, freezer_inventory_row: row, is_suggested_sample: false))//MARK: change this to be dynamic when it is suggested
+                                    content(row, column,InventorySampleModel(id: 0,freezer_box: "",freezer_inventory_column: column, freezer_inventory_row: row, is_suggested_sample: false,freezer_inventory_freeze_datetime: Date().ISO8601Format()))//MARK: change this to be dynamic when it is suggested
                                 }
                             }
                             //here

@@ -27,6 +27,8 @@ class FreezerInventoryViewModel : ObservableObject{
     @Published var isErrorMsg : Bool = false
     @Published var responseMsg : String = ""
     
+    @Published var target_sample_detail : InventorySampleModel = InventorySampleModel()
+    
     
     init(){
         addSubscribers()

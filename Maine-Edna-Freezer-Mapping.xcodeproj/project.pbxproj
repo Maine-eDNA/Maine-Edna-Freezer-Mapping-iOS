@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		4A04962227BAC51000BD483B /* GuidedSearchSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04962127BAC50F00BD483B /* GuidedSearchSampleView.swift */; };
 		4A0941B9283BF54F0011485D /* FreezerBoxDepthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0941B8283BF54F0011485D /* FreezerBoxDepthView.swift */; };
+		4A0C680528B1DD9F00CCB12E /* CustomHalfSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C680428B1DD9F00CCB12E /* CustomHalfSheetView.swift */; };
+		4A0C680928B266CE00CCB12E /* ResolutionModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C680828B266CE00CCB12E /* ResolutionModalView.swift */; };
+		4A0C680C28B331FF00CCB12E /* ResolutionInstructionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C680B28B331FF00CCB12E /* ResolutionInstructionModel.swift */; };
+		4A0C680F28B332F500CCB12E /* ResolutionInstructionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C680E28B332F500CCB12E /* ResolutionInstructionViewModel.swift */; };
+		4A0C681128B33DB500CCB12E /* ResolutionSampleDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C681028B33DB500CCB12E /* ResolutionSampleDataViewModel.swift */; };
+		4A0C681428B39F0300CCB12E /* FreezerProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C681328B39F0300CCB12E /* FreezerProfileInfoView.swift */; };
+		4A0C681628B3B0C500CCB12E /* FreezerDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C681528B3B0C500CCB12E /* FreezerDelete.swift */; };
 		4A1B95542755595000504AB7 /* FreezerMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1B95532755595000504AB7 /* FreezerMapView.swift */; };
 		4A1B95582755602B00504AB7 /* RackItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1B95572755602B00504AB7 /* RackItemModel.swift */; };
 		4A1B955B275563B700504AB7 /* ConstantValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1B955A275563B700504AB7 /* ConstantValues.swift */; };
@@ -62,10 +69,12 @@
 		4A3C7FFA2891FD7D00DA6217 /* ExtractionSampleReturnGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C7FF92891FD7D00DA6217 /* ExtractionSampleReturnGuideView.swift */; };
 		4A3C7FFC2891FE0000DA6217 /* ShowAllSamplesInBatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C7FFB2891FE0000DA6217 /* ShowAllSamplesInBatchesView.swift */; };
 		4A409787277D289100848560 /* MultiRackSlotItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A409786277D289100848560 /* MultiRackSlotItemView.swift */; };
+		4A5104CC28AAA37E007B4A07 /* HowToTutorialsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5104CB28AAA37E007B4A07 /* HowToTutorialsView.swift */; };
 		4A5314FE2899B7B70098418F /* SingleBarcodeScannerBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5314FD2899B7B70098418F /* SingleBarcodeScannerBtn.swift */; };
 		4A58839E27B57B7F0020AB0B /* SuggestedRackGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58839D27B57B7E0020AB0B /* SuggestedRackGridItemView.swift */; };
 		4A5E629A2805D5EA00F9325B /* TargetBoxToMoveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E62992805D5EA00F9325B /* TargetBoxToMoveView.swift */; };
 		4A5E629C2805D60B00F9325B /* DestinationFreezerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E629B2805D60B00F9325B /* DestinationFreezerView.swift */; };
+		4A601FAF28A9BA440039A9C6 /* ColorSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A601FAE28A9BA440039A9C6 /* ColorSetter.swift */; };
 		4A67B58927F23D41008BA579 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67B58827F23D40008BA579 /* CartViewModel.swift */; };
 		4A67B58B27F61A37008BA579 /* FreezerInventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67B58A27F61A36008BA579 /* FreezerInventoryViewModel.swift */; };
 		4A71275B27591DB2000D13CA /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A71275A27591DB2000D13CA /* MenuView.swift */; };
@@ -130,6 +139,8 @@
 		4AD76FB22862140D00F7B65C /* BarcodeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD76FB12862140D00F7B65C /* BarcodeDataService.swift */; };
 		4AD76FB428621B7F00F7B65C /* BarcodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD76FB328621B7F00F7B65C /* BarcodeViewModel.swift */; };
 		4ADA23BA288505C900B49B90 /* SampleCartFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA23B9288505C900B49B90 /* SampleCartFormView.swift */; };
+		4AE47AB328A660AD0032342E /* ExtractionReturnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE47AB228A660AD0032342E /* ExtractionReturnViewModel.swift */; };
+		4AE47AB728A664FB0032342E /* ReturnExtractionDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE47AB628A664FB0032342E /* ReturnExtractionDataService.swift */; };
 		4AE90923286B99A200446D5D /* InventoryTypeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE90922286B99A200446D5D /* InventoryTypeDataService.swift */; };
 		4AE90925286BA24900446D5D /* MiscViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE90924286BA24900446D5D /* MiscViewModel.swift */; };
 		4AE90927286CAAE400446D5D /* BoxPreviewPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE90926286CAAE400446D5D /* BoxPreviewPositionView.swift */; };
@@ -176,6 +187,13 @@
 /* Begin PBXFileReference section */
 		4A04962127BAC50F00BD483B /* GuidedSearchSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedSearchSampleView.swift; sourceTree = "<group>"; };
 		4A0941B8283BF54F0011485D /* FreezerBoxDepthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerBoxDepthView.swift; sourceTree = "<group>"; };
+		4A0C680428B1DD9F00CCB12E /* CustomHalfSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHalfSheetView.swift; sourceTree = "<group>"; };
+		4A0C680828B266CE00CCB12E /* ResolutionModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionModalView.swift; sourceTree = "<group>"; };
+		4A0C680B28B331FF00CCB12E /* ResolutionInstructionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionInstructionModel.swift; sourceTree = "<group>"; };
+		4A0C680E28B332F500CCB12E /* ResolutionInstructionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionInstructionViewModel.swift; sourceTree = "<group>"; };
+		4A0C681028B33DB500CCB12E /* ResolutionSampleDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionSampleDataViewModel.swift; sourceTree = "<group>"; };
+		4A0C681328B39F0300CCB12E /* FreezerProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerProfileInfoView.swift; sourceTree = "<group>"; };
+		4A0C681528B3B0C500CCB12E /* FreezerDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerDelete.swift; sourceTree = "<group>"; };
 		4A1B95532755595000504AB7 /* FreezerMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerMapView.swift; sourceTree = "<group>"; };
 		4A1B95572755602B00504AB7 /* RackItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RackItemModel.swift; sourceTree = "<group>"; };
 		4A1B955A275563B700504AB7 /* ConstantValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantValues.swift; sourceTree = "<group>"; };
@@ -228,10 +246,12 @@
 		4A3C7FF92891FD7D00DA6217 /* ExtractionSampleReturnGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractionSampleReturnGuideView.swift; sourceTree = "<group>"; };
 		4A3C7FFB2891FE0000DA6217 /* ShowAllSamplesInBatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllSamplesInBatchesView.swift; sourceTree = "<group>"; };
 		4A409786277D289100848560 /* MultiRackSlotItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiRackSlotItemView.swift; sourceTree = "<group>"; };
+		4A5104CB28AAA37E007B4A07 /* HowToTutorialsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToTutorialsView.swift; sourceTree = "<group>"; };
 		4A5314FD2899B7B70098418F /* SingleBarcodeScannerBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBarcodeScannerBtn.swift; sourceTree = "<group>"; };
 		4A58839D27B57B7E0020AB0B /* SuggestedRackGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedRackGridItemView.swift; sourceTree = "<group>"; };
 		4A5E62992805D5EA00F9325B /* TargetBoxToMoveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetBoxToMoveView.swift; sourceTree = "<group>"; };
 		4A5E629B2805D60B00F9325B /* DestinationFreezerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationFreezerView.swift; sourceTree = "<group>"; };
+		4A601FAE28A9BA440039A9C6 /* ColorSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSetter.swift; sourceTree = "<group>"; };
 		4A67B58827F23D40008BA579 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		4A67B58A27F61A36008BA579 /* FreezerInventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerInventoryViewModel.swift; sourceTree = "<group>"; };
 		4A68B5712770DB110072873A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -296,6 +316,8 @@
 		4AD76FB12862140D00F7B65C /* BarcodeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeDataService.swift; sourceTree = "<group>"; };
 		4AD76FB328621B7F00F7B65C /* BarcodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeViewModel.swift; sourceTree = "<group>"; };
 		4ADA23B9288505C900B49B90 /* SampleCartFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCartFormView.swift; sourceTree = "<group>"; };
+		4AE47AB228A660AD0032342E /* ExtractionReturnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractionReturnViewModel.swift; sourceTree = "<group>"; };
+		4AE47AB628A664FB0032342E /* ReturnExtractionDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnExtractionDataService.swift; sourceTree = "<group>"; };
 		4AE90922286B99A200446D5D /* InventoryTypeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryTypeDataService.swift; sourceTree = "<group>"; };
 		4AE90924286BA24900446D5D /* MiscViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscViewModel.swift; sourceTree = "<group>"; };
 		4AE90926286CAAE400446D5D /* BoxPreviewPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxPreviewPositionView.swift; sourceTree = "<group>"; };
@@ -368,9 +390,51 @@
 			path = Item;
 			sourceTree = "<group>";
 		};
+		4A0C680628B2668E00CCB12E /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				4A0C680728B2669C00CCB12E /* Modal */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		4A0C680728B2669C00CCB12E /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				4A0C680828B266CE00CCB12E /* ResolutionModalView.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		4A0C680A28B331B900CCB12E /* Instruction */ = {
+			isa = PBXGroup;
+			children = (
+				4A0C680B28B331FF00CCB12E /* ResolutionInstructionModel.swift */,
+			);
+			path = Instruction;
+			sourceTree = "<group>";
+		};
+		4A0C680D28B332D900CCB12E /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+				4A0C680E28B332F500CCB12E /* ResolutionInstructionViewModel.swift */,
+				4A0C681028B33DB500CCB12E /* ResolutionSampleDataViewModel.swift */,
+			);
+			path = Instructions;
+			sourceTree = "<group>";
+		};
+		4A0C681228B39ED500CCB12E /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				4A0C681328B39F0300CCB12E /* FreezerProfileInfoView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		4A1B954F2755590C00504AB7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A0C680A28B331B900CCB12E /* Instruction */,
 				4AF1019C286A1877001E3007 /* Misc */,
 				4AD76FAD286212C100F7B65C /* Barcode */,
 				4A766F2A27D638CF00049DBF /* Cart */,
@@ -388,6 +452,7 @@
 		4A1B95502755591500504AB7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A5104C928AAA2AF007B4A07 /* Tutorials */,
 				4A34DF61279ECF5600CA9531 /* Settings */,
 				4AF7D6AE2770D00200FABFA6 /* Cart */,
 				4A71276627591E96000D13CA /* Authentication */,
@@ -402,6 +467,7 @@
 		4A1B95512755591C00504AB7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4AE47AB428A664C20032342E /* Inventory */,
 				4AF1019B286A07A2001E3007 /* Misc */,
 				4AD76FB0286213F500F7B65C /* Barcodes */,
 				4A766F2727D6379700049DBF /* Cart */,
@@ -458,6 +524,7 @@
 				4A1B955F275564C000504AB7 /* FreezerRackLayoutService.swift */,
 				4A7584E9275A9A55006124ED /* FreezerProfileRetrieval.swift */,
 				4A758510275C7C4E006124ED /* FreezerCreation.swift */,
+				4A0C681528B3B0C500CCB12E /* FreezerDelete.swift */,
 			);
 			path = Freezer;
 			sourceTree = "<group>";
@@ -727,6 +794,7 @@
 				4A2CE72727E54C67000C0EFC /* UIApplication.swift */,
 				4A2F5A12283D523C00214622 /* ButtonStyles.swift */,
 				4A2F5A14283D536C00214622 /* LabelStyles.swift */,
+				4A0C680428B1DD9F00CCB12E /* CustomHalfSheetView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -734,6 +802,8 @@
 		4A2CE73527E54C99000C0EFC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4A0C680D28B332D900CCB12E /* Instructions */,
+				4AE47AB128A660770032342E /* Return */,
 				4AA25E53288F19DC00CEF281 /* Batch */,
 				4A2CE73627E54D19000C0EFC /* DashboardViewModel.swift */,
 				4A2CE73827E67202000C0EFC /* FreezerViewModel.swift */,
@@ -826,6 +896,22 @@
 			path = GridItem;
 			sourceTree = "<group>";
 		};
+		4A5104C928AAA2AF007B4A07 /* Tutorials */ = {
+			isa = PBXGroup;
+			children = (
+				4A5104CA28AAA2E2007B4A07 /* List */,
+			);
+			path = Tutorials;
+			sourceTree = "<group>";
+		};
+		4A5104CA28AAA2E2007B4A07 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				4A5104CB28AAA37E007B4A07 /* HowToTutorialsView.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		4A5E62982805D59700F9325B /* MovingBoxes */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,6 +919,14 @@
 				4A5E629B2805D60B00F9325B /* DestinationFreezerView.swift */,
 			);
 			path = MovingBoxes;
+			sourceTree = "<group>";
+		};
+		4A601FAD28A9B9BF0039A9C6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4A601FAE28A9BA440039A9C6 /* ColorSetter.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		4A71275927591D9A000D13CA /* General */ = {
@@ -892,6 +986,7 @@
 		4A71276527591E19000D13CA /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				4A0C681228B39ED500CCB12E /* SubViews */,
 				4A758518275D9AAD006124ED /* FreezerDetailView.swift */,
 			);
 			path = Detail;
@@ -1122,6 +1217,7 @@
 		4A955BB9285406E600A3832B /* Guided */ = {
 			isa = PBXGroup;
 			children = (
+				4A0C680628B2668E00CCB12E /* Add */,
 				4A3C7FF52891F10200DA6217 /* Return */,
 				4A955BBA2854072000A3832B /* GuidedCartView.swift */,
 				4A955BBF2858F48E00A3832B /* UtilitiesView.swift */,
@@ -1223,6 +1319,30 @@
 			path = Barcodes;
 			sourceTree = "<group>";
 		};
+		4AE47AB128A660770032342E /* Return */ = {
+			isa = PBXGroup;
+			children = (
+				4AE47AB228A660AD0032342E /* ExtractionReturnViewModel.swift */,
+			);
+			path = Return;
+			sourceTree = "<group>";
+		};
+		4AE47AB428A664C20032342E /* Inventory */ = {
+			isa = PBXGroup;
+			children = (
+				4AE47AB528A664CE0032342E /* Extraction */,
+			);
+			path = Inventory;
+			sourceTree = "<group>";
+		};
+		4AE47AB528A664CE0032342E /* Extraction */ = {
+			isa = PBXGroup;
+			children = (
+				4AE47AB628A664FB0032342E /* ReturnExtractionDataService.swift */,
+			);
+			path = Extraction;
+			sourceTree = "<group>";
+		};
 		4AEB96BB274C28DF001F7611 = {
 			isa = PBXGroup;
 			children = (
@@ -1247,6 +1367,7 @@
 			isa = PBXGroup;
 			children = (
 				4A2CE72627E54BB2000C0EFC /* Extensions */,
+				4A601FAD28A9B9BF0039A9C6 /* Helpers */,
 				4A29186427C7F67C0066A645 /* CoreData */,
 				4A1B95592755638B00504AB7 /* Constants */,
 				4A1B954F2755590C00504AB7 /* Model */,
@@ -1498,6 +1619,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A758506275C4381006124ED /* AttributedStringStyle.swift in Sources */,
+				4A0C680F28B332F500CCB12E /* ResolutionInstructionViewModel.swift in Sources */,
 				4A758508275C4381006124ED /* TextFieldClearButton.swift in Sources */,
 				4A75850F275C738A006124ED /* FreezerDepthPreview.swift in Sources */,
 				4AD76FA32861DEA300F7B65C /* RackCartFormView.swift in Sources */,
@@ -1525,11 +1647,13 @@
 				4A1B955B275563B700504AB7 /* ConstantValues.swift in Sources */,
 				4A2CE74627EA3829000C0EFC /* FreezerBoxViewModel.swift in Sources */,
 				4A769312288A1164002ABBC5 /* BoxEmptyItemCard.swift in Sources */,
+				4AE47AB728A664FB0032342E /* ReturnExtractionDataService.swift in Sources */,
 				4A2CE73227E54C68000C0EFC /* String.swift in Sources */,
 				4AE90923286B99A200446D5D /* InventoryTypeDataService.swift in Sources */,
 				4A1B95652755665B00504AB7 /* ModalCompatibility.swift in Sources */,
 				4A2CE73127E54C68000C0EFC /* PreviewProvider.swift in Sources */,
 				4A0941B9283BF54F0011485D /* FreezerBoxDepthView.swift in Sources */,
+				4A5104CC28AAA37E007B4A07 /* HowToTutorialsView.swift in Sources */,
 				4A758507275C4381006124ED /* DropdownButton.swift in Sources */,
 				4A758529275DD7C0006124ED /* RackCreation.swift in Sources */,
 				4A5E629C2805D60B00F9325B /* DestinationFreezerView.swift in Sources */,
@@ -1538,6 +1662,7 @@
 				4A1F0B1C2765E4D2008FDDF1 /* CreateNewFreezerBoxView.swift in Sources */,
 				4AD76F9F2861DD6700F7B65C /* CartDataCaptureFormView.swift in Sources */,
 				4A1F0B2D2766DF18008FDDF1 /* FreezerInventoryView.swift in Sources */,
+				4A0C681628B3B0C500CCB12E /* FreezerDelete.swift in Sources */,
 				4A1F0B292766BAD5008FDDF1 /* FreezerBoxRetrieval.swift in Sources */,
 				4A1F0B302766E234008FDDF1 /* BoxSampleMapView.swift in Sources */,
 				4A1F0B4F2767C4EA008FDDF1 /* UserProfileManagment.swift in Sources */,
@@ -1549,6 +1674,7 @@
 				4A1B95542755595000504AB7 /* FreezerMapView.swift in Sources */,
 				4A71275B27591DB2000D13CA /* MenuView.swift in Sources */,
 				4A758524275DADD9006124ED /* InteractFreezerLayoutPreview.swift in Sources */,
+				4A0C680C28B331FF00CCB12E /* ResolutionInstructionModel.swift in Sources */,
 				4A04962227BAC51000BD483B /* GuidedSearchSampleView.swift in Sources */,
 				4A67B58B27F61A37008BA579 /* FreezerInventoryViewModel.swift in Sources */,
 				4A1F0B43276781C3008FDDF1 /* FreezerCheckOutLogModel.swift in Sources */,
@@ -1569,6 +1695,7 @@
 				4A34DF65279ECF9700CA9531 /* UserThemeView.swift in Sources */,
 				4A1F0B462767828B008FDDF1 /* FreezerCheckOutLogRetrieval.swift in Sources */,
 				4A409787277D289100848560 /* MultiRackSlotItemView.swift in Sources */,
+				4A601FAF28A9BA440039A9C6 /* ColorSetter.swift in Sources */,
 				4A7584ED275AA20E006124ED /* FreezerProfileCardView.swift in Sources */,
 				4A3C7FFA2891FD7D00DA6217 /* ExtractionSampleReturnGuideView.swift in Sources */,
 				4A758503275C4381006124ED /* TextFieldLabelNoAuto.swift in Sources */,
@@ -1600,6 +1727,8 @@
 				4A7584E8275A98D3006124ED /* FreezerProfilesResultModel.swift in Sources */,
 				4A758502275C4381006124ED /* TextFieldLabelCombo.swift in Sources */,
 				4AF48640277D439700C3E053 /* SingleLevelRaciSlotItemView.swift in Sources */,
+				4A0C681428B39F0300CCB12E /* FreezerProfileInfoView.swift in Sources */,
+				4A0C681128B33DB500CCB12E /* ResolutionSampleDataViewModel.swift in Sources */,
 				4AA25E5A288F5ADB00CEF281 /* BatchSampleDetailView.swift in Sources */,
 				4AC28B8628087EFB00B7695A /* ResultsPreviewView.swift in Sources */,
 				4ADA23BA288505C900B49B90 /* SampleCartFormView.swift in Sources */,
@@ -1610,6 +1739,7 @@
 				4A2F5A15283D536C00214622 /* LabelStyles.swift in Sources */,
 				4AF1019E286A189D001E3007 /* InventoryTypeModel.swift in Sources */,
 				4A955BC02858F48E00A3832B /* UtilitiesView.swift in Sources */,
+				4A0C680928B266CE00CCB12E /* ResolutionModalView.swift in Sources */,
 				4A769316288A1219002ABBC5 /* BoxEmptyItemColorSettingCard.swift in Sources */,
 				4A84A4CC278760000059191C /* ExtensionClasses.swift in Sources */,
 				4A73A555287C713000C94C25 /* FreezerVisualList.swift in Sources */,
@@ -1633,6 +1763,8 @@
 				4AF48649277DDF0500C3E053 /* UserCssModel.swift in Sources */,
 				4AE90929286CB4E600446D5D /* SamplePreviewPositionView.swift in Sources */,
 				4A1B95642755665B00504AB7 /* AppStorageArray.swift in Sources */,
+				4A0C680528B1DD9F00CCB12E /* CustomHalfSheetView.swift in Sources */,
+				4AE47AB328A660AD0032342E /* ExtractionReturnViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1791,7 +1923,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.35;
+				CURRENT_PROJECT_VERSION = 2.431;
 				DEVELOPMENT_ASSET_PATHS = "\"Maine-Edna-Freezer-Mapping/Preview Content\"";
 				DEVELOPMENT_TEAM = KCSE39EC45;
 				ENABLE_PREVIEWS = YES;
@@ -1807,7 +1939,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.35;
+				MARKETING_VERSION = 2.431;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.keijaoh.Maine-Edna-Freezer-Mapping";
 				PRODUCT_NAME = "eDna-Freezer-Mapping";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1822,7 +1954,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.35;
+				CURRENT_PROJECT_VERSION = 2.431;
 				DEVELOPMENT_ASSET_PATHS = "\"Maine-Edna-Freezer-Mapping/Preview Content\"";
 				DEVELOPMENT_TEAM = KCSE39EC45;
 				ENABLE_PREVIEWS = YES;
@@ -1838,7 +1970,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.35;
+				MARKETING_VERSION = 2.431;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.keijaoh.Maine-Edna-Freezer-Mapping";
 				PRODUCT_NAME = "eDna-Freezer-Mapping";
 				SWIFT_EMIT_LOC_STRINGS = YES;

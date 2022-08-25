@@ -198,7 +198,7 @@ extension CartDataCaptureFormView{
             title_instruction_section
             
             HStack{
-                MenuStyleClicker(selection: self.$entry_selection, actions: self.$entry_modes,label: "Entry Mode",label_action: self.$entry_selection).frame(width: 200)
+                MenuStyleClicker(selection: self.$entry_selection, actions: self.$entry_modes,label: "Entry Mode",label_action: self.$entry_selection, width: .constant(UIScreen.main.bounds.width * 0.90))
                 
                 
             }
@@ -211,7 +211,7 @@ extension CartDataCaptureFormView{
             title_instruction_section
             
             HStack{
-                MenuStyleClicker(selection: self.$scanner_selection, actions: self.$scanner_modes,label: "Which Scanner are you using?",label_action: self.$scanner_selection,reverseTxtOrder: true).frame(width: 200)
+                MenuStyleClicker(selection: self.$scanner_selection, actions: self.$scanner_modes,label: "Which Scanner are you using?",label_action: self.$scanner_selection,reverseTxtOrder: true,width: .constant(UIScreen.main.bounds.width * 0.90))
                     .onChange(of: scanner_selection) { newValue in
                         //set focused state once it changes
                         if newValue == "Barcode Scanner"{

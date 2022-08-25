@@ -35,17 +35,17 @@ struct CapsuleSuggestedPositionView: View {
                 sample_capsule_section
             })
             .sheet(isPresented: $showMenu) {
-                if #available(iOS 16.0, *){
+              /*  if #available(iOS 16.0, *){
                  
                     list_of_actions_section
                     
                     //make the sheet take less space
                     .presentationDetents([.height(300)])
                 }
-                else {
+                else {*/
                     // Fallback on earlier versions
                     list_of_actions_section
-                }
+                //}
             }
              
             /*Text("tes")

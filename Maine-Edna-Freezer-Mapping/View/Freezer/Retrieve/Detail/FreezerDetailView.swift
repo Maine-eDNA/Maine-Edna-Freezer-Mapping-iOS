@@ -8,6 +8,32 @@
 import SwiftUI
 import AlertToast
 
+class FreezerDeletionViewModel : ObservableObject{
+    let freezerDeleteService = FreezerDelete()
+    //properties to update the UI
+    @Published var showResponseMsg : Bool = false
+    @Published var isErrorMsg : Bool = false
+    @Published var responseMsg : String = ""
+    
+    
+    func deleteFreezer(_freezerId: String,completion: @escaping (ServerMessageModel) -> Void){
+        
+        freezerDeleteService.DeleteFreezer(_freezerId: _freezerId){
+            response in
+            
+            //MARK: send the results to the UI
+            print("Response is: \(response)")
+            self.responseMsg = response.serverMessage
+            self.showResponseMsg = true
+            self.isErrorMsg = response.isError
+           
+            completion(response)
+            
+        }
+    }
+}
+
+
 struct FreezerDetailView: View {
     
     @State var show_freezer_detail : Bool = false
@@ -50,10 +76,10 @@ struct FreezerDetailView: View {
                         Section{
                             Label("Top-Down View", systemImage: "eye").font(.caption)
                             
-                          //  GeometryReader{reader in
-                            FreezerMapView(freezer_rack_layout: self.$vm.freezer_racks, freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack, rack_position_row: $rack_position_row,rack_position_column: $rack_position_column).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
+                            //MARK: Search Mode is the default when getting the freezer detail
+                            FreezerMapView(freezer_rack_layout: self.$vm.freezer_racks, freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack, rack_position_row: $rack_position_row,rack_position_column: $rack_position_column, selectMode: .constant("Search")).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
                                 .frame(width: UIScreen.main.bounds.width * 0.95, height: UIScreen.main.bounds.height * 0.95, alignment: .center)
-                           // }
+                            // }
                             
                         }
                     }
@@ -121,14 +147,8 @@ struct FreezerDetailView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.theme.accent,lineWidth: 1)
                     )
-            }).sheet(isPresented: self.$show_freezer_detail){
-                //Show the Create Freezer Form
-                //MARK: - Show all the Freezer Detail
-                /*
-                 CreateFreezerProfileView(show_new_screen: self.$show_create_freezer)
-                 .animation(.spring(), value: animationAmount)
-                 .interactiveDismissDisabled(true)*/
             })
+            )
             .navigationBarItems(
                 trailing:
                     //Button 1
@@ -149,18 +169,16 @@ struct FreezerDetailView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.theme.accent,lineWidth: 1)
                         )
-                }).sheet(isPresented: self.$show_freezer_detail){
-                    //Show the Create Freezer Form
-                    //MARK: - Show all the Freezer Detail
-                    /*
-                     CreateFreezerProfileView(show_new_screen: self.$show_create_freezer)
-                     .animation(.spring(), value: animationAmount)
-                     .interactiveDismissDisabled(true)*/
-                    VStack{
-                        Text("Rows \(self.freezer_profile.freezerCapacityRows ?? 0)")
-                        Text("Columns \(self.freezer_profile.freezerCapacityColumns ?? 0)")
-                        Spacer()
+                }).customHalfSheet(showHalfSheet: self.$show_freezer_detail){
+                    //Show the Create Freezer Profile
+                    
+                    VStack(alignment: .leading){
+                        Spacer().frame(height: 30)
+                        
+                        FreezerProfileInfoView(freezerProfile: $freezer_profile)
                     }
+                   
+                    
                 }
                 
             )

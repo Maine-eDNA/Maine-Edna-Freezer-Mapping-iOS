@@ -49,6 +49,8 @@ struct FreezerCartFormView : View{
     @State var freezer_temp_rating_options : [String] =  ["All","-20","-80"]
     @State var freezer_temp_rating_option_index : Int = 0
     
+    @Binding var selectMode : String
+    
     var body: some View{
         ZStack{
         VStack(alignment: .leading){
@@ -57,7 +59,7 @@ struct FreezerCartFormView : View{
                 .padding(.top,5)
                 .padding(.horizontal)
             
-            FreezerVisualList(searchText: $searchText, target_freezer: $target_freezer,show_freezer_detail: $show_freezer_detail, freezerList:  $vm.allFreezers)
+            FreezerVisualList(searchText: $searchText, target_freezer: $target_freezer,show_freezer_detail: $show_freezer_detail, freezerList:  $vm.allFreezers,selectMode: $selectMode)
             
             /*.refreshable {
              
@@ -127,15 +129,15 @@ extension FreezerCartFormView{
 
 struct FreezerCartFormView_Previews: PreviewProvider {
     static var previews: some View {
-        FreezerCartFormView(target_freezer: .constant(dev.freezerProfile))
+        FreezerCartFormView(target_freezer: .constant(dev.freezerProfile), selectMode: .constant(""))
             .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
             .previewDisplayName("iPhone 13")
         
-        FreezerCartFormView(target_freezer: .constant(dev.freezerProfile))
+        FreezerCartFormView(target_freezer: .constant(dev.freezerProfile), selectMode: .constant(""))
             .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
             .previewDisplayName("iPhone 13 Pro")
         
-        FreezerCartFormView(target_freezer: .constant(dev.freezerProfile))
+        FreezerCartFormView(target_freezer: .constant(dev.freezerProfile), selectMode: .constant(""))
             .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
             .previewDisplayName("iPad Air (4th generation)")
         

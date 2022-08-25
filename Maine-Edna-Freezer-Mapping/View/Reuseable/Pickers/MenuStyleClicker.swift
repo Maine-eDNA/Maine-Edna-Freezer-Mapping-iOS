@@ -17,6 +17,9 @@ struct MenuStyleClicker : View{
     //MARK: Need to send the details from the calling class as to what the hints are
     @State var hintDetails : [String] = []
     @State var reverseTxtOrder : Bool = false
+    
+    @Binding var width : CGFloat
+    
     var body : some View{
         VStack(alignment: .leading){
             //Continue here
@@ -58,7 +61,7 @@ struct MenuStyleClicker : View{
                         Text(action)
                             .tag(action)
                     }
-                }).frame(width: UIScreen.main.bounds.width * 0.90)
+                }).frame(width: width)
                     .pickerStyle(SegmentedPickerStyle()).textFieldStyle(.roundedBorder)
             }.padding(.horizontal,10)
                 .padding(.vertical,5)

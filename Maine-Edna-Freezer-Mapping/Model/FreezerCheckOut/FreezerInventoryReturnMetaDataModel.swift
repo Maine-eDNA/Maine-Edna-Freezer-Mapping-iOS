@@ -98,6 +98,30 @@ struct FreezerInventory: Codable {
     }
 }
 
+// MARK: - FreezerInventory
+struct FreezerInventoryPutModel: Codable {
+    
+    var id: Int?
+    var freezerBox, sampleBarcode/*, freezerInventorySlug*/, freezerInventoryType: String?
+    var freezerInventoryStatus: String?
+    var freezerInventoryColumn, freezerInventoryRow: Int?
+   /* var createdBy, createdDatetime, modifiedDatetime: String?*/
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case freezerBox = "freezer_box"
+        case sampleBarcode = "sample_barcode"
+        //case freezerInventorySlug = "freezer_inventory_slug"
+        case freezerInventoryType = "freezer_inventory_type"
+        case freezerInventoryStatus = "freezer_inventory_status"
+        case freezerInventoryColumn = "freezer_inventory_column"
+        case freezerInventoryRow = "freezer_inventory_row"
+        //case createdBy = "created_by"
+        //case createdDatetime = "created_datetime"
+        //case modifiedDatetime = "modified_datetime"
+    }
+}
+
 // JSONSchemaSupport.swift
 
 

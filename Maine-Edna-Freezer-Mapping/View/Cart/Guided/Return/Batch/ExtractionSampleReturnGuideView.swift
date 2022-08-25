@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AlertToast
 
 //MARK: add it its own file start
 class BarcodeToExtractionModel : ObservableObject{
@@ -39,6 +40,7 @@ class BarcodeToExtractionModel : ObservableObject{
 
 struct BarcodeToExtractionDetail : View{
     @Binding var new_barcodes_to_process : [BarcodeToExtractionModel]
+    @StateObject var extractionReturn_vm : ExtractionReturnViewModel = ExtractionReturnViewModel()
     
     var body: some View{
         VStack(alignment: .leading){
@@ -128,6 +130,11 @@ struct ExtractionSampleReturnGuideView: View {
     @State var new_barcodes_to_process : [BarcodeToExtractionModel] = [BarcodeToExtractionModel]()
     @State var showExtractionListDetail : Bool = false //show the old bar code, the new one and the location
     
+    @StateObject var extractionReturn_vm = ExtractionReturnViewModel()
+    @StateObject var inventorySample_vm = FreezerInventoryViewModel()
+    
+    @State var numberOfExtractionsReturned : Int = 0
+    
     var body: some View {
         //Text("This is the screen that will show all the samples being returned one by one like a quiz survey to guide them step by step")
         ZStack{
@@ -161,6 +168,22 @@ struct ExtractionSampleReturnGuideView: View {
         }.background(
             NavigationLink(destination: BarcodeToExtractionDetail(new_barcodes_to_process: $new_barcodes_to_process), isActive: $showExtractionListDetail, label: {EmptyView()})
         )
+        .toast(isPresenting: $extractionReturn_vm.showResponseMsg){
+            if self.extractionReturn_vm.isErrorMsg{
+                return AlertToast(type: .error(.red), title: "Response", subTitle: "\(self.extractionReturn_vm.responseMsg )")
+            }
+            else{
+                return AlertToast(type: .regular, title: "Response", subTitle: "\(self.extractionReturn_vm.responseMsg )")
+            }
+        }
+        .toast(isPresenting: $inventorySample_vm.showResponseMsg){
+            if self.inventorySample_vm.isErrorMsg{
+                return AlertToast(type: .error(.red), title: "Response", subTitle: "\(self.inventorySample_vm.responseMsg )")
+            }
+            else{
+                return AlertToast(type: .regular, title: "Response", subTitle: "\(self.inventorySample_vm.responseMsg )")
+            }
+        }
         
     }
     
@@ -246,20 +269,80 @@ extension ExtractionSampleReturnGuideView{
 #warning("Next")
                     //MARK: On Next add the value thats inside the textfield and associate it with the current barcode then clear the textfield and move to the next barcode
                     //MARK: be able to view the list so far anytime
-                    self.new_barcodes_to_process.append(BarcodeToExtractionModel(existing_barcode: current_barcode, new_extraction_barcode: current_replacement_barcode, freezer_inventory_status: targetSamplesToProcess.first(where: {$0.sample_barcode == current_barcode})?.freezer_inventory_status ?? "N/A", freezer_inventory_column: targetSamplesToProcess.first(where: {$0.sample_barcode == current_barcode})?.freezer_inventory_column ?? 0, freezer_inventory_row: targetSamplesToProcess.first(where: {$0.sample_barcode == current_barcode})?.freezer_inventory_row ?? 0))
+                    #warning("May not need this since I am applying the changes as the user presses Next")
+                    //MARK: Skip just adds it to a list to be completed at a later date into the exisitng batch
+                   /* self.new_barcodes_to_process.append(BarcodeToExtractionModel(existing_barcode: current_barcode, new_extraction_barcode: current_replacement_barcode, freezer_inventory_status: targetSamplesToProcess.first(where: {$0.sample_barcode == current_barcode})?.freezer_inventory_status ?? "N/A", freezer_inventory_column: targetSamplesToProcess.first(where: {$0.sample_barcode == current_barcode})?.freezer_inventory_column ?? 0, freezer_inventory_row: targetSamplesToProcess.first(where: {$0.sample_barcode == current_barcode})?.freezer_inventory_row ?? 0))*/
                     
-                    //MARK: clear current_replacement_barcode and other variables
-                    withAnimation {
-                        self.current_replacement_barcode = ""
+                    #warning("Need to perm remove this target sample")
+                    var freezerInventory = FreezerInventoryPutModel()
+                    if let currentInventory = targetSamplesToProcess.first(where: {$0.sample_barcode == current_barcode}){
+                        
+                        freezerInventory.id = currentInventory.id
+                        freezerInventory.freezerBox = currentInventory.freezer_box
+                        #warning("Keeps saying it doesnt exist")
+                        freezerInventory.sampleBarcode = currentInventory.sample_barcode
+                        
+                        //freezerInventory.freezerInventorySlug = currentInventory.freezer_inventory_slug
+                        
+                        freezerInventory.freezerInventoryType = currentInventory.freezer_inventory_type
+#warning("change this to be dynamic from a coredata of the inventory types")
+                        freezerInventory.freezerInventoryStatus = "perm_removed"
+                        freezerInventory.freezerInventoryColumn = currentInventory.freezer_inventory_column
+                        freezerInventory.freezerInventoryRow = currentInventory.freezer_inventory_row
+                        
+                        //freezerInventory.createdBy = currentInventory.created_by
+                       // freezerInventory.createdDatetime = currentInventory.created_datetime
+                       // freezerInventory.modifiedDatetime = currentInventory.modified_datetime
+                        
+                        
+                        #warning("Error 400 need to debug and fix this")
+                        self.extractionReturn_vm.PermanentlyRemoveExtraction(_freezerInventory: freezerInventory){
+                            response in
+                            
+                            if !response.isError{
+                                //if successful then I can take this temp record and create a new extraction
+                                //MARK: create a new sample as an extraction
+                                
+                                //set new extraction
+                                var newExtraction = FreezerInventory()
+                                //MARK: Need translate
+                                //newExtraction to freezerInventory
+                                
+                                //set new sample barcode
+                                newExtraction.sampleBarcode = current_replacement_barcode
+                                //set the type to be a extraction
+                                newExtraction.freezerInventoryType = "extraction"
+                                
+                                self.inventorySample_vm.createNewInvSample(_sampleDetail: InventorySampleModel(freezer_box: newExtraction.freezerBox ?? "", freezer_inventory_column: newExtraction.freezerInventoryColumn ?? 0, freezer_inventory_row: newExtraction.freezerInventoryRow ?? 0, freezer_inventory_type: newExtraction.freezerInventoryType  ?? "",  freezer_inventory_status: newExtraction.freezerInventoryStatus  ?? "", sample_barcode: newExtraction.sampleBarcode  ?? "", freezer_inventory_freeze_datetime: Date().ISO8601Format())){ inv_response in
+                                    
+                                    if !inv_response.isError{
+                                        //MARK: update progress to show this barcode was successfully returned as an extraction
+                                        
+                                        self.numberOfExtractionsReturned += 1
+                                    }
+                                    else{
+                                        print("Error has occurred, should log error")
+                                    }
+                                    
+                                }
+                                
+                            }
+                        }
+                        
+                       
+                        
+                        //MARK: clear current_replacement_barcode and other variables
+                        withAnimation {
+                            self.current_replacement_barcode = ""
+                            
+                        }
+                        
+                        
+                        if currentIndex != (general_steps.count - 1) {
+                            currentIndex += 1
+                        }
                         
                     }
-                    
-                    
-                    if currentIndex != (general_steps.count - 1) {
-                        currentIndex += 1
-                    }
-                    
-                    
                     
                     
                 }) {

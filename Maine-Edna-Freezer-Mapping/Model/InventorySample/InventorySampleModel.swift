@@ -29,7 +29,7 @@ class InventorySampleModel: Encodable,Decodable, Identifiable, Hashable {
         
     }
     
-    init(id : Int,freezer_box : String,freezer_inventory_column : Int,freezer_inventory_row : Int, is_suggested_sample : Bool  ){
+    init(id : Int,freezer_box : String,freezer_inventory_column : Int,freezer_inventory_row : Int, is_suggested_sample : Bool,freezer_inventory_freeze_datetime : String  ){
         self.id = 0
         self.freezer_box = ""
         self.freezer_inventory_column = 0
@@ -37,7 +37,7 @@ class InventorySampleModel: Encodable,Decodable, Identifiable, Hashable {
         self.is_suggested_sample = false
     }
     
-    init(freezer_box : String,freezer_inventory_column : Int,freezer_inventory_row : Int, freezer_inventory_type : String,freezer_inventory_status : String, sample_barcode : String  ){
+    init(freezer_box : String,freezer_inventory_column : Int,freezer_inventory_row : Int, freezer_inventory_type : String,freezer_inventory_status : String, sample_barcode : String, freezer_inventory_freeze_datetime : String  ){
 
         self.freezer_box = freezer_box
         self.freezer_inventory_column = freezer_inventory_column
@@ -45,6 +45,7 @@ class InventorySampleModel: Encodable,Decodable, Identifiable, Hashable {
         self.freezer_inventory_type = freezer_inventory_type
         self.freezer_inventory_status = freezer_inventory_status
         self.sample_barcode = sample_barcode
+        self.freezer_inventory_freeze_datetime = freezer_inventory_freeze_datetime
         
     }
     
@@ -64,7 +65,7 @@ class InventorySampleModel: Encodable,Decodable, Identifiable, Hashable {
     
     var is_suggested_sample : Bool = false
     
-    
+    var freezer_inventory_freeze_datetime : String = ""
     
     
     
@@ -80,6 +81,7 @@ class InventorySampleModel: Encodable,Decodable, Identifiable, Hashable {
             case created_by
             case created_datetime
             case modified_datetime
+            case freezer_inventory_freeze_datetime
          
         
         }

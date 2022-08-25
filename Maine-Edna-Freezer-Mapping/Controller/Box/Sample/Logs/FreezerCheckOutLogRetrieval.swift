@@ -37,6 +37,8 @@ class FreezerCheckOutLogRetrieval : ObservableObject {
     //new
     @Published var freezer_return_metas : [FreezerInventoryReturnMetaDataResults] = []
     
+    @Published var sampleLogs : [FreezerCheckOutLogModel] = [FreezerCheckOutLogModel]()
+    
     
     init(){
         
@@ -264,6 +266,8 @@ class FreezerCheckOutLogRetrieval : ObservableObject {
               
                 //MARK: - Filtering to show result by the freezer_log_slug
                 self.stored_box_sample_logs = box_sample_log_locals.filter{log in return log.freezer_log_slug == _freezer_log_slug} //results from the db
+                
+                self.sampleLogs = self.stored_box_sample_logs
                 
                 //MARK: - if stored_box_sample_logs found results take the freezer_inventory from the first result and use it to populate the sample header on the Exisiting Sample Detail
                 //return the id

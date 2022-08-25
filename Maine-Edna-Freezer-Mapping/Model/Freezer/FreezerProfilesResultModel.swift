@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+import Combine
 
 
 
@@ -20,7 +20,7 @@ struct FreezerProfilesResultModel: Codable {
 
 
 // MARK: - Result
-struct FreezerProfileModel: Identifiable, Codable {
+struct FreezerProfileModel: Identifiable, Codable, Equatable {
     
     init(){
         self.id = 0
@@ -72,7 +72,23 @@ struct FreezerProfileModel: Identifiable, Codable {
     var freezerDimensionUnits: String?
     var freezerCapacityColumns, freezerCapacityRows, freezerCapacityDepth, freezerRatedTemp: Int?
     var freezerRatedTempUnits, createdBy, createdDatetime, modifiedDatetime: String?
+    
+    //not on the API
+
    
+  /*  mutating func setBoxColor(newColor : String){
+        self.boxColor = newColor     
+    }*/
+    let objectWillChange = PassthroughSubject < Void,Never > ()
+    
+    var boxColor : String = "blue" {
+        willSet {
+            self.objectWillChange.send()
+        }
+    }
+    
+  
+    
     static func == (lhs: FreezerProfileModel, rhs: FreezerProfileModel) -> Bool {
         lhs.id == rhs.id
     }

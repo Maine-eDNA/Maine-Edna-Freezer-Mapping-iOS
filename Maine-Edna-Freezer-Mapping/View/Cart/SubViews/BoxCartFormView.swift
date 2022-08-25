@@ -36,6 +36,8 @@ struct BoxCartFormView : View{
     
     @State var is_in_select_mode : Bool = true
     
+    @Binding var selectMode : String
+    
     var body: some View{
         //Need to exclude or include 1 to 3 (so the start to end includes 1, 2 and 3) instead of just including 2
         //Text("Box Available Form")
@@ -59,7 +61,7 @@ extension BoxCartFormView{
          */
         
         Section{
-            RackProfileView(rack_profile: $target_rack,freezer_profile: self.freezer_profile,isInSearchMode: self.util_vm.isInSearchMode, inventoryLocations: self.inventoryLocations, addToRackMode: $util_vm.addToRackMode, freezer_rack_label_slug: $freezer_rack_label_slug, is_in_select_mode: $is_in_select_mode)
+            RackProfileView(rack_profile: $target_rack,freezer_profile: self.freezer_profile,isInSearchMode: self.util_vm.isInSearchMode, inventoryLocations: self.inventoryLocations, addToRackMode: $util_vm.addToRackMode, freezer_rack_label_slug: $freezer_rack_label_slug, is_in_select_mode: $is_in_select_mode, selectMode: $selectMode)
                 //.frame(width: 400)
             
         }

@@ -49,13 +49,15 @@ struct RackCartFormView : View{
     
     @Binding var inventoryLocations : [InventorySampleModel]
     
+    @Binding var selectMode : String
+    
     @StateObject private var box_vm : FreezerBoxViewModel = FreezerBoxViewModel()
     
     var body: some View{
         ZStack{
         VStack{
-            Text("Target Freezer \(freezer_profile.freezerLabel)")
-          
+           // Text("Target Freezer \(freezer_profile.freezerLabel)")
+          Text("\(selectMode) Mode")
 
             //Text("Racks Available Form")
             //MARK: Need to load the rack layouts (check the Freezer Layout on Freezer Tab bar)
@@ -100,7 +102,7 @@ struct RackCartFormView : View{
 extension RackCartFormView{
     //Need to exclude or include 1 to 3 (so the start to end includes 1, 2 and 3) instead of just including 2
     private var rack_layout_section : some View{
-        GuidedCartInteractFreezerLayout(freezer_max_rows: .constant($freezer_profile.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_profile.freezerCapacityColumns.wrappedValue ?? 0),freezer_rack_layout : self.$vm.freezer_racks,freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: .constant(false),freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant( UIScreen.main.bounds.height * 0.95),rack_position_row: $rack_position_row,rack_position_column: $rack_position_column, freezer_rack_label_slug: $freezer_rack_label_slug, show_rack_box_view: $show_rack_box_view)
+        GuidedCartInteractFreezerLayout(freezer_max_rows: .constant($freezer_profile.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_profile.freezerCapacityColumns.wrappedValue ?? 0),freezer_rack_layout : self.$vm.freezer_racks,freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: .constant(false),freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant( UIScreen.main.bounds.height * 0.95),rack_position_row: $rack_position_row,rack_position_column: $rack_position_column, freezer_rack_label_slug: $freezer_rack_label_slug, show_rack_box_view: $show_rack_box_view, selectMode: $selectMode)
     }
     
     //put the box layout inside the same view to share logic easier
@@ -173,6 +175,7 @@ struct GuidedCartInteractFreezerLayout: View {
     
     //MARK: required to switch the sample map into tap to add to list mode etc
     @State var is_in_select_mode : Bool = true
+    @Binding var selectMode : String
     
     var body: some View {
         //TODO outline the map with the row labels and column outline
@@ -244,7 +247,7 @@ extension GuidedCartInteractFreezerLayout{
         Section{
             ScrollView([.horizontal,.vertical],showsIndicators: false){
                 RackCrossSectView(rack_profile: self.target_rack, rack_boxes: self.$freezer_box_vm.all_filter_rack_boxes, freezer_profile: .constant(self.freezer_profile), current_rack_row: .constant(1),show_guided_box_view: .constant(true),show_guided_rack_view: .constant(false), in_guided_sample_mode: .constant(true), inventoryLocations: self.inventoryLocations,isInSearchMode: false,
-                                  freezer_rack_label_slug: freezer_rack_label_slug,is_in_select_mode: $is_in_select_mode)
+                                  freezer_rack_label_slug: freezer_rack_label_slug,selectMode: $selectMode, is_in_select_mode: $is_in_select_mode)
                 
                 
                 // .frame(width: UIScreen.main.bounds.width)

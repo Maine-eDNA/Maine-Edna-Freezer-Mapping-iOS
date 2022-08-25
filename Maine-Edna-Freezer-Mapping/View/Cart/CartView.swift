@@ -192,13 +192,13 @@ struct CartView: View {
                 }
             }.background(
        
-                NavigationLink(destination: InteractFreezerLayoutPreview(freezer_max_rows:   .constant(target_freezer.freezerCapacityRows ??  0), freezer_max_columns:   .constant(target_freezer.freezerCapacityColumns ?? 0), freezer_rack_layout: self.$vm.rack_layout, freezer_profile: target_freezer, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: self.$show_guided_map_view,inventoryLocations: [InventorySampleModel](),isInSearchMode: true,freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95),rack_position_row: $rack_position_row,rack_position_column: $rack_position_column, target_rack: .constant(RackItemModel())),isActive: self.$show_guided_map_view,  label: {EmptyView()})
+                NavigationLink(destination: InteractFreezerLayoutPreview(freezer_max_rows:   .constant(target_freezer.freezerCapacityRows ??  0), freezer_max_columns:   .constant(target_freezer.freezerCapacityColumns ?? 0), freezer_rack_layout: self.$vm.rack_layout, freezer_profile: target_freezer, show_create_new_rack: $show_create_new_rack, show_guided_rack_view: self.$show_guided_rack_view, show_guided_map_view: self.$show_guided_map_view,inventoryLocations: [InventorySampleModel](),isInSearchMode: true,freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95),rack_position_row: $rack_position_row,rack_position_column: $rack_position_column, target_rack: .constant(RackItemModel()), selectMode: .constant("")),isActive: self.$show_guided_map_view,  label: {EmptyView()})
             )
             
             .background(
                 
                 
-                NavigationLink(destination: RackProfileView(rack_profile: self.$targetAddToFreezerRack, freezer_profile: self.addDestinationFreezer, showNerdRackStats: false, isInSearchMode: true, inventoryLocations: self.boxSamples,addToRackMode: self.$showTargetRackToAdd, freezer_rack_label_slug: .constant(""), is_in_select_mode: .constant(false)),isActive: self.$showTargetRackToAdd,  label: {EmptyView()})
+                NavigationLink(destination: RackProfileView(rack_profile: self.$targetAddToFreezerRack, freezer_profile: self.addDestinationFreezer, showNerdRackStats: false, isInSearchMode: true, inventoryLocations: self.boxSamples,addToRackMode: self.$showTargetRackToAdd, freezer_rack_label_slug: .constant(""), is_in_select_mode: .constant(false), selectMode: .constant("")),isActive: self.$showTargetRackToAdd,  label: {EmptyView()})
             )
             
             /*
@@ -676,11 +676,11 @@ extension CartView{
 #warning("Can switch between Barcode or CSV to do the bulk search, add or return")
             
             
-            MenuStyleClicker(selection: self.$entry_selection, actions: self.$entry_modes, label: "Entry Mode",label_action: self.$entry_selection).frame(width: 200)
+            MenuStyleClicker(selection: self.$entry_selection, actions: self.$entry_modes, label: "Entry Mode",label_action: self.$entry_selection,width: .constant(UIScreen.main.bounds.width * 0.90))
             
             
             
-            MenuStyleClicker(selection: self.$selection, actions: self.$actions,label: "Action",label_action: self.$selection).frame(width: 200)
+            MenuStyleClicker(selection: self.$selection, actions: self.$actions,label: "Action",label_action: self.$selection,width: .constant(UIScreen.main.bounds.width * 0.90))
             
             targetbarcodessection
             

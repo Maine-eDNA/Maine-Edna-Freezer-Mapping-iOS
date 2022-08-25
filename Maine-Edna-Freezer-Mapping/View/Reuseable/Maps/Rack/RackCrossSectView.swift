@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-
+#warning("Need to add logic to show rows, depth and columns for the Rack Layout")
 struct RackCrossSectView: View {
-    
+    //MARK: put these into a view model
     var rack_profile : RackItemModel
     @Binding var rack_boxes : [BoxItemModel]
     @Binding var freezer_profile : FreezerProfileModel
@@ -49,66 +49,66 @@ struct RackCrossSectView: View {
     @StateObject private var vm : FreezerBoxViewModel = FreezerBoxViewModel()
     
 #warning("Need to refractor the box view to change the row based on the row selected and leave the row and column as is")
-    
+    @Binding var selectMode : String
     
     //MARK: required to switch the sample map into tap to add to list mode etc
     @Binding var is_in_select_mode : Bool
     
-    var body: some View {
+    
 #warning("Required Validation when entering new box it must meet the validation rules below")
-        //TODO: - Need to add validation to prevent user from adding a position outside of the scope of the box, rack or freezer ( min starting position max position the max or furthest space)
-        
+    //TODO: - Need to add validation to prevent user from adding a position outside of the scope of the box, rack or freezer ( min starting position max position the max or furthest space)
+    
 #warning("NEXT Calculate the number of samples each box can hold and how much space is still available")
-        /*
-         
-         Max Box Columns (Inventory) and Max Box Rows (Inventory) means the capacity of the Box 10 x 10 means 100 samples max
-         
-         So a Rack with 3 columns means a box can be in any of the 3 columns
-         and a the rack has 5 Rows it means it can be in any of the rows
-         so any of the row and column combination but must not fall outside of the range else show error
-         */
+    /*
+     
+     Max Box Columns (Inventory) and Max Box Rows (Inventory) means the capacity of the Box 10 x 10 means 100 samples max
+     
+     So a Rack with 3 columns means a box can be in any of the 3 columns
+     and a the rack has 5 Rows it means it can be in any of the rows
+     so any of the row and column combination but must not fall outside of the range else show error
+     */
+    
+    /*
+     How the types work
+     /
+     row /      rack_profile.freezer_rack_row_start   rack_profile.freezer_rack_row_end
+     depth  |   rack_profile.freezer_rack_depth_start  rack_profile.freezer_rack_depth_end
+     |
+     Column __  rack_profile.freezer_rack_column_start  rack_profile.freezer_rack_column_end
+     */
+    //MARK: start with depth then column then row
+    
+    
+    
+#warning("Need to increment the rack_depth and implement the row switching for the rack layout")
+    //MARK: rows
+    //MARK: each row has columns and depth (height)
+    
+    var body: some View {
         
-        /*
-         How the types work
-         /
-         row /      rack_profile.freezer_rack_row_start   rack_profile.freezer_rack_row_end
-         depth  |   rack_profile.freezer_rack_depth_start  rack_profile.freezer_rack_depth_end
-         |
-         Column __  rack_profile.freezer_rack_column_start  rack_profile.freezer_rack_column_end
-         */
-        //MARK: start with depth then column then row
-        
-       
-        
-        #warning("Need to increment the rack_depth and implement the row switching for the rack layout")
-        //MARK: rows
-        //MARK: each row has columns and depth (height)
         ZStack{
             //MARK: Do row last show it when the selector is clicked for the row
-            //if in_guided_sample_mode then dont navigate away just switch
-            //show_box_samples_in_guided
+            
             VStack{
-              
-
                 
                 Group{
-                if !show_box_samples_in_guided{
-                    withAnimation {
-                        box_loop_section
+                    if !show_box_samples_in_guided{
+                        withAnimation {
+                            box_loop_section
+                        }
+                    }
+                    else if show_box_samples_in_guided{
+                        withAnimation {
+                            freezer_box_samples_section
+                        }
                     }
                 }
-                else if show_box_samples_in_guided{
-                    withAnimation {
-                        freezer_box_samples_section
-                    }
-                }
-            }
             }
             
             .onAppear{
                 debugPrint(rack_profile)
                 print("Rack Name: \(self.rack_profile.freezer_rack_label_slug)")
-               // print(freezer_rack_label_slug)
+                // print(freezer_rack_label_slug)
                 print("Rack Name: \(self.rack_profile.freezer_rack_column_start)")
                 //freezer_rack_column_start
                 print("Amt of boxes : \(self.rack_boxes.count)")
@@ -127,8 +127,8 @@ struct RackCrossSectView: View {
                 
                 //MARK: If data not found
                 /*print("Rack Label Slug: \(freezer_rack_label_slug)")
-                
-                self.vm.FilterFreezerBoxes(_freezer_rack_label_slug: "test_freezer_1_test_rack3")
+                 
+                 self.vm.FilterFreezerBoxes(_freezer_rack_label_slug: "test_freezer_1_test_rack3")
                  */
                 
             }
@@ -152,23 +152,16 @@ struct RackCrossSectView: View {
         }
         .background(){
             //MARK: Need to send isInSearchMode so that it highlights the samples
-            NavigationLink(destination: FreezerInventoryView(box_detail: self.$targetBox, freezer_profile: self.$freezer_profile,inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode,is_in_select_mode: $is_in_select_mode)
+            NavigationLink(destination: FreezerInventoryView(box_detail: self.$targetBox, freezer_profile: self.$freezer_profile,inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode,is_in_select_mode: $is_in_select_mode, selectMode: $selectMode)
                            ,isActive: self.$showFreezerBoxDetail,  label: {EmptyView()})
         }
-#warning("Fix these to pass parameters")
-        /*.background(
-         //  NavigationLink(destination: CreateNewFreezerBoxView(row: .constant(0), column: .constant(0), freezer_profile: self.$freezer_profile,rack_profile: .constant(self.rack_profile)))
-         )
-         .background(
-         //NavigationLink(destination: FreezerInventoryView(box_detail: BoxModel(), freezer_profile: self.$freezer_profile))
-         
-         )*/
-    
+        
+        
     }
 }
 
 extension RackCrossSectView{
-   
+    
     private var column_loop_section : some View{
         Section{
             
@@ -207,9 +200,9 @@ extension RackCrossSectView{
                                     //MARK: handle depth later build the logic back uo
                                     
                                     ///checking if the box_column location is equal to the current rack column
-                                     if box.is_suggested_box_position && box.freezer_box_column == rack_column{
+                                    if box.is_suggested_box_position && box.freezer_box_column == rack_column{
                                         
-                                         SuggestedBoxItemCard(box_color: "green", box_text_color: "white", freezer_box_row: 0, freezer_box_column: rack_column,freezer_rack_depth: rack_depth,freezer_rack: rack_profile.freezer_rack_label)
+                                        SuggestedBoxItemCard(box_color: "green", box_text_color: "white", freezer_box_row: 0, freezer_box_column: rack_column,freezer_rack_depth: rack_depth,freezer_rack: rack_profile.freezer_rack_label)
                                             .listRowBackground(Color.clear)
                                             .onTapGesture {
                                                 
@@ -226,9 +219,9 @@ extension RackCrossSectView{
                                             }
                                         
                                     }
-                                      else if box.freezer_box_column == rack_column{
-                                        //BoxItemCard(rack_box: <#T##BoxItemModel#>, rack_depth: <#T##Int#>, rack_row: <#T##Int#>, box_color: <#T##String#>, box_text_color: <#T##String#>, height: <#T##CGFloat#>, width: <#T##CGFloat#>)
-                                          BoxItemCard(rack_box: .constant(box),rack_depth: .constant(rack_depth), rack_row: .constant(0))
+                                    else if box.freezer_box_column == rack_column{
+                                        
+                                        BoxItemCard(rack_box: .constant(box),rack_depth: .constant(rack_depth), rack_row: .constant(0))
                                             .listRowBackground(Color.clear)
                                             .onTapGesture {
                                                 
@@ -245,7 +238,7 @@ extension RackCrossSectView{
                                         
                                     }
                                     else{
-                                 
+                                        
                                         //Create new box: send the row and column the current box is in and the freezer info
                                         
                                         BoxEmptyItemCard(freezer_box_row: 0 , freezer_box_column: rack_column,freezer_rack_depth: rack_depth,freezer_rack: rack_profile.freezer_rack_label)
@@ -260,14 +253,14 @@ extension RackCrossSectView{
                                                 self.showCreateFreezerBox.toggle()
                                                 
                                                 //segue to the view
-                                               /* if !in_guided_sample_mode{
-                                                    self.showFreezerBoxDetail.toggle()
-                                                }
-                                                else{
-                                                    self.show_box_samples_in_guided.toggle()
-                                                    
-                                                   
-                                                }*/
+                                                /* if !in_guided_sample_mode{
+                                                 self.showFreezerBoxDetail.toggle()
+                                                 }
+                                                 else{
+                                                 self.show_box_samples_in_guided.toggle()
+                                                 
+                                                 
+                                                 }*/
                                             }
                                         
                                         
@@ -290,22 +283,16 @@ extension RackCrossSectView{
     
     
     private var freezer_box_samples_section : some View{
-        FreezerInventoryView(box_detail: self.$targetBox, freezer_profile: self.$freezer_profile,inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode, is_in_select_mode: $is_in_select_mode)
+        Section{
+            FreezerInventoryView(box_detail: self.$targetBox, freezer_profile: self.$freezer_profile,inventoryLocations: self.inventoryLocations,isInSearchMode: self.isInSearchMode, is_in_select_mode: $is_in_select_mode,selectMode: $selectMode)
+        }
     }
 }
 
 
-///.background(Color(wordName: box_color))//set the color based on the status of the box empty, half full and full (not available)
-
-
-
-
-
-
-
 struct RackCrossSectView_Previews: PreviewProvider {
     static var previews: some View {
-        #warning("Refractor and add to the Dev Preview")
+#warning("Refractor and add to the Dev Preview")
         
         var rack_profile : RackItemModel = RackItemModel()
         var rack_boxes : [BoxItemModel] = [BoxItemModel]()
@@ -335,19 +322,19 @@ struct RackCrossSectView_Previews: PreviewProvider {
         
         return Group {
             
-            RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),in_guided_sample_mode: .constant(false),is_in_select_mode: .constant(false))
-                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-                .previewDisplayName("iPhone 8")
-            RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),in_guided_sample_mode: .constant(false),is_in_select_mode: .constant(false))
+            RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),in_guided_sample_mode: .constant(false),selectMode: .constant(""), is_in_select_mode: .constant(false))
                 .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
                 .previewDisplayName("iPhone XS Max")
-            
-            RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),in_guided_sample_mode: .constant(false),is_in_select_mode: .constant(false))
-            // .preferredColorScheme(.dark)
-                .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
-                .previewDisplayName("iPad Air (4th generation)")
-            //.environment(\.colorScheme, .dark)
-            
+            /* RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),in_guided_sample_mode: .constant(false),selectMode: .constant(""), is_in_select_mode: .constant(false))
+             .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
+             .previewDisplayName("iPhone XS Max")
+             
+             RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),in_guided_sample_mode: .constant(false),selectMode: .constant(""), is_in_select_mode: .constant(false))
+             // .preferredColorScheme(.dark)
+             .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
+             .previewDisplayName("iPad Air (4th generation)")
+             //.environment(\.colorScheme, .dark)
+             */
         }
     }
 }

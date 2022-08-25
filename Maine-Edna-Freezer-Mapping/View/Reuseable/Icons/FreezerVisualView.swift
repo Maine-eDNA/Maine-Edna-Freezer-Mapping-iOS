@@ -10,6 +10,8 @@ import SwiftUI
 struct FreezerVisualView: View {
     
     @Binding var freezerProfile : FreezerProfileModel
+    @Binding var target_freezer : FreezerProfileModel
+    
     @State var box_color : String = "blue"
     @State var box_text_color : String = "blue"
     @State var height : CGFloat = 150
@@ -26,7 +28,7 @@ struct FreezerVisualView: View {
 
 struct FreezerVisualView_Previews: PreviewProvider {
     static var previews: some View {
-        FreezerVisualView(freezerProfile: .constant(dev.freezerProfile))
+        FreezerVisualView(freezerProfile: .constant(dev.freezerProfile), target_freezer: .constant(dev.freezerProfile))
             .previewLayout(.sizeThatFits)
     }
 }
@@ -44,8 +46,10 @@ extension FreezerVisualView{
                             .rotation(.degrees(45), anchor: .bottomLeading)
                             .scale(sqrt(2), anchor: .bottomLeading)
                             .frame(width: width, height: height * 0.15)
-                            .background(Color(wordName: box_color))
-                            .foregroundColor(Color(wordName: box_color))
+                          //  .background(Color(wordName: freezerProfile.boxColor))
+                            //.foregroundColor(Color(wordName: freezerProfile.boxColor))
+                            .background(self.target_freezer.id == freezerProfile.id ? Color.green : Color.blue)
+                            .foregroundColor(self.target_freezer.id == freezerProfile.id ? Color.green : Color.blue)
                             .clipped()
                     }
                     HStack{
