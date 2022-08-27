@@ -20,7 +20,7 @@ class ReturnExtractionDataService: ObservableObject {
     #warning("Check NOtion to for details on the errors and the params tried")
     ///sets the Inventory record to permanently removed
     ///NOTE:  must ensure that the inventory location is stored for the replacement Sample to inherit
-    func PermanentlyRemoveExtraction(_freezerInventory : FreezerInventoryPutModel,completion: @escaping (ServerMessageModel) -> Void) -> Void
+    func PermanentlyRemoveSample(_freezerInventory : FreezerInventoryPutModel,completion: @escaping (ServerMessageModel) -> Void) -> Void
     {
         
         if let id = _freezerInventory.id{

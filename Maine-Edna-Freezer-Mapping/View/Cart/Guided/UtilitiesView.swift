@@ -125,7 +125,7 @@ struct UtilitiesView: View {
     
     @State var figureToFindEnd : Int =  -2
     
-   
+    @State var target_barcodes : [String] = [String]()
     
     var body: some View {
         NavigationView{
@@ -230,10 +230,16 @@ extension UtilitiesView{
                         Section{
                             //1. Selected Remove
                             ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Utilities")
-                                .tag (0 )
+                                .tag (0)
                            
-                            //2. Select a Freezer (Show that the Freezer was selected and can press next)
-                            FreezerCartFormView(target_freezer: $freezer_profile, selectMode: $selection)
+                            //2. Add barcodes that should be removed
+                            CartDataCaptureFormView(target_barcodes: $target_barcodes)
+                                .tag(1)
+                            
+                            //3. Confirm the perm_removal of the target barcodes
+                            RemoveConfirmationView(sampleBarcodesToRemove: $target_barcodes)
+                                .tag(2)
+                           /* FreezerCartFormView(target_freezer: $freezer_profile, selectMode: $selection)
                                 .tag (1)
                             
                             //3. Select the rack
@@ -242,10 +248,12 @@ extension UtilitiesView{
                             
                             // 4. Select Box
                             #warning("May need to add another form that shows the summary of what will be removed")
+                            */
                         }
                     }
                     else if selection == "Add"{
-                        #warning("Working on Add and clashes now ")
+                        #warning("Copy the flow from search for adding ")
+                        //MARK: Search should take the barcodes -> then show the positions of all the samples that was added to the list
                         Section{
                             ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Utilities")
                                 .tag (0 )
@@ -259,11 +267,12 @@ extension UtilitiesView{
                         }
                     }
                     
-                    else{
+                    else if selection == "Transfer Box"{
+                        //MARK: updates the target box location to be in a new freezer and rack
                         Section{
                             ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Utilities")
                                 .tag (0 )
-                            CartDataCaptureFormView()
+                            CartDataCaptureFormView(target_barcodes: $target_barcodes)
                                 .tag(1)
                             FreezerCartFormView(target_freezer: $freezer_profile, selectMode: $selection)
                                 .tag (2)

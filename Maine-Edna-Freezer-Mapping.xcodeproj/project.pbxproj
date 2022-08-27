@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A0091D528BA3FD900268FA9 /* RemoveConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0091D428BA3FD900268FA9 /* RemoveConfirmationView.swift */; };
+		4A0091DA28BA491C00268FA9 /* FreezerQueryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0091D928BA491C00268FA9 /* FreezerQueryViewModel.swift */; };
+		4A0091DD28BA499E00268FA9 /* GuidedSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0091DC28BA499E00268FA9 /* GuidedSearchViewModel.swift */; };
+		4A0091DF28BA4A1C00268FA9 /* CSVHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0091DE28BA4A1C00268FA9 /* CSVHelper.swift */; };
+		4A0091E128BA4A4E00268FA9 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0091E028BA4A4E00268FA9 /* DocumentPicker.swift */; };
 		4A04962227BAC51000BD483B /* GuidedSearchSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04962127BAC50F00BD483B /* GuidedSearchSampleView.swift */; };
 		4A0941B9283BF54F0011485D /* FreezerBoxDepthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0941B8283BF54F0011485D /* FreezerBoxDepthView.swift */; };
 		4A0C680528B1DD9F00CCB12E /* CustomHalfSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C680428B1DD9F00CCB12E /* CustomHalfSheetView.swift */; };
@@ -164,7 +169,6 @@
 		4AF48646277DDE6300C3E053 /* DefaultCssModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF48645277DDE6300C3E053 /* DefaultCssModel.swift */; };
 		4AF48649277DDF0500C3E053 /* UserCssModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF48648277DDF0500C3E053 /* UserCssModel.swift */; };
 		4AF4864B277DF76800C3E053 /* ClassConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF4864A277DF76800C3E053 /* ClassConverter.swift */; };
-		4AF7D6B02770D01C00FABFA6 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF7D6AF2770D01C00FABFA6 /* CartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +189,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A0091D428BA3FD900268FA9 /* RemoveConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveConfirmationView.swift; sourceTree = "<group>"; };
+		4A0091D928BA491C00268FA9 /* FreezerQueryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerQueryViewModel.swift; sourceTree = "<group>"; };
+		4A0091DC28BA499E00268FA9 /* GuidedSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedSearchViewModel.swift; sourceTree = "<group>"; };
+		4A0091DE28BA4A1C00268FA9 /* CSVHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVHelper.swift; sourceTree = "<group>"; };
+		4A0091E028BA4A4E00268FA9 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		4A04962127BAC50F00BD483B /* GuidedSearchSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidedSearchSampleView.swift; sourceTree = "<group>"; };
 		4A0941B8283BF54F0011485D /* FreezerBoxDepthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezerBoxDepthView.swift; sourceTree = "<group>"; };
 		4A0C680428B1DD9F00CCB12E /* CustomHalfSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHalfSheetView.swift; sourceTree = "<group>"; };
@@ -340,7 +349,6 @@
 		4AF48645277DDE6300C3E053 /* DefaultCssModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCssModel.swift; sourceTree = "<group>"; };
 		4AF48648277DDF0500C3E053 /* UserCssModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCssModel.swift; sourceTree = "<group>"; };
 		4AF4864A277DF76800C3E053 /* ClassConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassConverter.swift; sourceTree = "<group>"; };
-		4AF7D6AF2770D01C00FABFA6 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,6 +382,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A0091D328BA3FA300268FA9 /* Remove */ = {
+			isa = PBXGroup;
+			children = (
+				4A0091D428BA3FD900268FA9 /* RemoveConfirmationView.swift */,
+			);
+			path = Remove;
+			sourceTree = "<group>";
+		};
+		4A0091D828BA48F700268FA9 /* Freezer */ = {
+			isa = PBXGroup;
+			children = (
+				4A2CE73827E67202000C0EFC /* FreezerViewModel.swift */,
+				4A0091D928BA491C00268FA9 /* FreezerQueryViewModel.swift */,
+			);
+			path = Freezer;
+			sourceTree = "<group>";
+		};
+		4A0091DB28BA496800268FA9 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				4A0091DC28BA499E00268FA9 /* GuidedSearchViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		4A04962027BAC50200BD483B /* Results */ = {
 			isa = PBXGroup;
 			children = (
@@ -802,11 +835,12 @@
 		4A2CE73527E54C99000C0EFC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4A0091DB28BA496800268FA9 /* Search */,
+				4A0091D828BA48F700268FA9 /* Freezer */,
 				4A0C680D28B332D900CCB12E /* Instructions */,
 				4AE47AB128A660770032342E /* Return */,
 				4AA25E53288F19DC00CEF281 /* Batch */,
 				4A2CE73627E54D19000C0EFC /* DashboardViewModel.swift */,
-				4A2CE73827E67202000C0EFC /* FreezerViewModel.swift */,
 				4A2CE74527EA3828000C0EFC /* FreezerBoxViewModel.swift */,
 				4A2CE74727EA4C5A000C0EFC /* FreezerRackViewModel.swift */,
 				4A67B58827F23D40008BA579 /* CartViewModel.swift */,
@@ -925,6 +959,8 @@
 			isa = PBXGroup;
 			children = (
 				4A601FAE28A9BA440039A9C6 /* ColorSetter.swift */,
+				4A0091DE28BA4A1C00268FA9 /* CSVHelper.swift */,
+				4A0091E028BA4A4E00268FA9 /* DocumentPicker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1217,6 +1253,7 @@
 		4A955BB9285406E600A3832B /* Guided */ = {
 			isa = PBXGroup;
 			children = (
+				4A0091D328BA3FA300268FA9 /* Remove */,
 				4A0C680628B2668E00CCB12E /* Add */,
 				4A3C7FF52891F10200DA6217 /* Return */,
 				4A955BBA2854072000A3832B /* GuidedCartView.swift */,
@@ -1467,7 +1504,6 @@
 				4A955BB9285406E600A3832B /* Guided */,
 				4A5E62982805D59700F9325B /* MovingBoxes */,
 				4A04962027BAC50200BD483B /* Results */,
-				4AF7D6AF2770D01C00FABFA6 /* CartView.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -1618,6 +1654,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A0091DA28BA491C00268FA9 /* FreezerQueryViewModel.swift in Sources */,
 				4A758506275C4381006124ED /* AttributedStringStyle.swift in Sources */,
 				4A0C680F28B332F500CCB12E /* ResolutionInstructionViewModel.swift in Sources */,
 				4A758508275C4381006124ED /* TextFieldClearButton.swift in Sources */,
@@ -1640,7 +1677,6 @@
 				4A758509275C4381006124ED /* ExitButtonView.swift in Sources */,
 				4A758520275DA48E006124ED /* CreateNewRackView.swift in Sources */,
 				4A2CE73027E54C68000C0EFC /* Date.swift in Sources */,
-				4AF7D6B02770D01C00FABFA6 /* CartView.swift in Sources */,
 				4A1F0B3D27676699008FDDF1 /* SampleInvenActivLogView.swift in Sources */,
 				4A67B58927F23D41008BA579 /* CartViewModel.swift in Sources */,
 				4A1F0AF7276266CB008FDDF1 /* UserProfileModel.swift in Sources */,
@@ -1652,6 +1688,7 @@
 				4AE90923286B99A200446D5D /* InventoryTypeDataService.swift in Sources */,
 				4A1B95652755665B00504AB7 /* ModalCompatibility.swift in Sources */,
 				4A2CE73127E54C68000C0EFC /* PreviewProvider.swift in Sources */,
+				4A0091DF28BA4A1C00268FA9 /* CSVHelper.swift in Sources */,
 				4A0941B9283BF54F0011485D /* FreezerBoxDepthView.swift in Sources */,
 				4A5104CC28AAA37E007B4A07 /* HowToTutorialsView.swift in Sources */,
 				4A758507275C4381006124ED /* DropdownButton.swift in Sources */,
@@ -1703,6 +1740,7 @@
 				4A2CE72E27E54C68000C0EFC /* UIApplication.swift in Sources */,
 				4AA25E55288F1A0A00CEF281 /* BatchSampleViewModel.swift in Sources */,
 				4A758511275C7C4E006124ED /* FreezerCreation.swift in Sources */,
+				4A0091DD28BA499E00268FA9 /* GuidedSearchViewModel.swift in Sources */,
 				4A9C432628764F8400593D67 /* InventoryStatusModel.swift in Sources */,
 				4AF48643277D48C600C3E053 /* BoxSampleCapsuleView.swift in Sources */,
 				4AF4864B277DF76800C3E053 /* ClassConverter.swift in Sources */,
@@ -1727,9 +1765,11 @@
 				4A7584E8275A98D3006124ED /* FreezerProfilesResultModel.swift in Sources */,
 				4A758502275C4381006124ED /* TextFieldLabelCombo.swift in Sources */,
 				4AF48640277D439700C3E053 /* SingleLevelRaciSlotItemView.swift in Sources */,
+				4A0091D528BA3FD900268FA9 /* RemoveConfirmationView.swift in Sources */,
 				4A0C681428B39F0300CCB12E /* FreezerProfileInfoView.swift in Sources */,
 				4A0C681128B33DB500CCB12E /* ResolutionSampleDataViewModel.swift in Sources */,
 				4AA25E5A288F5ADB00CEF281 /* BatchSampleDetailView.swift in Sources */,
+				4A0091E128BA4A4E00268FA9 /* DocumentPicker.swift in Sources */,
 				4AC28B8628087EFB00B7695A /* ResultsPreviewView.swift in Sources */,
 				4ADA23BA288505C900B49B90 /* SampleCartFormView.swift in Sources */,
 				4AD76F9C2861DCB300F7B65C /* ModeSelectorFormView.swift in Sources */,
@@ -1859,6 +1899,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1913,6 +1954,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1922,8 +1964,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.431;
+				CURRENT_PROJECT_VERSION = 2.36;
 				DEVELOPMENT_ASSET_PATHS = "\"Maine-Edna-Freezer-Mapping/Preview Content\"";
 				DEVELOPMENT_TEAM = KCSE39EC45;
 				ENABLE_PREVIEWS = YES;
@@ -1939,9 +1982,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.431;
+				MARKETING_VERSION = 1.36;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.keijaoh.Maine-Edna-Freezer-Mapping";
 				PRODUCT_NAME = "eDna-Freezer-Mapping";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1953,8 +1997,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.431;
+				CURRENT_PROJECT_VERSION = 2.36;
 				DEVELOPMENT_ASSET_PATHS = "\"Maine-Edna-Freezer-Mapping/Preview Content\"";
 				DEVELOPMENT_TEAM = KCSE39EC45;
 				ENABLE_PREVIEWS = YES;
@@ -1970,9 +2015,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.431;
+				MARKETING_VERSION = 1.36;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.keijaoh.Maine-Edna-Freezer-Mapping";
 				PRODUCT_NAME = "eDna-Freezer-Mapping";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

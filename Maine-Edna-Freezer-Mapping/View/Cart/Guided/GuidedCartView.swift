@@ -121,6 +121,8 @@ struct GuidedCartView: View {
     
     @State var figureToFindEnd : Int =  -2
     
+    @State var target_barcodes : [String] = [String]()
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -275,11 +277,12 @@ extension GuidedCartView{
                 TabView(selection: $currentIndex) {
                     
                     if selection == "Search"{
+                        //MARK: Search should take the barcodes -> then show the positions of all the samples that was added to the list
                         Section{
                             //MARK: will change this according to the mode
-                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Utilities")
+                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Cart")
                                 .tag (0)
-                            CartDataCaptureFormView()
+                            CartDataCaptureFormView(target_barcodes: $target_barcodes)
                                 .tag(1)
                             FreezerCartFormView(target_freezer: $freezer_profile, selectMode: $selection)
                                 .tag (2)

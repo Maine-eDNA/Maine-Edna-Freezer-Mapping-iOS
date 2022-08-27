@@ -51,7 +51,7 @@ class ExtractionReturnViewModel : ObservableObject{
     #warning("Need to call on UI")
   ///Permanently Remove use Put method to update status to perm_removed
     func PermanentlyRemoveExtraction(_freezerInventory : FreezerInventoryPutModel,completion: @escaping (ServerMessageModel) -> Void){
-        freezerExtractionReturnDataService.PermanentlyRemoveExtraction(_freezerInventory: _freezerInventory) { response in
+        freezerExtractionReturnDataService.PermanentlyRemoveSample(_freezerInventory: _freezerInventory) { response in
             
             //need to update the UI that one has been added, so that the progress can be updated
             

@@ -33,7 +33,7 @@ struct CartDataCaptureFormView : View{
     @FocusState var focusedField: FocusedField?
    
     @State var show_barcode_scanner : Bool = false
-    @State var target_barcodes : [String] = [String]()
+    @Binding var target_barcodes : [String] 
     @State var current_barcode : String = ""//esg_e01_19w_0002"//remove after testin
     @State var show_barcode_scanner_btn : Bool = false
     @State var maximizeListSpace : Bool = false
@@ -241,7 +241,7 @@ extension CartDataCaptureFormView{
 
 struct CartDataCaptureFormView_Previews: PreviewProvider {
     static var previews: some View {
-        CartDataCaptureFormView()
+        CartDataCaptureFormView(target_barcodes: .constant(dev.targetBarcodes))
     }
 }
 //MARK: Get all barcodes in the system
@@ -348,7 +348,7 @@ struct AutoCompleteBarcodeTextField : View{
         
         VStack{
             TextFieldLabelCombo(textValue: $searchText, label: "Barcode", placeHolder: "Type & Select Barcode to add to list", iconValue: "rectangle.and.text.magnifyingglass",autoCapitalization: .none)
-            
+            #warning("Need A Barcode Scanner Button beside the search field")
             List{
                 ForEach(searchResults){ barcode in
                     
