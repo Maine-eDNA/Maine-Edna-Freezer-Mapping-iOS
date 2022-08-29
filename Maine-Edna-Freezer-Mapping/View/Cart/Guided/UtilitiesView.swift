@@ -102,7 +102,20 @@ struct UtilitiesView: View {
     @State var return_selection : String = "Return"
     @State var return_actions = ["Return","Extraction Return"]
     /// Mode selector properties end
-   
+    #warning("Next to do")
+   /*
+    MARK: steps for Adding
+    //when the user selectrss add -> select CSV AS THE source ( works the same for the )
+    //upload csv with list of barcodes (generate add instruction list)
+    //2. select box
+    //3. Sequentially fix box
+    
+    //Outlier: if there is not enough space in the box, then have the user select the next box, dont show the final list until you have finished selecting positions for all the samples (returns to step 2 if in-suffient space)
+    //4. Return to the user the row and column of the barcodes added in an updated CSV file)
+    //Format: barcode , box row, box column
+    //freezerInventoryFreezeDatetime : String?
+    //barcode and  box (rack and column)
+    */
     
     ///Step indicator end
     ///current position in the form properties start

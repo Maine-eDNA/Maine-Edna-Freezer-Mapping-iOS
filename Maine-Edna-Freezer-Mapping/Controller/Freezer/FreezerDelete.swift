@@ -15,7 +15,7 @@ class FreezerDelete : ObservableObject {
     // Loading Screen...
     @Published var isLoading = false
     
-    
+    #warning("Should change to permanently removed")
     ///permanently removes freezer record from the database
     func DeleteFreezer(_freezerId : String,completion: @escaping (ServerMessageModel) -> Void) -> Void
     {

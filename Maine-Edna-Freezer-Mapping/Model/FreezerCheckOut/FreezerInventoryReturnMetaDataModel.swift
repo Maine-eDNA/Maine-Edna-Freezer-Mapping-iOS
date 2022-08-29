@@ -101,12 +101,55 @@ struct FreezerInventory: Codable {
 // MARK: - FreezerInventory
 struct FreezerInventoryPutModel: Codable {
     
+    init(){
+        self.id = 0
+        self.freezerBox = ""
+        self.sampleBarcode = ""
+        self.freezerInventoryType = ""
+        self.freezerInventoryStatus = ""
+        self.freezerInventoryColumn = 0
+        self.freezerInventoryRow = 0
+        self.freezerInventoryFreezeDatetime = Date().ISO8601Format()
+    }
+    
+    init(id: Int?,freezerBox : String?, sampleBarcode : String?, freezerInventoryType : String?,freezerInventoryStatus : String?,
+         freezerInventoryColumn : Int?, freezerInventoryRow : Int?,createdDatetime : String?){
+        
+        self.id = id
+        self.freezerBox = freezerBox
+        self.sampleBarcode = sampleBarcode
+        self.freezerInventoryType = freezerInventoryType
+        self.freezerInventoryStatus = freezerInventoryStatus
+        self.freezerInventoryColumn = freezerInventoryColumn
+        self.freezerInventoryRow = freezerInventoryRow
+        self.createdDatetime = createdDatetime
+        
+    }
+    
+    init(id: Int?,freezerBox : String?, sampleBarcode : String?, freezerInventoryType : String?,freezerInventoryStatus : String?,
+         freezerInventoryColumn : Int?, freezerInventoryRow : Int?, freezerInventoryFreezeDatetime : String?){
+        
+        self.id = id
+        self.freezerBox = freezerBox
+        self.sampleBarcode = sampleBarcode
+        self.freezerInventoryType = freezerInventoryType
+        self.freezerInventoryStatus = freezerInventoryStatus
+        self.freezerInventoryColumn = freezerInventoryColumn
+        self.freezerInventoryRow = freezerInventoryRow
+        self.freezerInventoryFreezeDatetime = freezerInventoryFreezeDatetime
+        
+    }
+
+    
     var id: Int?
     var freezerBox, sampleBarcode/*, freezerInventorySlug*/, freezerInventoryType: String?
     var freezerInventoryStatus: String?
     var freezerInventoryColumn, freezerInventoryRow: Int?
    /* var createdBy, createdDatetime, modifiedDatetime: String?*/
-
+    var createdDatetime : String?
+    var freezerInventoryFreezeDatetime : String?
+    
+    
     enum CodingKeys: String, CodingKey {
         case id
         case freezerBox = "freezer_box"
@@ -117,7 +160,8 @@ struct FreezerInventoryPutModel: Codable {
         case freezerInventoryColumn = "freezer_inventory_column"
         case freezerInventoryRow = "freezer_inventory_row"
         //case createdBy = "created_by"
-        //case createdDatetime = "created_datetime"
+        case freezerInventoryFreezeDatetime = "freezer_inventory_freeze_datetime"
+        case createdDatetime = "createdDatetime"
         //case modifiedDatetime = "modified_datetime"
     }
 }

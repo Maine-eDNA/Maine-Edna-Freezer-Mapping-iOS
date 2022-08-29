@@ -494,8 +494,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "FetchInventoryLocation(_sample_barcodes:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -510,8 +510,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "FetchInventoryLocation(_sample_barcodes:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -526,8 +526,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "FetchInventoryLocation(_sample_barcodes:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -606,8 +606,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "FetchInventoryLocation(_sample_barcodes:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -990,8 +990,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/ViewModel/CartViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "addSubscribers()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1006,8 +1006,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/ViewModel/CartViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "addSubscribers()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1022,8 +1022,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/ViewModel/CartViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "addSubscribers()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1038,8 +1038,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/ViewModel/CartViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "addSubscribers()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1054,8 +1054,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/ViewModel/CartViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "addSubscribers()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1470,8 +1470,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "FetchSingleInventoryLocation(_sample_barcode:_isAddToListMode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1486,8 +1486,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "FetchSingleInventoryLocation(_sample_barcode:_isAddToListMode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1518,8 +1518,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/ViewModel/CartViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "FetchInventoryLocation(_sample_barcodes:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1534,8 +1534,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "FetchSingleInventoryLocation(_sample_barcode:_isAddToListMode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1550,8 +1550,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "FetchSingleInventoryLocation(_sample_barcode:_isAddToListMode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1566,8 +1566,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "FetchSingleInventoryLocation(_sample_barcode:_isAddToListMode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1598,8 +1598,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "FetchSingleInventoryLocation(_sample_barcode:_isAddToListMode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1614,8 +1614,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "FetchSingleInventoryLocation(_sample_barcode:_isAddToListMode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2704,7 +2704,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "299"
                   endingLineNumber = "299"
-                  offsetFromSymbolStart = "1624">
+                  offsetFromSymbolStart = "1680">
                </Location>
                <Location
                   uuid = "6E53B509-BE6D-4438-9D6C-42D2F35FE8C2 - d242a5b67736b6e8"
@@ -2776,7 +2776,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "5492CC73-B29D-4171-9C2C-082F10FF0B63"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Inventory/Extraction/ReturnExtractionDataService.swift"
@@ -2808,7 +2808,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "3B7BB5AE-C1EC-4142-96F1-82A6579AD3A6"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Inventory/Extraction/ReturnExtractionDataService.swift"
@@ -3061,7 +3061,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "CBBE51F4-2EE9-40D6-81BB-3385982B11EE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maine-Edna-Freezer-Mapping/Controller/Inventory/Extraction/ReturnExtractionDataService.swift"
@@ -3279,6 +3279,278 @@
             endingLineNumber = "32"
             landmarkName = "DeleteFreezer(_freezerId:completion:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "031EE260-B679-4174-813E-1524E10FDCA7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "buttons_section"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "031EE260-B679-4174-813E-1524E10FDCA7 - a52bfbf77579e2d7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.roundedRectangleButton() -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.roundedRectangleButton() -&gt; some&gt;&gt;.0&gt;)&gt; in eDna_Freezer_Mapping.RemoveConfirmationView.buttons_section.getter : some"
+                  moduleName = "eDna-Freezer-Mapping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keijaohcampbell/Development/iOS/eDNA/Maine-Edna-Freezer-Mapping/Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "340">
+               </Location>
+               <Location
+                  uuid = "031EE260-B679-4174-813E-1524E10FDCA7 - 9ce8a559d76fa6e1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;eDna_Freezer_Mapping.InventoryLocationResult&gt;) -&gt; () in closure #3 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.roundedRectangleButton() -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.roundedRectangleButton() -&gt; some&gt;&gt;.0&gt;)&gt; in eDna_Freezer_Mapping.RemoveConfirmationView.buttons_section.getter : some"
+                  moduleName = "eDna-Freezer-Mapping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keijaohcampbell/Development/iOS/eDNA/Maine-Edna-Freezer-Mapping/Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3A05690E-73AB-449A-86D8-78D5592D5727"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "buttons_section"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FD8261FF-621B-4C5F-9170-06408DB3F06B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/ViewModel/CartViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "FetchInventoryLocation(_sample_barcodes:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "57C2605A-FCCE-4974-BD81-6CEBF05902F9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "FetchInventoryLocation(_sample_barcodes:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B003347A-AB07-4034-B6AE-D8236DECEE17"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/Controller/Cart/CartQueryDataService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "FetchInventoryLocation(_sample_barcodes:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B0DF2CB8-8E3E-4DDC-993D-3F36569E06A0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
+            landmarkName = "convertInventoryLocationToPutModel(samples:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E213CFD0-444A-47B3-95FB-6931936AA46A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "permRemoveSamples(samplesToRemove:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E213CFD0-444A-47B3-95FB-6931936AA46A - 244b9d25b631e77e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "eDna_Freezer_Mapping.RemoveConfirmationViewModel.permRemoveSamples(samplesToRemove: Swift.Array&lt;eDna_Freezer_Mapping.FreezerInventoryPutModel&gt;, completion: (eDna_Freezer_Mapping.ServerMessageModel) -&gt; ()) -&gt; ()"
+                  moduleName = "eDna-Freezer-Mapping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keijaohcampbell/Development/iOS/eDNA/Maine-Edna-Freezer-Mapping/Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "204">
+               </Location>
+               <Location
+                  uuid = "E213CFD0-444A-47B3-95FB-6931936AA46A - bb80ddd05e95eddb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (eDna_Freezer_Mapping.ServerMessageModel) -&gt; () in eDna_Freezer_Mapping.RemoveConfirmationViewModel.permRemoveSamples(samplesToRemove: Swift.Array&lt;eDna_Freezer_Mapping.FreezerInventoryPutModel&gt;, completion: (eDna_Freezer_Mapping.ServerMessageModel) -&gt; ()) -&gt; ()"
+                  moduleName = "eDna-Freezer-Mapping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keijaohcampbell/Development/iOS/eDNA/Maine-Edna-Freezer-Mapping/Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "60">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "705507BD-5BCB-4EDC-A97C-4089A53C749F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "permRemoveSamples(samplesToRemove:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EB9CFE24-5099-45DA-B1D5-BCF931AB0448"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "permRemoveSamples(samplesToRemove:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "224DB95C-C416-4CA1-B13A-95DA623D3772"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "permRemoveSamples(samplesToRemove:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "224DB95C-C416-4CA1-B13A-95DA623D3772 - 244b9d25b631e603"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "eDna_Freezer_Mapping.RemoveConfirmationViewModel.permRemoveSamples(samplesToRemove: Swift.Array&lt;eDna_Freezer_Mapping.FreezerInventoryPutModel&gt;, completion: (eDna_Freezer_Mapping.ServerMessageModel) -&gt; ()) -&gt; ()"
+                  moduleName = "eDna-Freezer-Mapping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keijaohcampbell/Development/iOS/eDNA/Maine-Edna-Freezer-Mapping/Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "836">
+               </Location>
+               <Location
+                  uuid = "224DB95C-C416-4CA1-B13A-95DA623D3772 - bb80ddd05e95ed3a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (eDna_Freezer_Mapping.ServerMessageModel) -&gt; () in eDna_Freezer_Mapping.RemoveConfirmationViewModel.permRemoveSamples(samplesToRemove: Swift.Array&lt;eDna_Freezer_Mapping.FreezerInventoryPutModel&gt;, completion: (eDna_Freezer_Mapping.ServerMessageModel) -&gt; ()) -&gt; ()"
+                  moduleName = "eDna-Freezer-Mapping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keijaohcampbell/Development/iOS/eDNA/Maine-Edna-Freezer-Mapping/Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5110D426-0751-4C92-A79A-9938D13AFEED"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Maine-Edna-Freezer-Mapping/View/Cart/Guided/Remove/RemoveConfirmationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "buttons_section"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

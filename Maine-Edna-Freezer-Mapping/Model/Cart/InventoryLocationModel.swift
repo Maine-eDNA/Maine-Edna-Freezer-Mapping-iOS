@@ -78,8 +78,8 @@ struct InventoryLocationResult: Codable {
     var createdBy, createdDatetime, modifiedDatetime: String?
     var isHighlighed : Bool = false
     
-    var freezerLabel : String = ""
-    var freezerRoomName : String = ""
+    var freezerLabel : String?
+    var freezerRoomName : String?
   
     
     

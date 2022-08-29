@@ -36,6 +36,11 @@ class CartViewModel : ObservableObject{
     //other view models
     @ObservedObject private var freezer_rack_vm : FreezerRackViewModel = FreezerRackViewModel()
     
+    //properties to update the UI
+    @Published var showResponseMsg : Bool = false
+    @Published var isErrorMsg : Bool = false
+    @Published var responseMsg : String = ""
+    
     init(){
         addSubscribers()
     }
@@ -142,10 +147,16 @@ class CartViewModel : ObservableObject{
     
     ///takes a list of barcodes and returns multiple results
     func FetchInventoryLocation(_sample_barcodes: String){
-        
-        
         //get the rack layout for all the freezers in this list
         self.cartQueryDataService.FetchInventoryLocation(_sample_barcodes: _sample_barcodes)
+    }
+    
+    func FetchInventoryLocation(_sample_barcodes: String,completion: @escaping ([InventoryLocationResult]) -> Void){
+        //get the rack layout for all the freezers in this list
+        self.cartQueryDataService.FetchInventoryLocation(_sample_barcodes: _sample_barcodes){
+            response in
+            completion(response)
+        }
     }
   
     ///takes a single barcode and return its location details

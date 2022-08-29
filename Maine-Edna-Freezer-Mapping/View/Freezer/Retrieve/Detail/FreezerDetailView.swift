@@ -17,7 +17,7 @@ class FreezerDeletionViewModel : ObservableObject{
     
     
     func deleteFreezer(_freezerId: String,completion: @escaping (ServerMessageModel) -> Void){
-        
+        #warning("should be an update method")
         freezerDeleteService.DeleteFreezer(_freezerId: _freezerId){
             response in
             

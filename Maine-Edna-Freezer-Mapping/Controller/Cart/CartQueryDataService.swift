@@ -25,7 +25,8 @@ class CartQueryDataService : ObservableObject {
       //  var request = URLRequest(url: URL(string: "https://metadata.spatialmsk.dev/api/freezer_inventory/inventory_location/?sample_barcode_list=esg_e01_19w_0001,esg_e01_19w_0004")!,timeoutInterval: Double.infinity)
        
         if let url = URL(string: "\(ServerConnectionUrls.productionUrl.rawValue)api/freezer_inventory/inventory_location/?sample_barcode_list=\(_sample_barcodes)"){
-        var request = URLRequest(url: url,timeoutInterval: Double.infinity);        request.addValue("Token \(self.edna_freezer_token)", forHTTPHeaderField: "Authorization")
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity);
+            request.addValue("Token \(self.edna_freezer_token)", forHTTPHeaderField: "Authorization")
         
         request.httpMethod = "GET"
         
@@ -86,6 +87,78 @@ class CartQueryDataService : ObservableObject {
         }
         
     }
+    
+
+    func FetchInventoryLocation(_sample_barcodes : String,completion: @escaping ([InventoryLocationResult]) -> Void){
+        
+        //https://metadata.spatialmsk.dev/api/freezer_inventory/inventory_location/?sample_barcode_list=esg_e01_19w_0001%2Cesg_e01_19w_0003
+      //  var request = URLRequest(url: URL(string: "https://metadata.spatialmsk.dev/api/freezer_inventory/inventory_location/?sample_barcode_list=esg_e01_19w_0001,esg_e01_19w_0004")!,timeoutInterval: Double.infinity)
+       
+        if let url = URL(string: "\(ServerConnectionUrls.productionUrl.rawValue)api/freezer_inventory/inventory_location/?sample_barcode_list=\(_sample_barcodes)"){
+        var request = URLRequest(url: url,timeoutInterval: Double.infinity);
+            request.addValue("Token \(self.edna_freezer_token)", forHTTPHeaderField: "Authorization")
+        
+        request.httpMethod = "GET"
+        
+        //request
+        URLSession.shared.dataTaskPublisher(for: request)//(for: url)
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: DispatchQueue.main)
+            .tryMap { (data, response) -> Data in
+                
+                
+                guard let response = response as? HTTPURLResponse,
+                      response.statusCode >= 200 && response.statusCode < 300 else{
+                          throw URLError(URLError.badServerResponse)
+                      }
+                return data
+            }
+            .decode(type: InventoryLocationModel.self, decoder: JSONDecoder())
+            .sink { (completion) in
+                print("Completion: \(completion)")
+            } receiveValue: { [weak self] (returnedResults) in
+              //  if let inventoryLocations = returnedResults.results{
+                    
+                    #warning("Need to update the rack, box and sample to be isHighlighted so that it shows up on the map")
+                var processedResults : [InventoryLocationResult] = []
+                print(returnedResults)
+                //MARK: Other method start
+                if returnedResults.results != nil
+                {
+                    var preProcessedResults = returnedResults.results
+                    //set the rack as highlighted
+                    
+                    //preProcessedResults.first?.isHighlighed = true
+                    for sample in preProcessedResults{
+                        var processedResult = InventoryLocationResult()
+                        processedResult = sample
+                        processedResult.isHighlighed = true
+                        //set the box
+                        
+                        //set the rack
+                        
+                        #warning("Check that the sample is there and shows that the isHighlighed is set")
+                        processedResults.append(processedResult)
+                    }
+                    
+                    
+                }
+                
+                    //MARK: Other method end
+                     
+                    //MARK: Put the completion handler inside the view model to stop the is loading
+             
+                    //self?.inventory_location_results = returnedResults.results  //group this
+                    completion(returnedResults.results )
+              //  }
+            }
+            .store(in: &cancellables)
+        
+        }
+        
+    }
+    
+    
     
     ///isAddToListMode tells the app that it should add it to the inventory results list instead of a single variable when previewing a single sample
     func FetchSingleInventoryLocation(_sample_barcode : String, _isAddToListMode : Bool){
