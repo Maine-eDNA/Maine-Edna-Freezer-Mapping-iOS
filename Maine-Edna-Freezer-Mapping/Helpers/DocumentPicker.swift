@@ -25,8 +25,16 @@ struct DocumentPicker : UIViewControllerRepresentable{
             controller = UIDocumentPickerViewController(forOpeningContentTypes: [.text], asCopy: true)
         }
         else{
-            controller = UIDocumentPickerViewController(documentTypes: [String()], in: .import)
+            controller = UIDocumentPickerViewController(documentTypes: [String()], in: .open)
         }
+        
+        /*
+         let picker = UIDocumentPickerViewController(documentTypes: [], in: .open)
+         picker.allowsMultipleSelection = false
+         
+         
+         return picker
+         */
         
         return controller
         

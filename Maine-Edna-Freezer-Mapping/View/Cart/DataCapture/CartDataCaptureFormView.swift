@@ -153,7 +153,7 @@ extension CartDataCaptureFormView{
     //MARK: CSV
     private var csvuploadersection : some View{
         VStack{
-            CsvDataDownloaderView()
+            CsvDataDownloaderView(target_barcodes: $target_barcodes)
         }
     }
     
@@ -255,6 +255,7 @@ struct CsvDataDownloaderView : View{
     
     @State private var csvUrl : String = ""
     
+    @Binding var target_barcodes : [String]
     
     var body: some View{
         VStack{
@@ -287,7 +288,7 @@ struct CsvDataDownloaderView : View{
                 }
                 
                 Text("or")
-                Text(fileContent ?? "No File Found").padding()
+                Text(fileContent ).padding()
                 
                 Button {
                     showDocumentPicker = true
@@ -298,20 +299,78 @@ struct CsvDataDownloaderView : View{
                 }
                 
                 //   }
-                
+              
                 
             }
-            .sheet(isPresented: self.$showDocumentPicker) {
+           /* .sheet(isPresented: self.$showDocumentPicker) {
                 DocumentPicker(fileContent: $fileContent)
-            }
+            }*/
+            //MARK: Read the barcodes from a CSV
+            .fileImporter(
+                isPresented: $showDocumentPicker,
+                        allowedContentTypes: [.plainText],
+                        allowsMultipleSelection: false
+                    ) { result in
+                        do {
+                            guard let selectedFile: URL = try result.get().first else { return }
+                            if selectedFile.startAccessingSecurityScopedResource() {
+                                guard let input = String(data: try Data(contentsOf: selectedFile), encoding: .utf8) else { return }
+                                defer { selectedFile.stopAccessingSecurityScopedResource() }
+                                //document.input = input
+                                print("\(input)")
+                                
+                                readCsv(csvData: input)
+                                
+                            } else {
+                                // Handle denied access
+                            }
+                        } catch {
+                            // Handle failure.
+                            print("Unable to read file contents")
+                            print(error.localizedDescription)
+                        }
+                    }
         }
     }
 }
 
 extension CsvDataDownloaderView{
+    
+    func readCsv(csvData : String){
+        
+        debugPrint(csvData)//\r
+        let preCleanedData = csvData.replacingOccurrences(of: "\r\n", with: "")
+        let separatedData = preCleanedData.components(separatedBy: ",")
+       //let cleanedData = preCleanedData.replacingOccurrences(of: ",,", with: "")
+            
+           
+        
+       // print("Separated Data")
+        print("Cleaned Data")
+        print(separatedData)
+        
+       // let formattingOptions = FormattingOptions(maximumLineWidth: 250, maximumCellWidth: 15, maximumRowCount: 3, includesColumnTypes: false)
+        //let policies = try DataFrame(csvData), rows: 0..<5)
+        //remove all empty strings
+        
+        
+        for barcodeData in separatedData{
+            
+            if !barcodeData.isEmpty && ( !barcodeData.lowercased().contains("barcode")){
+                target_barcodes.append(barcodeData)
+            }
+        }
+        
+        print("\(target_barcodes)")
+        
+    }
     func importCsvViaUrl(url : String){
         
         do{
+            if url.isEmpty{
+                print("Empty URL not allowed")
+                return
+            }
             /* let url : String = "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/testcsv%2FSampleCSVFile_2kb.csv?alt=media&token=6243cbcf-32a8-4bf0-b176-148b8c3fe76e"*/
             let formattingOptions = FormattingOptions(maximumLineWidth: 250, maximumCellWidth: 15, maximumRowCount: 3, includesColumnTypes: false)
             let policies = try DataFrame(contentsOfCSVFile: URL(string: url)!, rows: 0..<5)

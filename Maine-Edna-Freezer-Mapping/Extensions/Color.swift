@@ -1,9 +1,9 @@
 //
 //  Color.swift
-//  SwiftfulCrypto
+//  Maine-Edna
 //
-//  Created by Nick Sarno on 5/8/21.
-//
+//  Created by Keijaoh Campbell on 8/31/22.
+//  Copyright © 2022 Keijaoh Campbell. All rights reserved.
 
 import Foundation
 import SwiftUI
