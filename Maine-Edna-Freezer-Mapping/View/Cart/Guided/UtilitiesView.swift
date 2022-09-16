@@ -266,6 +266,10 @@ extension UtilitiesView{
                     }
                     else if selection == "Add"{
                         #warning("Copy the flow from search for adding ")
+                        /*
+                         MARK: NEXT
+                         The application suggest and auto fill the box and generates a visual map of where to fill
+                         */
                         //MARK: Search should take the barcodes -> then show the positions of all the samples that was added to the list
                         Section{
                             ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Utilities")

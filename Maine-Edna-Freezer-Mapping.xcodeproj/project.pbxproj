@@ -169,6 +169,9 @@
 		4AF48646277DDE6300C3E053 /* DefaultCssModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF48645277DDE6300C3E053 /* DefaultCssModel.swift */; };
 		4AF48649277DDF0500C3E053 /* UserCssModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF48648277DDF0500C3E053 /* UserCssModel.swift */; };
 		4AF4864B277DF76800C3E053 /* ClassConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF4864A277DF76800C3E053 /* ClassConverter.swift */; };
+		4AF784D428D3E57D007BEA1C /* SamplesFoundFromListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF784D328D3E57D007BEA1C /* SamplesFoundFromListView.swift */; };
+		4AF784D628D41C0F007BEA1C /* SearchModeSampleMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF784D528D41C0F007BEA1C /* SearchModeSampleMapModel.swift */; };
+		4AF784D828D427A7007BEA1C /* GroupedResultsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF784D728D427A7007BEA1C /* GroupedResultsMapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,6 +352,9 @@
 		4AF48645277DDE6300C3E053 /* DefaultCssModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCssModel.swift; sourceTree = "<group>"; };
 		4AF48648277DDF0500C3E053 /* UserCssModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCssModel.swift; sourceTree = "<group>"; };
 		4AF4864A277DF76800C3E053 /* ClassConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassConverter.swift; sourceTree = "<group>"; };
+		4AF784D328D3E57D007BEA1C /* SamplesFoundFromListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplesFoundFromListView.swift; sourceTree = "<group>"; };
+		4AF784D528D41C0F007BEA1C /* SearchModeSampleMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSampleMapModel.swift; sourceTree = "<group>"; };
+		4AF784D728D427A7007BEA1C /* GroupedResultsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedResultsMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1235,6 +1241,7 @@
 			isa = PBXGroup;
 			children = (
 				4A766F2B27D638E700049DBF /* InventoryLocationModel.swift */,
+				4AF784D528D41C0F007BEA1C /* SearchModeSampleMapModel.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -1253,6 +1260,7 @@
 		4A955BB9285406E600A3832B /* Guided */ = {
 			isa = PBXGroup;
 			children = (
+				4AF784D228D3E550007BEA1C /* Search */,
 				4A0091D328BA3FA300268FA9 /* Remove */,
 				4A0C680628B2668E00CCB12E /* Add */,
 				4A3C7FF52891F10200DA6217 /* Return */,
@@ -1496,6 +1504,15 @@
 			path = UserSysColors;
 			sourceTree = "<group>";
 		};
+		4AF784D228D3E550007BEA1C /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				4AF784D328D3E57D007BEA1C /* SamplesFoundFromListView.swift */,
+				4AF784D728D427A7007BEA1C /* GroupedResultsMapView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		4AF7D6AE2770D00200FABFA6 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
@@ -1718,6 +1735,7 @@
 				4A1F0B332766E6B2008FDDF1 /* InventorySampleModel.swift in Sources */,
 				4A2CE73327E54C68000C0EFC /* Color.swift in Sources */,
 				4A29186727C7F7140066A645 /* FreezerEdnaContainer.xcdatamodeld in Sources */,
+				4AF784D628D41C0F007BEA1C /* SearchModeSampleMapModel.swift in Sources */,
 				4A5E629A2805D5EA00F9325B /* TargetBoxToMoveView.swift in Sources */,
 				4AD76FAA2861DF3B00F7B65C /* BarcodeListView.swift in Sources */,
 				4AD76FA12861DE4000F7B65C /* FreezerCartFormView.swift in Sources */,
@@ -1746,6 +1764,7 @@
 				4AF4864B277DF76800C3E053 /* ClassConverter.swift in Sources */,
 				4A75850A275C4381006124ED /* SearchBar.swift in Sources */,
 				4AD76FA52861DED100F7B65C /* BoxCartFormView.swift in Sources */,
+				4AF784D828D427A7007BEA1C /* GroupedResultsMapView.swift in Sources */,
 				4AEB96C8274C28DF001F7611 /* Maine_Edna_Freezer_MappingApp.swift in Sources */,
 				4A769314288A11CC002ABBC5 /* SuggestedBoxItemCard.swift in Sources */,
 				4A758519275D9AAD006124ED /* FreezerDetailView.swift in Sources */,
@@ -1763,6 +1782,7 @@
 				4A2CE72F27E54C68000C0EFC /* Double.swift in Sources */,
 				4A758505275C4381006124ED /* SecuredTextFieldLabelCombo.swift in Sources */,
 				4A7584E8275A98D3006124ED /* FreezerProfilesResultModel.swift in Sources */,
+				4AF784D428D3E57D007BEA1C /* SamplesFoundFromListView.swift in Sources */,
 				4A758502275C4381006124ED /* TextFieldLabelCombo.swift in Sources */,
 				4AF48640277D439700C3E053 /* SingleLevelRaciSlotItemView.swift in Sources */,
 				4A0091D528BA3FD900268FA9 /* RemoveConfirmationView.swift in Sources */,

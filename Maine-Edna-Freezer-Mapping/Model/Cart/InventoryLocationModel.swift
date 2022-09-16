@@ -7,6 +7,9 @@
 //TODO: DO the Search and Add Option
 import Foundation
 //#error("Need to Separate the Location Model which is used when highlightig the areas of the map that is being searched for, then continue working on the Box samples showing up at the positions they are located by fetching the location from the api using await")
+
+
+
 struct InventoryLocationModel: Codable {
     var links: InventoryLocationLinks?
     var count: Int?
@@ -149,6 +152,8 @@ struct RackModel: Codable {
         
     }
     
+    
+
     init(){
         id = 0
         freezer_rack_label = ""

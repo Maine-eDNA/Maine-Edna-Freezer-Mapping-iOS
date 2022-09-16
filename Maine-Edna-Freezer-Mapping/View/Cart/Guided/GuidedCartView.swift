@@ -123,6 +123,9 @@ struct GuidedCartView: View {
     
     @State var target_barcodes : [String] = [String]()
     
+    //the grouped and re-ordered map of results
+    @State var sampleLocationMaps : [SearchModeSampleMapModel] = [SearchModeSampleMapModel]()
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -284,6 +287,14 @@ extension GuidedCartView{
                                 .tag (0)
                             CartDataCaptureFormView(target_barcodes: $target_barcodes)
                                 .tag(1)
+                            
+                            #warning("Show a new Screen which shows the list of samples that have been found and where they have been found")
+                            SamplesFoundFromListView(target_barcodes: $target_barcodes, sampleLocationMaps: $sampleLocationMaps)
+                                .tag (2)
+                            
+                            GroupedResultsMapView(sampleLocationMaps: $sampleLocationMaps)
+                                .tag(3)
+                            /*
                             FreezerCartFormView(target_freezer: $freezer_profile, selectMode: $selection)
                                 .tag (2)
                             
@@ -297,6 +308,8 @@ extension GuidedCartView{
                              //MARK: make this into a summary page
                                 EmptyView()
                                 .tag(4)
+                            
+                            */
                         }
                     }
                     else if selection == "Return"{
