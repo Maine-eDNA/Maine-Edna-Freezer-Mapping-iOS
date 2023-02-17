@@ -6,7 +6,6 @@
 	<array>
 		<string>fetch</string>
 		<string>processing</string>
-		<string>remote-notification</string>
 	</array>
 	<key>UILaunchScreen</key>
 	<dict>
@@ -19,5 +18,11 @@
 		<key>UILaunchScreen</key>
 		<dict/>
 	</dict>
+
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+<array>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+</array>
 </dict>
+
 </plist>

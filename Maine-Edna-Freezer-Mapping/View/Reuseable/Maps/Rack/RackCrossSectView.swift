@@ -200,7 +200,7 @@ extension RackCrossSectView{
                                     //MARK: handle depth later build the logic back uo
                                     
                                     ///checking if the box_column location is equal to the current rack column
-                                    if box.is_suggested_box_position && box.freezer_box_column == rack_column{
+                                    if box.is_suggested_box_position || box.freezer_box_column == rack_column{
                                         
                                         SuggestedBoxItemCard(box_color: "green", box_text_color: "white", freezer_box_row: 0, freezer_box_column: rack_column,freezer_rack_depth: rack_depth,freezer_rack: rack_profile.freezer_rack_label)
                                             .listRowBackground(Color.clear)
@@ -219,7 +219,8 @@ extension RackCrossSectView{
                                             }
                                         
                                     }
-                                    else if box.freezer_box_column == rack_column{
+                                    //MARK: #warning("Make more efficient")
+                                   /* else if box.freezer_box_column == rack_column{
                                         
                                         BoxItemCard(rack_box: .constant(box),rack_depth: .constant(rack_depth), rack_row: .constant(0))
                                             .listRowBackground(Color.clear)
@@ -236,7 +237,7 @@ extension RackCrossSectView{
                                                 }
                                             }
                                         
-                                    }
+                                    }*/
                                     else{
                                         
                                         //Create new box: send the row and column the current box is in and the freezer info
@@ -252,15 +253,7 @@ extension RackCrossSectView{
                                                 //When Empty should create new item doesnt matter the mode
                                                 self.showCreateFreezerBox.toggle()
                                                 
-                                                //segue to the view
-                                                /* if !in_guided_sample_mode{
-                                                 self.showFreezerBoxDetail.toggle()
-                                                 }
-                                                 else{
-                                                 self.show_box_samples_in_guided.toggle()
-                                                 
-                                                 
-                                                 }*/
+                                         
                                             }
                                         
                                         
@@ -325,16 +318,7 @@ struct RackCrossSectView_Previews: PreviewProvider {
             RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),in_guided_sample_mode: .constant(false),selectMode: .constant(""), is_in_select_mode: .constant(false))
                 .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
                 .previewDisplayName("iPhone XS Max")
-            /* RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),in_guided_sample_mode: .constant(false),selectMode: .constant(""), is_in_select_mode: .constant(false))
-             .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
-             .previewDisplayName("iPhone XS Max")
-             
-             RackCrossSectView(rack_profile: rack_profile, rack_boxes: .constant(rack_boxes), freezer_profile: .constant(FreezerProfileModel()), current_rack_row: .constant(1),show_guided_box_view: .constant(false),show_guided_rack_view: .constant(false),in_guided_sample_mode: .constant(false),selectMode: .constant(""), is_in_select_mode: .constant(false))
-             // .preferredColorScheme(.dark)
-             .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
-             .previewDisplayName("iPad Air (4th generation)")
-             //.environment(\.colorScheme, .dark)
-             */
+          
         }
     }
 }

@@ -10,13 +10,13 @@ import SwiftUI
 //MARK: need to be able to take the samples from the batch and return them to the freezer as new extracted samples using the same position as the previous un-extracted sample
 //MARK: this will be the entry point to the App
 struct BatchSampleManagementView: View {
-    //MARK: will only store in server api if requested
+    //MARK: When clicked carry user to the sample to complete the process
     
     @State var showBatchDetailView : Bool = false
     @State var targetBatch : SampleBatchModel = SampleBatchModel()
 #warning("Should remove batch when all the samples in the list have been returned")
 #warning("On return once you have clicked that the target barcode was returned then you can remove from the sample from the list of batch samples")
-    
+    @AppStorage(AppStorageNames.store_sample_batches.rawValue)  var store_sample_batches : [SampleBatchModel] = [SampleBatchModel]()
     @State private var selection = Set<SampleBatchModel>()
     
     let names : [SampleBatchModel] = [
@@ -39,7 +39,7 @@ struct BatchSampleManagementView: View {
                 )
             }
             
-            .navigationTitle("Sample Batches")
+            .navigationTitle("\(store_sample_batches.count) Sample Batches")
             .navigationBarTitleDisplayMode(.inline)
         }
         
@@ -49,7 +49,13 @@ struct BatchSampleManagementView: View {
 
 extension BatchSampleManagementView{
     
-    
+    private var empty_state : some View{
+        Section{
+            Image("Empty_Box")
+                .resizable()
+                .frame(width: 100, height: 100)
+        }
+    }
 }
 
 struct BatchSampleManagementView_Previews: PreviewProvider {
@@ -130,7 +136,10 @@ extension BatchSampleListView{
                      }.roundButtonStyle()
                      }
                      */
-                    Image("empty_box").resizable().frame(width: 400, height: 400, alignment: .center)
+                    //MARK: Put these in a const file so all assets can be update centrally 
+                    Image("Empty_Box").resizable().frame(width: 400, height: 400, alignment: .center)
+                    
+                    Spacer()
                 }
             }
         }

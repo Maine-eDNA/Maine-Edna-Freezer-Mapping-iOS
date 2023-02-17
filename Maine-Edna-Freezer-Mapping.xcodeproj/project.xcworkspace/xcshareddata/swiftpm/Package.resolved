@@ -6,7 +6,7 @@
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
         "branch" : "master",
-        "revision" : "65b77694905b0dea7e419b2f74b1e5dc037094b5"
+        "revision" : "bdecb2c87a21a236dcfe88b21532ad3f0e3d20f4"
       }
     },
     {
@@ -15,7 +15,7 @@
       "location" : "https://github.com/elai950/AlertToast.git",
       "state" : {
         "branch" : "master",
-        "revision" : "aa8ec2a145b64b49999c70777d9b297bb5b7fa73"
+        "revision" : "a437862bb6605080a5816e866cbd4ac8c8657b49"
       }
     },
     {
@@ -24,7 +24,7 @@
       "location" : "https://github.com/heart/CarBode-Barcode-Scanner-For-SwiftUI",
       "state" : {
         "branch" : "master",
-        "revision" : "23133e8a7caf11005e7b7a5724f4c3e327cf0a62"
+        "revision" : "b2c2361bb04528052ad47ee0a8276b380b4971fd"
       }
     },
     {
@@ -33,7 +33,7 @@
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
         "branch" : "master",
-        "revision" : "15dde451f97a8ae18ea4f94969b7c8546f034b37"
+        "revision" : "44e891bdb61426a95e31492a67c7c0dfad1f87c5"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/badrinathvm/StepperView.git",
       "state" : {
         "branch" : "master",
-        "revision" : "c66fb84c640fbc312f4eead0b7ae2a77f93e0839"
+        "revision" : "dbfc0349fe777ac7099eb69da2e5210cccef1db8"
       }
     },
     {
@@ -51,7 +51,7 @@
       "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",
       "state" : {
         "branch" : "master",
-        "revision" : "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07"
+        "revision" : "f8d4d57ebac1817f6aa161014f1d4e2e119cbf7b"
       }
     }
   ],
