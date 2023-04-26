@@ -99,3 +99,30 @@ extension View{
         self.modifier(RoundedRectangleButton())
     }
 }
+
+
+
+struct ColoredRoundedButtonStyle: ViewModifier {
+    
+    @Binding var selectedColor : Color
+    
+    func body(content: Content) -> some View {
+        content
+            .font(.caption)
+            .foregroundColor(Color.white)
+            .padding(.vertical,8)
+            .padding(.horizontal,15)
+            .background(
+            
+                Capsule()
+                    .fill(selectedColor)
+                
+            )
+    }
+}
+
+extension View{
+    func colorRoundedButtonStyle(selectedColor : Color = .blue) -> some View{
+        self.modifier(ColoredRoundedButtonStyle(selectedColor: .constant(selectedColor)))
+    }
+}

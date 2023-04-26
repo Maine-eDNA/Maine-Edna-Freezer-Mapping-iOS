@@ -45,8 +45,8 @@ struct InteractFreezerLayoutPreview: View {
     @State var inventoryLocations : [InventorySampleModel] = []
     @State var isInSearchMode : Bool = false
     
-    @Binding var freezer_width : CGFloat
-    @Binding var freezer_height : CGFloat
+   // @Binding var freezer_width : CGFloat
+   // @Binding var freezer_height : CGFloat
     
     //MARK: the empty rack location properties
     @Binding var rack_position_row : Int
@@ -90,7 +90,7 @@ struct InteractFreezerLayoutPreview: View {
 
 struct InteractFreezerLayoutPreview_Previews: PreviewProvider {
     static var previews: some View {
-        InteractFreezerLayoutPreview(freezer_max_rows: .constant(0), freezer_max_columns: .constant(0), freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel(), show_create_new_rack: .constant(false), show_guided_rack_view: .constant(false), show_guided_map_view: .constant(false),freezer_width: .constant(UIScreen.main.bounds.width * 0.95),freezer_height: .constant(UIScreen.main.bounds.height * 0.95), rack_position_row: .constant(0),rack_position_column: .constant(0), target_rack: .constant(RackItemModel()), selectMode: .constant(""))
+        InteractFreezerLayoutPreview(freezer_max_rows: .constant(0), freezer_max_columns: .constant(0), freezer_rack_layout: .constant([RackItemModel]()), freezer_profile: FreezerProfileModel(), show_create_new_rack: .constant(false), show_guided_rack_view: .constant(false), show_guided_map_view: .constant(false), rack_position_row: .constant(0),rack_position_column: .constant(0), target_rack: .constant(RackItemModel()), selectMode: .constant(""))
         
     }
 }

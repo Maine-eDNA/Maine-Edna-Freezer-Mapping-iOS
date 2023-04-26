@@ -42,184 +42,85 @@ struct CreateNewRackView: View {
     
     //grids
     
-    @State var twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
-    
-    @State var phoneOneColumnGrid = [GridItem(.flexible())]
-    
+   
+    private let twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
+    private let phoneOneColumnGrid = [GridItem(.flexible())]
+
     var body: some View {
-        
         ScrollView(showsIndicators: false){
-            VStack(alignment: .leading){
-                // Text("NEED TO FIX:{freezer:[Object with freezer_label_slug=Test_Freezer_1 does not exist. ")
-                TextFieldLabelCombo(textValue: $freezer_label, label: "Freezer", placeHolder: "Found in this Freezer", iconValue: "character.textbox",isDisabled: true)
+            
+        VStack(alignment: .leading) {
+            TextFieldLabelCombo(textValue: $freezer_label, label: "Freezer", placeHolder: "Found in this Freezer", iconValue: "character.textbox", isDisabled: true)
+            
+            TextFieldLabelCombo(textValue: self.$rack_label, label: "Rack Label", placeHolder: "Enter a Rack Label", iconValue: "pencil")
+            
+            HStack {
+                Text("Preview")
+                Text("\(freezer_detail.freezerLabel ?? "")_\(self.rack_label)")
+            }
+            
+            LazyVGrid(columns: twoColumnGrid, spacing: 10) {
+                RackStepperView(title: "Rack Start Depth", value: $rack_depth_start)
+                RackStepperView(title: "Rack End Depth", value: $rack_depth_end)
+            }
+            
+            LazyVGrid(columns: twoColumnGrid, spacing: 10) {
+                RackStepperView(title: "Row Start", value: $selected_row)
+                RackStepperView(title: "Row End", value: $selected_row_end)
                 
-                TextFieldLabelCombo(textValue: self.$rack_label, label: "Rack Label", placeHolder: "Enter a Rack Label", iconValue: "pencil")
-                HStack{
-                    Text("Preview")
-                    Text("\(freezer_detail.freezerLabel ?? "")_\(self.rack_label)")
-                }
-                
-                //Dynamic grid based start
-                LazyVGrid(columns: twoColumnGrid,spacing: 10){
-                VStack{
-                    Stepper("Rack Start Depth: \(rack_depth_start)", onIncrement: {
-                        rack_depth_start += 1
-                        
-                        
-                        
-                        
-                    }, onDecrement: {
-                        rack_depth_start -= 1
-                        
-                        
-                    })
+                RackStepperView(title: "Column Start", value: $selected_col)
+                RackStepperView(title: "Column End", value: $selected_col_end)
+            }
+            
+            Section(header: Text("Row and Column Preview")) {
+                LazyVGrid(columns: UIDevice.current.userInterfaceIdiom == .pad ? twoColumnGrid : phoneOneColumnGrid, spacing: 10) {
+                    PreviewValueView(title: "Row start", value: $selected_row)
+                    PreviewValueView(title: "Column start", value: $selected_col)
                     
-                    
-                }
-                
-                VStack{
-                    Stepper("Rack End Depth: \(rack_depth_end)", onIncrement: {
-                        rack_depth_end += 1
-                        
-                        
-                    }, onDecrement: {
-                        rack_depth_end -= 1
-                        
-                    })
-                    
-                    
+                    PreviewValueView(title: "Row end", value: $selected_row_end)
+                    PreviewValueView(title: "Column end", value: $selected_col_end)
                 }
             }
-                LazyVGrid(columns: twoColumnGrid,spacing: 10){
-                //Same row
-                Group{
-                    VStack{
-                        Stepper("Row Start: \(selected_row)", onIncrement: {
-                            selected_row += 1
-                            
-                            //update the end by one or decrease to keep the values in line
-                            selected_row_end = selected_row + 1
-                            
-                            
-                        }, onDecrement: {
-                            selected_row -= 1
-                            
-                            selected_row_end -= 1
-                        })
-                        
-                        
-                    }
-                    
-                    VStack{
-                        Stepper("Row End: \(selected_row_end)", onIncrement: {
-                            selected_row_end += 1
-                            
-                            
-                        }, onDecrement: {
-                            selected_row_end -= 1
-                            
-                        })
-                        
-                        
-                    }
+            
+            Toggle("Show Map", isOn: $show_freezer_grid_layout.animation(.spring()))
+            
+            if show_freezer_grid_layout {
+                Text("Select Rack Position").font(.caption)
+                VStack(alignment: .center) {
+                    FreezerLayoutPreview(
+                        freezer_max_rows: .constant($freezer_detail.freezerCapacityRows.wrappedValue ?? 0),
+                        freezer_max_columns: .constant($freezer_detail.freezerCapacityColumns.wrappedValue ?? 0),
+                        selected_row: self.$selected_row,
+                        selected_column: self.$selected_col,
+                        show_freezer_grid_layout: $show_freezer_grid_layout
+                    )
+                    .padding()
                 }
-                
-                Group{
-                    VStack{
-                        Stepper("Column Start: \(selected_col)", onIncrement: {
-                            selected_col += 1
-                            
-                            selected_col_end = selected_col + 1
-                            
-                            
-                            
-                        }, onDecrement: {
-                            selected_col -= 1
-                            if selected_col > 0{
-                                selected_col_end = selected_col - 1
-                            }
-                        })
-                        
-                        
-                    }
-                    
-                    VStack{
-                        Stepper("Column End: \(selected_col_end)", onIncrement: {
-                            selected_col_end += 1
-                            
-                            
-                        }, onDecrement: {
-                            selected_col_end -= 1
-                            
-                        })
-                        
-                        
-                    }
-                }
-                
-                
-                    Section(header: Text("Row and Column Preview")){
-                        LazyVGrid(columns: UIDevice.current.userInterfaceIdiom == .pad ? twoColumnGrid : phoneOneColumnGrid,spacing: 10){
-                            
-                            VStack{
-                                HStack{
-                                    Text("Row").font(.title3).bold()
-                                    Text("start: ").font(.caption).foregroundColor(.secondary).bold()
-                                }
-                                Text("\(self.selected_row)").font(.subheadline).bold()
-                            }
-                            VStack{
-                                
-                                HStack{
-                                    Text("Column").font(.title3).bold()
-                                    Text("start: ").font(.caption).foregroundColor(.secondary).bold()
-                                }
-                                Text("\(self.selected_col)").font(.subheadline).bold()
-                            }
-                            
-                            
-                            
-                            VStack{
-                                HStack{
-                                    Text("Row").font(.title3).bold()
-                                    Text("end: ").font(.caption).foregroundColor(.secondary).bold()
-                                }
-                                
-                                Text("\(self.selected_row)").font(.subheadline).bold()
-                            }
-                            VStack{
-                                HStack{
-                                    Text("Column").font(.title3).bold()
-                                    Text("end: ").font(.caption).foregroundColor(.secondary).bold()
-                                }
-                                Text("\(self.selected_col)").font(.subheadline).bold()
-                            }
-                            
-                        }
-                    }
             }
-                //MARK: - Rack Position Map - start
-                ///Map of the Freezer and allow the user to select position of the rack
-                ///
-                Toggle("Show Map",isOn: $show_freezer_grid_layout.animation(.spring()))
-                //MARK: Make show_freezer_grid_layout true if row and column = 0
-                if show_freezer_grid_layout{
-                    Text("Select Rack Position").font(.caption)
-                    // ScrollView([.horizontal,.vertical], showsIndicators: false){
-                    //  GeometryReader{reader in
-                    VStack(alignment: .center){
-                    FreezerLayoutPreview(freezer_max_rows: .constant($freezer_detail.freezerCapacityRows.wrappedValue ?? 0), freezer_max_columns: .constant($freezer_detail.freezerCapacityColumns.wrappedValue ?? 0),selected_row: self.$selected_row,selected_column: self.$selected_col,show_freezer_grid_layout: $show_freezer_grid_layout).padding()
-                }
-                 //   }
-                   // }
-                }
-                //MARK: - Rack Position Map - end
+            
+            Spacer()
+        }
+        .padding()
+    }
+        .onAppear(){
+            self.freezer_label = freezer_detail.freezerLabel ?? ""
+            
+            //set row and column
+            self.selected_row = rack_position_row
+            self.selected_col = rack_position_column
+            
+            //set rack name, making it unique
+            if let label_slug = self.freezer_detail.freezerLabelSlug{
+                self.rack_label = "\(label_slug )_rack_\(selected_row)_\(selected_col)"
                 
-                
-                //button  rack_profile_service
-                
-                Spacer()
-            }.padding()
+            }
+                //MARK: Initial Values
+            selected_col_end = selected_col + 1
+            
+            selected_row_end = selected_row + 1
+        }
+
+
             
             .navigationTitle("Create New Rack")
             .navigationBarTitleDisplayMode(.inline)
@@ -247,35 +148,20 @@ struct CreateNewRackView: View {
                     
                 }
             }
-        } .toast(isPresenting: $rack_vm.showResponseMsg){
-            if self.rack_vm.isErrorMsg{
-                return AlertToast(type: .error(.red), title: "Response", subTitle: "\(self.rack_vm.responseMsg )")
-            }
-            else{
-                return AlertToast(type: .regular, title: "Response", subTitle: "\(self.rack_vm.responseMsg )")
+            .toast(isPresenting: $rack_vm.showResponseMsg){
+                if self.rack_vm.isErrorMsg{
+                    return AlertToast(type: .error(.red), title: "Response", subTitle: "\(self.rack_vm.responseMsg )")
+                }
+                else{
+                    return AlertToast(type: .regular, title: "Response", subTitle: "\(self.rack_vm.responseMsg )")
+                }
             }
         }
         
-            .onAppear(){
-                self.freezer_label = freezer_detail.freezerLabel ?? ""
-                
-                //set row and column
-                self.selected_row = rack_position_row
-                self.selected_col = rack_position_column
-                
-                //set rack name, making it unique
-                if let label_slug = self.freezer_detail.freezerLabelSlug{
-                    self.rack_label = "\(label_slug )_rack_\(selected_row)_\(selected_col)"
-                    
-                }
-                    //MARK: Initial Values
-                selected_col_end = selected_col + 1
-                
-                selected_row_end = selected_row + 1
-            }
+      
         
         
-    }
+    
 }
 
 struct CreateNewRackView_Previews: PreviewProvider {
@@ -344,3 +230,36 @@ extension CreateNewRackView{
     
     
 }
+
+
+// StepperView for Rack Start/End Depth, Row Start/End, and Column Start/End
+struct RackStepperView: View {
+    var title: String
+    @Binding var value: Int
+
+    var body: some View {
+        VStack {
+            Stepper("\(title): \(value)", value: $value)
+        }
+    }
+}
+
+// PreviewValueView for Row and Column Preview
+struct PreviewValueView: View {
+    var title: String
+    @Binding var value: Int
+
+    var body: some View {
+        VStack {
+            HStack {
+                Text(title).font(.title3).bold()
+                Text("start: ").font(.caption)
+                    .foregroundColor(.secondary).bold()
+            }
+            Text("\(value)").font(.subheadline).bold()
+        }
+    }
+}
+
+
+

@@ -17,6 +17,20 @@ import Kingfisher
 struct GuidedCartView: View {
     //MARK: Put the form details in a view model to clean up the UI start
     ///Step indicator start
+    
+    //new start
+    //For multistep
+    @State var orderStatus : [OrderState] = [.queryMode]
+    @State var currentStatus : OrderState = .queryMode
+    
+    
+    //for returns
+    @State var currentReturnStatus : ReturnOrderState = .queryMode
+    @State var returnOrderStatus : [ReturnOrderState] = [.queryMode]
+    
+    //new end
+    
+    
     @State private var changePosition : Bool = true
     @State var current_position_in_form : String = ""
     @State var next_position_in_form : String = ""
@@ -24,6 +38,8 @@ struct GuidedCartView: View {
     @State var next_form_index : Int = 1
     
     //have steps for return
+ 
+    /*
     @State var general_steps = [ Text("Mode").font(.caption),
                                  Text("Entry").font(.caption),
                                  Text("Freezer").font(.caption),
@@ -32,6 +48,8 @@ struct GuidedCartView: View {
                                  
                                  
     ]
+     
+     */
     //MARK: steps for return
     @State var return_steps = [ Text("Mode").font(.caption),
                                  Text("Batch").font(.caption),
@@ -130,9 +148,18 @@ struct GuidedCartView: View {
         NavigationView{
             ZStack{
                 VStack(alignment: .leading,spacing: 10){
-                    step_indicator_section.padding(.top,10)
                     
-                    main_form_switcher
+                 
+                    
+                    if selection == "Search"{
+                        main_form_switcher
+                    }
+                    else if selection == "Return"{
+                        
+                        return_main_form_switcher
+                    }
+                    
+                    Spacer()
                 }
                 
                 //show tutorial button
@@ -247,32 +274,134 @@ extension GuidedCartView{
     }
     
     ///general step indicator
-    private var step_indicator_section : some View{
-        
-        HStack{
-            Spacer()
-            //need to indicate where you are in the list
-            StepperView()
-                .addSteps(setStepsMode())
-                .indicators(self.indicationTypes)
-                .stepIndicatorMode(StepperMode.horizontal)
-                .stepLifeCycles([StepLifeCycle.pending, .completed, .completed, .completed,.pending])
-                .spacing(50)
-                .lineOptions(StepperLineOptions.custom(1, Colors.blue(.teal).rawValue))
-            
-            
-            Spacer()
-        }.padding(.top,30)
-        
-    }
+
     
     ///special indicator types: for Remove and Transfer Box
     ///
     ///
     
-    
+    #warning("Place on separate screens")
+    #warning("Move Utility to menu and Return as its own tab then make the parts reusabled on each screen instead of swapping")
     //MARK: form switcher section start
+    
+    private var return_main_form_switcher : some View{
+        Section(header: Text(" Return Cart Sections").bold().font(.subheadline).foregroundColor(.secondary)) {
+            VStack {
+                            // MULTI-STEPS View
+                MultiStepsView(steps: $returnOrderStatus, extraContent: ReturnOrderState.allValues, extraContentPosition : .above, extraContentSize: CGSize(width: 30, height: 30), action: {_ in }) {
+                                RoundedRectangle(cornerRadius: 5).frame(height: 10)
+                            }
+                            .padding()
+                            .font(.title2)
+                            
+                            Spacer()
+                            // STEP VIEW - CONDITIONAL
+       
+                switch currentReturnStatus {
+                    /*
+      
+                     case sampleMap = "testtube.2"
+                     case returnGuideMode = "doc.text"
+                     */
+                    
+                case .queryMode:
+                    // Text("Search Mode")
+                    ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Cart")
+                    
+                case .sampleReturnBatches:
+                    MultiBatchSampleListView(showBatchDetailView: $showBatchDetailView, selection: $targetBatches)
+                    
+                case .sampleMap:
+                    
+                    ShowAllSamplesInBatchesView(targetBatches: $targetBatches, targetSamplesToProcess: $targetSamplesToProcess)
+                    
+                case .returnGuideMode:
+                    ExtractionSampleReturnGuideView(targetSamplesToProcess: $targetSamplesToProcess)
+         
+                }
+                            
+                            Spacer()
+                            /*
+                             
+                             Button {
+                                 
+                                 guard orderStatus.count > 1 else { return }
+                                 orderStatus.removeAll(where: {$0 == currentStatus})
+                                 currentStatus = currentStatus.previous()
+                                 
+                             } label: {
+                                 HStack{
+                                     Text("Back")
+                                 } .frame(maxWidth: .infinity).colorRoundedButtonStyle(selectedColor: Color.theme.red)
+                                    
+                             }
+                             .padding(.horizontal)
+                             .padding(.top,20)
+                             
+                    
+             
+                             Button {
+                                 if !orderStatus.contains(currentStatus.next()) {
+                                     currentStatus = currentStatus.next()
+                                     orderStatus.append(currentStatus)
+                                 }
+                             } label: {
+                                 HStack{
+                                     Text("Next")
+                                 } .frame(maxWidth: .infinity).colorRoundedButtonStyle(selectedColor: Color.blue)
+                                    
+                             }
+                             .padding(.horizontal)
+                             .padding(.top,20)
+                             */
+                            // BOTTOM BUTTONS
+                            HStack {
+                                
+                                Button {
+                                    
+                                    guard returnOrderStatus.count > 1 else { return }
+                                    returnOrderStatus.removeAll(where: {$0 == currentReturnStatus})
+                                    currentReturnStatus = currentReturnStatus.previous()
+                                    
+                                } label: {
+                                    HStack{
+                                        Text("Back")
+                                    } .frame(maxWidth: .infinity).colorRoundedButtonStyle(selectedColor: Color.theme.red)
+                                       
+                                }
+                                .padding(.horizontal)
+                                .padding(.top,20)
+                                
+                       
+                
+                                Button {
+                                    if !returnOrderStatus.contains(currentReturnStatus.next()) {
+                                        currentReturnStatus = currentReturnStatus.next()
+                                        returnOrderStatus.append(currentReturnStatus)
+                                    }
+                                } label: {
+                                    HStack{
+                                        Text("Next")
+                                    } .frame(maxWidth: .infinity).colorRoundedButtonStyle(selectedColor: Color.blue)
+                                       
+                                }
+                                .padding(.horizontal)
+                                .padding(.top,20)
+
+                                
+                            }
+                          
+               
+                    }
+        }
+    
+    
+
+    }
+    
     private var main_form_switcher : some View{
+       
+        /*
         //GeometryReader ( content: { geometry in
         VStack{
             #warning("NEXT: Continue here do the Search, then take samples from the freezer and add it to a batch, make the list accessible ")
@@ -354,110 +483,117 @@ extension GuidedCartView{
             form_switcher_fwd_back_buttons
                 .padding(.bottom,10)
         }
+        */
         
-    }
-    
-    private var form_switcher_fwd_back_buttons : some View{
-        VStack {
-            // .. //
-            HStack(alignment: .center, spacing: 8) {
-                if currentIndex > 0 {
-                    Button(action: {
-                        //animate transition
-                        changePosition.toggle()
-                        currentIndex -= 1
-                    }) {
-                        HStack(alignment: .center, spacing: 10) {
-                            Image(systemName: "arrow.backward")
-                                .accentColor(Color(wordName: ColorSetter().setTextForegroundColor()))
-                            Text("Back")
-                                .foregroundColor(Color(wordName: ColorSetter().setTextForegroundColor()))
-                            
-                        }
-                    }
-                    .frame(
-                        minWidth: 0,
-                        maxWidth: .infinity,
-                        maxHeight: 44
-                    )
-                    //.background(Color.secondary)
-                    .cornerRadius(4)
-                    .padding(
-                        [.leading, .trailing], 20
-                    )
-                }
-                if currentIndex != (setStepsMode().count + figureToFindEnd){
-                Button(action: {
-                    //animate transition
-                    changePosition.toggle()
-                    
-                    //(setStepsMode().count + figureToFindEnd) meants at the end of the steps
-                    //- 1 because the steps start from 0 while the steps count start from 1
+        //use this in the edit part of the app as well the tabview
+
+            
+            Section(header: Text("Cart Sections").bold().font(.subheadline).foregroundColor(.secondary)) {
+                VStack {
+                                // MULTI-STEPS View
+                    MultiStepsView(steps: $orderStatus, extraContent: OrderState.allValues, extraContentPosition : .above, extraContentSize: CGSize(width: 30, height: 30), action: {_ in }) {
+                                    RoundedRectangle(cornerRadius: 5).frame(height: 10)
+                                }
+                                .padding()
+                                .font(.title2)
+                                
+                                Spacer()
+                                // STEP VIEW - CONDITIONAL
                     if selection == "Search"{
-                        if currentIndex != (setStepsMode().count + figureToFindEnd) {
-                            currentIndex += 1
+                        switch currentStatus {
+                        case .queryMode:
+                            // Text("Search Mode")
+                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Cart")
+                            
+                        case .entryMode:
+                            
+                            //Text("Entry Mode")
+                            CartDataCaptureFormView(target_barcodes: $target_barcodes)
+                        case .freezerMap:
+                            
+                            //Text("Freezer Map")
+                            FreezerCartFormView(target_freezer: $freezer_profile, selectMode: $selection)
+                            
+                        case .rackMap:
+                            //Text("Rack Map")
+                            RackCartFormView(freezer_rack_label_slug: $freezer_rack_label_slug, target_rack: $target_rack, freezer_profile: $freezer_profile, inventoryLocations: $inventoryLocations, selectMode: $selection)
+                            
+                        case .boxMap:
+                            Text("Box Map")
+                        case .sampleMap:
+                            // ReferenceAndBackgroundPreview(showAddNewDocumentView: $showAddNewDocumentView)
+                            //.environmentObject(manager)
+                            Text("Samples In Box")
+                            
+                        case .summaryView:
+                            Text("Summary of Actions done")
                         }
+                        
                     }
                     else if selection == "Return"{
-                        if currentIndex != (return_steps.count - 1) {
-                            currentIndex += 1
+                        switch currentStatus {
+                        case .queryMode:
+                            // Text("Search Mode")
+                            ModeSelectorFormView(selection: $selection, actions: $actions, return_selection: $return_selection,return_actions: $return_actions, viewCalling: "Cart")
+                            
+                        default:
+                            Text("Not Valid Selection")
                         }
                     }
+                                
+                                
+                                Spacer()
+                                
+                                // BOTTOM BUTTONS
+                                HStack {
+                                    
+                                    Button {
+                                        
+                                        guard orderStatus.count > 1 else { return }
+                                        orderStatus.removeAll(where: {$0 == currentStatus})
+                                        currentStatus = currentStatus.previous()
+                                        
+                                    } label: {
+                                        HStack{
+                                            Text("Back")
+                                        } .frame(maxWidth: .infinity).colorRoundedButtonStyle(selectedColor: Color.theme.red)
+                                           
+                                    }
+                                    .padding(.horizontal)
+                                    .padding(.top,20)
+                                    
+                           
                     
-                    
-                    
-                }) {
-                    HStack(alignment: .center, spacing: 10) {
-                        //if equal the last section
-                        //MARK: change to be the number of count of steps to know when at the end
-                        
-                        
-                        if selection == "Search"{
-                            Section{
-                                Text(currentIndex == (setStepsMode().count + figureToFindEnd) ? "Done" : "Next")
-                                    .foregroundColor(.white)
-                                Image(systemName: currentIndex == (setStepsMode().count + figureToFindEnd) ? "checkmark" : "arrow.right")
-                                    .accentColor(.white)
+                                    Button {
+                                        if !orderStatus.contains(currentStatus.next()) {
+                                            currentStatus = currentStatus.next()
+                                            orderStatus.append(currentStatus)
+                                        }
+                                    } label: {
+                                        HStack{
+                                            Text("Next")
+                                        } .frame(maxWidth: .infinity).colorRoundedButtonStyle(selectedColor: Color.blue)
+                                           
+                                    }
+                                    .padding(.horizontal)
+                                    .padding(.top,20)
+
+                                    
+                                }
+                              
+                                
                             }
-                        }
-                        else if selection == "Return"{
-                            Section{
-                                Text(currentIndex == (return_steps.count - 1) ? "Done" : "Next")
-                                    .foregroundColor(.white)
-                                Image(systemName: currentIndex == (return_steps.count - 1) ? "checkmark" : "arrow.right")
-                                    .accentColor(.white)
-                            }
-                        }
-                    }
-                }
-                .frame(
-                    minWidth: 0,
-                    maxWidth: .infinity,
-                    maxHeight: 44
-                )
-                .background(Color.secondary)
-                .cornerRadius(4)
-                .padding(
-                    [.leading, .trailing], 20
-                )
             }
-            }
-            // Spacer()
-        }
+        
+        
     }
-    
+
     
     //MARK: form switcher section end
     
     
 }
-extension GuidedCartView{
-    #warning("Will need to update this to use a case or similar to set step mode for multiple selection types")
-    ///sets the correct steps according to the mode to keep the form behavior consistent
-    func setStepsMode() -> [Text]{
-        return selection == "Search" ? general_steps : return_steps
-    }
-}
+
 
 struct GuidedCartView_Previews: PreviewProvider {
     static var previews: some View {

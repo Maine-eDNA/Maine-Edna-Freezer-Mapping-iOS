@@ -231,22 +231,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D96BD2ED-DEB9-4399-B314-30D79C337051"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Maine-Edna-Freezer-Mapping/View/Reuseable/Maps/FreezerMapView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "698D282C-7642-47D6-B890-E11DDF495A36"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -270,8 +254,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/View/Freezer/Retrieve/Detail/FreezerDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -286,8 +270,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/View/Freezer/Retrieve/Detail/FreezerDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -302,8 +286,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/View/Freezer/Retrieve/Detail/FreezerDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -318,8 +302,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/View/Freezer/Retrieve/Detail/FreezerDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -818,22 +802,6 @@
             endingLineNumber = "322"
             landmarkName = "init(rows:columns:racks:@ViewBuilder:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "124B4542-32DD-43C5-9EF0-916C0F4C7058"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Maine-Edna-Freezer-Mapping/View/Reuseable/Maps/FreezerMapView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "body"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2126,8 +2094,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/View/Freezer/Rack/Create/CreateNewRackView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "createNewRackProfile()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2622,10 +2590,10 @@
             filePath = "Maine-Edna-Freezer-Mapping/View/Cart/Guided/GuidedCartView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
-            landmarkName = "main_form_switcher"
-            landmarkType = "24">
+            startingLineNumber = "411"
+            endingLineNumber = "411"
+            landmarkName = "Search should take the barcodes -&gt; then show the positions of all the samples that was added to the list"
+            landmarkType = "19">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2638,8 +2606,8 @@
             filePath = "Maine-Edna-Freezer-Mapping/View/Cart/Guided/GuidedCartView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
             landmarkName = "main_form_switcher"
             landmarkType = "24">
          </BreakpointContent>
@@ -2720,6 +2688,21 @@
                   startingLineNumber = "302"
                   endingLineNumber = "302"
                   offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  uuid = "6E53B509-BE6D-4438-9D6C-42D2F35FE8C2 - 4fee26f2486761ac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt; in eDna_Freezer_Mapping.ExtractionSampleReturnGuideView.form_switcher_fwd_back_buttons.getter : some"
+                  moduleName = "eDna-Freezer-Mapping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keijaohcampbell/Development/Maine-eDNA/Maine-Edna-Freezer-Mapping-iOS/Maine-Edna-Freezer-Mapping/View/Cart/Guided/Return/Batch/ExtractionSampleReturnGuideView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "299"
+                  endingLineNumber = "299"
+                  offsetFromSymbolStart = "1728">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -69,7 +69,6 @@
 		4A34DF65279ECF9700CA9531 /* UserThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34DF64279ECF9700CA9531 /* UserThemeView.swift */; };
 		4A34DF68279EF67100CA9531 /* EditUserColorThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34DF67279EF67100CA9531 /* EditUserColorThemeView.swift */; };
 		4A34DF6C279F5C5600CA9531 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A34DF6B279F5C5600CA9531 /* UserProfileView.swift */; };
-		4A34DF6F279F5D3C00CA9531 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4A34DF6E279F5D3C00CA9531 /* Kingfisher */; };
 		4A3C7FF82891F13B00DA6217 /* MultiBatchSampleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C7FF72891F13B00DA6217 /* MultiBatchSampleListView.swift */; };
 		4A3C7FFA2891FD7D00DA6217 /* ExtractionSampleReturnGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C7FF92891FD7D00DA6217 /* ExtractionSampleReturnGuideView.swift */; };
 		4A3C7FFC2891FE0000DA6217 /* ShowAllSamplesInBatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C7FFB2891FE0000DA6217 /* ShowAllSamplesInBatchesView.swift */; };
@@ -133,6 +132,7 @@
 		4AAFA6A7277BD0A2009F83B5 /* MenuStyleClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFA6A6277BD0A2009F83B5 /* MenuStyleClicker.swift */; };
 		4AC28B8628087EFB00B7695A /* ResultsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC28B8528087EFB00B7695A /* ResultsPreviewView.swift */; };
 		4AC97EE72829894D00F3B42B /* BoxDepthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC97EE62829894D00F3B42B /* BoxDepthView.swift */; };
+		4ACC230029E6C17400F612D2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4ACC22FF29E6C17400F612D2 /* Kingfisher */; };
 		4AD76F9C2861DCB300F7B65C /* ModeSelectorFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD76F9B2861DCB300F7B65C /* ModeSelectorFormView.swift */; };
 		4AD76F9F2861DD6700F7B65C /* CartDataCaptureFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD76F9E2861DD6700F7B65C /* CartDataCaptureFormView.swift */; };
 		4AD76FA12861DE4000F7B65C /* FreezerCartFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD76FA02861DE4000F7B65C /* FreezerCartFormView.swift */; };
@@ -172,6 +172,16 @@
 		4AF784D428D3E57D007BEA1C /* SamplesFoundFromListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF784D328D3E57D007BEA1C /* SamplesFoundFromListView.swift */; };
 		4AF784D628D41C0F007BEA1C /* SearchModeSampleMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF784D528D41C0F007BEA1C /* SearchModeSampleMapModel.swift */; };
 		4AF784D828D427A7007BEA1C /* GroupedResultsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF784D728D427A7007BEA1C /* GroupedResultsMapView.swift */; };
+		4AF9DB1529F8ABA40039218A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 4AF9DB1429F8ABA40039218A /* Lottie */; };
+		4AF9DB1F29F8ABEE0039218A /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9DB1729F8ABEE0039218A /* LottieView.swift */; };
+		4AF9DB2029F8ABEE0039218A /* money_vault.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9DB1929F8ABEE0039218A /* money_vault.json */; };
+		4AF9DB2129F8ABEE0039218A /* wallet_of_money_and_credit_card.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9DB1A29F8ABEE0039218A /* wallet_of_money_and_credit_card.json */; };
+		4AF9DB2229F8ABEE0039218A /* no_pets_found.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9DB1B29F8ABEE0039218A /* no_pets_found.json */; };
+		4AF9DB2329F8ABEE0039218A /* empty_people_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9DB1C29F8ABEE0039218A /* empty_people_list.json */; };
+		4AF9DB2429F8ABEE0039218A /* empty-face.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9DB1D29F8ABEE0039218A /* empty-face.json */; };
+		4AF9DB2529F8ABEE0039218A /* address_not_found.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9DB1E29F8ABEE0039218A /* address_not_found.json */; };
+		4AF9DB2929F8ACA70039218A /* MultiStepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9DB2829F8ACA70039218A /* MultiStepsView.swift */; };
+		4AF9DB2C29F8ADB30039218A /* OrderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9DB2B29F8ADB30039218A /* OrderState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -355,6 +365,15 @@
 		4AF784D328D3E57D007BEA1C /* SamplesFoundFromListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplesFoundFromListView.swift; sourceTree = "<group>"; };
 		4AF784D528D41C0F007BEA1C /* SearchModeSampleMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModeSampleMapModel.swift; sourceTree = "<group>"; };
 		4AF784D728D427A7007BEA1C /* GroupedResultsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedResultsMapView.swift; sourceTree = "<group>"; };
+		4AF9DB1729F8ABEE0039218A /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		4AF9DB1929F8ABEE0039218A /* money_vault.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = money_vault.json; sourceTree = "<group>"; };
+		4AF9DB1A29F8ABEE0039218A /* wallet_of_money_and_credit_card.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wallet_of_money_and_credit_card.json; sourceTree = "<group>"; };
+		4AF9DB1B29F8ABEE0039218A /* no_pets_found.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = no_pets_found.json; sourceTree = "<group>"; };
+		4AF9DB1C29F8ABEE0039218A /* empty_people_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty_people_list.json; sourceTree = "<group>"; };
+		4AF9DB1D29F8ABEE0039218A /* empty-face.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "empty-face.json"; sourceTree = "<group>"; };
+		4AF9DB1E29F8ABEE0039218A /* address_not_found.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = address_not_found.json; sourceTree = "<group>"; };
+		4AF9DB2829F8ACA70039218A /* MultiStepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiStepsView.swift; sourceTree = "<group>"; };
+		4AF9DB2B29F8ADB30039218A /* OrderState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,12 +381,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ACC230029E6C17400F612D2 /* Kingfisher in Frameworks */,
+				4AF9DB1529F8ABA40039218A /* Lottie in Frameworks */,
 				4AEB96F9274C2958001F7611 /* AlertToast in Frameworks */,
 				4AEB96F3274C2928001F7611 /* Alamofire in Frameworks */,
 				4AEB96FC274C2975001F7611 /* SwiftyJSON in Frameworks */,
 				4A955BBE2854091B00A3832B /* StepperView in Frameworks */,
 				4AEB96F6274C2944001F7611 /* CarBode in Frameworks */,
-				4A34DF6F279F5D3C00CA9531 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,6 +844,8 @@
 		4A2CE72627E54BB2000C0EFC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4AF9DB2629F8AC840039218A /* Form */,
+				4AF9DB1629F8ABEE0039218A /* Animation */,
 				4A2CE72C27E54C68000C0EFC /* Color.swift */,
 				4A2CE72927E54C67000C0EFC /* Date.swift */,
 				4A2CE72827E54C67000C0EFC /* Double.swift */,
@@ -1525,6 +1547,53 @@
 			path = Cart;
 			sourceTree = "<group>";
 		};
+		4AF9DB1629F8ABEE0039218A /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				4AF9DB1729F8ABEE0039218A /* LottieView.swift */,
+				4AF9DB1829F8ABEE0039218A /* Animations */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		4AF9DB1829F8ABEE0039218A /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				4AF9DB1929F8ABEE0039218A /* money_vault.json */,
+				4AF9DB1A29F8ABEE0039218A /* wallet_of_money_and_credit_card.json */,
+				4AF9DB1B29F8ABEE0039218A /* no_pets_found.json */,
+				4AF9DB1C29F8ABEE0039218A /* empty_people_list.json */,
+				4AF9DB1D29F8ABEE0039218A /* empty-face.json */,
+				4AF9DB1E29F8ABEE0039218A /* address_not_found.json */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		4AF9DB2629F8AC840039218A /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				4AF9DB2729F8AC8E0039218A /* MultiStep */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+		4AF9DB2729F8AC8E0039218A /* MultiStep */ = {
+			isa = PBXGroup;
+			children = (
+				4AF9DB2A29F8AD9F0039218A /* Model */,
+				4AF9DB2829F8ACA70039218A /* MultiStepsView.swift */,
+			);
+			path = MultiStep;
+			sourceTree = "<group>";
+		};
+		4AF9DB2A29F8AD9F0039218A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4AF9DB2B29F8ADB30039218A /* OrderState.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1546,8 +1615,9 @@
 				4AEB96F5274C2944001F7611 /* CarBode */,
 				4AEB96F8274C2958001F7611 /* AlertToast */,
 				4AEB96FB274C2974001F7611 /* SwiftyJSON */,
-				4A34DF6E279F5D3C00CA9531 /* Kingfisher */,
 				4A955BBD2854091B00A3832B /* StepperView */,
+				4ACC22FF29E6C17400F612D2 /* Kingfisher */,
+				4AF9DB1429F8ABA40039218A /* Lottie */,
 			);
 			productName = "Maine-Edna-Freezer-Mapping";
 			productReference = 4AEB96C4274C28DF001F7611 /* eDna-Freezer-Mapping.app */;
@@ -1626,8 +1696,9 @@
 				4AEB96F4274C2944001F7611 /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */,
 				4AEB96F7274C2958001F7611 /* XCRemoteSwiftPackageReference "AlertToast" */,
 				4AEB96FA274C2974001F7611 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				4A34DF6D279F5D3B00CA9531 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				4A955BBC2854091B00A3832B /* XCRemoteSwiftPackageReference "StepperView" */,
+				4ACC22FE29E6C17400F612D2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				4AF9DB1329F8ABA40039218A /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 4AEB96C5274C28DF001F7611 /* Products */;
 			projectDirPath = "";
@@ -1645,8 +1716,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AF9DB2229F8ABEE0039218A /* no_pets_found.json in Resources */,
 				4AEB96CF274C28E1001F7611 /* Preview Assets.xcassets in Resources */,
+				4AF9DB2429F8ABEE0039218A /* empty-face.json in Resources */,
+				4AF9DB2329F8ABEE0039218A /* empty_people_list.json in Resources */,
+				4AF9DB2129F8ABEE0039218A /* wallet_of_money_and_credit_card.json in Resources */,
 				4AEB96CC274C28E1001F7611 /* Assets.xcassets in Resources */,
+				4AF9DB2029F8ABEE0039218A /* money_vault.json in Resources */,
+				4AF9DB2529F8ABEE0039218A /* address_not_found.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1688,6 +1765,7 @@
 				4A758501275C4381006124ED /* NumericTextfieldView.swift in Sources */,
 				4A766F2927D637BC00049DBF /* CartQueryDataService.swift in Sources */,
 				4AE90927286CAAE400446D5D /* BoxPreviewPositionView.swift in Sources */,
+				4AF9DB1F29F8ABEE0039218A /* LottieView.swift in Sources */,
 				4A1F0B4B276790E3008FDDF1 /* CheckOutLogDetailView.swift in Sources */,
 				4AF48646277DDE6300C3E053 /* DefaultCssModel.swift in Sources */,
 				4A9C432428764EC000593D67 /* InventoryStatusDataService.swift in Sources */,
@@ -1758,6 +1836,7 @@
 				4A2CE72E27E54C68000C0EFC /* UIApplication.swift in Sources */,
 				4AA25E55288F1A0A00CEF281 /* BatchSampleViewModel.swift in Sources */,
 				4A758511275C7C4E006124ED /* FreezerCreation.swift in Sources */,
+				4AF9DB2929F8ACA70039218A /* MultiStepsView.swift in Sources */,
 				4A0091DD28BA499E00268FA9 /* GuidedSearchViewModel.swift in Sources */,
 				4A9C432628764F8400593D67 /* InventoryStatusModel.swift in Sources */,
 				4AF48643277D48C600C3E053 /* BoxSampleCapsuleView.swift in Sources */,
@@ -1785,6 +1864,7 @@
 				4AF784D428D3E57D007BEA1C /* SamplesFoundFromListView.swift in Sources */,
 				4A758502275C4381006124ED /* TextFieldLabelCombo.swift in Sources */,
 				4AF48640277D439700C3E053 /* SingleLevelRaciSlotItemView.swift in Sources */,
+				4AF9DB2C29F8ADB30039218A /* OrderState.swift in Sources */,
 				4A0091D528BA3FD900268FA9 /* RemoveConfirmationView.swift in Sources */,
 				4A0C681428B39F0300CCB12E /* FreezerProfileInfoView.swift in Sources */,
 				4A0C681128B33DB500CCB12E /* ResolutionSampleDataViewModel.swift in Sources */,
@@ -2185,20 +2265,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4A34DF6D279F5D3B00CA9531 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		4A955BBC2854091B00A3832B /* XCRemoteSwiftPackageReference "StepperView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/badrinathvm/StepperView.git";
 			requirement = {
 				branch = master;
 				kind = branch;
+			};
+		};
+		4ACC22FE29E6C17400F612D2 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
 			};
 		};
 		4AEB96F1274C2928001F7611 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -2233,18 +2313,26 @@
 				kind = branch;
 			};
 		};
+		4AF9DB1329F8ABA40039218A /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4A34DF6E279F5D3C00CA9531 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4A34DF6D279F5D3B00CA9531 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
 		4A955BBD2854091B00A3832B /* StepperView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4A955BBC2854091B00A3832B /* XCRemoteSwiftPackageReference "StepperView" */;
 			productName = StepperView;
+		};
+		4ACC22FF29E6C17400F612D2 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4ACC22FE29E6C17400F612D2 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		4AEB96F2274C2928001F7611 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2265,6 +2353,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4AEB96FA274C2974001F7611 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		4AF9DB1429F8ABA40039218A /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4AF9DB1329F8ABA40039218A /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 

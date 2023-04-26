@@ -66,11 +66,10 @@ struct FreezerDetailView: View {
     
     
     var body: some View {
-        ZStack{
+      //  ZStack{
             
-            VStack(alignment: .leading){
-                //   if !show_create_new_rack{
-                //self.rack_layout_service.freezer_racks
+         /*   VStack(alignment: .leading){
+              
                 if self.vm.freezer_racks.count > 0{
                     withAnimation(.spring()){
                         Section{
@@ -79,7 +78,7 @@ struct FreezerDetailView: View {
                             //MARK: Search Mode is the default when getting the freezer detail
                             FreezerMapView(freezer_rack_layout: self.$vm.freezer_racks, freezer_profile: freezer_profile, show_create_new_rack: $show_create_new_rack, rack_position_row: $rack_position_row,rack_position_column: $rack_position_column, selectMode: .constant("Search")).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
                                 .frame(width: UIScreen.main.bounds.width * 0.95, height: UIScreen.main.bounds.height * 0.95, alignment: .center)
-                            // }
+                          
                             
                         }
                     }
@@ -93,14 +92,45 @@ struct FreezerDetailView: View {
                     }
                 }
                 
-                // }
-                //use sheet
-                /* else if show_create_new_rack{
-                 
-                 CreateNewRackView(freezer_detail: self.freezer_profile,show_create_new_rack: $show_create_new_rack).transition(.move(edge: .top)).animation(.spring(), value: 0.1).zIndex(1)
-                 }*/
+           
                 
-            }.toast(isPresenting: $showResponseMsg){
+            }*/
+        ScrollView {
+                 VStack(alignment: .leading) {
+                     if self.vm.freezer_racks.count > 0 {
+                         withAnimation(.spring()) {
+                             Section {
+                                 Label("Top-Down View", systemImage: "eye").font(.caption)
+                                 
+                                 FreezerMapView(
+                                     freezer_rack_layout: self.$vm.freezer_racks,
+                                     freezer_profile: freezer_profile,
+                                     show_create_new_rack: $show_create_new_rack,
+                                     rack_position_row: $rack_position_row,
+                                     rack_position_column: $rack_position_column,
+                                     selectMode: .constant("Search")
+                                 )
+                                 .transition(.move(edge: .top))
+                                 .animation(.spring(), value: 0.1)
+                                 .zIndex(1)
+                             }
+                         }
+                     } else {
+                         withAnimation(.spring()) {
+                             Section {
+                                 Image("not_found_06")
+                                     .resizable()
+                                     .scaledToFit()
+                                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                             }
+                         }
+                     }
+                 }
+                 .padding()
+             }
+            
+            
+            .toast(isPresenting: $showResponseMsg){
                 if self.isErrorMsg{
                     return AlertToast(type: .error(.red), title: "Response", subTitle: "\(self.responseMsg )")
                 }
@@ -229,7 +259,8 @@ struct FreezerDetailView: View {
                  }*/
             }
             
-        }     .background(
+       // }
+        .background(
             //MARK: Need to send the Rack Location accross
             NavigationLink(destination:   CreateNewRackView(freezer_detail: freezer_profile, show_create_new_rack:  self.$show_create_new_rack,rack_position_row: $rack_position_row,rack_position_column: $rack_position_column), isActive: self.$show_create_new_rack,label: {EmptyView()})
         )
